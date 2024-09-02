@@ -11,4 +11,8 @@ _________GITHUB AND GODOT DOCUMENTATION HERE_________
 - Godot versionen är 4.3 .NET
 - https://godotengine.org/releases/4.3/
 
+- För att hämta repot:
+- i Github Desktop, klicka File->Clone Repository
+
+
 
