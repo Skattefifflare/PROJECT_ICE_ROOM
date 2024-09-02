@@ -8,5 +8,7 @@ _________FORMATTING GUIDE GOES HERE_________
 
 
 _________GITHUB AND GODOT DOCUMENTATION HERE_________
+- Godot versionen är 4.3 .NET
+- https://godotengine.org/releases/4.3/
 
 
