@@ -9,11 +9,21 @@ _________FORMATTING GUIDE GOES HERE_________
 
 _________GITHUB AND GODOT DOCUMENTATION HERE_________
 - Godot versionen är 4.3 .NET
-- https://godotengine.org/releases/4.3/
+  https://godotengine.org/releases/4.3/
 
 - För att hämta repot:
-- i Github Desktop, klicka File->Clone Repository
+  i Github Desktop, klicka File->Clone Repository
 
 - För att visa procedurell generering i editorn:
-- skriv [Tool] i nodens script på raden ovanför public partial class
+  skriv [Tool] i nodens script på raden ovanför public partial class
+
+- För att ednast visa en funktion i scriptet i editorn:
+  använd
+  if Engine.editor_hint:
+        return
+  i toppen av funktionen
+  eller
+  if not Engine.editor_hint:
+        return
+  för att funktionen ENDAST ska köra i editorn
 
