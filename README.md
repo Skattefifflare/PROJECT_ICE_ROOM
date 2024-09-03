@@ -15,7 +15,8 @@ _________GITHUB AND GODOT DOCUMENTATION HERE_________
   i Github Desktop, klicka File->Clone Repository
 
 - För att visa procedurell generering i editorn:<br />
-  skriv [Tool] i nodens script på raden ovanför public partial class
+  skriv [Tool] i nodens script på raden ovanför public partial class<br />
+  i VS, klicka build-> build solution
 
 - För att endast visa en funktion i scriptet i editorn:
   använd<br />
