@@ -22,8 +22,12 @@ _________GITHUB AND GODOT DOCUMENTATION HERE_________
   if Engine.editor_hint:<br />
         return<br />
   i toppen av funktionen<br />
-  eller<br />
+  eller, för att funktionen ENDAST ska köra i editorn<br />
   if not Engine.editor_hint:<br />
         return<br />
-  för att funktionen ENDAST ska köra i editorn
+  ytterligare info:<br />
+  https://docs.godotengine.org/en/stable/tutorials/plugins/running_code_in_the_editor.html
+
+  
+  
 
