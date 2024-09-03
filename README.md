@@ -14,5 +14,6 @@ _________GITHUB AND GODOT DOCUMENTATION HERE_________
 - För att hämta repot:
 - i Github Desktop, klicka File->Clone Repository
 
-
+- För att visa procedurell generering i editorn:
+- skriv [Tool] i nodens script på raden ovanför public partial class
 
