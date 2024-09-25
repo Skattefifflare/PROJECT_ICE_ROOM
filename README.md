@@ -23,15 +23,15 @@ osv.
 > [!WARNING]
 > OTROLIGT UP FOR DEBATE
 
-| Fil-/Objekttyp| Namnformat    |
-| ------------- | ------------- |
-| mappar        | ALL_CAPS      |
-| noder         | CamelCase     |
-| .cs-scripts   | CamelCase     |
-| .gd-scripts   | CamelCaseGD   |
-| medlemsvars   | ALL_CAPS      |
-| vars          | all_smalls    |
-| metoder       | CamelCase     |
+| Fil-/Objekttyp| Namnformat     |
+| ------------- | -------------- |
+| mappar        | ALL_CAPS       |
+| noder         | PascalCase     |
+| .cs-scripts   | PascalCase     |
+| .gd-scripts   | PascalCaseGD   |
+| medlemsvars   | ALL_CAPS       |
+| vars          | all_smalls     |
+| metoder       | PascalCase     |
 
 
 ### Kommentarer
