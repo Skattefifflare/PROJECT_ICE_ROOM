@@ -9,18 +9,26 @@ public partial class ShapeGen : Node2D
     int CIRCLE_RADIUS_M;
     int DETAIL_M;
 
-    public override void _Ready() {
-        GetSetMeta();
+    Vector2[] circle_points;
+    Polygon2D poly_circle;
 
-        Polygon2D poly_circle = new Polygon2D() {
-            Polygon = GenerateCircle(CIRCLE_RADIUS_M, DETAIL_M),
+    Vector2[] grav_points;
+
+    public override void _Ready() {
+        circle_points = new Vector2[DETAIL_M * 4];
+        GetSetPoints();    
+
+        poly_circle = new Polygon2D() {
+            Polygon = circle_points
         };
-        AddChild(poly_circle);
-        // polygon points seemingly cannot be manipulated after creation
+        AddChild(poly_circle);     
     }
     
     private void GravityPull() {
-        
+        int grav_num = 10;
+        for (int i = 0; i < grav_num; i++) {
+
+        }
     }
 
     private Vector2[] GenerateCircle(int radius = 1, int detail = 1) {
@@ -40,22 +48,21 @@ public partial class ShapeGen : Node2D
         return points;
     }
 
-
-
     public override void _Process(double delta) {
         base._Process(delta);
 
         if ((int)GetMeta("CIRCLE_RADIUS") != CIRCLE_RADIUS_M) {
-            GetSetMeta();
+            GetSetPoints();
+            poly_circle.Polygon = circle_points;
         }
-
-
-
-
-        
+        if ((int)GetMeta("DETAIL") != DETAIL_M) {
+            GetSetPoints();
+            poly_circle.Polygon = circle_points;
+        }
     }
-    void GetSetMeta() {
+    void GetSetPoints() {
         CIRCLE_RADIUS_M = (int)GetMeta("CIRCLE_RADIUS");
         DETAIL_M = (int)GetMeta("DETAIL");
+        circle_points = GenerateCircle(CIRCLE_RADIUS_M, DETAIL_M);
     }
 }
