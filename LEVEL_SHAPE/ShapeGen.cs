@@ -5,16 +5,22 @@ using System;
 [Tool]
 public partial class ShapeGen : Node2D
 {
+    // M for meta data
+    int CIRCLE_RADIUS_M;
+    int DETAIL_M;
+
     public override void _Ready() {
+        GetSetMeta();
+
         Polygon2D poly_circle = new Polygon2D() {
-            Polygon = GenerateCircle(100, 4),
+            Polygon = GenerateCircle(CIRCLE_RADIUS_M, DETAIL_M),
         };
         AddChild(poly_circle);
         // polygon points seemingly cannot be manipulated after creation
     }
     
     private void GravityPull() {
-
+        
     }
 
     private Vector2[] GenerateCircle(int radius = 1, int detail = 1) {
@@ -32,5 +38,24 @@ public partial class ShapeGen : Node2D
             points_index++;
         }
         return points;
+    }
+
+
+
+    public override void _Process(double delta) {
+        base._Process(delta);
+
+        if ((int)GetMeta("CIRCLE_RADIUS") != CIRCLE_RADIUS_M) {
+            GetSetMeta();
+        }
+
+
+
+
+        
+    }
+    void GetSetMeta() {
+        CIRCLE_RADIUS_M = (int)GetMeta("CIRCLE_RADIUS");
+        DETAIL_M = (int)GetMeta("DETAIL");
     }
 }
