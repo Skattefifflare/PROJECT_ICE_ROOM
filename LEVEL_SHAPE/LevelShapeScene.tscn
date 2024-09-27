@@ -4,6 +4,6 @@
 
 [node name="ROOT" type="Node2D"]
 script = ExtResource("1_c67f0")
-metadata/LevelSize = Vector2(1000, 500)
-metadata/CIRCLE_RADIUS = 390
-metadata/DETAIL = 3
+metadata/CIRCLE_RADIUS = 400
+metadata/DETAIL = 4
+metadata/POINT_BOUNDS = Vector4i(-600, -400, 600, 400)
