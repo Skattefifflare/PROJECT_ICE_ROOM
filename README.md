@@ -8,15 +8,15 @@ The most ambitious game made since Skyrim.
 Mappar och filer sorteras i detta mönster:<br/>
 res://
   - Creatures
-	- Cow
-	  - CowObj.tscn
-	  - CowScript.cs
-	  - CowSprite.png
+    - Cow
+      - CowObj.tscn
+      - CowScript.cs
+      - CowSprite.png
   - Weapons
-	- Spear
-	  - SpearObj.tscn
-	  - SpearSprite.png
-	
+    - Spear
+      - SpearObj.tscn
+      - SpearSprite.png
+    
 osv.
 
 ### Namngivning
