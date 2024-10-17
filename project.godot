@@ -12,8 +12,11 @@ config_version=5
 
 config/name="Project_Ice_Room"
 config/features=PackedStringArray("4.3", "C#", "Forward Plus")
-config/icon="res://icon.svg"
 
 [dotnet]
 
 project/assembly_name="Project_Ice_Room"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/level_gen_plugin/plugin.cfg", "res://addons/my_plugin/plugin.cfg")

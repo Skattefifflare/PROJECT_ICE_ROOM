@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://8o05qexnbefk"]
+
+[ext_resource type="Script" path="res://addons/level_gen_plugin/base_script.cs" id="1_ikpyq"]
+
+[node name="MyNode" type="Node2D"]
+script = ExtResource("1_ikpyq")
