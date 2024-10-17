@@ -64,7 +64,8 @@ Skriv **[Tool]** i nodens script på raden ovanför **public partial class**<br/
 I VS, klicka **Build-> Build Solution**<br/>
 ytterligare info [här](https://docs.godotengine.org/en/stable/tutorials/plugins/running_code_in_the_editor.html)
 
+### Egna properties för noder:<br/>
+använd **[Export]** på raden ovanför en nods medlemsvariabel för att göra den ändringsbar i editorn<br/>
+mer info [här](https://docs.godotengine.org/en/stable/tutorials/scripting/c_sharp/c_sharp_exports.html)
   
-  
-
 <!--För att styla README-filen kolla här, https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax -->
