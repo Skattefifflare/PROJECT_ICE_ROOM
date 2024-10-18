@@ -4,7 +4,7 @@ using System;
 public partial class MAN : CharacterBody2D
 {
 	private Vector2 newVelocity;
-	private int speed = 300;
+	private int speed = 420;
 
 	public override void _PhysicsProcess(double delta)
 	{
