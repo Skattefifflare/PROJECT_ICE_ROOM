@@ -1,7 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://cu8fq37nykl5r"]
 
-[ext_resource type="PackedScene" uid="uid://bllmb63r4rtar" path="res://MAN.tscn" id="1_2v6g2"]
+[ext_resource type="PackedScene" uid="uid://crpgithyhta3j" path="res://MAN/MAN.tscn" id="1_ctm5t"]
 
 [node name="Main" type="Node2D"]
 
-[node name="MAN" parent="." instance=ExtResource("1_2v6g2")]
+[node name="MAN" parent="." instance=ExtResource("1_ctm5t")]
