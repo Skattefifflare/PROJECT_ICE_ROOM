@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class MAN : CharacterBody2D
+public partial class Movement : CharacterBody2D
 {
 	private Vector2 newVelocity;
 	private int speed = 420;

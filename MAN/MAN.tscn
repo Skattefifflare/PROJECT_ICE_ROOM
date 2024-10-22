@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://crpgithyhta3j"]
 
 [ext_resource type="Texture2D" uid="uid://bvyo48ahtd3gd" path="res://MAN/MAN.png" id="1_6urfr"]
-[ext_resource type="Script" path="res://MAN/MAN.cs" id="1_nblen"]
+[ext_resource type="Script" path="res://MAN/Movement.cs" id="1_ofkhu"]
 
 [node name="MAN" type="CharacterBody2D"]
-script = ExtResource("1_nblen")
+script = ExtResource("1_ofkhu")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.35, 0.35)
