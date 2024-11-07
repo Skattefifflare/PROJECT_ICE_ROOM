@@ -18,6 +18,19 @@ public partial class LvlGenNode : Node2D
     public override void _Ready() {
         base._Ready();
 
+        Polygon2D polygon = new Polygon2D() {
+            Polygon = new Vector2[] {
+                new Vector2( -100, -100),
+                new Vector2( 100, -100),
+                new Vector2( 100, 100),
+                new Vector2( -100, 100)
+            },
+            Color = new Color(1,0,0.7f,1)
+
+        };
+        AddChild(polygon);
+
+
         GD.Print("hello");
     }
 
