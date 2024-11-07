@@ -17,3 +17,14 @@ config/icon="res://icon.svg"
 [dotnet]
 
 project/assembly_name="Project_Ice_Room"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/LEVEL_GEN/plugin.cfg")
+
+[input]
+
+ui_select={
+"deadzone": 0.5,
+"events": []
+}
