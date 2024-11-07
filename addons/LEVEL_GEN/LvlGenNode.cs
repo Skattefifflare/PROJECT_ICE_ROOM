@@ -1,6 +1,7 @@
 using Godot;
 using System;
 
+
 [Tool]
 public partial class LvlGenNode : Node2D
 {
@@ -25,11 +26,18 @@ public partial class LvlGenNode : Node2D
                 new Vector2( 100, 100),
                 new Vector2( -100, 100)
             },
-            Color = new Color(1,0,0.7f,1)
+            Color = new Color(1,1,1,1)
 
         };
         AddChild(polygon);
 
+
+        GD.Print("hello");
+    }
+
+
+    public override void _Process(double delta) {
+        base._Process(delta);
 
         GD.Print("hello");
     }
