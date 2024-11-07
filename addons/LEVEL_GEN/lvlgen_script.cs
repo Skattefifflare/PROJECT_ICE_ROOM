@@ -10,15 +10,15 @@ public partial class LvlGenNode : Node2D
         get {
             return SIZE;
         }
-        set {          
-            SIZE = value;           
+        set {
+            SIZE = value;
         }
     }
 
     public override void _Ready() {
         base._Ready();
 
-        
+        GD.Print("hello");
     }
 
 }
