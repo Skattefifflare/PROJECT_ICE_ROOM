@@ -21,7 +21,7 @@ project/assembly_name="Project_Ice_Room"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/LEVEL_GEN/plugin.cfg")
+enabled=PackedStringArray()
 
 [input]
 
