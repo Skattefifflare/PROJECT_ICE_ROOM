@@ -22,7 +22,7 @@ public partial class LvlGenNode : Node2D
     public override void _Ready() {
         base._Ready();
 
-        NewLvlShapeObject lso = new NewLvlShapeObject(2, new Vector2(200, 100));
+        NewLvlShapeObject lso = new NewLvlShapeObject(11, new Vector2(200, 100));
         
         Polygon2D polygon = new Polygon2D {
             Polygon = lso.GetShape(),
