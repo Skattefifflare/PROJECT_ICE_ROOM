@@ -94,53 +94,6 @@ internal class NewLvlShapeObject { // contains all the bounding points of the le
             POINTS[random_i + 4] = exp_end;
 
 
-            /*
-            Vector2 expansion = new Vector2(
-                ((parent_width > 0 ? 1 : -1) * (r.Next() % Math.Abs(parent_width) / 2)) + (Math.Abs(parent_width) * 0.3f), // span between 0.3 and 0.8
-                ((parent_height > 0 ? 1 : -1) * (r.Next() % Math.Abs(parent_height) / 2)) + (Math.Abs(parent_height) * 0.3f)
-            );
-
-
-            Vector2 og = POINTS[random_i];
-            Vector2 first = POINTS[random_i];
-            Vector2 last = POINTS[random_i];
-            if (random_i % 2 == 0) {
-                int down_up = (POINTS[random_i].Y - POINTS[prev_i].Y > 0 ? 1 : -1);
-                first.Y -= inset_height * down_up;
-                last.X += inset_width * down_up * -1;
-            }
-            else {
-                int right_left = (POINTS[random_i].X - POINTS[prev_i].X > 0 ? 1 : -1);
-                first.X -= inset_width * right_left;
-                last.Y += inset_height * right_left;
-            }
-
-            // shifts all points after insertion by 4.
-            Vector2[] POINTS_COPY = POINTS;
-            foreach (Vector2 p in POINTS) {
-                if (Array.IndexOf(POINTS, p) + 4 >= POINTS.Length) continue;
-                POINTS_COPY[Array.IndexOf(POINTS, p) + 4] = p;
-            }
-            POINTS = POINTS_COPY;
-
-
-            POINTS[random_i] = first;
-            POINTS[random_i + 1] = first;
-            POINTS[random_i + 2] = first + expansion;
-            POINTS[random_i + 3] = last;
-            POINTS[random_i + 4] = last;
-
-            if (first.Y != og.Y) {
-                POINTS[random_i + 1].X += expansion.X;
-                POINTS[random_i + 3].Y += expansion.Y;
-            }
-            else {
-                POINTS[random_i + 1].Y += expansion.Y;
-                POINTS[random_i + 3].X += expansion.X;
-            }
-
-            //
-            */
             max_index += 2;
             USABLE_INDEXES.Remove(random_i);
             USABLE_INDEXES.Remove(random_i + 4);
