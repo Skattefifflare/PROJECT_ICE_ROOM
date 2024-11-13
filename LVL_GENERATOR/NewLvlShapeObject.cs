@@ -8,7 +8,7 @@ using System.Reflection;
 internal class NewLvlShapeObject { // contains all the bounding points of the level and some other stuff. 
     Vector2[] POINTS;
     List<int> USABLE_INDEXES;
-
+    List<int> UNUSABLE_INDEXES;
 
     internal NewLvlShapeObject(int rect_num, Vector2 init_size) {
 
