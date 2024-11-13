@@ -7,7 +7,7 @@ using System.Reflection;
 
 internal class LvlShapeObject { // contains all the bounding points of the level and some other stuff. 
     Vector2[] points;
-    List<int> usable_indexes;
+    List<int> all_indexes;
     List<int> unusable_indexes;
 
     internal LvlShapeObject(int rect_num, Vector2 init_size) {
@@ -18,20 +18,24 @@ internal class LvlShapeObject { // contains all the bounding points of the level
         points[1] = new Vector2(-init_size.X / 2, init_size.Y / 2);
         points[2] = new Vector2(-init_size.X / 2, -init_size.Y / 2);
         points[3] = new Vector2(init_size.X / 2, -init_size.Y / 2);
-        usable_indexes = Enumerable.Range(0, rect_num * 4).ToList();
-
+        all_indexes = Enumerable.Range(0, rect_num * 4).ToList();
+        unusable_indexes = new List<int>();
 
         Random r = new Random();
         int max_index = 3;
         while(rect_num > 1) { //wont run if we just want the main rectangle
-            
-            int[] filled_indexes = usable_indexes.GetRange(0, max_index + 1).ToArray();
-
+            // all indexes that are allowed to be used and below the current largest index
+            int[] available_indexes = all_indexes.Where(x => !unusable_indexes.Contains(x)).ToList().GetRange(0, max_index + 1).ToArray();
             // random index of a corner of the shape.
-            int r_index = filled_indexes[r.Next(filled_indexes.Length)];
+            int r_index = available_indexes[r.Next(available_indexes.Length)];
             int next_index = (r_index == max_index) ? 0 : r_index + 1;
             int prev_index = (r_index == 0) ? max_index : r_index - 1;
             
+            
+            unusable_indexes = unusable_indexes.Select(x => x > r_index ? x + 4 : x).ToList();
+            unusable_indexes.Add(r_index);
+            unusable_indexes.Add(r_index + 4);
+
             // if our random point is on the bottom right corner of a rectangle the width and height will both be +.
             // if the point is top left both will be -.
             // this can be exploited to simplify the expansion.
@@ -55,14 +59,6 @@ internal class LvlShapeObject { // contains all the bounding points of the level
                 (new Vector2(vctr.X, 0), new Vector2(0, vctr.Y));
             }
 
-            /*
-            Vector2 corner_one = points[r_index] -= VectorMagic(inset).Item1;
-            Vector2 corner_two = corner_one += VectorMagic(expansion).Item2;
-            Vector2 corner_three = points[r_index] + expansion;
-            Vector2 corner_five = points[r_index] -= VectorMagic(inset).Item2;
-            Vector2 corner_four = corner_five += VectorMagic(expansion).Item1;
-            */
-
             Vector2[] corners = new Vector2[] {
                 points[r_index] - VectorMagic(inset).Item1,               // corner_one
                 points[r_index] - VectorMagic(inset).Item1 + VectorMagic(expansion).Item2, // corner_two
@@ -77,8 +73,6 @@ internal class LvlShapeObject { // contains all the bounding points of the level
             Array.Copy(corners, 0, points, r_index, corners.Length);
 
             max_index += 2;
-            usable_indexes.Remove(r_index);
-            usable_indexes.Remove(r_index + 4); // THE CULPRIT!!!!
             rect_num--;
         }
     }
