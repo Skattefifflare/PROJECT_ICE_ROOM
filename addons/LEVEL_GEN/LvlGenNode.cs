@@ -22,7 +22,7 @@ public partial class LvlGenNode : Node2D
     public override void _Ready() {
         base._Ready();
 
-        LvlShapeObject lso = new LvlShapeObject(12, new Vector2(200, 200));
+        LvlShapeObject lso = new LvlShapeObject(10, new Vector2(200, 200));
         
         Polygon2D polygon = new Polygon2D {
             Polygon = lso.GetShape(),
@@ -30,14 +30,8 @@ public partial class LvlGenNode : Node2D
         };
         AddChild(polygon);
         
-        lso.PrintArray();
-
-        for (int i = 0; i < polygon.Polygon.Length-1; i++) {
-            
-            if (polygon.Polygon[i].X != polygon.Polygon[i+1].X && polygon.Polygon[i].Y != polygon.Polygon[i + 1].Y) {
-                GD.Print("diagonal between index " + i + " and " + (i + 1));
-            }
-        }
+        
+        
         
     }
     public override void _ExitTree() {

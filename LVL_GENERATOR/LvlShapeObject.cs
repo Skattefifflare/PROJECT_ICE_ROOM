@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 
 
-internal class LvlShapeObject { // contains all the bounding points of the level and some other stuff. 
+internal class LvlShapeObject {
     Vector2[] points;
     List<int> all_indexes;
     List<int> unusable_indexes;
@@ -30,7 +30,7 @@ internal class LvlShapeObject { // contains all the bounding points of the level
             int r_index = available_indexes[r.Next(available_indexes.Length)];
             int next_index = (r_index == max_index) ? 0 : r_index + 1;
             int prev_index = (r_index == 0) ? max_index : r_index - 1;
-            
+            GD.Print("index: " + r_index);
             
             unusable_indexes = unusable_indexes.Select(x => x > r_index ? x + 4 : x).ToList();
             unusable_indexes.Add(r_index);
@@ -66,11 +66,21 @@ internal class LvlShapeObject { // contains all the bounding points of the level
                 points[r_index] - VectorMagic(inset).Item2 + VectorMagic(expansion).Item1,  // corner_four
                 points[r_index] - VectorMagic(inset).Item2                // corner_five
             };
-
+            for (int i = 0; i < corners.Length-1; i++) {
+                if (corners[i].X != corners[i+1].X && corners[i].Y != corners[i + 1].Y) {
+                    GD.Print("start index: " + r_index + "diagonal between corner " + (i+1) + " and " + (i+2)); // this never triggers.
+                }
+            }
             // making space
             Array.Copy(points, r_index + 1, points, r_index + 5, (points.Length - 1 - r_index - 4));
             // filling space
             Array.Copy(corners, 0, points, r_index, corners.Length);
+
+            for (int i = 0; i < points.Length-1; i++) {
+                if (points[i].X != points[i + 1].X && points[i].Y != points[i + 1].Y && points[i+1] != Vector2.Zero) {
+                    GD.Print("diagonal between " + i + " and " + (i + 1));
+                }
+            }
 
             max_index += 2;
             rect_num--;
