@@ -2,7 +2,6 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 
 
 internal class LvlShapeObject {
@@ -10,7 +9,13 @@ internal class LvlShapeObject {
     List<int> all_indexes;
     List<int> unusable_indexes;
 
+
+    int[] nums = new int[]{
+            0, 4
+    };
+
     internal LvlShapeObject(int rect_num, Vector2 init_size) {
+        rect_num = nums.Length+1;
         points = new Vector2[rect_num * 4];
 
         // starting rectangle
@@ -23,11 +28,16 @@ internal class LvlShapeObject {
 
         Random r = new Random();
         int max_index = 3;
+
+
+        int k = 0;
         while(rect_num > 1) { //wont run if we just want the main rectangle
             // all indexes that are allowed to be used and below the current largest index
             int[] available_indexes = all_indexes.Where(x => !unusable_indexes.Contains(x)).ToList().GetRange(0, max_index + 1).ToArray();
+            foreach (var a in available_indexes) GD.Print(a);
             // random index of a corner of the shape.
-            int r_index = available_indexes[r.Next(available_indexes.Length)];
+            int r_index = nums[k];//r.Next(available_indexes.Length);
+                k++;
             int next_index = (r_index == max_index) ? 0 : r_index + 1;
             int prev_index = (r_index == 0) ? max_index : r_index - 1;
             GD.Print("index: " + r_index);
