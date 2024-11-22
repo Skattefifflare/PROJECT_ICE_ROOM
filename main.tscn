@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cu8fq37nykl5r"]
+[gd_scene load_steps=6 format=3 uid="uid://cdmtg1dp4w4qb"]
 
 [ext_resource type="PackedScene" uid="uid://crpgithyhta3j" path="res://MAN/MAN.tscn" id="1_ctm5t"]
 [ext_resource type="Texture2D" uid="uid://citl3qaifbyvs" path="res://GrassPlaceholderGrid.png" id="2_vti1c"]
@@ -11,16 +11,18 @@
 [node name="MAN" parent="." instance=ExtResource("1_ctm5t")]
 z_index = 1
 
-[node name="Camera2D" type="Camera2D" parent="MAN"]
-process_callback = 0
-position_smoothing_enabled = true
-position_smoothing_speed = 21.0
-
-[node name="BG" type="Sprite2D" parent="MAN/Camera2D"]
+[node name="BG" type="Sprite2D" parent="MAN"]
 z_index = -2
 position = Vector2(24, 24)
 scale = Vector2(3, 3)
 texture = ExtResource("2_vti1c")
+
+[node name="Camera2D" type="Camera2D" parent="MAN/BG"]
+position = Vector2(-8, -8)
+scale = Vector2(0.333333, 0.333333)
+process_callback = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 15.0
 
 [node name="Grass" type="Sprite2D" parent="."]
 texture = ExtResource("3_4vl8r")
