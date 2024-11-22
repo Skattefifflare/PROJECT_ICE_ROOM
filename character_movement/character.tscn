@@ -1,13 +1,106 @@
-[gd_scene format=3 uid="uid://vk258ytnj7ii"]
+[gd_scene load_steps=10 format=3 uid="uid://vk258ytnj7ii"]
+
+[ext_resource type="Script" path="res://character_movement/ArmAdjustment.cs" id="1_boss8"]
+[ext_resource type="Texture2D" uid="uid://c3c43ppxnqpjo" path="res://character_movement/assets/CharacterForMovementRun.png" id="1_fwkn6"]
+[ext_resource type="Texture2D" uid="uid://cpv18jusu663a" path="res://character_movement/assets/UpperArm.png" id="3_l4n0c"]
+[ext_resource type="Texture2D" uid="uid://7p3ftuvdhkuf" path="res://character_movement/assets/LowerArm.png" id="4_6ggcu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_27itp"]
+atlas = ExtResource("1_fwkn6")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f6p4y"]
+atlas = ExtResource("1_fwkn6")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_grlmv"]
+atlas = ExtResource("1_fwkn6")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_73evu"]
+atlas = ExtResource("1_fwkn6")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5dal3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_27itp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f6p4y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_grlmv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_73evu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Root" type="Node2D"]
 
 [node name="Sprite_Sheet" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_5dal3")
 
 [node name="Arm_Skeleton" type="Skeleton2D" parent="Sprite_Sheet"]
+position = Vector2(28, 4)
+script = ExtResource("1_boss8")
 
-[node name="Upper_Arm" type="Bone2D" parent="Sprite_Sheet/Arm_Skeleton"]
-position = Vector2(-9, -3)
+[node name="Upper_Arm_Front" type="Bone2D" parent="Sprite_Sheet/Arm_Skeleton"]
+position = Vector2(-31, -10)
+rest = Transform2D(1, 0, 0, 1, -31, -10)
+editor_settings/show_bone_gizmo = false
 
-[node name="Lower_Arm" type="Bone2D" parent="Sprite_Sheet/Arm_Skeleton/Upper_Arm"]
-position = Vector2(24, 26)
+[node name="Lower_Arm_Front" type="Bone2D" parent="Sprite_Sheet/Arm_Skeleton/Upper_Arm_Front"]
+position = Vector2(-4.47035e-08, 6)
+rotation = 1.5708
+rest = Transform2D(-4.37114e-08, 1, -1, -4.37114e-08, -4.47035e-08, 7)
+editor_settings/show_bone_gizmo = false
+
+[node name="Upper_Arm_Back" type="Bone2D" parent="Sprite_Sheet/Arm_Skeleton"]
+position = Vector2(-25, -10)
+rest = Transform2D(1, 0, 0, 1, -25, -10)
+editor_settings/show_bone_gizmo = false
+
+[node name="Lower_Arm_Back" type="Bone2D" parent="Sprite_Sheet/Arm_Skeleton/Upper_Arm_Back"]
+position = Vector2(1.42109e-14, 6)
+rotation = 1.5708
+scale = Vector2(1, 1)
+rest = Transform2D(-4.37114e-08, 1, -1, -4.37114e-08, 2.38419e-07, 7)
+editor_settings/show_bone_gizmo = false
+
+[node name="UAF_Tex" type="Polygon2D" parent="Sprite_Sheet"]
+position = Vector2(-3.5, -7)
+texture = ExtResource("3_l4n0c")
+skeleton = NodePath("../Arm_Skeleton")
+polygon = PackedVector2Array(0.00387478, -0.0153749, 1.01169, -0.0153749, 1.00387, 6.98462, 0.0116873, 6.99244)
+uv = PackedVector2Array(0.00387478, -0.0153749, 1.01169, -0.0153749, 1.00387, 6.98462, 0.0116873, 6.99244)
+bones = ["Upper_Arm_Front", PackedFloat32Array(1, 1, 1, 1), "Upper_Arm_Front/Lower_Arm_Front", PackedFloat32Array(0, 0, 0, 0), "Upper_Arm_Back", PackedFloat32Array(0, 0, 0, 0), "Upper_Arm_Back/Lower_Arm_Back", PackedFloat32Array(0, 0, 0, 0)]
+
+[node name="LAF_Tex" type="Polygon2D" parent="Sprite_Sheet"]
+position = Vector2(-3.5, 1)
+texture = ExtResource("4_6ggcu")
+skeleton = NodePath("../Arm_Skeleton")
+polygon = PackedVector2Array(0.000437737, -0.0231874, 1.00044, -0.0309999, 1.00825, 4.99244, 0.00825024, 4.99244)
+uv = PackedVector2Array(0.000437737, -0.0231874, 1.00044, -0.0309999, 1.00825, 4.99244, 0.00825024, 4.99244)
+bones = ["Upper_Arm_Front", PackedFloat32Array(0, 0, 0, 0), "Upper_Arm_Front/Lower_Arm_Front", PackedFloat32Array(1, 1, 1, 1), "Upper_Arm_Back", PackedFloat32Array(0, 0, 0, 0), "Upper_Arm_Back/Lower_Arm_Back", PackedFloat32Array(0, 0, 0, 0)]
+
+[node name="UAB_Tex" type="Polygon2D" parent="Sprite_Sheet"]
+position = Vector2(2.5, -7)
+texture = ExtResource("3_l4n0c")
+skeleton = NodePath("../Arm_Skeleton")
+polygon = PackedVector2Array(0.000437737, -0.0153749, 1.01606, -0.0153749, 1.00825, 7.00025, 0.000437737, 6.97681)
+uv = PackedVector2Array(0.000437737, -0.0153749, 1.01606, -0.0153749, 1.00825, 7.00025, 0.000437737, 6.97681)
+bones = ["Upper_Arm_Front", PackedFloat32Array(0, 0, 0, 0), "Upper_Arm_Front/Lower_Arm_Front", PackedFloat32Array(0, 0, 0, 0), "Upper_Arm_Back", PackedFloat32Array(1, 1, 1, 0.5), "Upper_Arm_Back/Lower_Arm_Back", PackedFloat32Array(0, 0, 0, 0)]
+
+[node name="LAB_Tex" type="Polygon2D" parent="Sprite_Sheet"]
+position = Vector2(2.5, 1)
+texture = ExtResource("4_6ggcu")
+skeleton = NodePath("../Arm_Skeleton")
+polygon = PackedVector2Array(0.000437737, -0.0231874, 0.984813, -0.0075624, 1.00825, 5.00025, 0.0160627, 5.00806)
+uv = PackedVector2Array(0.000437737, -0.0231874, 0.984813, -0.0075624, 1.00825, 5.00025, 0.0160627, 5.00806)
+bones = ["Upper_Arm_Front", PackedFloat32Array(0, 0, 0, 0), "Upper_Arm_Front/Lower_Arm_Front", PackedFloat32Array(0, 0, 0, 0), "Upper_Arm_Back", PackedFloat32Array(0, 0, 0, 0), "Upper_Arm_Back/Lower_Arm_Back", PackedFloat32Array(1, 1, 1, 1)]
