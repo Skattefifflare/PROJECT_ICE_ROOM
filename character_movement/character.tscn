@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://vk258ytnj7ii"]
+
+[node name="Root" type="Node2D"]
+
+[node name="Sprite_Sheet" type="AnimatedSprite2D" parent="."]
+
+[node name="Arm_Skeleton" type="Skeleton2D" parent="Sprite_Sheet"]
+
+[node name="Upper_Arm" type="Bone2D" parent="Sprite_Sheet/Arm_Skeleton"]
+position = Vector2(-9, -3)
+
+[node name="Lower_Arm" type="Bone2D" parent="Sprite_Sheet/Arm_Skeleton/Upper_Arm"]
+position = Vector2(24, 26)
