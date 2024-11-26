@@ -28,7 +28,7 @@ internal class LvlShapeObject {
 
         Random r = new Random();
         int max_index = 3;
-
+        
 
         int k = 0;
         while(rect_num > 1) { //wont run if we just want the main rectangle

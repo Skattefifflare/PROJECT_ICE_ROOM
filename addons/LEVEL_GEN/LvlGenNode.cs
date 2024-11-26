@@ -23,7 +23,10 @@ public partial class LvlGenNode : Node2D
         base._Ready();
 
         LvlShapeObject lso = new LvlShapeObject(13, new Vector2(200, 200));
-        
+
+        var generated_shape = lso.GetShape();
+
+
         Polygon2D polygon = new Polygon2D {
             Polygon = lso.GetShape(),
             Color = new Color(0.4f, 0.8f, 0.2f, 0.8f)
