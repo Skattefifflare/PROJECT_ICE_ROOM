@@ -29,6 +29,7 @@ namespace Project_Ice_Room.LVL_GENERATOR {
 
 
         void CreateRect(int attach_index) {
+            GD.Print(attach_index);
             if (attach_index == -1) { // base rectangle
                 complete_shape[0] = new Vector2(base_size.Item1 / 2, base_size.Item2 / 2);
                 complete_shape[0] = new Vector2(-base_size.Item1 / 2, base_size.Item2 / 2);
@@ -53,12 +54,27 @@ namespace Project_Ice_Room.LVL_GENERATOR {
                 complete_shape[attach_index + 3].X -= exp.Item3 -=exp.Item1;
 
                 complete_shape[attach_index + 4] = complete_shape[attach_index + 3];
-                complete_shape[attach_index + 4].Y += exp.Item2 -= exp.Item3;
+                complete_shape[attach_index + 4].Y += exp.Item2 -= exp.Item4;
+            }
+            else {
+                complete_shape[attach_index].X -= exp.Item1;
+
+                complete_shape[attach_index + 1] = complete_shape[attach_index];
+                complete_shape[attach_index + 1].Y += exp.Item4;
+
+                complete_shape[attach_index + 2] = complete_shape[attach_index + 1];
+                complete_shape[attach_index + 2].X += exp.Item3;
+
+                complete_shape[attach_index + 3] = complete_shape[attach_index + 2];
+                complete_shape[attach_index + 3].Y -= exp.Item4 -= exp.Item2;
+
+                complete_shape[attach_index + 4] = complete_shape[attach_index + 3];
+                complete_shape[attach_index + 4].X += exp.Item1 -= exp.Item3;
             }
             
 
             
-            // I just put this in methods for cleanliness
+            // I just put all this in methods for cleanliness
             (int, int) GetPrevAndNextIndex(int index) {
                 if (attach_index == 0)
                     return (complete_shape.Length - 1, 1);
