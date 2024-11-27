@@ -1,4 +1,5 @@
 using Godot;
+using Project_Ice_Room.LVL_GENERATOR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,18 +23,18 @@ public partial class LvlGenNode : Node2D
     public override void _Ready() {
         base._Ready();
 
-        LvlShapeObject lso = new LvlShapeObject(13, new Vector2(200, 200));
-
-        var generated_shape = lso.GetShape();
+        NewerLvlShapeObject lso = new NewerLvlShapeObject(200, 200, 4);
+       
+        var generated_shape = lso.complete_shape;
 
 
         Polygon2D polygon = new Polygon2D {
-            Polygon = lso.GetShape(),
-            Color = new Color(0.4f, 0.8f, 0.2f, 0.8f)
+            Polygon = generated_shape,
+            Color = new Color(0.4f, 0.8f, 0.2f, 1f)
         };
         AddChild(polygon);
-        
-        
+
+        lso.PrintShape();
         
         
     }
