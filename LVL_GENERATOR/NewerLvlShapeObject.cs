@@ -73,11 +73,7 @@ namespace Project_Ice_Room.LVL_GENERATOR {
                 complete_shape[attach_index + 4] = complete_shape[attach_index + 3];
                 complete_shape[attach_index + 4].X += exp.Item1 -= exp.Item3;
             }
-            
-            
-            
-            
-            
+
             // I just put all this in methods for cleanliness
             (int, int) GetPrevAndNextIndex(int index) {
                 if (attach_index == 0)

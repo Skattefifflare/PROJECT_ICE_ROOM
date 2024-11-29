@@ -23,9 +23,9 @@ public partial class LvlGenNode : Node2D
     public override void _Ready() {
         base._Ready();
 
-        NewerLvlShapeObject lso = new NewerLvlShapeObject(200, 200, 2);
+       FinalLvlShapeObject lso = new FinalLvlShapeObject(200, 200, 4);
        
-        var generated_shape = lso.complete_shape;
+        var generated_shape = lso.GetShape();
 
 
         Polygon2D polygon = new Polygon2D {
@@ -34,15 +34,6 @@ public partial class LvlGenNode : Node2D
         };
         AddChild(polygon);
 
-        lso.PrintShape();
-
-
-        GD.Print("______polygon points_______");
-        foreach (var p in polygon.Polygon) {
-            GD.Print(p);
-        }
-        
-        
     }
     public override void _ExitTree() {
         base._ExitTree();
