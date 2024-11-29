@@ -10,7 +10,7 @@ namespace Project_Ice_Room.LVL_GENERATOR {
 
         (int, int) base_size;
         internal Vector2[] complete_shape;
-        Polygon2D[] sub_shapes;
+         Polygon2D[] sub_shapes;
         List<int> unusable_indexes;
         Random rand = new Random();
 
@@ -29,50 +29,56 @@ namespace Project_Ice_Room.LVL_GENERATOR {
 
 
         void CreateRect(int attach_index) {
-            GD.Print(attach_index);
+            GD.Print("attach index:" + attach_index);
             if (attach_index == -1) { // base rectangle
                 complete_shape[0] = new Vector2(base_size.Item1 / 2, base_size.Item2 / 2);
-                complete_shape[0] = new Vector2(-base_size.Item1 / 2, base_size.Item2 / 2);
-                complete_shape[0] = new Vector2(-base_size.Item1 / 2, -base_size.Item2 / 2);
-                complete_shape[0] = new Vector2(base_size.Item1 / 2, -base_size.Item2 / 2);
+                complete_shape[1] = new Vector2(-base_size.Item1 / 2, base_size.Item2 / 2);
+                complete_shape[2] = new Vector2(-base_size.Item1 / 2, -base_size.Item2 / 2);
+                complete_shape[3] = new Vector2(base_size.Item1 / 2, -base_size.Item2 / 2);
                 return;
             }
 
             ShiftArray();
             var dir = GetDirection();
             var exp = GetExpansion();
-            if (Math.Sign(dir.X) == Math.Sign(dir.Y)) { // bottom right or top left
-                complete_shape[attach_index].Y -= exp.Item2;
 
-                complete_shape[attach_index + 1] = complete_shape[attach_index];
-                complete_shape[attach_index + 1].X += exp.Item3;
+            try {
+                if (Math.Sign(dir.X) == Math.Sign(dir.Y)) { // bottom right or top left
+                    complete_shape[attach_index].Y -= exp.Item2;
 
-                complete_shape[attach_index + 2] = complete_shape[attach_index + 1];
-                complete_shape[attach_index + 2].Y += exp.Item4;
+                    complete_shape[attach_index + 1] = complete_shape[attach_index];
+                    complete_shape[attach_index + 1].X += exp.Item3;
 
-                complete_shape[attach_index + 3] = complete_shape[attach_index + 2];
-                complete_shape[attach_index + 3].X -= exp.Item3 -=exp.Item1;
+                    complete_shape[attach_index + 2] = complete_shape[attach_index + 1];
+                    complete_shape[attach_index + 2].Y += exp.Item4;
 
-                complete_shape[attach_index + 4] = complete_shape[attach_index + 3];
-                complete_shape[attach_index + 4].Y += exp.Item2 -= exp.Item4;
+                    complete_shape[attach_index + 3] = complete_shape[attach_index + 2];
+                    complete_shape[attach_index + 3].X -= exp.Item3 -= exp.Item1;
+
+                    complete_shape[attach_index + 4] = complete_shape[attach_index + 3];
+                    complete_shape[attach_index + 4].Y += exp.Item2 -= exp.Item4;
+                }
+                else {
+                    complete_shape[attach_index].X -= exp.Item1;
+
+                    complete_shape[attach_index + 1] = complete_shape[attach_index];
+                    complete_shape[attach_index + 1].Y += exp.Item4;
+
+                    complete_shape[attach_index + 2] = complete_shape[attach_index + 1];
+                    complete_shape[attach_index + 2].X += exp.Item3;
+
+                    complete_shape[attach_index + 3] = complete_shape[attach_index + 2];
+                    complete_shape[attach_index + 3].Y -= exp.Item4 -= exp.Item2;
+
+                    complete_shape[attach_index + 4] = complete_shape[attach_index + 3];
+                    complete_shape[attach_index + 4].X += exp.Item1 -= exp.Item3;
+                }
             }
-            else {
-                complete_shape[attach_index].X -= exp.Item1;
-
-                complete_shape[attach_index + 1] = complete_shape[attach_index];
-                complete_shape[attach_index + 1].Y += exp.Item4;
-
-                complete_shape[attach_index + 2] = complete_shape[attach_index + 1];
-                complete_shape[attach_index + 2].X += exp.Item3;
-
-                complete_shape[attach_index + 3] = complete_shape[attach_index + 2];
-                complete_shape[attach_index + 3].Y -= exp.Item4 -= exp.Item2;
-
-                complete_shape[attach_index + 4] = complete_shape[attach_index + 3];
-                complete_shape[attach_index + 4].X += exp.Item1 -= exp.Item3;
+            catch (Exception ex) {
+                GD.Print("error");
             }
+           
             
-
             
             // I just put all this in methods for cleanliness
             (int, int) GetPrevAndNextIndex(int index) {
@@ -104,8 +110,9 @@ namespace Project_Ice_Room.LVL_GENERATOR {
         }
 
         void FillShape() {
-            CreateRect(-1); 
-            for (int i = 0; i < complete_shape.Length-1; i++) {
+            GD.Print("subshapelen: " + (sub_shapes.Length - 1));
+            CreateRect(-1);
+            for (int i = 0; i < sub_shapes.Length-1; i++) {
                 CreateRect(GetRandomIndex());
             }
 
@@ -117,9 +124,11 @@ namespace Project_Ice_Room.LVL_GENERATOR {
         }
 
         internal void PrintShape() {
+            GD.Print("_________all points_________");
             foreach (var p in complete_shape) {
                 GD.Print(p);
             }
+            GD.Print("____________________________");
         }
     }
 }

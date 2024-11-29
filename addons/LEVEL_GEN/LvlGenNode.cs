@@ -30,11 +30,17 @@ public partial class LvlGenNode : Node2D
 
         Polygon2D polygon = new Polygon2D {
             Polygon = generated_shape,
-            Color = new Color(0.4f, 0.8f, 0.2f, 1f)
+            Color = new Color(0.4f, 0.8f, 0.2f)
         };
         AddChild(polygon);
 
         lso.PrintShape();
+
+
+        GD.Print("______polygon points_______");
+        foreach (var p in polygon.Polygon) {
+            GD.Print(p);
+        }
         
         
     }
