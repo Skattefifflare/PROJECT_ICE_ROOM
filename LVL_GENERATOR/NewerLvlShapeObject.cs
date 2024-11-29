@@ -42,42 +42,40 @@ namespace Project_Ice_Room.LVL_GENERATOR {
             var dir = GetDirection();
             var exp = GetExpansion();
 
-            try {
-                if (Math.Sign(dir.X) == Math.Sign(dir.Y)) { // bottom right or top left
-                    complete_shape[attach_index].Y -= exp.Item2;
+            
+            if (Math.Sign(dir.X) == Math.Sign(dir.Y)) { // bottom right or top left
+                complete_shape[attach_index].Y -= exp.Item2;
 
-                    complete_shape[attach_index + 1] = complete_shape[attach_index];
-                    complete_shape[attach_index + 1].X += exp.Item3;
+                complete_shape[attach_index + 1] = complete_shape[attach_index];
+                complete_shape[attach_index + 1].X += exp.Item3;
 
-                    complete_shape[attach_index + 2] = complete_shape[attach_index + 1];
-                    complete_shape[attach_index + 2].Y += exp.Item4;
+                complete_shape[attach_index + 2] = complete_shape[attach_index + 1];
+                complete_shape[attach_index + 2].Y += exp.Item4;
 
-                    complete_shape[attach_index + 3] = complete_shape[attach_index + 2];
-                    complete_shape[attach_index + 3].X -= exp.Item3 -= exp.Item1;
+                complete_shape[attach_index + 3] = complete_shape[attach_index + 2];
+                complete_shape[attach_index + 3].X -= exp.Item3 -= exp.Item1;
 
-                    complete_shape[attach_index + 4] = complete_shape[attach_index + 3];
-                    complete_shape[attach_index + 4].Y += exp.Item2 -= exp.Item4;
-                }
-                else {
-                    complete_shape[attach_index].X -= exp.Item1;
-
-                    complete_shape[attach_index + 1] = complete_shape[attach_index];
-                    complete_shape[attach_index + 1].Y += exp.Item4;
-
-                    complete_shape[attach_index + 2] = complete_shape[attach_index + 1];
-                    complete_shape[attach_index + 2].X += exp.Item3;
-
-                    complete_shape[attach_index + 3] = complete_shape[attach_index + 2];
-                    complete_shape[attach_index + 3].Y -= exp.Item4 -= exp.Item2;
-
-                    complete_shape[attach_index + 4] = complete_shape[attach_index + 3];
-                    complete_shape[attach_index + 4].X += exp.Item1 -= exp.Item3;
-                }
+                complete_shape[attach_index + 4] = complete_shape[attach_index + 3];
+                complete_shape[attach_index + 4].Y += exp.Item2 -= exp.Item4;
             }
-            catch (Exception ex) {
-                GD.Print("error");
+            else {
+                complete_shape[attach_index].X -= exp.Item1;
+
+                complete_shape[attach_index + 1] = complete_shape[attach_index];
+                complete_shape[attach_index + 1].Y += exp.Item4;
+
+                complete_shape[attach_index + 2] = complete_shape[attach_index + 1];
+                complete_shape[attach_index + 2].X += exp.Item3;
+
+                complete_shape[attach_index + 3] = complete_shape[attach_index + 2];
+                complete_shape[attach_index + 3].Y -= exp.Item4 -= exp.Item2;
+
+                complete_shape[attach_index + 4] = complete_shape[attach_index + 3];
+                complete_shape[attach_index + 4].X += exp.Item1 -= exp.Item3;
             }
-           
+            
+            
+            
             
             
             // I just put all this in methods for cleanliness
@@ -100,7 +98,11 @@ namespace Project_Ice_Room.LVL_GENERATOR {
                 return dir;
             }
             (int, int, int, int) GetExpansion() { // first 2 are insets, last 2 are expansions
-                return (50, 50, 100, 100);
+                var dir = GetDirection();
+                dir = dir.Normalized();
+                (int, int, int, int) expansion = (50 * (int)dir.X, 50 * (int)dir.Y, 100 * (int)dir.X, 100 * (int)dir.Y);
+
+                return expansion;
             }
             void ShiftArray() {
                 for (int i = complete_shape.Length-1; i > attach_index + 4; i--) {
@@ -113,12 +115,16 @@ namespace Project_Ice_Room.LVL_GENERATOR {
             GD.Print("subshapelen: " + (sub_shapes.Length - 1));
             CreateRect(-1);
             for (int i = 0; i < sub_shapes.Length-1; i++) {
-                CreateRect(GetRandomIndex());
+                CreateRect(GetRandomIndex( (i + 1) * 4));
             }
 
-            int GetRandomIndex() {
-                List<int> usable_indexes = Enumerable.Range(0, complete_shape.Length).ToList();
+            int GetRandomIndex(int current_max_index) {
+                List<int> usable_indexes = Enumerable.Range(0, current_max_index).ToList();
                 usable_indexes.RemoveAll(i => unusable_indexes.Contains(i));
+                GD.Print("usable indexes");
+                foreach(var i in usable_indexes) {
+                    GD.Print(i);
+                }
                 return usable_indexes[rand.Next(0, usable_indexes.Count)];
             }
         }

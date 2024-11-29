@@ -23,7 +23,7 @@ public partial class LvlGenNode : Node2D
     public override void _Ready() {
         base._Ready();
 
-        NewerLvlShapeObject lso = new NewerLvlShapeObject(200, 200, 4);
+        NewerLvlShapeObject lso = new NewerLvlShapeObject(200, 200, 2);
        
         var generated_shape = lso.complete_shape;
 
