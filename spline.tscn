@@ -1,13 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://ckvbu5w3an0wr"]
+[gd_scene load_steps=2 format=3 uid="uid://ckvbu5w3an0wr"]
 
 [ext_resource type="Script" path="res://GenSpline.cs" id="1_3bo70"]
-[ext_resource type="Script" path="res://cat_mull.cs" id="1_ww8ij"]
-
-[sub_resource type="Curve2D" id="Curve2D_uj40w"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_3bo70")
-
-[node name="TestPath" type="Path2D" parent="."]
-curve = SubResource("Curve2D_uj40w")
-script = ExtResource("1_ww8ij")
