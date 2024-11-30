@@ -30,26 +30,32 @@ namespace Project_Ice_Room.LVL_GENERATOR {
 
         private void CreateShape() {
             List<int> unusable_indexes = new List<int>();
+            int index;
 
-            CreateBaseShape();
+            shape[0] = new Vector2(base_size.Item1 / 2, base_size.Item2 / 2);
+            shape[1] = new Vector2(-base_size.Item1 / 2, base_size.Item2 / 2);
+            shape[2] = new Vector2(-base_size.Item1 / 2, -base_size.Item2 / 2);
+            shape[3] = new Vector2(base_size.Item1 / 2, -base_size.Item2 / 2);
 
             for (int i = 1; i < rect_num; i++) {
                 GD.Print($"creating expansion number {i}");
-                int index = ChooseInsertion(i);
-                MakeSpace(index);
+
+                ChooseIndex(i);
+
+                PrintVectorArray(shape, "shape pre-shifting:");
+                for (int j = shape.Length - 5; j > index; j--) {
+                    shape[j + 4] = shape[j];
+                }
+                PrintVectorArray(shape, "shape post-shifting:");
+
                 ExpandShape(index);
+
                 GD.Print("\n\n\n");
             }
 
-            void CreateBaseShape() {
-                GD.Print("...Creating Base Shape...");
-                shape[0] = new Vector2(base_size.Item1 / 2, base_size.Item2 / 2);
-                shape[1] = new Vector2(-base_size.Item1 / 2, base_size.Item2 / 2);
-                shape[2] = new Vector2(-base_size.Item1 / 2, -base_size.Item2 / 2);
-                shape[3] = new Vector2(base_size.Item1 / 2, -base_size.Item2 / 2);
-            }
 
-            int ChooseInsertion(int rects_created) {
+
+            void ChooseIndex(int rects_created) {
                 GD.Print("_____ChooseInsertion_____");
                 List<int> usable_indexes = new List<int>();  //Enumerable.Range(0, rects_created * 4).ToList();
                 
@@ -59,7 +65,7 @@ namespace Project_Ice_Room.LVL_GENERATOR {
                     }
                 }
                 
-                int index = usable_indexes[rand.Next(0, usable_indexes.Count)];
+                index = usable_indexes[rand.Next(0, usable_indexes.Count)];
                 PrintIntList(usable_indexes, "usable indexes: ");
                 GD.Print("index is " + index);
                 UpdateUnusables(index);                               
@@ -68,27 +74,15 @@ namespace Project_Ice_Room.LVL_GENERATOR {
                     unusable_indexes.Add(index);
                     unusable_indexes.Add(index + 4);
                     for (int i = 0; i < unusable_indexes.Count; i++) {
-                        if (unusable_indexes[i] > index) {
+                        if (unusable_indexes[i] > index && unusable_indexes[i] != index + 4) {
                             unusable_indexes[i] += 4;
                         }
                     }
                     PrintIntList(unusable_indexes, "unusable_indexes: ");
                 }
-                return index;
-            }
-
-            void MakeSpace(int index) {
-                GD.Print("_____MakeSpace_____");
-
-                PrintVectorArray(shape, "shape pre-shifting:");
-                for (int i = shape.Length - 5; i > index; i--) {
-                    shape[i + 4] = shape[i];
-                }
-                PrintVectorArray(shape, "shape post-shifting:");
             }
 
             void ExpandShape(int index) {
-                GD.Print("_____ExpandShape_____");
                 Vector2 dir = GetDirection();
                 Vector2 inset = new Vector2(30, 30) * dir;
                 Vector2 expansion = new Vector2(100, 100) * dir;
@@ -99,50 +93,50 @@ namespace Project_Ice_Room.LVL_GENERATOR {
 
                 if (Math.Sign(dir.X) == Math.Sign(dir.Y)) {
 
-                    new_points[index] = shape[index];
-                    new_points[index].Y -= inset.Y;
+                    new_points[0] = shape[index];
+                    new_points[0].Y -= inset.Y;
 
-                    new_points[index + 1] = new_points[index];
-                    new_points[index + 1].X += expansion.X;
+                    new_points[1] = new_points[0];
+                    new_points[1].X += expansion.X;
 
-                    new_points[index + 2] = new_points[index + 1];
-                    new_points[index + 2].Y += expansion.Y;
-                    new_points[index + 2].Y += inset.Y;
+                    new_points[2] = new_points[1];
+                    new_points[2].Y += expansion.Y;
+                    new_points[2].Y += inset.Y;
 
-                    new_points[index + 3] = new_points[index + 2];
-                    new_points[index + 3].X -= expansion.X;
-                    new_points[index + 3].X -= inset.X;
+                    new_points[3] = new_points[2];
+                    new_points[3].X -= expansion.X;
+                    new_points[3].X -= inset.X;
 
-                    new_points[index + 4] = new_points[index + 3];
-                    new_points[index + 4].Y -= expansion.Y;
+                    new_points[4] = new_points[3];
+                    new_points[4].Y -= expansion.Y;
 
-                    CreateSubShape(inset.Y, false);
+                    //CreateSubShape(inset.Y, false);
                 }
                 else {
-                    new_points[index] = shape[index];
-                    new_points[index].X -= inset.X;
+                    new_points[0] = shape[index];
+                    new_points[0].X -= inset.X;
 
-                    new_points[index + 1] = new_points[index];
-                    new_points[index + 1].Y += expansion.Y;
+                    new_points[1] = new_points[0];
+                    new_points[1].Y += expansion.Y;
 
-                    new_points[index + 2] = new_points[index + 1];
-                    new_points[index + 2].X += expansion.X;
-                    new_points[index + 2].X += inset.X;
+                    new_points[2] = new_points[1];
+                    new_points[2].X += expansion.X;
+                    new_points[2].X += inset.X;
 
-                    new_points[index + 3] = new_points[index + 2];
-                    new_points[index + 3].Y -= expansion.Y;
-                    new_points[index + 3].Y -= inset.Y;
+                    new_points[3] = new_points[2];
+                    new_points[3].Y -= expansion.Y;
+                    new_points[3].Y -= inset.Y;
 
-                    new_points[index + 4] = new_points[index + 3];
-                    new_points[index + 4].X -= expansion.X;
+                    new_points[4] = new_points[3];
+                    new_points[4].X -= expansion.X;
 
-                    CreateSubShape(inset.X, true);
+                    //CreateSubShape(inset.X, true);
                 }
-                shape[index] = new_points[index];
-                shape[index + 1] = new_points[index + 1];
-                shape[index + 2] = new_points[index + 2];
-                shape[index + 3] = new_points[index + 3];
-                shape[index + 4] = new_points[index + 4];
+                shape[index] = new_points[0];
+                shape[index + 1] = new_points[1];
+                shape[index + 2] = new_points[2];
+                shape[index + 3] = new_points[3];
+                shape[index + 4] = new_points[4];
 
 
                 GD.Print("dir was " + dir.X + ", " + dir.Y);
@@ -173,7 +167,7 @@ namespace Project_Ice_Room.LVL_GENERATOR {
 
                 void CreateSubShape(float inset, bool first_inset_is_X) {
 
-                    Vector2 vec4 = new_points[index + 4];
+                    Vector2 vec4 = new_points[4];
 
                     if (first_inset_is_X) {
                         vec4.X -= inset;
@@ -184,9 +178,9 @@ namespace Project_Ice_Room.LVL_GENERATOR {
 
                     Polygon2D new_sub_shape = new Polygon2D {
                         Polygon = new Vector2[] {
-                            new_points[index + 1],
-                            new_points[index + 2],
-                            new_points[index + 3],
+                            new_points[1],
+                            new_points[2],
+                            new_points[3],
                             vec4
                         },
                         Color = new Color((float)rand.NextDouble(), (float)rand.NextDouble(), (float)rand.NextDouble(), 0.7f)
@@ -229,7 +223,6 @@ namespace Project_Ice_Room.LVL_GENERATOR {
                     }
                 }
             }
-
         }
 
         internal Vector2[] GetShape() {

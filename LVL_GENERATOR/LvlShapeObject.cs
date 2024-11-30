@@ -5,112 +5,211 @@ using System.Linq;
 
 
 internal class LvlShapeObject {
-    Vector2[] points;
-    List<int> all_indexes;
-    List<int> unusable_indexes;
+
+    private int rect_num;
+    private (int, int) base_size;
+    private Vector2[] shape;
+    private List<Polygon2D> sub_shapes;
+    private Random rand;
 
 
-    int[] nums = new int[]{
-            0, 4
-    };
+    internal LvlShapeObject(int width, int height, int A_rect_num) {
+        rect_num = A_rect_num;
+        base_size = (width, height);
+        shape = new Vector2[rect_num * 4];
+        sub_shapes = new List<Polygon2D>();
+        rand = new Random();
 
-    internal LvlShapeObject(int rect_num, Vector2 init_size) {
-        rect_num = nums.Length+1;
-        points = new Vector2[rect_num * 4];
+        CreateShape();
+    }
 
-        // starting rectangle
-        points[0] = new Vector2(init_size.X/2, init_size.Y / 2);
-        points[1] = new Vector2(-init_size.X / 2, init_size.Y / 2);
-        points[2] = new Vector2(-init_size.X / 2, -init_size.Y / 2);
-        points[3] = new Vector2(init_size.X / 2, -init_size.Y / 2);
-        all_indexes = Enumerable.Range(0, rect_num * 4).ToList();
-        unusable_indexes = new List<int>();
+    private void CreateShape() {
+        List<int> unusable_indexes = new List<int>();
+        int index;
 
-        Random r = new Random();
-        int max_index = 3;
-        
+        // creating the base shape
+        shape[0] = new Vector2(base_size.Item1 / 2, base_size.Item2 / 2);
+        shape[1] = new Vector2(-base_size.Item1 / 2, base_size.Item2 / 2);
+        shape[2] = new Vector2(-base_size.Item1 / 2, -base_size.Item2 / 2);
+        shape[3] = new Vector2(base_size.Item1 / 2, -base_size.Item2 / 2);
 
-        int k = 0;
-        while(rect_num > 1) { //wont run if we just want the main rectangle
-            // all indexes that are allowed to be used and below the current largest index
-            int[] available_indexes = all_indexes.Where(x => !unusable_indexes.Contains(x)).ToList().GetRange(0, max_index + 1).ToArray();
-            foreach (var a in available_indexes) GD.Print(a);
-            // random index of a corner of the shape.
-            int r_index = nums[k];//r.Next(available_indexes.Length);
-                k++;
-            int next_index = (r_index == max_index) ? 0 : r_index + 1;
-            int prev_index = (r_index == 0) ? max_index : r_index - 1;
-            GD.Print("index: " + r_index);
+        for (int i = 1; i < rect_num; i++) {
+            ChooseIndex(i);
+
+            // shifting the array
+            for (int j = shape.Length - 5; j > i; j--) {
+                shape[j + 4] = shape[i];
+            }
+
+            ExpandShape(index);
+        }
+
+        void ChooseIndex(int rects_created) {
+            List<int> usable_indexes = new List<int>();
+            for (int i = 0; i < (rects_created * 4); i++) {
+                if (!unusable_indexes.Contains(i)) {
+                    usable_indexes.Add(i);
+                }
+            }
+            index = usable_indexes[rand.Next(0, usable_indexes.Count)];
+
+            UpdateUnusables(index);
+
+            void UpdateUnusables(int index) {
+                unusable_indexes.Add(index);
+                unusable_indexes.Add(index + 4);
+                for (int i = 0; i < unusable_indexes.Count; i++) {
+                    if (unusable_indexes[i] > index) {
+                        unusable_indexes[i] += 4;
+                    }
+                }
+            }
+        }
+
+        void ExpandShape(int index) {
+            Vector2 dir = GetDirection();
+            Vector2 inset = new Vector2(30, 30) * dir;
+            Vector2 expansion = new Vector2(100, 100) * dir;
+
+            Vector2[] new_points = new Vector2[5];
+
+
             
-            unusable_indexes = unusable_indexes.Select(x => x > r_index ? x + 4 : x).ToList();
-            unusable_indexes.Add(r_index);
-            unusable_indexes.Add(r_index + 4);
+            if (Math.Sign(dir.X) == Math.Sign(dir.Y)) {
+                new_points[index] = shape[index];
+                new_points[index].Y -= inset.Y;
 
-            // if our random point is on the bottom right corner of a rectangle the width and height will both be +.
-            // if the point is top left both will be -.
-            // this can be exploited to simplify the expansion.
-            Vector2 parent_size = new Vector2(
-                NonZeroMax(points[r_index].X - points[prev_index].X, points[r_index].X - points[next_index].X),
-                NonZeroMax(points[r_index].Y - points[prev_index].Y, points[r_index].Y - points[next_index].Y)
-            );
-            Vector2 inset = new Vector2(
-                parent_size.X * (((float)r.NextDouble() / 3) + 0.10f),
-                parent_size.Y * (((float)r.NextDouble() / 3) + 0.10f)
-            );
-            Vector2 expansion = new Vector2(
-                parent_size.X * (((float)r.NextDouble() / 4) + 0.35f),
-                parent_size.Y * (((float)r.NextDouble() / 4) + 0.35f)
-            );
+                new_points[index + 1] = new_points[index];
+                new_points[index + 1].X += expansion.X;
 
-            // does stuff
-            (Vector2, Vector2) VectorMagic(Vector2 vctr) {
-                return (parent_size.X > 0 && parent_size.Y > 0) || (parent_size.X < 0 && parent_size.Y < 0) ?
-                (new Vector2(0, vctr.Y), new Vector2(vctr.X, 0)) :
-                (new Vector2(vctr.X, 0), new Vector2(0, vctr.Y));
+                new_points[index + 2] = new_points[index + 1];
+                new_points[index + 2].Y += expansion.Y;
+                new_points[index + 2].Y += inset.Y;
+
+                new_points[index + 3] = new_points[index + 2];
+                new_points[index + 3].X -= expansion.X;
+                new_points[index + 3].X -= inset.X;
+
+                new_points[index + 4] = new_points[index + 3];
+                new_points[index + 4].Y -= expansion.Y;
+
+                //CreateSubShape(inset.Y, false);
             }
+            else {
+                new_points[index] = shape[index];
+                new_points[index].X -= inset.X;
 
-            Vector2[] corners = new Vector2[] {
-                points[r_index] - VectorMagic(inset).Item1,               // corner_one
-                points[r_index] - VectorMagic(inset).Item1 + VectorMagic(expansion).Item2, // corner_two
-                points[r_index] + expansion,                              // corner_three
-                points[r_index] - VectorMagic(inset).Item2 + VectorMagic(expansion).Item1,  // corner_four
-                points[r_index] - VectorMagic(inset).Item2                // corner_five
-            };
-            for (int i = 0; i < corners.Length-1; i++) {
-                if (corners[i].X != corners[i+1].X && corners[i].Y != corners[i + 1].Y) {
-                    GD.Print("start index: " + r_index + "diagonal between corner " + (i+1) + " and " + (i+2)); // this never triggers.
+                new_points[index + 1] = new_points[index];
+                new_points[index + 1].Y += expansion.Y;
+
+                new_points[index + 2] = new_points[index + 1];
+                new_points[index + 2].X += expansion.X;
+                new_points[index + 2].X += inset.X;
+
+                new_points[index + 3] = new_points[index + 2];
+                new_points[index + 3].Y -= expansion.Y;
+                new_points[index + 3].Y -= inset.Y;
+
+                new_points[index + 4] = new_points[index + 3];
+                new_points[index + 4].X -= expansion.X;
+
+                //CreateSubShape(inset.X, true);
+            }
+            shape[index] = new_points[index];
+            shape[index + 1] = new_points[index + 1];
+            shape[index + 2] = new_points[index + 2];
+            shape[index + 3] = new_points[index + 3];
+            shape[index + 4] = new_points[index + 4];
+
+
+
+            Vector2 GetDirection() {
+                var prev_next = GetPrevAndNextIndex();
+                Vector2 prev_to_i = shape[index] - shape[prev_next.Item1];
+                Vector2 next_to_i = shape[index] - shape[prev_next.Item2];
+                Vector2 dir = prev_to_i + next_to_i;
+                dir = dir.Normalized();
+                dir = new Vector2(Math.Sign(dir.X), Math.Sign(dir.Y));
+                return dir;
+
+                (int, int) GetPrevAndNextIndex() {
+                    int current_max_index = 3 + (unusable_indexes.Count / 2 * 4); // 3 for the base rect, for each new rect 2 points are added to unusables
+                    if (index == 0) {
+                        return (current_max_index, index + 1);
+                    }
+                    if (index == current_max_index) {
+                        return (index - 1, 0);
+                    }
+                    else {
+                        return (index - 1, index + 1);
+                    }
                 }
             }
-            // making space
-            Array.Copy(points, r_index + 1, points, r_index + 5, (points.Length - 1 - r_index - 4));
-            // filling space
-            Array.Copy(corners, 0, points, r_index, corners.Length);
+            /*
+            void CreateSubShape(float inset, bool first_inset_is_X) {
 
-            for (int i = 0; i < points.Length-1; i++) {
-                if (points[i].X != points[i + 1].X && points[i].Y != points[i + 1].Y && points[i+1] != Vector2.Zero) {
-                    GD.Print("diagonal between " + i + " and " + (i + 1));
+                Vector2 vec4 = new_points[index + 4];
+
+                if (first_inset_is_X) {
+                    vec4.X -= inset;
+                }
+                else {
+                    vec4.Y -= inset;
+                }
+
+                Polygon2D new_sub_shape = new Polygon2D {
+                    Polygon = new Vector2[] {
+                            new_points[index + 1],
+                            new_points[index + 2],
+                            new_points[index + 3],
+                            vec4
+                        },
+                    Color = new Color((float)rand.NextDouble(), (float)rand.NextDouble(), (float)rand.NextDouble(), 0.7f)
+                };
+                //CheckOverlap();
+
+                sub_shapes.Add(new_sub_shape);
+
+                void CheckOverlap() {
+                    for (int i = 0; i < sub_shapes.Count; i++) {
+
+                        if ((index - (index % 4)) / 4 == i) {
+                            continue;
+                        }
+
+                        foreach (var p in new_sub_shape.Polygon) {
+
+                            Vector2[] shape = sub_shapes[i].Polygon;
+                            var top_left = new Vector2(
+                                Math.Min(Math.Min(shape[0].X, shape[1].X), Math.Min(shape[2].X, shape[3].X)),
+                                Math.Min(Math.Min(shape[0].Y, shape[1].Y), Math.Min(shape[2].Y, shape[3].Y)));
+
+                            var bottom_right = new Vector2(
+                                Math.Max(Math.Max(shape[0].X, shape[1].X), Math.Max(shape[2].X, shape[3].X)),
+                                Math.Max(Math.Max(shape[0].Y, shape[1].Y), Math.Max(shape[2].Y, shape[3].Y)));
+
+                            var clampedX = Math.Clamp(p.X, top_left.X, bottom_right.X);
+                            var clampedY = Math.Clamp(p.Y, top_left.Y, bottom_right.Y);
+
+                            if (clampedX == top_left.X || clampedX == bottom_right.X) {
+                                if (clampedY == top_left.Y || clampedY == bottom_right.Y) {
+                                    unusable_indexes.Add(index);
+                                    return;
+                                }
+                            }
+
+                        }
+                    }
+                    sub_shapes.Add(new_sub_shape);
                 }
             }
-
-            max_index += 2;
-            rect_num--;
+            */
         }
     }
-    float NonZeroMax(float a, float b) {
-        if (a != 0 && b == 0) return a;
-        if (b != 0 && a == 0) return b;
-        if (a != 0 && b != 0) return Math.Max(a, b);
-        return 0; // Only if both are zero
-    }
+
     internal Vector2[] GetShape() {
-        return points;
+        return shape;
     }
-    internal void PrintArray() {
-        int index = 0;
-        points.ToList().ForEach(i => {
-            GD.Print(index + ": " + i.ToString());
-            index++;
-        });
-    }
+    
 }
 
