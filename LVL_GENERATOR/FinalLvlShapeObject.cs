@@ -14,7 +14,7 @@ namespace Project_Ice_Room.LVL_GENERATOR {
         private int rect_num;
         private (int, int) base_size;
         private Vector2[] shape;
-        private Polygon2D[] sub_shapes;
+        private List<Polygon2D> sub_shapes;
         private Random rand;
 
 
@@ -22,7 +22,7 @@ namespace Project_Ice_Room.LVL_GENERATOR {
             rect_num = A_rect_num;
             base_size = (width, height);
             shape = new Vector2[rect_num * 4];
-            sub_shapes = new Polygon2D[rect_num];
+            sub_shapes = new List<Polygon2D>();
             rand = new Random();
 
             CreateShape();
@@ -38,7 +38,6 @@ namespace Project_Ice_Room.LVL_GENERATOR {
                 int index = ChooseInsertion(i);
                 MakeSpace(index);
                 ExpandShape(index);
-                CreateSubShape();
                 GD.Print("\n\n\n");
             }
 
@@ -94,42 +93,58 @@ namespace Project_Ice_Room.LVL_GENERATOR {
                 Vector2 inset = new Vector2(30, 30) * dir;
                 Vector2 expansion = new Vector2(100, 100) * dir;
 
+                Vector2[] new_points = new Vector2[5];
+
+
+
                 if (Math.Sign(dir.X) == Math.Sign(dir.Y)) {
-                    
-                    shape[index].Y -= inset.Y;
 
-                    shape[index + 1] = shape[index];
-                    shape[index + 1].X += expansion.X;
+                    new_points[index] = shape[index];
+                    new_points[index].Y -= inset.Y;
 
-                    shape[index + 2] = shape[index + 1];
-                    shape[index + 2].Y += expansion.Y;
-                    shape[index + 2].Y += inset.Y;
+                    new_points[index + 1] = new_points[index];
+                    new_points[index + 1].X += expansion.X;
 
-                    shape[index + 3] = shape[index + 2];
-                    shape[index + 3].X -= expansion.X;
-                    shape[index + 3].X -= inset.X;
+                    new_points[index + 2] = new_points[index + 1];
+                    new_points[index + 2].Y += expansion.Y;
+                    new_points[index + 2].Y += inset.Y;
 
-                    shape[index + 4] = shape[index + 3];
-                    shape[index + 4].Y -= expansion.Y;                                  
+                    new_points[index + 3] = new_points[index + 2];
+                    new_points[index + 3].X -= expansion.X;
+                    new_points[index + 3].X -= inset.X;
+
+                    new_points[index + 4] = new_points[index + 3];
+                    new_points[index + 4].Y -= expansion.Y;
+
+                    CreateSubShape(inset.Y, false);
                 }
                 else {
-                    
-                    shape[index].X -= inset.X;
+                    new_points[index] = shape[index];
+                    new_points[index].X -= inset.X;
 
-                    shape[index + 1] = shape[index];
-                    shape[index + 1].Y += expansion.Y;
+                    new_points[index + 1] = new_points[index];
+                    new_points[index + 1].Y += expansion.Y;
 
-                    shape[index + 2] = shape[index + 1];
-                    shape[index + 2].X += expansion.X;
-                    shape[index + 2].X += inset.X;
+                    new_points[index + 2] = new_points[index + 1];
+                    new_points[index + 2].X += expansion.X;
+                    new_points[index + 2].X += inset.X;
 
-                    shape[index + 3] = shape[index + 2];
-                    shape[index + 3].Y -= expansion.Y;
-                    shape[index + 3].Y -= inset.Y;
+                    new_points[index + 3] = new_points[index + 2];
+                    new_points[index + 3].Y -= expansion.Y;
+                    new_points[index + 3].Y -= inset.Y;
 
-                    shape[index + 4] = shape[index + 3];
-                    shape[index + 4].X -= expansion.X;                                  
+                    new_points[index + 4] = new_points[index + 3];
+                    new_points[index + 4].X -= expansion.X;
+
+                    CreateSubShape(inset.X, true);
                 }
+                shape[index] = new_points[index];
+                shape[index + 1] = new_points[index + 1];
+                shape[index + 2] = new_points[index + 2];
+                shape[index + 3] = new_points[index + 3];
+                shape[index + 4] = new_points[index + 4];
+
+
                 GD.Print("dir was " + dir.X + ", " + dir.Y);
                 GD.Print("expansion was " + expansion.X + ", " + expansion.Y);
                 Vector2 GetDirection() {
@@ -155,15 +170,73 @@ namespace Project_Ice_Room.LVL_GENERATOR {
                         }
                     }
                 }
+
+                void CreateSubShape(float inset, bool first_inset_is_X) {
+
+                    Vector2 vec4 = new_points[index + 4];
+
+                    if (first_inset_is_X) {
+                        vec4.X -= inset;
+                    }
+                    else {
+                        vec4.Y -= inset;
+                    }
+
+                    Polygon2D new_sub_shape = new Polygon2D {
+                        Polygon = new Vector2[] {
+                            new_points[index + 1],
+                            new_points[index + 2],
+                            new_points[index + 3],
+                            vec4
+                        },
+                        Color = new Color((float)rand.NextDouble(), (float)rand.NextDouble(), (float)rand.NextDouble(), 0.7f)
+                    };
+                    //CheckOverlap();
+
+                    sub_shapes.Add(new_sub_shape);
+
+                    void CheckOverlap() {
+                        for (int i = 0; i < sub_shapes.Count; i++) {
+
+                            if ((index - (index % 4)) / 4 == i) {
+                                continue;
+                            }
+
+                            foreach (var p in new_sub_shape.Polygon) {
+
+                                Vector2[] shape = sub_shapes[i].Polygon;
+                                var top_left = new Vector2(
+                                    Math.Min(Math.Min(shape[0].X, shape[1].X), Math.Min(shape[2].X, shape[3].X)),
+                                    Math.Min(Math.Min(shape[0].Y, shape[1].Y), Math.Min(shape[2].Y, shape[3].Y)));
+
+                                var bottom_right = new Vector2(
+                                    Math.Max(Math.Max(shape[0].X, shape[1].X), Math.Max(shape[2].X, shape[3].X)),
+                                    Math.Max(Math.Max(shape[0].Y, shape[1].Y), Math.Max(shape[2].Y, shape[3].Y)));
+
+                                var clampedX = Math.Clamp(p.X, top_left.X, bottom_right.X);
+                                var clampedY = Math.Clamp(p.Y, top_left.Y, bottom_right.Y);
+
+                                if (clampedX == top_left.X || clampedX == bottom_right.X) {
+                                    if (clampedY == top_left.Y || clampedY == bottom_right.Y) {
+                                        unusable_indexes.Add(index);
+                                        return;
+                                    }
+                                }
+                                
+                            }
+                        }
+                        sub_shapes.Add(new_sub_shape);
+                    }
+                }
             }
 
-            void CreateSubShape() {
-                return;
-            }
         }
 
         internal Vector2[] GetShape() {
             return shape;
+        }
+        internal List<Polygon2D> GetSubShapes() {
+            return sub_shapes;
         }
 
         void PrintIntList(List<int> list, string text) {
