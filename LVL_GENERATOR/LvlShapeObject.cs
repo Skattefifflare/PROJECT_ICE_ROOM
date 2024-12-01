@@ -38,7 +38,7 @@ internal class LvlShapeObject {
             Polygon = new Vector2[] {
                 shape[0], shape[1], shape[2], shape[3]
             },
-            Color = new Color(1, 1, 1)
+            Color = new Color(1, 1, 1, 0.5f)
         });
 
         int index;
@@ -57,6 +57,11 @@ internal class LvlShapeObject {
                     GD.Print("no overlap at index: " + index);
                     ShiftArray(index);
                     sub_shapes.Add(new_sub_shape);
+                    foreach (var p in new_sub_shape.Polygon) {
+                        GD.Print(p);
+                    }
+
+
                     UpdateUnusables();
                     Array.Copy(new_points, 0, shape, index, new_points.Length);
                     break;
@@ -67,6 +72,19 @@ internal class LvlShapeObject {
                 }
             }
         }
+        GD.Print("___");
+        GD.Print("subshapecount: " + sub_shapes.Count);
+
+        foreach (var sub_shape in sub_shapes) {
+            GD.Print("subshape number " + sub_shapes.IndexOf(sub_shape));
+            foreach (var p in sub_shape.Polygon) {
+                GD.Print(p);
+            }
+            GD.Print("___");
+        }
+        GD.Print("\n\n");
+
+
 
         int ChooseIndex(int rects_created) {
             List<int> usable_indexes = new List<int>();
@@ -78,7 +96,6 @@ internal class LvlShapeObject {
             index = usable_indexes[rand.Next(0, usable_indexes.Count)];
             return index;
         }
-
         Vector2[] CreateExpansion() {
 
             var dir = GetDirection();
@@ -109,7 +126,7 @@ internal class LvlShapeObject {
                 new_points[4] = new_points[3];
                 new_points[4].Y -= expansion.Y;
 
-                new_sub_shape =  CreateSubShape(new Vector2(inset.X, 0));
+                new_sub_shape =  CreateSubShape(new Vector2(0, inset.Y));
             }
             else {
                 new_points[0] = shape[index];
@@ -129,7 +146,7 @@ internal class LvlShapeObject {
                 new_points[4] = new_points[3];
                 new_points[4].X -= expansion.X;
 
-                new_sub_shape = CreateSubShape(new Vector2(0, inset.Y));
+                new_sub_shape = CreateSubShape(new Vector2(inset.X, 0));
             }
             return new_points;
 
@@ -157,16 +174,14 @@ internal class LvlShapeObject {
                 }
             }
         }
-
         Polygon2D CreateSubShape(Vector2 first_inset) {
             return new Polygon2D() {
                 Polygon = new Vector2[] {
-                    new_points[1], new_points[2], new_points[3], new_points[4] + first_inset,
+                    new_points[1], new_points[2], new_points[3], new_points[4],
                 },
-                Color = new Color((float)rand.NextDouble(), (float)rand.NextDouble(), (float)rand.NextDouble(), 0.3f)
+                Color = new Color((float)rand.NextDouble(), (float)rand.NextDouble(), (float)rand.NextDouble(), 0.5f)
             };
         }
-
         void UpdateUnusables() {
             unusable_indexes.Add(index);
             unusable_indexes.Add(index + 4);
