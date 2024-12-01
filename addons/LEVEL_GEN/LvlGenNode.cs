@@ -23,7 +23,7 @@ public partial class LvlGenNode : Node2D
     public override void _Ready() {
         base._Ready();
 
-       FinalLvlShapeObject lso = new FinalLvlShapeObject(200, 200, 3);
+       LvlShapeObject lso = new LvlShapeObject(200, 200, 6);
        
         var generated_shape = lso.GetShape();
 
@@ -32,11 +32,15 @@ public partial class LvlGenNode : Node2D
             Polygon = generated_shape,
             Color = new Color(0.4f, 0.8f, 0.2f)
         };
-        AddChild(polygon);
+        //AddChild(polygon);
 
-        //foreach (var p in lso.GetSubShapes()) {
-        //    AddChild(p);
-        //}
+        foreach (var p in lso.GetSubShapes()) {
+            AddChild(p);
+        }
+
+        foreach (var p in polygon.Polygon) {
+            GD.Print(p);
+        }
 
     }
     public override void _ExitTree() {
