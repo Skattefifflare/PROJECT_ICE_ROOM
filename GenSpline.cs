@@ -23,26 +23,57 @@ public partial class GenSpline : Node2D
             shape = new List<Vector2>
             {
                 new Vector2(0, 0),    
-                new Vector2(0, 200),   
-                new Vector2(300, 200), 
-                new Vector2(300, 300), 
-                new Vector2(500, 300), 
-                new Vector2(500, 100), 
-                new Vector2(400, 100),
-                new Vector2(400, 0)  
+                //new Vector2(0, 200),   
+                //new Vector2(300, 200), 
+                //new Vector2(300, 300), 
+                //new Vector2(500, 300), 
+                //new Vector2(500, 100), 
+                //new Vector2(400, 100),
+                //new Vector2(400, 0)  
+                new Vector2(300, 0),
+                new Vector2(300, 150),
+                new Vector2(100, 150),
+                new Vector2(100, 350),
+                new Vector2(400, 350),
+                new Vector2(400, 200),
+                new Vector2(650, 200),
+                new Vector2(650, -100),
+                new Vector2(400, -100),
+                new Vector2(400, -200),
+                new Vector2(600, -200),
+                new Vector2(600, -600),
+                new Vector2(350, -600),
+                new Vector2(350, -300),
+                new Vector2(0, -300)
+
             };
             ControllPolygon = new Polygon2D
             {
                 Polygon = new Vector2[]
                 {
                     new Vector2(0, 0),
-                    new Vector2(0, 200),
-                    new Vector2(300, 200),
-                    new Vector2(300, 300),
-                    new Vector2(500, 300),
-                    new Vector2(500, 100),
-                    new Vector2(400, 100),
-                    new Vector2(400, 0)
+                    //new Vector2(0, 200),
+                    //new Vector2(300, 200),
+                    //new Vector2(300, 300),
+                    //new Vector2(500, 300),
+                    //new Vector2(500, 100),
+                    //new Vector2(400, 100),
+                    //new Vector2(400, 0)
+                    new Vector2(300, 0),
+                    new Vector2(300, 150),
+                    new Vector2(100, 150),
+                    new Vector2(100, 350),
+                    new Vector2(400, 350),
+                    new Vector2(400, 200),
+                    new Vector2(650, 200),
+                    new Vector2(650, -100),
+                    new Vector2(400, -100),
+                    new Vector2(400, -200),
+                    new Vector2(600, -200),
+                    new Vector2(600, -600),
+                    new Vector2(350, -600),
+                    new Vector2(350, -300),
+                    new Vector2(0, -300)
                 },
                 Color = new Color(0.5f, 0.5f, 0.5f, 0.5f)
             };
