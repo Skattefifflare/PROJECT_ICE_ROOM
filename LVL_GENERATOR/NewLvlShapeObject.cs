@@ -11,20 +11,26 @@ internal class NewLvlShapeObject { // contains all the bounding points of the le
     private List<Polygon2D> sub_shapes;
     private Random rand;
 
+    float width;
+    float height;
+
 
     internal NewLvlShapeObject(int width, int height, int rect_num) {
+        this.width = width;
+        this.height = height;
+
         this.rect_num = rect_num;
         full_shape = new Vector2[rect_num * 4];
         sub_shapes = new List<Polygon2D>();
         rand = new Random();
 
 
-        CreateBaseShape(width, height);
+        CreateBaseShape();
 
         CreateExpansions();
     }
 
-    void CreateBaseShape(int width, int height) {
+    void CreateBaseShape() {
         full_shape[0] = new Vector2(width / 2, height / 2);
         full_shape[1] = new Vector2(-width / 2, height / 2);
         full_shape[2] = new Vector2(-width / 2, -height / 2);
@@ -49,6 +55,8 @@ internal class NewLvlShapeObject { // contains all the bounding points of the le
         Polygon2D new_sub_shape;
 
         for (rects_created = 1; rects_created < rect_num; rects_created++) {
+            width *= 0.65f + (float)rand.NextDouble() / 3;
+            height *= 0.65f + (float)rand.NextDouble() / 3;
             while (true) {
                 insert_index = ChooseIndex();
                 GD.Print("index is " + insert_index);
@@ -82,8 +90,12 @@ internal class NewLvlShapeObject { // contains all the bounding points of the le
         void CreatePoints() {
             Vector2 dir = GetDirection();
 
-            Vector2 expansion = new Vector2(100, 100) * dir;
-            Vector2 inset = new Vector2(30, 30) * dir;
+            //Vector2 expansion = new Vector2(100, 100) * dir;
+            //Vector2 inset = new Vector2(30, 30) * dir;
+
+            Vector2 expansion = new Vector2(width, height) * dir;
+            Vector2 inset = expansion * 0.2f;
+
 
             Vector2 odd = (Math.Sign(dir.X) == Math.Sign(dir.Y)) ? new Vector2(0, 1) : new Vector2(1, 0);
             Vector2 even = new Vector2(odd.Y, odd.X); 
