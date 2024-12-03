@@ -63,7 +63,7 @@ internal class NewLvlShapeObject { // contains all the bounding points of the le
                     ShiftArray();
                     UpdateUnusables();
                     Array.Copy(new_points, 0, full_shape, insert_index, new_points.Length);
-
+                    sub_shapes.Add(new_sub_shape);
                     break;
                 }
             }
@@ -84,37 +84,24 @@ internal class NewLvlShapeObject { // contains all the bounding points of the le
 
             Vector2 expansion = new Vector2(100, 100) * dir;
             Vector2 inset = new Vector2(30, 30) * dir;
-            GD.Print("expansion is " + expansion);
-            GD.Print("dir is " + dir);
-                
+
             Vector2 odd = (Math.Sign(dir.X) == Math.Sign(dir.Y)) ? new Vector2(0, 1) : new Vector2(1, 0);
             Vector2 even = new Vector2(odd.Y, odd.X); 
-            GD.Print("odd is " + odd + " even is " + even);
 
             Array.Fill(new_points, full_shape[insert_index]);
-            //new_points = Array.ConvertAll(new_points, i => i -= inset * odd);
-            //new_points = Array.ConvertAll(new_points, i => Array.IndexOf(new_points, i) > 0 ? i += expansion * even : i);
-            //new_points = Array.ConvertAll(new_points, i => Array.IndexOf(new_points, i) > 1 ? i += expansion * odd : i);
-            //new_points = Array.ConvertAll(new_points, i => Array.IndexOf(new_points, i) > 2 ? i -= (expansion - inset) * even : i);
-            //new_points = Array.ConvertAll(new_points, i => Array.IndexOf(new_points, i) > 3 ? i -= (expansion + inset) * odd : i);
-
             var operations = new Func<Vector2, Vector2>[] {
                 x => x - (inset * odd),
                 x => x + (expansion * even),
-                x => x + (expansion * odd),
-                x => x - ((expansion - inset) * even),
-                x => x - ((expansion + inset) * odd)
+                x => x + ((expansion + inset) * odd),
+                x => x - ((expansion + inset) * even),
+                x => x - (expansion * odd)
             };
-
-
-
             for (int i = 4; i >= 0 ; i--) {
-                for (int j = i; j >= 0; j--) {
-
+                for (int j = i; j <= 4; j++) {
+                    new_points[j] = operations[i](new_points[j]);
                 }
             }
             
-
 
             GD.Print("new_points:");
             foreach(var point in new_points) {
@@ -142,44 +129,29 @@ internal class NewLvlShapeObject { // contains all the bounding points of the le
 
         Polygon2D CreateSubShape() {
 
+            var sub_shape_points = new Vector2[6];
+            Array.Copy(new_points, sub_shape_points, new_points.Length);
+            sub_shape_points[5] = full_shape[insert_index];
+
             return new Polygon2D() {
-                Color = new Color((float)rand.NextDouble(), (float)rand.NextDouble(), (float)rand.NextDouble(), 0.5f)
+                Polygon = sub_shape_points,
+                Color = new Color((float)rand.NextDouble(), (float)rand.NextDouble(), (float)rand.NextDouble(), 222f)
             };
         }
 
-
         bool ShapeOverlaps() { // returns true if it overlaps
-            return false;
-            if (sub_shapes.Count < 2) return false;
-            foreach (var sub_shape in sub_shapes) {
-                var shape_points = sub_shape.Polygon;
-
-                bool parent_flag = false;
-                foreach (var p in shape_points) {
-                    if (p == full_shape[insert_index]) {
-                        parent_flag = true; break;
+            foreach (var polygon in sub_shapes) {
+                if (Geometry2D.IntersectPolygons(polygon.Polygon, new_sub_shape.Polygon).Any(a => a.Any(p => !new_sub_shape.Polygon.Contains(p)))) {
+                    GD.Print("intersecting points: ");
+                    foreach( var a in Geometry2D.IntersectPolygons(polygon.Polygon, new_sub_shape.Polygon).ToArray()) {
+                        foreach (var p in a) {
+                            GD.Print(p);
+                        }
                     }
-                }
-                if (parent_flag) continue;
-
-                var top_left = new Vector2(
-                    Math.Min(Math.Min(shape_points[0].X, shape_points[1].X), Math.Min(shape_points[2].X, shape_points[3].X)),
-                    Math.Min(Math.Min(shape_points[0].Y, shape_points[1].Y), Math.Min(shape_points[2].Y, shape_points[3].Y)));
-
-                var bottom_right = new Vector2(
-                    Math.Max(Math.Max(shape_points[0].X, shape_points[1].X), Math.Max(shape_points[2].X, shape_points[3].X)),
-                    Math.Max(Math.Max(shape_points[0].Y, shape_points[1].Y), Math.Max(shape_points[2].Y, shape_points[3].Y)));
-
-                foreach (var p in new_sub_shape.Polygon) {
-                    var clampedX = Math.Clamp(p.X, top_left.X, bottom_right.X);
-                    var clampedY = Math.Clamp(p.Y, top_left.Y, bottom_right.Y);
-
-                    if (p.X == clampedX && p.Y == clampedY) {
-                        return true;
-                    }
+                    return true;
                 }
             }
-            return false;
+            return false;         
         }
 
         void ShiftArray() { // shifts the 4 elements after index
@@ -198,7 +170,6 @@ internal class NewLvlShapeObject { // contains all the bounding points of the le
             }
         }
     }
-
 
 
     internal Vector2[] GetShape() {
