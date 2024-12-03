@@ -34,6 +34,8 @@ internal class LvlShapeObject {
         shape[1] = new Vector2(-width / 2, height / 2);
         shape[2] = new Vector2(-width / 2, -height / 2);
         shape[3] = new Vector2(width / 2, -height / 2);
+
+
         sub_shapes.Add(new Polygon2D {
             Polygon = new Vector2[] {
                 shape[0], shape[1], shape[2], shape[3]
@@ -50,17 +52,16 @@ internal class LvlShapeObject {
         for (int i = 1; i < rect_num; i++) {
             
             while (true) {
-                index = ChooseIndex(i);
-                new_points = CreateExpansion();
+                ChooseIndex(i);
+                (new_points, new_sub_shape) = CreateExpansion();
 
-                if (!CheckOverlap(new_sub_shape, index)) {
+                if (!CheckOverlap(new_sub_shape, index) || true) {
                     GD.Print("no overlap at index: " + index);
                     ShiftArray(index);
                     sub_shapes.Add(new_sub_shape);
                     foreach (var p in new_sub_shape.Polygon) {
                         GD.Print(p);
                     }
-
 
                     UpdateUnusables();
                     Array.Copy(new_points, 0, shape, index, new_points.Length);
@@ -86,7 +87,7 @@ internal class LvlShapeObject {
 
 
 
-        int ChooseIndex(int rects_created) {
+        void ChooseIndex(int rects_created) {
             List<int> usable_indexes = new List<int>();
             for (int i = 0; i < (rects_created * 4); i++) {
                 if (!unusable_indexes.Contains(i)) {
@@ -94,9 +95,8 @@ internal class LvlShapeObject {
                 }
             }
             index = usable_indexes[rand.Next(0, usable_indexes.Count)];
-            return index;
         }
-        Vector2[] CreateExpansion() {
+        (Vector2[], Polygon2D) CreateExpansion() {
 
             var dir = GetDirection();
 
@@ -105,50 +105,51 @@ internal class LvlShapeObject {
 
 
             
-            Vector2[] new_points = new Vector2[5];
+            Vector2[] new_points_r = new Vector2[5];
+            Polygon2D new_sub_shape_r;
 
             if (Math.Sign(dir.X) == Math.Sign(dir.Y)) {
 
-                new_points[0] = shape[index];
-                new_points[0].Y -= inset.Y;
+                new_points_r[0] = shape[index];
+                new_points_r[0].Y -= inset.Y;
 
-                new_points[1] = new_points[0];
-                new_points[1].X += expansion.X;
+                new_points_r[1] = new_points_r[0];
+                new_points_r[1].X += expansion.X;
 
-                new_points[2] = new_points[1];
-                new_points[2].Y += expansion.Y;
-                new_points[2].Y += inset.Y;
+                new_points_r[2] = new_points_r[1];
+                new_points_r[2].Y += expansion.Y;
+                new_points_r[2].Y += inset.Y;
 
-                new_points[3] = new_points[2];
-                new_points[3].X -= expansion.X;
-                new_points[3].X -= inset.X;
+                new_points_r[3] = new_points_r[2];
+                new_points_r[3].X -= expansion.X;
+                new_points_r[3].X -= inset.X;
 
-                new_points[4] = new_points[3];
-                new_points[4].Y -= expansion.Y;
+                new_points_r[4] = new_points_r[3];
+                new_points_r[4].Y -= expansion.Y;
 
-                new_sub_shape =  CreateSubShape(new Vector2(0, inset.Y));
+                new_sub_shape_r =  CreateSubShape(new Vector2(0, inset.Y));
             }
             else {
-                new_points[0] = shape[index];
-                new_points[0].X -= inset.X;
+                new_points_r[0] = shape[index];
+                new_points_r[0].X -= inset.X;
 
-                new_points[1] = new_points[0];
-                new_points[1].Y += expansion.Y;
+                new_points_r[1] = new_points_r[0];
+                new_points_r[1].Y += expansion.Y;
 
-                new_points[2] = new_points[1];
-                new_points[2].X += expansion.X;
-                new_points[2].X += inset.X;
+                new_points_r[2] = new_points_r[1];
+                new_points_r[2].X += expansion.X;
+                new_points_r[2].X += inset.X;
 
-                new_points[3] = new_points[2];
-                new_points[3].Y -= expansion.Y;
-                new_points[3].Y -= inset.Y;
+                new_points_r[3] = new_points_r[2];
+                new_points_r[3].Y -= expansion.Y;
+                new_points_r[3].Y -= inset.Y;
 
-                new_points[4] = new_points[3];
-                new_points[4].X -= expansion.X;
+                new_points_r[4] = new_points_r[3];
+                new_points_r[4].X -= expansion.X;
 
-                new_sub_shape = CreateSubShape(new Vector2(inset.X, 0));
+                new_sub_shape_r = CreateSubShape(new Vector2(inset.X, 0));
             }
-            return new_points;
+            return (new_points_r, new_sub_shape_r);
 
             Vector2 GetDirection() {
                 var prev_next = GetPrevAndNextIndex();
@@ -177,7 +178,7 @@ internal class LvlShapeObject {
         Polygon2D CreateSubShape(Vector2 first_inset) {
             return new Polygon2D() {
                 Polygon = new Vector2[] {
-                    new_points[1], new_points[2], new_points[3], new_points[4],
+                    new Vector2(0,0), new Vector2(100,0),new Vector2(100,100),new Vector2(0,100),
                 },
                 Color = new Color((float)rand.NextDouble(), (float)rand.NextDouble(), (float)rand.NextDouble(), 0.5f)
             };
@@ -192,12 +193,14 @@ internal class LvlShapeObject {
             }
         }
     }
+
+
+
     void ShiftArray(int index) {
         for (int i = shape.Length - 1; i > index + 4; i--) {
             shape[i] = shape[i - 4];
         }
     }
-
     bool CheckOverlap(Polygon2D new_sub_shape, int attach_index) { // false means no overlap
         if (sub_shapes.Count < 2 ) return false;
         foreach ( var sub_shape in sub_shapes) {
@@ -230,7 +233,6 @@ internal class LvlShapeObject {
         }
         return false;
     }
-
     internal Vector2[] GetShape() {
         return shape;
     }
