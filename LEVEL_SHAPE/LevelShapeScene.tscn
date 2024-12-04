@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dddtg5tkny2m1"]
-
-[ext_resource type="Script" path="res://LEVEL_SHAPE/ShapeGen.cs" id="1_c67f0"]
-
-[node name="ROOT" type="Node2D"]
-script = ExtResource("1_c67f0")
-metadata/LevelSize = Vector2(1000, 500)
