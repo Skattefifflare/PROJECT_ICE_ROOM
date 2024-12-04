@@ -112,7 +112,6 @@ public partial class GenSpline : Node2D
         splinePoly = new Polygon2D()
         {
             Polygon = splinePoints.ToArray(),
-            //Color = new Color(0.5f, 0.5f, 0.5f, 1f)
         };
     }
 }

@@ -7,15 +7,16 @@ public partial class NoiseMap : GenSpline
 {
 	private float height;
 	private float width;
-    private Vector2 center;
+    private Vector2 center; //center of the polygon
+    private Vector2[] uVS;
 
-	private float noiseScale = 50.0f;
-	private int noiseSeed = 21;
+	private float noiseScale = 100.0f; //Large number equals bigger noise
+	private Random seed = new Random();
     private Image noiseMap;
-
-    private float[] mapSize;
-
     private FastNoiseLite noiseGen;
+
+    private float[] mapSize;//max and min vector values
+
 	public override void _Ready()
 	{
 		Update();
@@ -23,8 +24,9 @@ public partial class NoiseMap : GenSpline
 		noiseGen = new FastNoiseLite();
 		noiseGen.NoiseType = FastNoiseLite.NoiseTypeEnum.Perlin;
 		noiseGen.Frequency = 1.0f/noiseScale;
-		noiseGen.Seed = noiseSeed;
+		noiseGen.Seed = seed.Next(0, 100000);
 		CreateNoiseMap();
+        DrawNoiseMap(ImageTexture.CreateFromImage(noiseMap));
 	}
 	public void CreateNoiseMap()
 	{
@@ -35,7 +37,6 @@ public partial class NoiseMap : GenSpline
 
 		noiseMap = GenerateNoiseMap();
     }
-    //Up for rewriting
     public float[] GetMaxAndMin()
     {
         if (splinePoints.Count == 0)
@@ -69,10 +70,30 @@ public partial class NoiseMap : GenSpline
         newCenter.Y = (mapSize[2] + mapSize[3]) / 2;
         return newCenter;
     }
+    private Vector2[] GenerateUV(int rHeight, int rWidth)
+    {
+        Vector2[] tempPoints = splinePoints.ToArray(); //remove when GenSpline.cs is reformated to use Arrays
+        Vector2[] uvs = new Vector2[splinePoints.Count];
+        Rect2 boundingBox = new Rect2(
+            new Vector2(mapSize[1], mapSize[3]),
+            new Vector2(mapSize[0] - mapSize[1], mapSize[2]- mapSize[3])
+        );
+
+        for (int i = 0; i < tempPoints.Length; i++)
+        {
+            uvs[i] = new Vector2( 
+                (tempPoints[i].X - boundingBox.Position.X),
+                (tempPoints[i].Y - boundingBox.Position.Y)
+            );
+        }
+        return uvs;
+    }
     private Image GenerateNoiseMap()
 	{
 		int rWidth = (int)Math.Ceiling(width);
 		int rHeight = (int)Math.Ceiling(height);
+
+        uVS = GenerateUV(rHeight, rWidth);
 
         Image img = new Image();
         byte[] pixelData = new byte[rWidth * rHeight];
@@ -91,15 +112,8 @@ public partial class NoiseMap : GenSpline
     }
 	private void DrawNoiseMap(Texture2D texture)
 	{
-        Sprite2D sprite = new Sprite2D() { Texture = texture };
-        sprite.Position = new Vector2(1000, 0);
-        AddChild(sprite);
+        splinePoly.UV = uVS;
         splinePoly.Texture = texture;
-        splinePoly.TextureRepeat = TextureRepeatEnum.Enabled;
 		AddChild(splinePoly);
 	}
-    public override void _Draw()
-    {
-        DrawNoiseMap(ImageTexture.CreateFromImage(noiseMap));
-    }
 }
