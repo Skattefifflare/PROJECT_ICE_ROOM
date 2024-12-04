@@ -27,12 +27,16 @@ public partial class LvlGenNode : Node2D
        
         var generated_shape = lso.GetShape();
 
+        GenSpline spline = new GenSpline(generated_shape);
+        spline.Update();
+        spline.CreateSplinePolygon();
 
         Polygon2D polygon = new Polygon2D {
             Polygon = generated_shape,
-            Color = new Color(0.4f, 0.8f, 0.2f, 1f)
+            Color = new Color(0.4f, 0.8f, 0.2f, 0.5f)
         };
         AddChild(polygon);
+        AddChild(spline.splinePoly);
 
         foreach (var p in lso.GetSubShapes()) {
             //AddChild(p);
@@ -50,6 +54,7 @@ public partial class LvlGenNode : Node2D
             RemoveChild(c);
             c.QueueFree();
         }
+        
     }
 
 
