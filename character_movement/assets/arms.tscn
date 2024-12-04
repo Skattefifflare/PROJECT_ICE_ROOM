@@ -43,7 +43,7 @@ modifications/0 = SubResource("SkeletonModification2DCCDIK_deipo")
 modifications/1 = SubResource("SkeletonModification2DCCDIK_2gxp6")
 
 [node name="RootArms" type="Node2D"]
-position = Vector2(32, 32)
+position = Vector2(64, 64)
 
 [node name="Arms" type="Skeleton2D" parent="."]
 visible = false
@@ -144,10 +144,11 @@ uv = PackedVector2Array(2, 1, 2, 0, 1, 0, 1, 1, 0, 1, 0, 3, 1, 3, 1, 25, 2, 25, 
 bones = ["SpearOffset", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "SpearOffset/SpearBody", PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)]
 
 [node name="SpearKinematics" type="Skeleton2D" parent="."]
-position = Vector2(0, 3)
+visible = false
+position = Vector2(0, 4)
 
 [node name="SpearOffset" type="Bone2D" parent="SpearKinematics"]
-position = Vector2(0, -6.5)
+position = Vector2(0, -6)
 rest = Transform2D(1, 0, 0, 1, 0, -6.5)
 auto_calculate_length_and_angle = false
 length = 5.0
@@ -166,10 +167,10 @@ editor_settings/show_bone_gizmo = false
 script = ExtResource("4_p78xb")
 
 [node name="SpearTip" type="Marker2D" parent="SpearKinematics/SpearOffset/SpearBody"]
-position = Vector2(24, 0)
+position = Vector2(30, 0)
 
 [node name="InverseKinematics" type="Node2D" parent="SpearKinematics/SpearOffset/SpearBody"]
-position = Vector2(19.5, -1.09278e-07)
+position = Vector2(20, 0)
 
 [node name="TargetLeft" type="Marker2D" parent="SpearKinematics/SpearOffset/SpearBody/InverseKinematics"]
 position = Vector2(-21, -1.87553e-06)

@@ -11,7 +11,7 @@ public partial class Movement : CharacterBody2D
 
 	public override void _Ready()
 	{
-		_animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		_animatedSprite = GetNode<AnimatedSprite2D>("Sprite_Sheet");
 	}
 
 
