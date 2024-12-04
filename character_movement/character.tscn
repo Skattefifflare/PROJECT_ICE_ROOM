@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=3 uid="uid://vk258ytnj7ii"]
+
+[ext_resource type="Texture2D" uid="uid://c3c43ppxnqpjo" path="res://character_movement/assets/CharacterForMovementRun.png" id="1_fwkn6"]
+[ext_resource type="PackedScene" uid="uid://dnk6x2eysw14c" path="res://character_movement/assets/arms.tscn" id="2_tmfkw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_27itp"]
+atlas = ExtResource("1_fwkn6")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f6p4y"]
+atlas = ExtResource("1_fwkn6")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_grlmv"]
+atlas = ExtResource("1_fwkn6")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_73evu"]
+atlas = ExtResource("1_fwkn6")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5dal3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_27itp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f6p4y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_grlmv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_73evu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[node name="Root" type="Node2D"]
+
+[node name="Sprite_Sheet" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_5dal3")
+autoplay = "default"
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Sprite_Sheet"]
+z_index = 2
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+
+[node name="SubViewport" type="SubViewport" parent="Sprite_Sheet/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+size = Vector2i(64, 64)
+render_target_update_mode = 4
+
+[node name="RootArms" parent="Sprite_Sheet/SubViewportContainer/SubViewport" instance=ExtResource("2_tmfkw")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(12, 12)

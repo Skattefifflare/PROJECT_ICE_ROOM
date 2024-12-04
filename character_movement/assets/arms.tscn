@@ -1,0 +1,178 @@
+[gd_scene load_steps=9 format=3 uid="uid://dnk6x2eysw14c"]
+
+[ext_resource type="Texture2D" uid="uid://cpv18jusu663a" path="res://character_movement/assets/UpperArm.png" id="1_0hiak"]
+[ext_resource type="Texture2D" uid="uid://7p3ftuvdhkuf" path="res://character_movement/assets/LowerArm.png" id="2_14oo4"]
+[ext_resource type="Texture2D" uid="uid://cfdon8876150v" path="res://character_movement/assets/Spear.png" id="3_xmidy"]
+[ext_resource type="Script" path="res://character_movement/assets/SpearOffset.cs" id="4_d34nb"]
+[ext_resource type="Script" path="res://character_movement/assets/SpearBody.cs" id="4_p78xb"]
+
+[sub_resource type="SkeletonModification2DCCDIK" id="SkeletonModification2DCCDIK_deipo"]
+target_nodepath = NodePath("../SpearKinematics/SpearOffset/SpearBody/InverseKinematics/TargetLeft")
+tip_nodepath = NodePath("UpperLeft/LowerLeft/HandLeft")
+ccdik_data_chain_length = 2
+joint_data/0/bone_index = 0
+joint_data/0/bone2d_node = NodePath("UpperLeft")
+joint_data/0/rotate_from_joint = false
+joint_data/0/enable_constraint = false
+joint_data/0/editor_draw_gizmo = true
+joint_data/1/bone_index = 1
+joint_data/1/bone2d_node = NodePath("UpperLeft/LowerLeft")
+joint_data/1/rotate_from_joint = false
+joint_data/1/enable_constraint = false
+joint_data/1/editor_draw_gizmo = true
+
+[sub_resource type="SkeletonModification2DCCDIK" id="SkeletonModification2DCCDIK_2gxp6"]
+target_nodepath = NodePath("../SpearKinematics/SpearOffset/SpearBody/InverseKinematics/TargetRight")
+tip_nodepath = NodePath("UpperRight/LowerRight/HandRight")
+ccdik_data_chain_length = 2
+joint_data/0/bone_index = 2
+joint_data/0/bone2d_node = NodePath("UpperRight")
+joint_data/0/rotate_from_joint = false
+joint_data/0/enable_constraint = false
+joint_data/0/editor_draw_gizmo = true
+joint_data/1/bone_index = 3
+joint_data/1/bone2d_node = NodePath("UpperRight/LowerRight")
+joint_data/1/rotate_from_joint = false
+joint_data/1/enable_constraint = false
+joint_data/1/editor_draw_gizmo = true
+
+[sub_resource type="SkeletonModificationStack2D" id="SkeletonModificationStack2D_o2bno"]
+enabled = true
+modification_count = 2
+modifications/0 = SubResource("SkeletonModification2DCCDIK_deipo")
+modifications/1 = SubResource("SkeletonModification2DCCDIK_2gxp6")
+
+[node name="RootArms" type="Node2D"]
+position = Vector2(32, 32)
+
+[node name="Arms" type="Skeleton2D" parent="."]
+visible = false
+modification_stack = SubResource("SkeletonModificationStack2D_o2bno")
+
+[node name="UpperLeft" type="Bone2D" parent="Arms"]
+position = Vector2(-2.5, -6.5)
+scale = Vector2(0.999999, 0.999999)
+rest = Transform2D(0.999999, 0, 0, 0.999999, -2.5, -6.5)
+auto_calculate_length_and_angle = false
+length = 6.0
+bone_angle = 90.0
+editor_settings/show_bone_gizmo = false
+metadata/_local_pose_override_enabled_ = true
+
+[node name="LowerLeft" type="Bone2D" parent="Arms/UpperLeft"]
+position = Vector2(0, 6)
+rotation = 1.5708
+scale = Vector2(0.999999, 0.999999)
+rest = Transform2D(-3.61999e-06, 0.999999, -0.999999, -3.61999e-06, 0, 6)
+auto_calculate_length_and_angle = false
+length = 4.0
+bone_angle = 0.0
+editor_settings/show_bone_gizmo = false
+metadata/_local_pose_override_enabled_ = true
+
+[node name="HandLeft" type="Marker2D" parent="Arms/UpperLeft/LowerLeft"]
+position = Vector2(4, 0)
+
+[node name="UpperRight" type="Bone2D" parent="Arms"]
+position = Vector2(2.5, -6.5)
+scale = Vector2(0.999947, 0.999947)
+rest = Transform2D(0.999947, 0, 0, 0.999947, 2.5, -6.5)
+auto_calculate_length_and_angle = false
+length = 6.0
+bone_angle = 0.0
+editor_settings/show_bone_gizmo = false
+metadata/_local_pose_override_enabled_ = true
+
+[node name="LowerRight" type="Bone2D" parent="Arms/UpperRight"]
+position = Vector2(0, 6)
+rotation = 1.5708
+scale = Vector2(0.999996, 0.999996)
+rest = Transform2D(-3.61998e-06, 0.999996, -0.999996, -3.61998e-06, 0, 6)
+auto_calculate_length_and_angle = false
+length = 4.0
+bone_angle = 0.0
+editor_settings/show_bone_gizmo = false
+metadata/_local_pose_override_enabled_ = true
+
+[node name="HandRight" type="Marker2D" parent="Arms/UpperRight/LowerRight"]
+position = Vector2(4, 0)
+
+[node name="Textures" type="Node2D" parent="."]
+
+[node name="UpperLeftTex" type="Polygon2D" parent="Textures"]
+z_index = 2
+position = Vector2(-3, -7)
+texture = ExtResource("1_0hiak")
+skeleton = NodePath("../../Arms")
+polygon = PackedVector2Array(0, 0, 1, 0, 1, 7, 0, 7)
+uv = PackedVector2Array(0, 0, 1, 0, 1, 7, 0, 7)
+bones = ["UpperLeft", PackedFloat32Array(1, 1, 1, 1), "UpperLeft/LowerLeft", PackedFloat32Array(0, 0, 0, 0), "UpperRight", PackedFloat32Array(0, 0, 0, 0), "UpperRight/LowerRight", PackedFloat32Array(0, 0, 0, 0)]
+
+[node name="LowerLeftTex" type="Polygon2D" parent="Textures"]
+z_index = 2
+position = Vector2(-3, -1)
+texture = ExtResource("2_14oo4")
+skeleton = NodePath("../../Arms")
+polygon = PackedVector2Array(0, 0, 1, 0, 1, 5, 0, 5)
+uv = PackedVector2Array(0, 0, 1, 0, 1, 5, 0, 5)
+bones = ["UpperLeft", PackedFloat32Array(0, 0, 0, 0), "UpperLeft/LowerLeft", PackedFloat32Array(1, 1, 1, 1), "UpperRight", PackedFloat32Array(0, 0, 0, 0), "UpperRight/LowerRight", PackedFloat32Array(0, 0, 0, 0)]
+
+[node name="UpperRightTex" type="Polygon2D" parent="Textures"]
+z_index = 2
+position = Vector2(2, -7)
+texture = ExtResource("1_0hiak")
+skeleton = NodePath("../../Arms")
+polygon = PackedVector2Array(0, 0, 1, 0, 1, 7, 0, 7)
+uv = PackedVector2Array(0, 0, 1, 0, 1, 7, 0, 7)
+bones = ["UpperLeft", PackedFloat32Array(0, 0, 0, 0), "UpperLeft/LowerLeft", PackedFloat32Array(0, 0, 0, 0), "UpperRight", PackedFloat32Array(1, 1, 1, 1), "UpperRight/LowerRight", PackedFloat32Array(0, 0, 0, 0)]
+
+[node name="LowerRightTex" type="Polygon2D" parent="Textures"]
+z_index = 2
+position = Vector2(2, -1)
+texture = ExtResource("2_14oo4")
+skeleton = NodePath("../../Arms")
+polygon = PackedVector2Array(0, 0, 0.999938, -0.000124991, 1, 5, 0, 5)
+uv = PackedVector2Array(0, 0, 0.999938, -0.000124991, 1, 5, 0, 5)
+bones = ["UpperLeft", PackedFloat32Array(0, 0, 0, 0), "UpperLeft/LowerLeft", PackedFloat32Array(0, 0, 0, 0), "UpperRight", PackedFloat32Array(0, 0, 0, 0), "UpperRight/LowerRight", PackedFloat32Array(1, 1, 1, 1)]
+
+[node name="SpearTex" type="Polygon2D" parent="Textures"]
+position = Vector2(3.5, -31)
+texture = ExtResource("3_xmidy")
+skeleton = NodePath("../../SpearKinematics")
+polygon = PackedVector2Array(2, 1, 2, 0, 1, 0, 1, 1, 0, 1, 0, 3, 1, 3, 1, 50, 2, 50, 2, 3, 3, 3, 3, 1)
+uv = PackedVector2Array(2, 1, 2, 0, 1, 0, 1, 1, 0, 1, 0, 3, 1, 3, 1, 25, 2, 25, 2, 3, 3, 3, 3, 1)
+bones = ["SpearOffset", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "SpearOffset/SpearBody", PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)]
+
+[node name="SpearKinematics" type="Skeleton2D" parent="."]
+position = Vector2(0, 3)
+
+[node name="SpearOffset" type="Bone2D" parent="SpearKinematics"]
+position = Vector2(0, -6.5)
+rest = Transform2D(1, 0, 0, 1, 0, -6.5)
+auto_calculate_length_and_angle = false
+length = 5.0
+bone_angle = 0.0
+editor_settings/show_bone_gizmo = false
+script = ExtResource("4_d34nb")
+
+[node name="SpearBody" type="Bone2D" parent="SpearKinematics/SpearOffset"]
+position = Vector2(5, 0)
+rotation = -1.5708
+rest = Transform2D(-4.37114e-08, -1, 1, -4.37114e-08, 5, 0)
+auto_calculate_length_and_angle = false
+length = 24.0
+bone_angle = 0.0
+editor_settings/show_bone_gizmo = false
+script = ExtResource("4_p78xb")
+
+[node name="SpearTip" type="Marker2D" parent="SpearKinematics/SpearOffset/SpearBody"]
+position = Vector2(24, 0)
+
+[node name="InverseKinematics" type="Node2D" parent="SpearKinematics/SpearOffset/SpearBody"]
+position = Vector2(19.5, -1.09278e-07)
+
+[node name="TargetLeft" type="Marker2D" parent="SpearKinematics/SpearOffset/SpearBody/InverseKinematics"]
+position = Vector2(-21, -1.87553e-06)
+
+[node name="TargetRight" type="Marker2D" parent="SpearKinematics/SpearOffset/SpearBody/InverseKinematics"]
+position = Vector2(-15, -1.35502e-06)
