@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://cvkm6rcr41aki"]
+
+[ext_resource type="Script" path="res://MovementScript.cs" id="1_oy77a"]
+[ext_resource type="Texture2D" uid="uid://bvyo48ahtd3gd" path="res://MAN/MAN.png" id="2_fmx0y"]
+[ext_resource type="Texture2D" uid="uid://citl3qaifbyvs" path="res://GrassPlaceholderGrid.png" id="3_vi3y6"]
+[ext_resource type="Texture2D" uid="uid://b0penvrnd4wkp" path="res://SceneTestingOriginalSize.png" id="4_s08bm"]
+[ext_resource type="Texture2D" uid="uid://cl77766s7l0bn" path="res://PlantBotnew.png" id="5_3v56b"]
+
+[node name="Root" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = ExtResource("1_oy77a")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(4.8125, -8.74364)
+scale = Vector2(0.0337719, 0.0334365)
+texture = ExtResource("2_fmx0y")
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D/Sprite2D"]
+
+[node name="BG" type="Sprite2D" parent="CharacterBody2D/Sprite2D/Camera2D"]
+z_index = -2
+position = Vector2(-201.721, -276.834)
+scale = Vector2(62.7679, 63.3975)
+texture = ExtResource("3_vi3y6")
+offset = Vector2(3.77396, 11.7936)
+
+[node name="Environ" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(-8, 9)
+texture = ExtResource("4_s08bm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-123, -53)
+texture = ExtResource("5_3v56b")
