@@ -11,9 +11,25 @@ config_version=5
 [application]
 
 config/name="Project_Ice_Room"
+run/main_scene="res://Tree/Tree.tscn"
 config/features=PackedStringArray("4.3", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
 [dotnet]
 
 project/assembly_name="Project_Ice_Room"
+
+[editor_plugins]
+
+enabled=PackedStringArray()
+
+[input]
+
+ui_select={
+"deadzone": 0.5,
+"events": []
+}
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
