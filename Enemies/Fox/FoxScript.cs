@@ -1,20 +1,20 @@
 using Godot;
 using System;
 
-public partial class CharacterBody2d : CharacterBody2D
+public partial class FoxScript : CharacterBody2D
 {
 	public const float Speed = 300.0f;
-	public const float JumpVelocity = -400.0f;
 
 	private AnimatedSprite2D _spriteplayer;
-
+	EnemyAI fox_AI;
+    bool is_attacking = false;
 
     public override void _Ready() {
         base._Ready();
+		fox_AI = new EnemyAI(this);
 
 		_spriteplayer = GetNode<AnimatedSprite2D>("FoxAnimator");
     }
-
 
     public override void _PhysicsProcess(double delta)
 	{
@@ -39,56 +39,30 @@ public partial class CharacterBody2d : CharacterBody2D
 		MoveAndSlide();
 
 		AnimationHandler();
-
-        void AnimationHandler() {
-
-
-            if (velocity == Vector2.Zero) {
-				_spriteplayer.Play("fox_idle");
-			}
-			else {
-				_spriteplayer.Play("fox_walk");
-			}
-
-		}
+    }
+    void AnimationHandler() {
+        if (Velocity.X > 0) {
+            _spriteplayer.FlipH = true;
+        }
+        if (Velocity.X < 0) {
+            _spriteplayer.FlipH = false;
+        }
+        if (fox_AI.sees_player) {
+            if (!is_attacking) {
+                is_attacking = true;
+                _spriteplayer.Play("fox_attack");
+            }
+            if (!_spriteplayer.IsPlaying()) {
+                is_attacking= false;
+            }
+        }
+        else if (Velocity != Vector2.Zero) {
+            _spriteplayer.Play("fox_walk");
+        }
+        else {
+            _spriteplayer.Play("fox_idle");
+        }
     }
 }
 
 
-public partial class EnemyAI : Node {
-
-	bool sees_player = false;
-
-
-	EnemyAI() { 
-		
-		
-	}
-
-
-
-	void Update() {
-
-	}
-
-	void LookForPlayer() {
-		if (!sees_player) {
-			try {
-				var field_of_view = GetNode<Area2D>("FieldOfView");
-				field_of_view.BodyEntered += (what_entered) => sees_player = true;
-            }
-			catch { 
-				
-			}
-		}
-	}
-	void WalkTowardsPlayer() {
-		if (sees_player) {
-
-		}
-	}
-	
-
-
-
-}

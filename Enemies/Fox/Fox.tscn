@@ -1,7 +1,7 @@
-[gd_scene load_steps=31 format=3 uid="uid://d38ikgnd44wfa"]
+[gd_scene load_steps=30 format=3 uid="uid://d38ikgnd44wfa"]
 
-[ext_resource type="Texture2D" uid="uid://cg36hun4jv524" path="res://Fox/FoxSprites.png" id="1_en7gu"]
-[ext_resource type="Script" path="res://Fox/CharacterBody2d.cs" id="1_y7vhn"]
+[ext_resource type="Texture2D" uid="uid://cg36hun4jv524" path="res://Enemies/Fox/FoxSprites.png" id="1_en7gu"]
+[ext_resource type="Script" path="res://Enemies/Fox/FoxScript.cs" id="1_y7vhn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_77vpa"]
 atlas = ExtResource("1_en7gu")
@@ -131,7 +131,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qvhsu")
 }],
-"loop": true,
+"loop": false,
 "name": &"fox_attack",
 "speed": 12.0
 }, {
@@ -208,9 +208,6 @@ animations = [{
 "speed": 12.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_op6lt"]
-radius = 110.0
-
 [node name="Fox" type="Node2D"]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
@@ -219,9 +216,10 @@ script = ExtResource("1_y7vhn")
 [node name="FoxAnimator" type="AnimatedSprite2D" parent="CharacterBody2D"]
 position = Vector2(0, -1)
 sprite_frames = SubResource("SpriteFrames_r0bkh")
-animation = &"fox_idle"
+animation = &"fox_attack"
 autoplay = "fox_idle"
-frame_progress = 0.569457
+frame = 6
+frame_progress = 1.0
 
 [node name="Hitbox_Walk" type="CollisionPolygon2D" parent="CharacterBody2D"]
 position = Vector2(1, 8.9407e-08)
@@ -237,8 +235,3 @@ polygon = PackedVector2Array(-10, -2.22222, -10, -4.44444, -5.71429, -6.66667, -
 position = Vector2(1, 8.9407e-08)
 scale = Vector2(1.4, 0.9)
 polygon = PackedVector2Array(-10.7143, -1.11111, -10.7143, -5.55556, -5.71429, -7.77778, -2.85714, -4.44444, 5, -5.55556, 4.28571, 4.44444, -4.28571, 4.44444, -6.42857, -1.11111)
-
-[node name="FieldOfView" type="Area2D" parent="CharacterBody2D"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/FieldOfView"]
-shape = SubResource("CircleShape2D_op6lt")
