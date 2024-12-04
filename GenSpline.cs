@@ -7,29 +7,18 @@ public partial class GenSpline : Node2D
 {
     int index = 0; //index for which point to draw
     List<Vector2> shape = new List<Vector2>(); //for testing
-    public List<Vector2> ControlPoints = new List<Vector2>();
-    public int SegmentsPerCurve = 100; //Needs some testing for a better vaule?
-    private List<Vector2> _splinePoints = new List<Vector2>(); //the actual spline
-    private Polygon2D ControllPolygon; //for testing
-    public override void _Ready()
-    {
-        Update();
-        AddChild(ControllPolygon);
-    }
-    private void Update()
+    private List<Vector2> ControlPoints = new List<Vector2>();
+    private int SegmentsPerCurve = 100; //Needs some testing for a better vaule?
+    public List<Vector2> splinePoints = new List<Vector2>(); //the actual spline 
+    public Polygon2D splinePoly;
+
+    public void Update()
     {
         if (shape.Count == 0)
         {
             shape = new List<Vector2>
             {
-                new Vector2(0, 0),    
-                //new Vector2(0, 200),   
-                //new Vector2(300, 200), 
-                //new Vector2(300, 300), 
-                //new Vector2(500, 300), 
-                //new Vector2(500, 100), 
-                //new Vector2(400, 100),
-                //new Vector2(400, 0)  
+                new Vector2(0, 0),  
                 new Vector2(300, 0),
                 new Vector2(300, 150),
                 new Vector2(100, 150),
@@ -47,49 +36,9 @@ public partial class GenSpline : Node2D
                 new Vector2(0, -300)
 
             };
-            ControllPolygon = new Polygon2D
-            {
-                Polygon = new Vector2[]
-                {
-                    new Vector2(0, 0),
-                    //new Vector2(0, 200),
-                    //new Vector2(300, 200),
-                    //new Vector2(300, 300),
-                    //new Vector2(500, 300),
-                    //new Vector2(500, 100),
-                    //new Vector2(400, 100),
-                    //new Vector2(400, 0)
-                    new Vector2(300, 0),
-                    new Vector2(300, 150),
-                    new Vector2(100, 150),
-                    new Vector2(100, 350),
-                    new Vector2(400, 350),
-                    new Vector2(400, 200),
-                    new Vector2(650, 200),
-                    new Vector2(650, -100),
-                    new Vector2(400, -100),
-                    new Vector2(400, -200),
-                    new Vector2(600, -200),
-                    new Vector2(600, -600),
-                    new Vector2(350, -600),
-                    new Vector2(350, -300),
-                    new Vector2(0, -300)
-                },
-                Color = new Color(0.5f, 0.5f, 0.5f, 0.5f)
-            };
         }
         SetControlPoints();
         CalculateSpline();
-    }
-    public override void _Draw()
-    {
-        if (_splinePoints.Count > 1)
-        {
-            for (int i = 0; i < _splinePoints.Count - 1; i++)
-            {
-                DrawLine(_splinePoints[i], _splinePoints[i + 1], Colors.White, 1);
-            }
-        }
     }
     private void SetControlPoints()
     {
@@ -99,10 +48,10 @@ public partial class GenSpline : Node2D
             return;
         }
         ControlPoints.Clear();
-        ControlPoints.Add(shape[currentIndex.Item1]);
-        ControlPoints.Add(shape[index]);
-        ControlPoints.Add(shape[currentIndex.Item2]);
-        ControlPoints.Add(shape[currentIndex.Item3]);
+        ControlPoints.Add(shape[currentIndex.Item1]);//First control point
+        ControlPoints.Add(shape[index]);             //Point where drawing begins
+        ControlPoints.Add(shape[currentIndex.Item2]);//Point where drawing ends
+        ControlPoints.Add(shape[currentIndex.Item3]);//Secon control point
         index++;
     }
     //Adds points to the spline using control points
@@ -118,12 +67,16 @@ public partial class GenSpline : Node2D
             for (int j = 0; j <= SegmentsPerCurve; j++)
             {
                 float t = j / (float)SegmentsPerCurve; // Parameter t (0 to 1)
-                _splinePoints.Add(CalculateCatmullRomPoint(t, p0, p1, p2, p3));
+                splinePoints.Add(CalculateCatmullRomPoint(t, p0, p1, p2, p3));
             }
         }
-        if (index < shape.Count) 
+        if (index < shape.Count)
         {
             Update();
+        }
+        else
+        {
+            SplineToPolygon();
         }
     }
     //The catmull Rom algorithim to create the spline points
@@ -152,6 +105,14 @@ public partial class GenSpline : Node2D
             _ when index == max - 1 => (index - 1, index + 1, 0), //--||-- second to last -> last point
             _ when index == 0 => (max, index + 1, index + 2), //--||-- first -> second point
             _ => (index - 1, index + 1, index + 2), //base case
+        };
+    }
+    private void SplineToPolygon()
+    {
+        splinePoly = new Polygon2D()
+        {
+            Polygon = splinePoints.ToArray(),
+            //Color = new Color(0.5f, 0.5f, 0.5f, 1f)
         };
     }
 }
