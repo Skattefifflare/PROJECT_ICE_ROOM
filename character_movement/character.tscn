@@ -59,7 +59,7 @@ canvas_item_default_texture_filter = 0
 size = Vector2i(64, 64)
 render_target_update_mode = 4
 
-[node name="Root" parent="Sprite_Sheet/SubViewportContainer/SubViewport" instance=ExtResource("2_tmfkw")]
+[node name="RootArms" parent="Sprite_Sheet/SubViewportContainer/SubViewport" instance=ExtResource("2_tmfkw")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(12, 12)
