@@ -93,8 +93,11 @@ internal class NewLvlShapeObject { // contains all the bounding points of the le
             //Vector2 expansion = new Vector2(100, 100) * dir;
             //Vector2 inset = new Vector2(30, 30) * dir;
 
-            Vector2 expansion = new Vector2(width, height) * dir;
-            Vector2 inset = expansion * 0.2f;
+            //Vector2 expansion = new Vector2(width, height) * dir;
+            //Vector2 inset = expansion * 0.4f;
+
+            Vector2 expansion = dir * 0.8f;
+            Vector2 inset = expansion * 0.45f;
 
 
             Vector2 odd = (Math.Sign(dir.X) == Math.Sign(dir.Y)) ? new Vector2(0, 1) : new Vector2(1, 0);
@@ -126,8 +129,8 @@ internal class NewLvlShapeObject { // contains all the bounding points of the le
                 Vector2 prev_to_i = full_shape[insert_index] - full_shape[prev_next.Item1];
                 Vector2 next_to_i = full_shape[insert_index] - full_shape[prev_next.Item2];
                 Vector2 dir = prev_to_i + next_to_i;
-                dir = dir.Normalized();
-                dir = new Vector2(Math.Sign(dir.X), Math.Sign(dir.Y));
+                // dir = dir.Normalized();
+                // dir = new Vector2(Math.Sign(dir.X), Math.Sign(dir.Y));
                 return dir;
 
                 (int, int) GetPrevAndNextIndex() {
