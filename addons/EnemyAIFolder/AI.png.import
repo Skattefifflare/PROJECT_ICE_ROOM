@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxkitdfce0bb1"
-path="res://.godot/imported/FoxSprites.png-8fd75ef55f35bbd453db006c844c8eb7.ctex"
+uid="uid://dvahfcqsmggck"
+path="res://.godot/imported/AI.png-4f346fd5bcf6716876b4569bd5cc5acf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Enemies/Fox/FoxSprites.png"
-dest_files=["res://.godot/imported/FoxSprites.png-8fd75ef55f35bbd453db006c844c8eb7.ctex"]
+source_file="res://addons/EnemyAIFolder/AI.png"
+dest_files=["res://.godot/imported/AI.png-4f346fd5bcf6716876b4569bd5cc5acf.ctex"]
 
 [params]
 

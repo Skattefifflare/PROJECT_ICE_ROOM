@@ -1,15 +1,15 @@
 [gd_scene load_steps=3 format=3 uid="uid://bav2vso835uxd"]
 
-[ext_resource type="PackedScene" uid="uid://d38ikgnd44wfa" path="res://Enemies/Fox/Fox.tscn" id="1_svt7v"]
 [ext_resource type="PackedScene" uid="uid://vwvt1qvu5m5v" path="res://TempPlayer/TempPlayer.tscn" id="2_hjvhr"]
+[ext_resource type="PackedScene" uid="uid://c5lfrw2nny0cd" path="res://Enemies/Fox/smart_fox.tscn" id="2_isbbg"]
 
 [node name="GameScene" type="Node2D"]
-
-[node name="Fox" parent="." instance=ExtResource("1_svt7v")]
-position = Vector2(252, -137)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
 
 [node name="TempPlayer" parent="." instance=ExtResource("2_hjvhr")]
 position = Vector2(-19, 19)
+
+[node name="SmartFox" parent="." instance=ExtResource("2_isbbg")]
+position = Vector2(-257, -140)
