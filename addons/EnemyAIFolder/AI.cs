@@ -5,59 +5,54 @@ using System.Linq;
 
 public partial class AI : CharacterBody2D
 {
-	public const float SPEED = 300.0f;
+	CollisionShape2D view_field;
+	AnimatedSprite2D sprite_player;
+	Dictionary<string, Action> state_dict;
 
-
-	CollisionShape2D VIEW_FIELD;
-	AnimatedSprite2D SPRITE_PLAYER;
-
-	Dictionary<string, CollisionPolygon2D> HITBOX_DICT;
+	public bool state_is_busy = false;
+	Action current_state;
 
 
     public override void _Ready() {
         base._Ready();	
-        VIEW_FIELD = (CollisionShape2D)FindChild("view_field");
-		SPRITE_PLAYER = (AnimatedSprite2D)FindChild("sprite_player");
-
-		HITBOX_DICT = new Dictionary<string, CollisionPolygon2D>();
-		foreach (var hitbox in GetChildren().OfType<CollisionPolygon2D>().Where(child => child.Name.ToString().StartsWith("hitbox_"))) {
-			hitbox.Disabled = true;
-			HITBOX_DICT[hitbox.Name.ToString().Substring(7)] = hitbox;
-		}
-
+        view_field = (CollisionShape2D)FindChild("view_field");
+		sprite_player = (AnimatedSprite2D)FindChild("sprite_player");
+		state_dict = new Dictionary<string, Action>() {
+			{"idle", Idle},
+			{"walk", Walk},
+			{"death", Death},
+		};
     }
 
+    public override void _Process(double delta) {
+        base._Process(delta);
+		GD.PrintErr("You must implement an overridden _Process without calling base._Process.");
+    }
 
-    public override void _PhysicsProcess(double delta)
-	{
-		Vector2 velocity = Velocity;
-
-		// Get the input direction and handle the movement/deceleration.
-		// As good practice, you should replace UI actions with custom gameplay actions.
-		Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
-		if (direction != Vector2.Zero)
-		{
-			velocity.X = direction.X * SPEED;
-            velocity.Y = direction.Y * SPEED;
-        }
-		else
-		{
-			velocity.X = Mathf.MoveToward(Velocity.X, 0, SPEED);
-            velocity.Y = Mathf.MoveToward(Velocity.Y, 0, SPEED);
-        }
-		Velocity = velocity;
-		MoveAndSlide();
+    internal virtual void DecideState() {
+		GD.PrintErr("DecideState has to be implemented in an extended script.");
+	}
+	void StateCaller(string state) {
+		if (state_is_busy) return;
+		current_state = state_dict[state];
+		try {
+			current_state();
+		}
+		catch {
+			GD.PrintErr("state '" + state + "' could not be started. Make sure animations and nodes needed exist and are properly named");
+		}
 	}
 
-
-	void DecideState() {
-
+	void Idle() {
+		state_is_busy = false;
+		sprite_player.Play("idle");
 	}
-
-
-
-	void SetStateTo(string state) {
-		SPRITE_PLAYER.Play(state);
-		HITBOX_DICT[state].Disabled = false;
+	void Death() {
+		state_is_busy = true;
+		sprite_player.Play("death");
+	}
+	void Walk() {
+		state_is_busy = false;
+		sprite_player.Play("walk");
 	}
 }

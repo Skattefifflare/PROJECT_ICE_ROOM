@@ -1,6 +1,6 @@
 [gd_scene load_steps=32 format=3 uid="uid://c5lfrw2nny0cd"]
 
-[ext_resource type="Script" path="res://addons/EnemyAIFolder/AI.cs" id="1_tkwp0"]
+[ext_resource type="Script" path="res://Enemies/Fox/FoxAI.cs" id="1_d36rd"]
 [ext_resource type="Texture2D" uid="uid://bxkitdfce0bb1" path="res://Enemies/Fox/FoxSprites.png" id="2_oe7mg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0qcsi"]
@@ -218,7 +218,7 @@ radius = 110.0
 [node name="fox" type="Node2D"]
 
 [node name="EnemyAI" type="CharacterBody2D" parent="."]
-script = ExtResource("1_tkwp0")
+script = ExtResource("1_d36rd")
 
 [node name="sprite_player" type="AnimatedSprite2D" parent="EnemyAI"]
 sprite_frames = SubResource("SpriteFrames_jceai")
