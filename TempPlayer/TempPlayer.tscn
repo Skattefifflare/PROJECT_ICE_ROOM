@@ -1,16 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://vwvt1qvu5m5v"]
+[gd_scene load_steps=3 format=3 uid="uid://vwvt1qvu5m5v"]
 
 [ext_resource type="Texture2D" uid="uid://cv2lsrl7np5w" path="res://TempPlayer/temp_player.png" id="1_1qfgj"]
+[ext_resource type="Script" path="res://TempPlayer/movement.cs" id="1_dsjur"]
 
 [node name="TempPlayer" type="Node2D"]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = ExtResource("1_dsjur")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 texture = ExtResource("1_1qfgj")
 
-[node name="PlayerNoticeBox" type="Area2D" parent="Sprite2D"]
-unique_name_in_owner = true
+[node name="Area2D" type="Area2D" parent="CharacterBody2D"]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite2D/PlayerNoticeBox"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CharacterBody2D/Area2D"]
 position = Vector2(0, 2)
 scale = Vector2(1, 1.4)
 polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)

@@ -217,35 +217,18 @@ radius = 110.0
 
 [node name="fox" type="Node2D"]
 
-[node name="EnemyAI" type="CharacterBody2D" parent="."]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 script = ExtResource("1_d36rd")
 
-[node name="sprite_player" type="AnimatedSprite2D" parent="EnemyAI"]
+[node name="sprite_player" type="AnimatedSprite2D" parent="CharacterBody2D"]
 sprite_frames = SubResource("SpriteFrames_jceai")
 animation = &"death"
 autoplay = "idle"
 
-[node name="hitbox_walk" type="CollisionPolygon2D" parent="EnemyAI"]
-position = Vector2(1, 8.9407e-08)
-scale = Vector2(1.4, 0.9)
-polygon = PackedVector2Array(-10, -1.11111, -10, -2.22222, -5.71429, -6.66667, -2.85714, -3.33333, 6.42857, -2.22222, 4.28571, 6.66667, -3.57143, 6.66667, -6.42857, -9.93411e-08)
-disabled = true
-
-[node name="hitbox_idle" type="CollisionPolygon2D" parent="EnemyAI"]
-position = Vector2(1, 8.9407e-08)
-scale = Vector2(1.4, 0.9)
-polygon = PackedVector2Array(-10, -2.22222, -10, -4.44444, -5.71429, -6.66667, -2.85714, -3.33333, 5.71429, -4.44444, 4.28571, 5.55556, -4.28571, 5.55556, -6.42857, -1.11111)
-disabled = true
-
-[node name="hitbox_attack" type="CollisionPolygon2D" parent="EnemyAI"]
-position = Vector2(1, 8.9407e-08)
-scale = Vector2(1.4, 0.9)
-polygon = PackedVector2Array(-10.7143, -1.11111, -10.7143, -5.55556, -5.71429, -7.77778, -2.85714, -4.44444, 5, -5.55556, 4.28571, 4.44444, -4.28571, 4.44444, -6.42857, -1.11111)
-disabled = true
-
-[node name="feet" type="CollisionShape2D" parent="EnemyAI"]
+[node name="feet" type="CollisionShape2D" parent="CharacterBody2D"]
 shape = SubResource("SegmentShape2D_lbsw0")
 
-[node name="view_field" type="CollisionShape2D" parent="EnemyAI"]
-visible = false
+[node name="view_field" type="Area2D" parent="CharacterBody2D"]
+
+[node name="cirle" type="CollisionShape2D" parent="CharacterBody2D/view_field"]
 shape = SubResource("CircleShape2D_7f840")

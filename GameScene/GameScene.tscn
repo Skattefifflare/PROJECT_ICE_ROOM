@@ -12,4 +12,4 @@ zoom = Vector2(2, 2)
 position = Vector2(-19, 19)
 
 [node name="SmartFox" parent="." instance=ExtResource("2_isbbg")]
-position = Vector2(-257, -140)
+position = Vector2(211, -105)
