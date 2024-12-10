@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bxkitdfce0bb1"
-path="res://.godot/imported/FoxSprites.png-8fd75ef55f35bbd453db006c844c8eb7.ctex"
+path="res://.godot/imported/fox_sprites.png-31bcf9fc34827e1896369a7457745cd1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Enemies/Fox/FoxSprites.png"
-dest_files=["res://.godot/imported/FoxSprites.png-8fd75ef55f35bbd453db006c844c8eb7.ctex"]
+source_file="res://Enemies/Fox/fox_sprites.png"
+dest_files=["res://.godot/imported/fox_sprites.png-31bcf9fc34827e1896369a7457745cd1.ctex"]
 
 [params]
 

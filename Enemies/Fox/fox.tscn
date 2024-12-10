@@ -1,7 +1,7 @@
 [gd_scene load_steps=32 format=3 uid="uid://c5lfrw2nny0cd"]
 
 [ext_resource type="Script" path="res://Enemies/Fox/FoxAI.cs" id="1_d36rd"]
-[ext_resource type="Texture2D" uid="uid://bxkitdfce0bb1" path="res://Enemies/Fox/FoxSprites.png" id="2_oe7mg"]
+[ext_resource type="Texture2D" uid="uid://bxkitdfce0bb1" path="res://Enemies/Fox/fox_sprites.png" id="2_oe7mg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0qcsi"]
 atlas = ExtResource("2_oe7mg")
@@ -217,18 +217,26 @@ radius = 110.0
 
 [node name="fox_root" type="Node2D"]
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="fox" type="CharacterBody2D" parent="."]
 script = ExtResource("1_d36rd")
 
-[node name="sprite_player" type="AnimatedSprite2D" parent="CharacterBody2D"]
+[node name="sprite_player" type="AnimatedSprite2D" parent="fox"]
 sprite_frames = SubResource("SpriteFrames_jceai")
 animation = &"death"
 autoplay = "idle"
 
-[node name="feet" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="feet" type="CollisionShape2D" parent="fox"]
 shape = SubResource("SegmentShape2D_lbsw0")
 
-[node name="view_field" type="Area2D" parent="CharacterBody2D"]
+[node name="view_field" type="Area2D" parent="fox"]
+visible = false
 
-[node name="cirle" type="CollisionShape2D" parent="CharacterBody2D/view_field"]
+[node name="cirle" type="CollisionShape2D" parent="fox/view_field"]
 shape = SubResource("CircleShape2D_7f840")
+
+[node name="hitbox" type="Area2D" parent="fox"]
+
+[node name="polygon" type="CollisionPolygon2D" parent="fox/hitbox"]
+position = Vector2(0.625, 0)
+scale = Vector2(1.5375, 0.9)
+polygon = PackedVector2Array(-3.00813, -10, -4.30894, -6.66667, -5.60976, -10, -8.86179, -3.33333, -8.86179, -1.11111, -5.60976, -1.11111, -3.65854, 5.55556, 4.14634, 5.55556, 4.79675, 0, 6.74797, -4.44444, -2.35772, -4.44444)

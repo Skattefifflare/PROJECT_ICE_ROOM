@@ -32,6 +32,10 @@ public partial class AI : KillableThing
 			{"death", Death},
 		};
     }
+    public override void _PhysicsProcess(double delta) {
+        base._PhysicsProcess(delta);
+		StateMachine();
+    }
 
     public virtual void StateMachine() {
 		GD.PrintErr("DecideState has to be implemented in a child script.");
