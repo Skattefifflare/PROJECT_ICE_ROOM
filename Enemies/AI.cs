@@ -1,27 +1,31 @@
 using Godot;
+using Project_Ice_Room.Scriptbin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public partial class AI : CharacterBody2D
+public partial class AI : KillableThing
 {
 	Area2D view_field;
 	public bool sees_player = false;
+	CharacterBody2D player; // bad idea, how is the player supposed to find the fox?
 
-	AnimatedSprite2D sprite_player;
 	public Dictionary<string, Action> state_dict;
-
 	public bool state_is_busy = false;
 	Action current_state;
 
-
+	
     public override void _Ready() {
         base._Ready();	
 
         view_field = (Area2D)FindChild("view_field");
-		view_field.AreaEntered += (object_that_entered) => sees_player = true; // object_that_entered is needed for the lambda to work
+		view_field.AreaEntered += (object_that_entered) => {
+			if (object_that_entered.Name.ToString() == "visibility_box") {
+                sees_player = true;
+                player = (CharacterBody2D)object_that_entered.FindParent("player");
+            }       
+        }; 
 
-		sprite_player = (AnimatedSprite2D)FindChild("sprite_player");
 		state_dict = new Dictionary<string, Action>() {
 			{"idle", Idle},
 			{"walk", Walk},
@@ -54,5 +58,8 @@ public partial class AI : CharacterBody2D
     public virtual void Walk() {
 		state_is_busy = false;
 		sprite_player.Play("walk");
+	}
+	public virtual void DamageReaction() {
+
 	}
 }

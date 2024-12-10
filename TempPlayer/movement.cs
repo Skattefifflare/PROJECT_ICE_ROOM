@@ -1,12 +1,26 @@
 using Godot;
+using Project_Ice_Room.Scriptbin;
 using System;
 
-public partial class movement : CharacterBody2D
+public partial class movement : KillableThing
 {
-	public const float Speed = 300.0f;
-	public const float JumpVelocity = -400.0f;
+	public const float Speed = 100.0f;
 
-	public override void _PhysicsProcess(double delta)
+	public Area2D hitbox;
+
+
+    public override void _Ready() {
+        base._Ready();
+		hitbox = (Area2D)FindChild("hitbox");
+
+		dmgh = new DamageHandler(hitbox, 100, ref taken_dmg_flag, ref death_flag);
+    }
+
+
+
+
+
+    public override void _PhysicsProcess(double delta)
 	{
 		Vector2 velocity = Velocity;
 

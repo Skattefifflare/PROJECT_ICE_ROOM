@@ -7,6 +7,7 @@ public partial class FoxAI : AI
         base._Ready();
 
         state_dict["run_towards_player"] = RunTowardsPlayer;
+        dmgh = new DamageHandler(hitbox, 50, ref taken_dmg_flag, ref death_flag);
     }
 
     public override void _PhysicsProcess(double delta) {

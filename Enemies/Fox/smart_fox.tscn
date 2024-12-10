@@ -215,7 +215,7 @@ b = Vector2(-7, 9)
 [sub_resource type="CircleShape2D" id="CircleShape2D_7f840"]
 radius = 110.0
 
-[node name="fox" type="Node2D"]
+[node name="fox_root" type="Node2D"]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 script = ExtResource("1_d36rd")

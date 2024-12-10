@@ -8,8 +8,8 @@
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
 
-[node name="TempPlayer" parent="." instance=ExtResource("2_hjvhr")]
+[node name="player" parent="." instance=ExtResource("2_hjvhr")]
 position = Vector2(-19, 19)
 
-[node name="SmartFox" parent="." instance=ExtResource("2_isbbg")]
+[node name="fox" parent="." instance=ExtResource("2_isbbg")]
 position = Vector2(211, -105)
