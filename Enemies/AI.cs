@@ -8,7 +8,6 @@ public partial class AI : KillableThing
 {
 	Area2D view_field;
 	public bool sees_player = false;
-	CharacterBody2D player; // bad idea, how is the player supposed to find the fox?
 
 	public Dictionary<string, Action> state_dict;
 	public bool state_is_busy = false;
@@ -22,7 +21,6 @@ public partial class AI : KillableThing
 		view_field.AreaEntered += (object_that_entered) => {
 			if (object_that_entered.Name.ToString() == "visibility_box") {
                 sees_player = true;
-                player = (CharacterBody2D)object_that_entered.FindParent("player");
             }       
         }; 
 

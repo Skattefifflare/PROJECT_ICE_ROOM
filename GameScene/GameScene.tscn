@@ -1,15 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://bav2vso835uxd"]
+[gd_scene load_steps=4 format=3 uid="uid://bav2vso835uxd"]
 
+[ext_resource type="Script" path="res://GameScene/GameManager.cs" id="1_2o2al"]
 [ext_resource type="PackedScene" uid="uid://vwvt1qvu5m5v" path="res://Player/Player.tscn" id="2_hjvhr"]
-[ext_resource type="PackedScene" uid="uid://c5lfrw2nny0cd" path="res://Enemies/Fox/fox.tscn" id="2_isbbg"]
+[ext_resource type="PackedScene" uid="uid://c5lfrw2nny0cd" path="res://Enemies/Fox/Fox.tscn" id="2_isbbg"]
 
-[node name="GameScene" type="Node2D"]
+[node name="gm" type="Node2D"]
+script = ExtResource("1_2o2al")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="camera" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
 
 [node name="player" parent="." instance=ExtResource("2_hjvhr")]
 position = Vector2(16, 32)
 
-[node name="fox" parent="." instance=ExtResource("2_isbbg")]
+[node name="enemies" type="Node" parent="."]
+
+[node name="fox" parent="enemies" instance=ExtResource("2_isbbg")]
 position = Vector2(211, -105)
+
+[node name="fox2" parent="enemies" instance=ExtResource("2_isbbg")]
+position = Vector2(219, -56)

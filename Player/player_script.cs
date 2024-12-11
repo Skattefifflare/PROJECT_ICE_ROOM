@@ -11,11 +11,8 @@ public partial class player_script : KillableThing
     public override void _Ready() {
 		hp = 100; // hp must be declared before base. yes it is dumb but i dont wanna learn dependency injection
         base._Ready();
-		hitbox = (Area2D)FindChild("hitbox");
+		hitbox = (Area2D)FindChild("hitbox");		
     }
-
-
-
 
 
     public override void _PhysicsProcess(double delta)

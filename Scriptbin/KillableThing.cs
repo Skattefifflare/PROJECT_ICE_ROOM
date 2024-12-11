@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 namespace Project_Ice_Room.Scriptbin {
     public partial class KillableThing : CharacterBody2D {
 
+        public GameManager gm;
+
         public bool taken_dmg_flag = false;
         public bool death_flag = false;
         public int hp;
@@ -22,6 +24,7 @@ namespace Project_Ice_Room.Scriptbin {
 
         public override void _Ready() {
             base._Ready();
+            gm = (GameManager)FindParent("gm");
             sprite_player = (AnimatedSprite2D)FindChild("sprite_player");
             feet = (CollisionShape2D)FindChild("feet");
             hitbox = (Area2D)FindChild("hitbox");
