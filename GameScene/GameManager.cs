@@ -25,11 +25,17 @@ public partial class GameManager : Node2D
 
 	}
 
-	public void PlayerAttackEnemy(Area2D damage_box, int proposed_dmg) {
+	public void PlayerAttacksEnemy(Area2D damage_box, int proposed_dmg) {
 		foreach (var enemy in enemies) {
 			DamageHandler enemy_dmgh = enemy.GetChildren().OfType<KillableThing>().ToList()[0].dmgh;
 			enemy_dmgh.SendHitRequest(damage_box, proposed_dmg);
 		}
 	}
+	public void PlayerStopsAttack() {
+        foreach (var enemy in enemies) {
+            DamageHandler enemy_dmgh = enemy.GetChildren().OfType<KillableThing>().ToList()[0].dmgh;
+            enemy_dmgh.EndHitRequest();
+        }
+    }
 }
 

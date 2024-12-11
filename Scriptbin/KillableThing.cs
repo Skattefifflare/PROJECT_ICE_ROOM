@@ -15,8 +15,6 @@ namespace Project_Ice_Room.Scriptbin {
         public int hp;
         public DamageHandler dmgh;
 
-        // And the Gamedev said, "All things which can die must have feet."
-        // And so it was that all things which perish must have feet because edge cases are annoying.
         public CollisionShape2D feet;
         // all of these are dubious to have in the base class.
         public AnimatedSprite2D sprite_player;

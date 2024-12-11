@@ -6,12 +6,17 @@ public partial class player_script : KillableThing
 {
 	public float speed = 100.0f;
 
-	// here the player would have some way to communicate with the current weapon.
+
+	// the player needs to communicate with its weapon.
+	int spear_dmg = 40;
+	Area2D dmg_box;
 
     public override void _Ready() {
 		hp = 100; // hp must be declared before base. yes it is dumb but i dont wanna learn dependency injection
         base._Ready();
-		hitbox = (Area2D)FindChild("hitbox");		
+		hitbox = (Area2D)FindChild("hitbox");
+
+		dmg_box = (Area2D)FindChild("damagebox");
     }
 
 
@@ -35,5 +40,12 @@ public partial class player_script : KillableThing
 
 		Velocity = velocity;
 		MoveAndSlide();
+	}
+
+
+	private void Attack() {
+		gm.PlayerAttacksEnemy(dmg_box, spear_dmg);
+		// attack animation here
+		gm.PlayerStopsAttack();
 	}
 }
