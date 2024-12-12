@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class FoxAI : AI
+public partial class Fox : Enemy
 {
     public override void _Ready() {
         hp = 50;
@@ -13,7 +13,6 @@ public partial class FoxAI : AI
     public override void _PhysicsProcess(double delta) {
         base._PhysicsProcess(delta);
 
-        StateMachine();
         MoveAndSlide();
     }
 
@@ -27,9 +26,8 @@ public partial class FoxAI : AI
     }
 
     void RunTowardsPlayer() {
-        base.Walk();
         state_is_busy = true;
-
+        sprite_player.Play("walk");
 
         Vector2 velocity = Velocity;
         velocity.X -= 20;

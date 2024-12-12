@@ -1,6 +1,6 @@
 [gd_scene load_steps=32 format=3 uid="uid://c5lfrw2nny0cd"]
 
-[ext_resource type="Script" path="res://Enemies/Fox/FoxAI.cs" id="1_d36rd"]
+[ext_resource type="Script" path="res://Enemies/Fox/Fox.cs" id="1_d36rd"]
 [ext_resource type="Texture2D" uid="uid://bxkitdfce0bb1" path="res://Enemies/Fox/fox_sprites.png" id="2_oe7mg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0qcsi"]
@@ -229,7 +229,6 @@ autoplay = "idle"
 shape = SubResource("SegmentShape2D_lbsw0")
 
 [node name="view_field" type="Area2D" parent="fox"]
-visible = false
 
 [node name="cirle" type="CollisionShape2D" parent="fox/view_field"]
 shape = SubResource("CircleShape2D_7f840")

@@ -2,20 +2,17 @@ using Godot;
 using Project_Ice_Room.Scriptbin;
 using System;
 
-public partial class player_script : KillableThing
+public partial class Player : Creature
 {
-	public float speed = 100.0f;
-
-
+	public float speed = 100f;
 	// the player needs to communicate with its weapon.
 	int spear_dmg = 40;
-	Area2D dmg_box;
+
 
     public override void _Ready() {
 		hp = 100; // hp must be declared before base. yes it is dumb but i dont wanna learn dependency injection
         base._Ready();
 		hitbox = (Area2D)FindChild("hitbox");
-
 		dmg_box = (Area2D)FindChild("damagebox");
     }
 
@@ -41,18 +38,4 @@ public partial class player_script : KillableThing
 		Velocity = velocity;
 		MoveAndSlide();
 	}
-
-
-	private void Attack() {
-		gm.SendAttack(dmg_box, spear_dmg);
-		
-        System.Action handler = null;
-        handler = () =>
-        {
-            gm.PlayerStopsAttack();
-            sprite_player.AnimationFinished -= handler;
-        };
-
-        sprite_player.AnimationFinished += handler;
-    }
 }
