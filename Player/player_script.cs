@@ -44,8 +44,15 @@ public partial class player_script : KillableThing
 
 
 	private void Attack() {
-		gm.PlayerAttacksEnemy(dmg_box, spear_dmg);
-		// attack animation here
-		gm.PlayerStopsAttack();
-	}
+		gm.SendAttack(dmg_box, spear_dmg);
+		
+        System.Action handler = null;
+        handler = () =>
+        {
+            gm.PlayerStopsAttack();
+            sprite_player.AnimationFinished -= handler;
+        };
+
+        sprite_player.AnimationFinished += handler;
+    }
 }
