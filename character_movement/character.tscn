@@ -82,7 +82,6 @@ render_target_update_mode = 4
 z_index = 2
 
 [node name="Camera2D" type="Camera2D" parent="Guy"]
-zoom = Vector2(3, 3)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("4_wtnvh")

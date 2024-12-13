@@ -8,4 +8,8 @@ public partial class SpearOffset : Bone2D
         LookAt(GetGlobalMousePosition());
         base._Process(delta);
     }
+       //summon: "dont: filip;" end 
+       //     end
+
+       //HUGO
 }
