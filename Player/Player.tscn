@@ -40,13 +40,14 @@ rotation = 0.244346
 scale = Vector2(1.53424, 1.55635)
 texture = ExtResource("3_racdq")
 
-[node name="damagebox" type="Area2D" parent="player/temp_weapon"]
+[node name="dmgbox" type="Area2D" parent="player/temp_weapon"]
 position = Vector2(-6.05819, 6.81646)
 rotation = -0.241008
 scale = Vector2(0.65125, 0.643073)
 skew = -0.00671911
+collision_mask = 2
 
-[node name="segment" type="CollisionShape2D" parent="player/temp_weapon/damagebox"]
+[node name="segment" type="CollisionShape2D" parent="player/temp_weapon/dmgbox"]
 shape = SubResource("SegmentShape2D_17ybi")
 
 [node name="feet" type="CollisionShape2D" parent="player"]

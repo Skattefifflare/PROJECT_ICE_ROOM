@@ -1,31 +1,25 @@
 using Godot;
 using System;
 
-public partial class Fox : Enemy
+public partial class Fox : CreatureClass
 {
     public override void _Ready() {
-        hp = 50;
         base._Ready();
+        hp = 50;
 
-        state_dict["run_towards_player"] = RunTowardsPlayer;
     }
 
     public override void _PhysicsProcess(double delta) {
         base._PhysicsProcess(delta);
-
-        MoveAndSlide();
     }
 
-    public override void StateMachine() {
-        if (sees_player) {
-            CallState("run_towards_player");
-        }
-        else {
-            CallState("idle");
-        }
+    protected override void StateMachine() {
+        
+        CallState("idle");
+        
     }
 
-    void RunTowardsPlayer() {        
+    private void RunTowardsPlayer() {        
         sprite_player.Play("walk");
 
         Vector2 velocity = Velocity;

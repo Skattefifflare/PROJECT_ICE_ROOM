@@ -1,7 +1,8 @@
-[gd_scene load_steps=32 format=3 uid="uid://c5lfrw2nny0cd"]
+[gd_scene load_steps=34 format=3 uid="uid://c5lfrw2nny0cd"]
 
 [ext_resource type="Script" path="res://Enemies/Fox/Fox.cs" id="1_d36rd"]
 [ext_resource type="Texture2D" uid="uid://bxkitdfce0bb1" path="res://Enemies/Fox/fox_sprites.png" id="2_oe7mg"]
+[ext_resource type="Script" path="res://Scriptbin/Weapon.cs" id="3_lldid"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0qcsi"]
 atlas = ExtResource("2_oe7mg")
@@ -215,27 +216,40 @@ b = Vector2(-7, 9)
 [sub_resource type="CircleShape2D" id="CircleShape2D_7f840"]
 radius = 110.0
 
-[node name="fox_root" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yxtu5"]
+size = Vector2(3.125, 2)
 
-[node name="fox" type="CharacterBody2D" parent="."]
+[node name="fox" type="CharacterBody2D"]
 script = ExtResource("1_d36rd")
 
-[node name="sprite_player" type="AnimatedSprite2D" parent="fox"]
+[node name="sprite_player" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_jceai")
-animation = &"death"
+animation = &"idle"
 autoplay = "idle"
+frame_progress = 0.393489
 
-[node name="feet" type="CollisionShape2D" parent="fox"]
+[node name="feet" type="CollisionShape2D" parent="."]
 shape = SubResource("SegmentShape2D_lbsw0")
 
-[node name="view_field" type="Area2D" parent="fox"]
+[node name="view_field" type="Area2D" parent="."]
+collision_layer = 2
 
-[node name="cirle" type="CollisionShape2D" parent="fox/view_field"]
+[node name="cirle" type="CollisionShape2D" parent="view_field"]
 shape = SubResource("CircleShape2D_7f840")
 
-[node name="hitbox" type="Area2D" parent="fox"]
+[node name="hitbox" type="Area2D" parent="."]
 
-[node name="polygon" type="CollisionPolygon2D" parent="fox/hitbox"]
+[node name="polygon" type="CollisionPolygon2D" parent="hitbox"]
 position = Vector2(0.625, 0)
 scale = Vector2(1.5375, 0.9)
 polygon = PackedVector2Array(-3.00813, -10, -4.30894, -6.66667, -5.60976, -10, -8.86179, -3.33333, -8.86179, -1.11111, -5.60976, -1.11111, -3.65854, 5.55556, 4.14634, 5.55556, 4.79675, 0, 6.74797, -4.44444, -2.35772, -4.44444)
+
+[node name="weapon" type="Sprite2D" parent="."]
+script = ExtResource("3_lldid")
+
+[node name="dmgbox" type="Area2D" parent="weapon"]
+position = Vector2(-12, -2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="weapon/dmgbox"]
+position = Vector2(0.5625, 0)
+shape = SubResource("RectangleShape2D_yxtu5")
