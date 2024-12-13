@@ -15,14 +15,6 @@ public partial class Enemy : Creature
 
         view_field = (Area2D)FindChild("view_field");
 		view_field.AreaEntered += (object_that_entered) => {
-            try {
-
-                GD.Print(gm.player.GetChild(0).FindChild("visibility_box").Name);
-            }
-            catch {
-                GD.Print("why");
-            }
-            
 			if (object_that_entered == gm.player.FindChild("visibility_box")) {
                 sees_player = true;
             }       

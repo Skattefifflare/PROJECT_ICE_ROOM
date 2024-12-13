@@ -40,6 +40,7 @@ namespace Project_Ice_Room.Scriptbin {
             current_state = state_dict[state];
             try {
                 current_state();
+                state_is_busy = true;
             }
             catch {
                 GD.PrintErr("state '" + state + "' could not be started. Make sure animations and nodes needed exist and are properly named");

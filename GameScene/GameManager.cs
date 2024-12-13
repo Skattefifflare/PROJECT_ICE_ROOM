@@ -12,7 +12,7 @@ public partial class GameManager : Node2D
 
 	public override void _Ready()
 	{
-		player = FindChild("player", true);
+		player = FindChild("player_scene", true);
 
 
 		enemies = new();
@@ -21,7 +21,7 @@ public partial class GameManager : Node2D
 			
 		}
 	}
-
+	
 	public void SendAttack(Area2D damage_box, int proposed_dmg, string target = null) {		
         if (target == null) {
 			List<DamageHandler> all_damagehandlers = GetChildren().OfType<KillableThing>().Select(x => x.dmgh).ToList();

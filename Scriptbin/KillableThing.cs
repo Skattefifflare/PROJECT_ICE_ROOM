@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 namespace Project_Ice_Room.Scriptbin {
     public partial class KillableThing : CharacterBody2D {
 
-        public GameManager gm;
-        public bool taken_dmg_flag = false;
-        public bool death_flag = false;
-        public int hp;
+        protected GameManager gm;
+        protected bool taken_dmg_flag = false;
+        protected bool death_flag = false;
+        protected int hp;
         public DamageHandler dmgh;
-        public CollisionShape2D feet;
-        public AnimatedSprite2D sprite_player;
-        public Area2D hitbox; // the damagehandler hitbox automatically updates when this hitbox changes.
+        protected CollisionShape2D feet;
+        protected AnimatedSprite2D sprite_player;
+        protected Area2D hitbox; // the damagehandler hitbox automatically updates when this hitbox changes.
 
         public override void _Ready() {
             base._Ready();

@@ -25,8 +25,7 @@ public partial class Fox : Enemy
         }
     }
 
-    void RunTowardsPlayer() {
-        state_is_busy = true;
+    void RunTowardsPlayer() {        
         sprite_player.Play("walk");
 
         Vector2 velocity = Velocity;

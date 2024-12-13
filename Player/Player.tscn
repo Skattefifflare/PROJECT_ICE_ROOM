@@ -20,9 +20,9 @@ script = ExtResource("1_dsjur")
 [node name="sprite" type="Sprite2D" parent="player"]
 texture = ExtResource("1_1qfgj")
 
-[node name="visibilty_box" type="Area2D" parent="player"]
+[node name="visibility_box" type="Area2D" parent="player"]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="player/visibilty_box"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="player/visibility_box"]
 position = Vector2(0, 2)
 scale = Vector2(1, 1.4)
 polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
