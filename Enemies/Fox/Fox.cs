@@ -1,5 +1,7 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+
 
 public partial class Fox : CreatureClass
 {
@@ -7,25 +9,25 @@ public partial class Fox : CreatureClass
         base._Ready();
         hp = 50;
 
+
+        AddStates(new Dictionary<string, Action>() {
+            {"run_towards_player", RunTowardsPlayer}
+        });
     }
 
-    public override void _PhysicsProcess(double delta) {
-        base._PhysicsProcess(delta);
-    }
 
     protected override void StateMachine() {
-        
-        CallState("idle");
-        
+        CallState("run_towards_player");       
     }
 
-    private void RunTowardsPlayer() {        
+    private void RunTowardsPlayer() {
         sprite_player.Play("walk");
+        GD.Print(sprite_player.Animation.ToString());
+        var player = (PlayerClass)GetNode("%player");
+        
+        Vector2 direction = player.Position-Position;
+        direction = direction.Normalized();
 
-        Vector2 velocity = Velocity;
-        velocity.X -= 20;
-        velocity.Y += 20;
-        Velocity = velocity;
-        GD.Print("walk");
+        Velocity = direction * 50;
     }
 }

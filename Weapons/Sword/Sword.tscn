@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dapgexv4no1bw"]
+
+[ext_resource type="Texture2D" uid="uid://ckmpjpepjgwso" path="res://Weapons/Sword/sword.png" id="1_c0bcu"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_275my"]
+b = Vector2(0, 9)
+
+[node name="sword_root" type="Sprite2D"]
+texture = ExtResource("1_c0bcu")
+
+[node name="dmgbox" type="Area2D" parent="."]
+
+[node name="segment" type="CollisionShape2D" parent="dmgbox"]
+position = Vector2(0, -6)
+shape = SubResource("SegmentShape2D_275my")

@@ -10,11 +10,12 @@ zoom = Vector2(2, 2)
 
 [node name="enemies" type="Node" parent="."]
 
-[node name="fox" parent="enemies" instance=ExtResource("2_isbbg")]
-position = Vector2(211, -105)
+[node name="fox_root" parent="enemies" instance=ExtResource("2_isbbg")]
+position = Vector2(184, -71)
 
-[node name="fox2" parent="enemies" instance=ExtResource("2_isbbg")]
-position = Vector2(-52, -102)
+[node name="fox_root2" parent="enemies" instance=ExtResource("2_isbbg")]
+position = Vector2(-77, -114)
 
-[node name="player_scene" parent="." instance=ExtResource("2_hjvhr")]
-position = Vector2(-23, 42)
+[node name="player" parent="." instance=ExtResource("2_hjvhr")]
+unique_name_in_owner = true
+position = Vector2(2, -1)

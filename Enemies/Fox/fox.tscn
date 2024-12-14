@@ -219,14 +219,14 @@ radius = 110.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yxtu5"]
 size = Vector2(3.125, 2)
 
-[node name="fox" type="CharacterBody2D"]
+[node name="fox_root" type="CharacterBody2D"]
 script = ExtResource("1_d36rd")
 
 [node name="sprite_player" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_jceai")
-animation = &"idle"
+animation = &"walk"
 autoplay = "idle"
-frame_progress = 0.393489
+frame_progress = 0.413563
 
 [node name="feet" type="CollisionShape2D" parent="."]
 shape = SubResource("SegmentShape2D_lbsw0")
