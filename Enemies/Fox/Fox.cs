@@ -17,17 +17,21 @@ public partial class Fox : CreatureClass
 
 
     protected override void StateMachine() {
-        CallState("run_towards_player");       
+        CallStateAsThread("run_towards_player");       
     }
 
     private void RunTowardsPlayer() {
         sprite_player.Play("walk");
         GD.Print(sprite_player.Animation.ToString());
         var player = (PlayerClass)GetNode("%player");
-        
-        Vector2 direction = player.Position-Position;
-        direction = direction.Normalized();
 
-        Velocity = direction * 50;
+        Vector2 pos_diff = Vector2.Inf;
+        while (pos_diff.Length() > 20) {
+            pos_diff = player.Position - Position;
+            Vector2 direction = pos_diff.Normalized();
+
+            Velocity = direction * 50;
+        }
+        
     }
 }

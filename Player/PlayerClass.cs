@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 
 public partial class PlayerClass : CreatureClass {
@@ -13,6 +14,11 @@ public partial class PlayerClass : CreatureClass {
 		AddStates(new Dictionary<string, Action>() {
 			{"walk", Walk }
 		});
+
+		Thread thread = new Thread( () => {
+			CallDeferred(nameof(Increment));
+		});
+		thread.Start();
     }
 
 
@@ -20,7 +26,7 @@ public partial class PlayerClass : CreatureClass {
 		direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
 
 		if (direction != Vector2.Zero) {
-			CallState("walk");
+			CallStateAsThread("walk");
 		}
 		else {
 			//CallState("idle");
@@ -35,5 +41,12 @@ public partial class PlayerClass : CreatureClass {
 		is_busy = false;
 		// sprite_player.Play("walk");
 		Velocity = direction * Speed;
+	}
+
+	void Increment() {
+		while (true) {
+			Thread.Sleep(1000);
+			GD.Print(this.Position);			
+		}
 	}
 }

@@ -13,7 +13,7 @@ public partial class CreatureClass : CharacterBody2D {
     protected Area2D dmgbox;
 
     private Dictionary<string, Action> state_dict;
-    protected Action current_state;
+    protected string current_state;
     protected bool is_busy = false;
 
     public override void _Ready() {
@@ -24,7 +24,7 @@ public partial class CreatureClass : CharacterBody2D {
         hitbox.AreaEntered += (entered_node) => {
             if (entered_node.GetParent().GetType() != typeof(Weapon)) return;
             weapon_hurt_from = (Weapon)entered_node.GetParent();
-            CallState("take_damage");           
+            CallStateAsThread("take_damage");           
         };
         dmgbox = (Area2D)FindChild("dmgbox");
         dmgbox.Monitorable = false;        
@@ -43,12 +43,20 @@ public partial class CreatureClass : CharacterBody2D {
     protected void AddStates(Dictionary<string, Action> added_states) {
         state_dict = (Dictionary<string, Action>)state_dict.Concat(added_states).ToDictionary(s => s.Key, s => s.Value);
     }
-    protected void CallState(string state) {
+    //protected void CallState(string state) {
+    //    if (!state_dict.ContainsKey(state)) GD.Print("state '" + state + "' does not exist in the dictionary.");
+    //    if (current_state == state_dict[state]) return;
+    //    current_state = state_dict[state];
+    //    current_state();
+    //    is_busy = true;
+    //}
+    
+    protected void CallStateAsThread(string state) {
         if (!state_dict.ContainsKey(state)) GD.Print("state '" + state + "' does not exist in the dictionary.");
-        if (current_state == state_dict[state]) return;
-        current_state = state_dict[state];
-        current_state();
-        is_busy = true;
+        if (current_state == state) return;
+
+        
+
     }
     protected virtual void StateMachine() {
         throw new NotImplementedException("This method must be overridden in a derived class.");
