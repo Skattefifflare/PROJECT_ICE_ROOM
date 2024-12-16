@@ -14,11 +14,6 @@ public partial class PlayerClass : CreatureClass {
 		AddStates(new Dictionary<string, Action>() {
 			{"walk", Walk }
 		});
-
-		Thread thread = new Thread( () => {
-			CallDeferred(nameof(Increment));
-		});
-		thread.Start();
     }
 
 
@@ -26,10 +21,10 @@ public partial class PlayerClass : CreatureClass {
 		direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
 
 		if (direction != Vector2.Zero) {
-			CallStateAsThread("walk");
+			CallState("walk");
 		}
 		else {
-			//CallState("idle");
+			CallState("attack");
 		}
 
 		if (hp < 0) {
@@ -38,15 +33,12 @@ public partial class PlayerClass : CreatureClass {
 	}
 
 	private void Walk() {
-		is_busy = false;
-		// sprite_player.Play("walk");
+		is_busy = false;		
 		Velocity = direction * Speed;
 	}
+	protected override void Idle() {
+        is_busy = false;
+    }
 
-	void Increment() {
-		while (true) {
-			Thread.Sleep(1000);
-			GD.Print(this.Position);			
-		}
-	}
+	
 }
