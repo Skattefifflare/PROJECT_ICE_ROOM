@@ -1,10 +1,8 @@
 using Godot;
 using System.Collections.Generic;
-using System.Linq;
 
 [Tool]
-public partial class GenSpline : Node2D
-{
+public partial class GenSpline : Node2D {
     int index = 0; //index for which point to draw
     List<Vector2> shape = new List<Vector2>(); //for testing
     private List<Vector2> ControlPoints = new List<Vector2>();
@@ -12,13 +10,11 @@ public partial class GenSpline : Node2D
     public List<Vector2> splinePoints = new List<Vector2>(); //the actual spline 
     public Polygon2D splinePoly;
 
-    public void Update()
-    {
-        if (shape.Count == 0)
-        {
+    public void Update() {
+        if (shape.Count == 0) {
             shape = new List<Vector2>
             {
-                new Vector2(0, 0),  
+                new Vector2(0, 0),
                 new Vector2(300, 0),
                 new Vector2(300, 150),
                 new Vector2(100, 150),
@@ -40,11 +36,9 @@ public partial class GenSpline : Node2D
         SetControlPoints();
         CalculateSpline();
     }
-    private void SetControlPoints()
-    {
+    private void SetControlPoints() {
         var currentIndex = GetControlIndex();
-        if(index == shape.Count)
-        {
+        if (index == shape.Count) {
             return;
         }
         ControlPoints.Clear();
@@ -55,8 +49,7 @@ public partial class GenSpline : Node2D
         index++;
     }
     //Adds points to the spline using control points
-    private void CalculateSpline()
-    {
+    private void CalculateSpline() {
         for (int i = 0; i < ControlPoints.Count - 3; i++) // Iterate through control points
         {
             Vector2 p0 = ControlPoints[i];
@@ -64,24 +57,20 @@ public partial class GenSpline : Node2D
             Vector2 p2 = ControlPoints[i + 2];
             Vector2 p3 = ControlPoints[i + 3];
 
-            for (int j = 0; j <= SegmentsPerCurve; j++)
-            {
+            for (int j = 0; j <= SegmentsPerCurve; j++) {
                 float t = j / (float)SegmentsPerCurve; // Parameter t (0 to 1)
                 splinePoints.Add(CalculateCatmullRomPoint(t, p0, p1, p2, p3));
             }
         }
-        if (index < shape.Count)
-        {
+        if (index < shape.Count) {
             Update();
         }
-        else
-        {
+        else {
             SplineToPolygon();
         }
     }
     //The catmull Rom algorithim to create the spline points
-    private Vector2 CalculateCatmullRomPoint(float t, Vector2 p0, Vector2 p1, Vector2 p2, Vector2 p3)
-    {
+    private Vector2 CalculateCatmullRomPoint(float t, Vector2 p0, Vector2 p1, Vector2 p2, Vector2 p3) {
         float t2 = t * t;
         float t3 = t2 * t;
 
@@ -94,12 +83,10 @@ public partial class GenSpline : Node2D
         );
     }
 
-    private (int, int, int) GetControlIndex()
-    {
+    private (int, int, int) GetControlIndex() {
         int max = shape.Count - 1;
 
-        return index switch
-        {
+        return index switch {
             //Peak readability
             _ when index == max => (index - 1, 0, 1), //drawing from last -> first point
             _ when index == max - 1 => (index - 1, index + 1, 0), //--||-- second to last -> last point
@@ -107,10 +94,8 @@ public partial class GenSpline : Node2D
             _ => (index - 1, index + 1, index + 2), //base case
         };
     }
-    private void SplineToPolygon()
-    {
-        splinePoly = new Polygon2D()
-        {
+    private void SplineToPolygon() {
+        splinePoly = new Polygon2D() {
             Polygon = splinePoints.ToArray(),
         };
     }
