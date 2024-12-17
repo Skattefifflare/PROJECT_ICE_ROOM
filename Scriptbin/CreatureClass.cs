@@ -72,12 +72,14 @@ public partial class CreatureClass : CharacterBody2D {
     }
     protected virtual void Attack() {
         dmgbox.Monitorable = true;
+        
         sprite_player.Play("attack");
-
+        
         Action finish_attack = null;
         finish_attack = () => {
             sprite_player.AnimationFinished -= finish_attack;
             dmgbox.Monitorable = false;
+            GD.Print(dmgbox.Monitorable);
         };
         sprite_player.AnimationFinished += finish_attack;
     }
@@ -85,6 +87,8 @@ public partial class CreatureClass : CharacterBody2D {
         hp -= weapon_hurt_from.dmg;
     }
     protected virtual void Death() {
-        sprite_player.Play("death");
+        if (sprite_player.Animation != "death") {
+            sprite_player.Play("death");
+        }
     }
 }

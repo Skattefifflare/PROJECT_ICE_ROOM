@@ -21,7 +21,10 @@ public partial class PlayerClass : CreatureClass {
 	protected override void StateMachine() {
 		direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
 
-		if (direction != Vector2.Zero) {
+		if (Input.IsActionJustPressed("attack")) {
+			CallState("attack");
+		}
+		else if (direction != Vector2.Zero) {
 			CallState("walk");
 		}
 		else {
