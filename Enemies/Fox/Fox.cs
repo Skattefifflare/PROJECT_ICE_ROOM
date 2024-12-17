@@ -7,7 +7,9 @@ public partial class Fox : CreatureClass
 {
     public override void _Ready() {
         base._Ready();
-        hp = 50;
+        hp = 100;
+        speed = 60;
+
 
 
         AddStates(new Dictionary<string, Action>() {
@@ -19,14 +21,16 @@ public partial class Fox : CreatureClass
     protected override void StateMachine() {
         PlayerClass player = (PlayerClass)GetNode("%player");
         Vector2 pos_diff = player.Position - Position;
-        if (pos_diff.Length() > 40) {
+
+        if (hp <= 0) {
+            CallState("death");
+        }
+        else if (Math.Abs(pos_diff.Length()) > 40) {
             CallState("run_towards_player");
         }
-
         else {
             CallState("idle");
-        }
-            
+        }           
     }
 
     private void RunTowardsPlayer() {  
@@ -38,6 +42,14 @@ public partial class Fox : CreatureClass
         PlayerClass player = (PlayerClass)GetNode("%player");
         Vector2 pos_diff = player.Position - Position;
         Vector2 direction = pos_diff.Normalized();
-        Velocity = direction * 50;                  
+
+        if (direction.X > 0) {
+            sprite_player.FlipH =true;
+        }
+        else {
+            sprite_player.FlipH =false;
+        }
+
+        Velocity = direction * speed;                  
     }
 }

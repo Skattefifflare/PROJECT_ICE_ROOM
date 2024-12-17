@@ -9,7 +9,7 @@ using Godot.NativeInterop;
 
 namespace Project_Ice_Room.Scriptbin {
     public partial class Weapon : Sprite2D {
-        public int dmg = 10;
+        public int dmg = 100;
 
         public override void _Ready() {
             base._Ready();

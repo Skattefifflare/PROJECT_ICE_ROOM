@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bav2vso835uxd"]
 
 [ext_resource type="PackedScene" uid="uid://vwvt1qvu5m5v" path="res://Player/Player.tscn" id="2_hjvhr"]
-[ext_resource type="PackedScene" uid="uid://c5lfrw2nny0cd" path="res://Enemies/Fox/Fox.tscn" id="2_isbbg"]
+[ext_resource type="PackedScene" uid="uid://c5lfrw2nny0cd" path="res://Enemies/Fox/fox.tscn" id="2_isbbg"]
 
 [node name="gamemaster" type="Node2D"]
 
@@ -14,8 +14,8 @@ zoom = Vector2(2, 2)
 position = Vector2(184, -71)
 
 [node name="fox_root2" parent="enemies" instance=ExtResource("2_isbbg")]
-position = Vector2(-77, -114)
+position = Vector2(-212, -105)
 
 [node name="player" parent="." instance=ExtResource("2_hjvhr")]
 unique_name_in_owner = true
-position = Vector2(2, -1)
+position = Vector2(-201, 138)

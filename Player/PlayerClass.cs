@@ -5,12 +5,13 @@ using System.Threading;
 
 
 public partial class PlayerClass : CreatureClass {
-	public const float Speed = 80f;
+	public const float Speed = 100f;
 	private Vector2 direction;
     public override void _Ready() {
         base._Ready();
 
 		hp = 100;
+		speed = 90;
 		AddStates(new Dictionary<string, Action>() {
 			{"walk", Walk }
 		});
@@ -24,21 +25,16 @@ public partial class PlayerClass : CreatureClass {
 			CallState("walk");
 		}
 		else {
-			CallState("attack");
-		}
-
-		if (hp < 0) {
-			GD.Print("player died");
+			CallState("idle");		
 		}
 	}
 
 	private void Walk() {
+		sprite_player.Play("walk");
 		is_busy = false;		
 		Velocity = direction * Speed;
 	}
-	protected override void Idle() {
-        is_busy = false;
-    }
+	
 
 	
 }

@@ -8,7 +8,8 @@ using System.Linq;
 public partial class CreatureClass : CharacterBody2D {
 
     protected int hp = 1;
-    protected CollisionShape2D feet;
+    protected int speed = 1;
+    protected Area2D feet;
     protected AnimatedSprite2D sprite_player;
     protected Area2D hitbox;
     protected Weapon weapon_hurt_from;
@@ -20,7 +21,7 @@ public partial class CreatureClass : CharacterBody2D {
 
     public override void _Ready() {
         base._Ready();
-        feet = (CollisionShape2D)FindChild("feet");
+        feet = (Area2D)FindChild("feet");
         sprite_player = (AnimatedSprite2D)FindChild("sprite_player");
         hitbox = (Area2D)FindChild("hitbox");
         hitbox.AreaEntered += (entered_node) => {
@@ -34,10 +35,13 @@ public partial class CreatureClass : CharacterBody2D {
             {"idle", Idle },
             {"attack", Attack },
             {"take_damage", TakeDamage },
+            {"death", Death }
         };
     }
     public override void _PhysicsProcess(double delta) {
         base._PhysicsProcess(delta);
+
+        
         StateMachine();
         MoveAndSlide();
     }
@@ -48,18 +52,13 @@ public partial class CreatureClass : CharacterBody2D {
     protected void CallState(string state) {
         if (!state_dict.ContainsKey(state)) GD.Print("state '" + state + "' does not exist in the dictionary.");
         //if (current_state == state_dict[state]) return;
+        
         current_state = state_dict[state];
-        current_state();
         is_busy = true;
+        current_state();
+        
     }
 
-    //protected void CallStateAsThread(string state) {
-    //    if (!state_dict.ContainsKey(state)) GD.Print("state '" + state + "' does not exist in the dictionary.");
-    //    if (current_state == state_dict[state]) return;
-    //    current_state = state_dict[state];
-    //    Thread state_thread = new Thread(new ThreadStart(current_state));
-    //    state_thread.Start();
-    //}
     protected virtual void StateMachine() {
         throw new NotImplementedException("This method must be overridden in a derived class.");
     }
@@ -69,6 +68,7 @@ public partial class CreatureClass : CharacterBody2D {
     protected virtual void Idle() {
         is_busy = false; // since idle state can be overruled is_busy will be false.
         sprite_player.Play("idle");
+        Velocity = new Vector2(Mathf.MoveToward(Velocity.X, 0, speed), Mathf.MoveToward(Velocity.Y, 0, speed));
     }
     protected virtual void Attack() {
         dmgbox.Monitorable = true;
@@ -84,7 +84,7 @@ public partial class CreatureClass : CharacterBody2D {
     protected virtual void TakeDamage() {
         hp -= weapon_hurt_from.dmg;
     }
-    protected virtual void Die() {
-        sprite_player.Play("die");
+    protected virtual void Death() {
+        sprite_player.Play("death");
     }
 }

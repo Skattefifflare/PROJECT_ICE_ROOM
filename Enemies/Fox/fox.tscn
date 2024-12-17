@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://c5lfrw2nny0cd"]
+[gd_scene load_steps=35 format=3 uid="uid://c5lfrw2nny0cd"]
 
 [ext_resource type="Script" path="res://Enemies/Fox/Fox.cs" id="1_d36rd"]
 [ext_resource type="Texture2D" uid="uid://bxkitdfce0bb1" path="res://Enemies/Fox/fox_sprites.png" id="2_oe7mg"]
@@ -167,7 +167,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_l2rcn")
 }],
-"loop": true,
+"loop": false,
 "name": &"death",
 "speed": 12.0
 }, {
@@ -209,27 +209,28 @@ animations = [{
 "speed": 12.0
 }]
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_lbsw0"]
-a = Vector2(7, 9)
-b = Vector2(-7, 9)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_7f840"]
 radius = 110.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yxtu5"]
 size = Vector2(3.125, 2)
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_rvfyu"]
+a = Vector2(6, 16)
+b = Vector2(-8, 16)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u7dvh"]
+radius = 6.0
+height = 16.0
+
 [node name="fox_root" type="CharacterBody2D"]
 script = ExtResource("1_d36rd")
 
 [node name="sprite_player" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_jceai")
-animation = &"walk"
+animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.413563
-
-[node name="feet" type="CollisionShape2D" parent="."]
-shape = SubResource("SegmentShape2D_lbsw0")
+frame_progress = 0.691519
 
 [node name="view_field" type="Area2D" parent="."]
 collision_layer = 2
@@ -238,6 +239,8 @@ collision_layer = 2
 shape = SubResource("CircleShape2D_7f840")
 
 [node name="hitbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
 
 [node name="polygon" type="CollisionPolygon2D" parent="hitbox"]
 position = Vector2(0.625, 0)
@@ -253,3 +256,16 @@ position = Vector2(-12, -2)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="weapon/dmgbox"]
 position = Vector2(0.5625, 0)
 shape = SubResource("RectangleShape2D_yxtu5")
+
+[node name="feet" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+
+[node name="segment" type="CollisionShape2D" parent="feet"]
+position = Vector2(1, -7)
+shape = SubResource("SegmentShape2D_rvfyu")
+
+[node name="personal_space" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_u7dvh")
