@@ -52,7 +52,7 @@ public partial class CreatureClass : CharacterBody2D {
     protected void CallState(string state) {
         if (!state_dict.ContainsKey(state)) GD.Print("state '" + state + "' does not exist in the dictionary.");
         //if (current_state == state_dict[state]) return;
-        
+        if (is_busy == true) return;
         current_state = state_dict[state];
         is_busy = true;
         current_state();
@@ -71,17 +71,16 @@ public partial class CreatureClass : CharacterBody2D {
         Velocity = new Vector2(Mathf.MoveToward(Velocity.X, 0, speed), Mathf.MoveToward(Velocity.Y, 0, speed));
     }
     protected virtual void Attack() {
-        dmgbox.Monitorable = true;
-        
+        dmgbox.Monitorable = true;       
         sprite_player.Play("attack");
-        
-        Action finish_attack = null;
-        finish_attack = () => {
-            sprite_player.AnimationFinished -= finish_attack;
+        sprite_player.AnimationFinished += OnFinish;
+
+        void OnFinish() {
             dmgbox.Monitorable = false;
+            sprite_player.AnimationFinished -= OnFinish;
+            is_busy = false;
             GD.Print(dmgbox.Monitorable);
-        };
-        sprite_player.AnimationFinished += finish_attack;
+        }
     }
     protected virtual void TakeDamage() {
         hp -= weapon_hurt_from.dmg;

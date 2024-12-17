@@ -40,7 +40,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack",
-"speed": 1.0
+"speed": 0.5
 }, {
 "frames": [{
 "duration": 1.0,
