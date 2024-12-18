@@ -14,7 +14,6 @@ public partial class CreatureClass : CharacterBody2D {
     protected Area2D hitbox;
     protected Weapon weapon_hurt_from;
     protected Area2D dmgbox;
-
     private Dictionary<string, Action> state_dict;
     protected Action current_state;
     protected bool is_busy = false;
@@ -39,9 +38,7 @@ public partial class CreatureClass : CharacterBody2D {
         };
     }
     public override void _PhysicsProcess(double delta) {
-        base._PhysicsProcess(delta);
-
-        
+        base._PhysicsProcess(delta);     
         StateMachine();
         MoveAndSlide();
     }
@@ -55,14 +52,11 @@ public partial class CreatureClass : CharacterBody2D {
         if (is_busy == true) return;
         current_state = state_dict[state];
         is_busy = true;
-        current_state();
-        
+        current_state();       
     }
-
     protected virtual void StateMachine() {
         throw new NotImplementedException("This method must be overridden in a derived class.");
     }
-
 
     //_____________STATES_____________
     protected virtual void Idle() {
@@ -83,7 +77,7 @@ public partial class CreatureClass : CharacterBody2D {
         }
     }
     protected virtual void TakeDamage() {
-        hp -= weapon_hurt_from.dmg;
+        hp -= weapon_hurt_from.DMG;
     }
     protected virtual void Death() {
         if (sprite_player.Animation != "death") {

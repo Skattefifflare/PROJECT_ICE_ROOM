@@ -9,6 +9,7 @@ b = Vector2(0, 9)
 [node name="sword_root" type="Sprite2D"]
 texture = ExtResource("1_c0bcu")
 script = ExtResource("2_3tjhs")
+DMG = 100
 
 [node name="dmgbox" type="Area2D" parent="."]
 collision_layer = 2

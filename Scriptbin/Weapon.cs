@@ -8,12 +8,27 @@ using Godot.NativeInterop;
 
 
 namespace Project_Ice_Room.Scriptbin {
+    [Tool]
     public partial class Weapon : Sprite2D {
-        public int dmg = 100;
+
+        [Export]
+        protected int DMG = 0;
+
+        protected Area2D DMG_BOX;
+
 
         public override void _Ready() {
             base._Ready();
+
+            DMG_BOX = (Area2D)FindChild("dmg_box");
+            DMG_BOX.Monitorable = false;
         }
 
+        public void MakeDangerous() {
+            DMG_BOX.Monitorable = true;
+        }
+        public void MakeHarmLess() {
+            DMG_BOX.Monitorable = false;
+        }
     }
 }
