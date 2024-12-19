@@ -14,22 +14,22 @@ public partial class Creature : CharacterBody2D {
     [Export]
     protected int SPEED = 1;
 
-
+    protected AnimatedSprite2D SPRITE_PLAYER;
     protected Weapon WHAP;
     protected Area2D FEET;
-    protected AnimatedSprite2D SPRITE_PLAYER;
     protected Area2D HITBOX;
     protected Action CURRENT_ACTION;
     protected Vector2 DIRECTION;
-        
+    protected StateHandler SH;
 
     public override void _Ready() {
         base._Ready();
 
-        WHAP = (Weapon)FindChild("weapon");          
-        FEET = (Area2D)FindChild("feet");
         SPRITE_PLAYER = (AnimatedSprite2D)FindChild("sprite_player");
+        WHAP = (Weapon)FindChild("weapon");
+        FEET = (Area2D)FindChild("feet");
         HITBOX = (Area2D)FindChild("hitbox");
+        SH = new(SPRITE_PLAYER);
     }
     public override void _PhysicsProcess(double delta) {
         base._PhysicsProcess(delta);
@@ -37,46 +37,51 @@ public partial class Creature : CharacterBody2D {
         MoveAndSlide();
     }
 
-    public void StateMachine() {
-        DIRECTION = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
 
-
-        if (HP <= 0) {
-            CallState(Die);
-            return;
-        }
-        else {
-            
-        }
-        
-
-    }
-    protected void CallState(Action state) {
-
-    }
-
-    
     public virtual void Idle() {
-        SPRITE_PLAYER.Play("idle");
+        CallAnimation("idle");
     }
     public virtual void Walk() {
-        SPRITE_PLAYER.Play("walk");
+        CallAnimation("walk");
     }
     public virtual void Die() {
-        SPRITE_PLAYER.Play("die");
+        CallAnimation("die");
+    }
+    public virtual void AttackMoving() {
+        CallAnimation("attack_moving");
     }
     public virtual void Attack() {
-        SPRITE_PLAYER.Play("attack");
+        CallAnimation("attack");
     }
     public virtual void TakeDamage() {
-        SPRITE_PLAYER.Play("take_damage");
+        CallAnimation("take_damage");
     }
 }
-public struct State {
-    Action STATE_ACTION;
-    
-    
+public class StateHandler {
+    private List<(bool, Action, string, bool)> STATE_LIST;
+    private List<(bool, Action, string, bool)> ACTIVE_STATES;
+    AnimatedSprite2D SPRITE_PLAYER;
+    public StateHandler(AnimatedSprite2D SPRITE_PLAYER) {
+        STATE_LIST = new();
+        ACTIVE_STATES = new();
+        this.SPRITE_PLAYER = SPRITE_PLAYER;
+    }
+    public void AddStates(List<(bool, Action, string, bool)> states) {
+        STATE_LIST.Concat(states);
+    }
 
-
+    public void DecideState() {
+        foreach (var state in STATE_LIST) {
+            if (!state.Item1) continue;
+            if (state.Item4) STATE_LIST.Clear();
+            ACTIVE_STATES.Add(state);
+            break;
+        }
+    }
+    public void CallState() {
+        foreach (var state in ACTIVE_STATES) {
+            state.Item2();
+        }
+        SPRITE_PLAYER.Play(ACTIVE_STATES.Last().Item3);
+    }
 }
-
