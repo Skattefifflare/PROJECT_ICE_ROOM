@@ -1,55 +1,43 @@
 using Godot;
+using Project_Ice_Room.Scriptbin;
 using System;
 using System.Collections.Generic;
+using Project_Ice_Room.Player;
 
 
-public partial class Fox : CreatureClass
+public partial class Fox : Creature
 {
+    State RunToPlayerState;
+
+
     public override void _Ready() {
         base._Ready();
-        hp = 100;
-        speed = 60;
 
+        SPEED = 50;
 
+        RunToPlayerState = new State(
+            () => {
+                var player = (Player)GetNode("%player");
+                if (Math.Abs((player.Position - this.Position).Length()) > 40) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            },
+            RunToPlayer,
+            true,
+            "walk"
+        );
 
-        AddStates(new Dictionary<string, Action>() {
-            {"run_towards_player", RunTowardsPlayer}
-        });
+        SH.SetStates(new List<State>() { DieState, RunToPlayerState, IdleState});
     }
 
-
-    protected override void StateMachine() {
-        PlayerClass player = (PlayerClass)GetNode("%player");
+    private void RunToPlayer() {  
+        Player player = (Player)GetNode("%player");
         Vector2 pos_diff = player.Position - Position;
+        DIRECTION = pos_diff.Normalized();
 
-        if (hp <= 0) {
-            CallState("death");
-        }
-        else if (Math.Abs(pos_diff.Length()) > 40) {
-            CallState("run_towards_player");
-        }
-        else {
-            CallState("idle");
-        }           
-    }
-
-    private void RunTowardsPlayer() {  
-        is_busy = false;
-        if (sprite_player.Animation != "walk") {
-            sprite_player.Play("walk");
-        }
-
-        PlayerClass player = (PlayerClass)GetNode("%player");
-        Vector2 pos_diff = player.Position - Position;
-        Vector2 direction = pos_diff.Normalized();
-
-        if (direction.X > 0) {
-            sprite_player.FlipH =true;
-        }
-        else {
-            sprite_player.FlipH =false;
-        }
-
-        Velocity = direction * speed;                  
+        Velocity = DIRECTION * SPEED;                  
     }
 }

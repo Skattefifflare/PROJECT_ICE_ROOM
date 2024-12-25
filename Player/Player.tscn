@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://vwvt1qvu5m5v"]
 
 [ext_resource type="Texture2D" uid="uid://cv2lsrl7np5w" path="res://Player/player.png" id="1_1qfgj"]
-[ext_resource type="Script" path="res://Player/PlayerClass.cs" id="1_783ts"]
+[ext_resource type="Script" path="res://Player/Player.cs" id="1_twk3x"]
 [ext_resource type="PackedScene" uid="uid://dapgexv4no1bw" path="res://Weapons/Sword/Sword.tscn" id="3_tuffx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vm7gn"]
@@ -85,7 +85,7 @@ a = Vector2(4, 16)
 b = Vector2(-5, 16)
 
 [node name="player_root" type="CharacterBody2D"]
-script = ExtResource("1_783ts")
+script = ExtResource("1_twk3x")
 
 [node name="sprite_player" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ueiu5")
@@ -103,7 +103,7 @@ shape = SubResource("RectangleShape2D_tftvx")
 position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_tftvx")
 
-[node name="Sword" parent="." instance=ExtResource("3_tuffx")]
+[node name="weapon" parent="." instance=ExtResource("3_tuffx")]
 position = Vector2(9.14298, -7.16445)
 rotation = 0.122173
 scale = Vector2(1.30788, 1.81914)

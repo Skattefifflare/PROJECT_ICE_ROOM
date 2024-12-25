@@ -58,6 +58,7 @@ public partial class CreatureClass : CharacterBody2D {
         throw new NotImplementedException("This method must be overridden in a derived class.");
     }
 
+
     //_____________STATES_____________
     protected virtual void Idle() {
         is_busy = false; // since idle state can be overruled is_busy will be false.

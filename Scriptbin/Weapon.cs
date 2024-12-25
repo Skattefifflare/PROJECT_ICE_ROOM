@@ -12,7 +12,7 @@ namespace Project_Ice_Room.Scriptbin {
     public partial class Weapon : Sprite2D {
 
         [Export]
-        protected int DMG = 0;
+        public int DMG = 0;
 
         protected Area2D DMG_BOX;
 

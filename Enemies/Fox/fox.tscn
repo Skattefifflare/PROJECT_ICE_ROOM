@@ -249,10 +249,10 @@ polygon = PackedVector2Array(-3.00813, -10, -4.30894, -6.66667, -5.60976, -10, -
 [node name="weapon" type="Sprite2D" parent="."]
 script = ExtResource("3_lldid")
 
-[node name="dmgbox" type="Area2D" parent="weapon"]
+[node name="dmg_box" type="Area2D" parent="weapon"]
 position = Vector2(-12, -2)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="weapon/dmgbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="weapon/dmg_box"]
 position = Vector2(0.5625, 0)
 shape = SubResource("RectangleShape2D_yxtu5")
 
