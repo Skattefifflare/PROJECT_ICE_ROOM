@@ -9,7 +9,7 @@ namespace Project_Ice_Room.Scriptbin {
     public class StateHandler {
         private List<State> STATE_LIST;
         private List<State> ACTIVE_STATES;
-        AnimatedSprite2D SPRITE_PLAYER;
+        private AnimatedSprite2D SPRITE_PLAYER;
 
         public StateHandler(AnimatedSprite2D SPRITE_PLAYER) {
             STATE_LIST = new();

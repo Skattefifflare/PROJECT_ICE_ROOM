@@ -23,7 +23,7 @@ public partial class Creature : CharacterBody2D {
     protected Vector2 DIRECTION;
     protected StateHandler SH;
 
-
+    // shared states across creatures
     public State DieState;
     public State WalkState;
     public State IdleState;
@@ -68,21 +68,20 @@ public partial class Creature : CharacterBody2D {
 
         if (DIRECTION.X > 0) SPRITE_PLAYER.FlipH = true;
         else SPRITE_PLAYER.FlipH = false;
-
+        
         MoveAndSlide();
     }
     public virtual void Die() {
         SPRITE_PLAYER.AnimationFinished += () => QueueFree();
     }
     public virtual void Walk() {
-        Vector2 pos = Position + (DIRECTION * SPEED);
-        Position = pos;
+        //Vector2 pos = Position + (DIRECTION * SPEED);
+        //Position = pos;
+        Velocity = DIRECTION * SPEED;
     }
     public virtual void Idle() {
         Velocity = Vector2.Zero;
     }
-
-
     public virtual void AttackMoving() {
         WHAP.MakeDangerous();
         SPRITE_PLAYER.AnimationFinished += WHAP.MakeHarmLess;

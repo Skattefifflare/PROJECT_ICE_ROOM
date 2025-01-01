@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Enemies/Fox/Fox.cs" id="1_d36rd"]
 [ext_resource type="Texture2D" uid="uid://bxkitdfce0bb1" path="res://Enemies/Fox/fox_sprites.png" id="2_oe7mg"]
-[ext_resource type="Script" path="res://Scriptbin/Weapon.cs" id="3_lldid"]
+[ext_resource type="Script" path="res://Weapons/Weapon.cs" id="3_lldid"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0qcsi"]
 atlas = ExtResource("2_oe7mg")
@@ -225,6 +225,7 @@ height = 16.0
 
 [node name="fox_root" type="CharacterBody2D"]
 script = ExtResource("1_d36rd")
+SPEED = 50
 
 [node name="sprite_player" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_jceai")
@@ -251,6 +252,7 @@ script = ExtResource("3_lldid")
 
 [node name="dmg_box" type="Area2D" parent="weapon"]
 position = Vector2(-12, -2)
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="weapon/dmg_box"]
 position = Vector2(0.5625, 0)

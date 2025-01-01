@@ -13,8 +13,6 @@ public partial class Fox : Creature
     public override void _Ready() {
         base._Ready();
 
-        SPEED = 50;
-
         RunToPlayerState = new State(
             () => {
                 var player = (Player)GetNode("%player");

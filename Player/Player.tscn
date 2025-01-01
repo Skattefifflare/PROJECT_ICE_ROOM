@@ -86,6 +86,7 @@ b = Vector2(-5, 16)
 
 [node name="player_root" type="CharacterBody2D"]
 script = ExtResource("1_twk3x")
+SPEED = 80
 
 [node name="sprite_player" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ueiu5")
