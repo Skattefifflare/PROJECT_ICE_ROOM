@@ -1,0 +1,20 @@
+[gd_scene load_steps=6 format=3 uid="uid://beopa12hb4oua"]
+
+[ext_resource type="Shader" path="res://foliage.gdshader" id="1_k7a07"]
+[ext_resource type="Texture2D" uid="uid://fh83240hvk0h" path="res://Tree/TreeMask.png" id="2_rvufh"]
+[ext_resource type="Texture2D" uid="uid://dm2b04804j628" path="res://Tree/Tree.png" id="3_2410i"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5284i"]
+shader = ExtResource("1_k7a07")
+shader_parameter/shader_mask = ExtResource("2_rvufh")
+
+[sub_resource type="QuadMesh" id="QuadMesh_rumit"]
+size = Vector2(96, 192)
+subdivide_width = 48
+subdivide_depth = 96
+
+[node name="MeshInstance2D" type="MeshInstance2D"]
+material = SubResource("ShaderMaterial_5284i")
+rotation = 3.14159
+mesh = SubResource("QuadMesh_rumit")
+texture = ExtResource("3_2410i")

@@ -15,13 +15,11 @@ shader_parameter/distortion = 0.01
 shader_parameter/heightOffset = null
 shader_parameter/offset = 0.0
 
-[node name="Root (haha)" type="Node2D"]
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D"]
 material = SubResource("ShaderMaterial_xsrlq")
 position = Vector2(0, -48)
 texture = ExtResource("1_ukutl")
 
-[node name="Camera2D" type="Camera2D" parent="Sprite2D"]
+[node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -6)
 zoom = Vector2(6, 6)
