@@ -1,25 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://ducewschy4xwt"]
+[gd_scene load_steps=6 format=3 uid="uid://beopa12hb4oua"]
 
-[ext_resource type="Shader" path="res://Tree/FoliageWind.gdshader" id="1_u1ixb"]
+[ext_resource type="Shader" path="res://Tree/foliage.gdshader" id="1_h6li4"]
 [ext_resource type="Texture2D" uid="uid://dm2b04804j628" path="res://Tree/Tree.png" id="1_ukutl"]
+[ext_resource type="Texture2D" uid="uid://bijkfg4bacf3p" path="res://Tree/TreeMask.png" id="2_ir6qb"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xsrlq"]
-shader = ExtResource("1_u1ixb")
-shader_parameter/speed = 1.0
-shader_parameter/minStrength = 0.05
-shader_parameter/maxStrength = 0.01
-shader_parameter/strengthScale = 100.0
-shader_parameter/interval = 3.5
-shader_parameter/detail = 1.0
-shader_parameter/distortion = 0.01
-shader_parameter/heightOffset = null
-shader_parameter/offset = 0.0
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xc5lq"]
+shader = ExtResource("1_h6li4")
+shader_parameter/shader_mask = ExtResource("2_ir6qb")
 
-[node name="Sprite2D" type="Sprite2D"]
-material = SubResource("ShaderMaterial_xsrlq")
+[sub_resource type="QuadMesh" id="QuadMesh_1llre"]
+size = Vector2(48, 96)
+subdivide_width = 48
+subdivide_depth = 96
+
+[node name="MeshInstance2D" type="MeshInstance2D"]
+material = SubResource("ShaderMaterial_xc5lq")
 position = Vector2(0, -48)
+rotation = 3.14159
+mesh = SubResource("QuadMesh_1llre")
 texture = ExtResource("1_ukutl")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, -6)
-zoom = Vector2(6, 6)
