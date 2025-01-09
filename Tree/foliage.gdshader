@@ -21,8 +21,8 @@ float leafT(vec2 _UV) {
 	// Time-based wind oscillation
     
 	float windStrength = 0.2; // Adjust for overall sway intensity
-    float windFrequency = 4.2; // General wind frequency
-    float gustFrequency = 0.3; // Gust-like variations
+    float windFrequency = 5.2; // General wind frequency
+    float gustFrequency = 0.0; // Gust-like variations
 
     // Generate pseudo-random offsets based on UV coordinates
     float randomOffset = rand(_UV * 10.0);
@@ -37,8 +37,8 @@ float leafT(vec2 _UV) {
 }
 
 void vertex() {
-	float sway = sin(1.2 * TIME);
-	VERTEX.x += sway * (1.0 - UV.y) * 4.0;
+	float sway = sin(TIME);
+	VERTEX.x += sway * (1.0 - UV.y) * 0.05;
 	
 
 	if (texture(shader_mask, UV).a == 1.0) {

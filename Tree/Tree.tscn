@@ -15,7 +15,7 @@ subdivide_depth = 96
 
 [node name="MeshInstance2D" type="MeshInstance2D"]
 material = SubResource("ShaderMaterial_xc5lq")
-position = Vector2(0, -48)
+position = Vector2(-4.22557e-05, -48)
 rotation = 3.14159
 mesh = SubResource("QuadMesh_1llre")
 texture = ExtResource("1_ukutl")
