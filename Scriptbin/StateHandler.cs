@@ -23,7 +23,7 @@ namespace Project_Ice_Room.Scriptbin {
                 
                 if (!ACTIVE_STATES.Contains(state)) {
                     if (!state.CONDITION()) continue;
-                    if (state.IS_EXCLUSIVE)ACTIVE_STATES.Clear();
+                    if (state.IS_EXCLUSIVE) ACTIVE_STATES.Clear();
                     ACTIVE_STATES.Add(state);
                     break;
                 }

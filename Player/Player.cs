@@ -6,9 +6,19 @@ using System.Collections.Generic;
 namespace Project_Ice_Room.Player {
     public partial class Player : Creature {
 
+        
+
         public override void _Ready() {
             base._Ready();
-            SH.SetStates(new List<State>() { DieState, WalkState, IdleState });
+
+            State AttackState = new State(
+            () => Input.IsActionPressed("attack"),
+            Attack,
+            true,
+            "attack"
+            );
+
+            SH.SetStates(new List<State>() { DieState, AttackState, WalkState, IdleState });
             
         }
 
@@ -17,5 +27,8 @@ namespace Project_Ice_Room.Player {
 
             DIRECTION = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
         }
+
+
+        
     }
 }

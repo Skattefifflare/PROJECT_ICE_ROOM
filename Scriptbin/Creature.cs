@@ -80,7 +80,8 @@ public partial class Creature : CharacterBody2D {
         SPRITE_PLAYER.AnimationFinished += WHAP.MakeHarmLess; // we can later on exchange this for when the arm's animation is finished, allowing us to only need the Attack method
     }
     public virtual void Attack() {
-        
+        WHAP.MakeDangerous();
+        SPRITE_PLAYER.AnimationFinished += WHAP.MakeHarmLess;
     }
     public virtual void TakeDamage() {
         
