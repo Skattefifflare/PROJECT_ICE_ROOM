@@ -1,12 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://beopa12hb4oua"]
+[gd_scene load_steps=5 format=3 uid="uid://beopa12hb4oua"]
 
-[ext_resource type="Shader" path="res://Tree/foliage.gdshader" id="1_h6li4"]
+[ext_resource type="Shader" path="res://Tree/FoliageWind.gdshader" id="1_4vfv3"]
 [ext_resource type="Texture2D" uid="uid://dm2b04804j628" path="res://Tree/Tree.png" id="1_ukutl"]
-[ext_resource type="Texture2D" uid="uid://bijkfg4bacf3p" path="res://Tree/TreeMask.png" id="2_ir6qb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xc5lq"]
-shader = ExtResource("1_h6li4")
-shader_parameter/shader_mask = ExtResource("2_ir6qb")
+shader = ExtResource("1_4vfv3")
+shader_parameter/speed = 1.0
+shader_parameter/minStrength = 0.065
+shader_parameter/maxStrength = 0.207
+shader_parameter/strengthScale = 200.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = null
+shader_parameter/offset = 0.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_1llre"]
 size = Vector2(48, 96)
