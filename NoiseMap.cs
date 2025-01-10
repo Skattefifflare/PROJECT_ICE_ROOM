@@ -26,7 +26,7 @@ public partial class NoiseMap : GenSpline {
         CreateNoiseMap();
         DrawNoiseMap(ImageTexture.CreateFromImage(noiseMap));
         GetNoiseData();
-        NoiseHandler test = new(GetNoiseData(), cHeight, cWidth, 10, 0.5f);
+        NoiseHandler test = new(GetNoiseData(), cHeight, cWidth, 10, 0.4f);
     }
     public void CreateNoiseMap() {
         mapSize = GetMaxAndMin();

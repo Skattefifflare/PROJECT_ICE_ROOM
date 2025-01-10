@@ -8,25 +8,27 @@ internal partial class NoiseHandler : Node2D {
     int height, width;
     int patchSize;
     float threshold;
+    float[] minCoords;
 
-    public NoiseHandler(float[] noiseValues, int height, int width, int patchSize, float threshold) {
+    public NoiseHandler(float[] noiseValues, int height, int width, int patchSize, float threshold, float[] minCoords) {
         this.height = height;
         this.width = width;
         this.noiseValues = ConvertNoiseData(noiseValues);
         this.patchSize = patchSize;
+        this.threshold = threshold;
+        this.minCoords = minCoords;
         NoiseEvaluation();
     }
     private float[,] ConvertNoiseData(float[] noiseData) {
         float[,] newValues = new float[width, height];
         for (int i = 0; i < noiseData.Length; i++) {
             try {
-                int row = i / width;
-                int col = i % width;
+                int row = i % width;
+                int col = i / width;
 
                 newValues[row, col] = noiseData[i];
             }
             catch (Exception ex) {
-                GD.Print("nej");
                 GD.Print(ex + "Error at index: " + i);
             }
         }
@@ -40,6 +42,10 @@ internal partial class NoiseHandler : Node2D {
 
                     if (value > threshold) {
                         GD.Print($"Texture at ({x}, {y}): Mean={value}");
+
+                        Vector2 topLeftPosition = new Vector2(x, y);
+                        Vector2 centerPosition = new Vector2(x + patchSize / 2f, y + patchSize / 2f);
+                        GD.Print(centerPosition);
                     }
                 }
                 catch (Exception ex) {
@@ -60,6 +66,10 @@ internal partial class NoiseHandler : Node2D {
             }
         }
         return total / count;
+    }
+
+    private void PlaceTexture(float x, float y) {
+
     }
 }
 
