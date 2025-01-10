@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://dnk6x2eysw14c"]
+[gd_scene load_steps=10 format=3 uid="uid://dnk6x2eysw14c"]
 
 [ext_resource type="Texture2D" uid="uid://cpv18jusu663a" path="res://character_movement/assets/UpperArm.png" id="1_0hiak"]
+[ext_resource type="Script" path="res://character_movement/assets/Arms.cs" id="1_mult4"]
 [ext_resource type="Texture2D" uid="uid://7p3ftuvdhkuf" path="res://character_movement/assets/LowerArm.png" id="2_14oo4"]
 [ext_resource type="Texture2D" uid="uid://cfdon8876150v" path="res://character_movement/assets/Spear.png" id="3_xmidy"]
 [ext_resource type="Script" path="res://character_movement/assets/SpearOffset.cs" id="4_d34nb"]
@@ -48,6 +49,7 @@ position = Vector2(64, 64)
 [node name="Arms" type="Skeleton2D" parent="."]
 visible = false
 modification_stack = SubResource("SkeletonModificationStack2D_o2bno")
+script = ExtResource("1_mult4")
 
 [node name="UpperLeft" type="Bone2D" parent="Arms"]
 position = Vector2(-2.5, -6.5)
