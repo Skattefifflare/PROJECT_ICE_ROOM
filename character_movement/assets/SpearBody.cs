@@ -7,6 +7,7 @@ public partial class SpearBody : Bone2D
     double distancemax = 20;
     public override void _Process(double delta)
     {
+        base._Process(delta);
         Vector2 GlobalMousePosition = GetGlobalMousePosition();
         Transform2D GlobalTransform = GetGlobalTransform();
         Vector2 GlobalPosition = GlobalTransform.Origin;
@@ -16,8 +17,7 @@ public partial class SpearBody : Bone2D
         {
             offset = new Vector2((float)(distancemax), 0);
         }
-        this.Position = offset;
+        Position = offset;
         LookAt(GlobalMousePosition);
-        base._Process(delta);
     }
 }
