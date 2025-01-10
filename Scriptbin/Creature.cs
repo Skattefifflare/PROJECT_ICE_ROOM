@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Godot;
-using static Godot.TextServer;
-using Project_Ice_Room;
+
 
 namespace Project_Ice_Room.Scriptbin;
 public partial class Creature : CharacterBody2D {
@@ -24,10 +19,10 @@ public partial class Creature : CharacterBody2D {
     protected StateHandler SH;
 
     // shared states across creatures
-    public State DieState;
-    public State WalkState;
-    public State IdleState;
-    public State AttackMovingState;
+    protected State DieState;
+    protected State WalkState;
+    protected State IdleState;
+    protected State AttackMovingState;
 
 
     public override void _Ready() {
@@ -75,8 +70,6 @@ public partial class Creature : CharacterBody2D {
         SPRITE_PLAYER.AnimationFinished += () => QueueFree();
     }
     public virtual void Walk() {
-        //Vector2 pos = Position + (DIRECTION * SPEED);
-        //Position = pos;
         Velocity = DIRECTION * SPEED;
     }
     public virtual void Idle() {
@@ -84,7 +77,7 @@ public partial class Creature : CharacterBody2D {
     }
     public virtual void AttackMoving() {
         WHAP.MakeDangerous();
-        SPRITE_PLAYER.AnimationFinished += WHAP.MakeHarmLess;
+        SPRITE_PLAYER.AnimationFinished += WHAP.MakeHarmLess; // we can later on exchange this for when the arm's animation is finished, allowing us to only need the Attack method
     }
     public virtual void Attack() {
         

@@ -2,8 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Project_Ice_Room.Scriptbin {
     public class StateHandler {
@@ -56,7 +55,6 @@ namespace Project_Ice_Room.Scriptbin {
                     }
                 }
             }
-
             void CallSpritePlayer(string sprite) {
                 if (SPRITE_PLAYER.Animation != sprite) {
                     SPRITE_PLAYER.Play(sprite);

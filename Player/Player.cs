@@ -1,10 +1,7 @@
 ﻿using Godot;
 using Project_Ice_Room.Scriptbin;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Project_Ice_Room.Player {
     public partial class Player : Creature {
