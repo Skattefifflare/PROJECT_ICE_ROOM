@@ -35,12 +35,10 @@ public partial class Arms : Skeleton2D
         {
             leftIK.TargetNodePath = rightTarget;
             rightIK.TargetNodePath = leftTarget;
-            GD.Print("Hej");
         }
 
         else
         {
-            GD.Print(spearOffset.RotationDegrees);
             leftIK.TargetNodePath = leftTarget;
             rightIK.TargetNodePath = rightTarget;
         }
