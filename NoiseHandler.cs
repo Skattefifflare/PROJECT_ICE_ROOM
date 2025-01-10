@@ -21,23 +21,29 @@ internal partial class NoiseHandler : Node2D {
         for (int i = 0; i < noiseData.Length; i++) {
             try {
                 int row = i / width;
-                int col = i % height;
+                int col = i % width;
 
                 newValues[row, col] = noiseData[i];
             }
-            catch(Exception ex) {
+            catch (Exception ex) {
+                GD.Print("nej");
                 GD.Print(ex + "Error at index: " + i);
             }
         }
         return newValues;
     }
     private void NoiseEvaluation() {
-        for(int y = 0; y < height; y += patchSize) {
+        for (int y = 0; y < height; y += patchSize) {
             for (int x = 0; x < width; x += patchSize) {
-                float value = GetNoisePatchMean(x, y);
+                try {
+                    float value = GetNoisePatchMean(x, y);
 
-                if(value > threshold) {
-                    GD.Print($"Texture at ({x}, {y}): Mean={value}");
+                    if (value > threshold) {
+                        GD.Print($"Texture at ({x}, {y}): Mean={value}");
+                    }
+                }
+                catch (Exception ex) {
+                    GD.Print(ex + "Error at index: " + x, y);
                 }
             }
         }
