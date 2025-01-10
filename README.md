@@ -12,10 +12,10 @@ The most ambitious game made since Skyrim.
 - koda fiender 2.0 (health, attacker, avancerat beteende) [?]
 - fler vapen [H]
 - inventory och pickupable vapen [?]
+- - crafting [?]
 - snyggare environs [H]
 - bossar [?]
 - avancerad combat [?]
-- crafting [?]
 - story [?]
 
 
