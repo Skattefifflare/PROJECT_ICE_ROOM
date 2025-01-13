@@ -21,11 +21,14 @@ public class StateHandler {
     }
 
     public void CallStateHandler() {
+        var active_states_copy = new List<State>();
+        active_states_copy.AddRange(ACTIVE_STATES);
         foreach (var state in ACTIVE_STATES) {
             if (state.END_CONDITION()) {
-                ACTIVE_STATES.Remove(state);
+                active_states_copy.Remove(state);
             }
         }
+        ACTIVE_STATES = active_states_copy;
         foreach (var state in STATE_LIST) {
             if (ACTIVE_STATES.Contains(state)) continue;
             if (!state.CONDITION()) continue;
@@ -41,6 +44,7 @@ public class StateHandler {
         }
         foreach (var state in ACTIVE_STATES) {
             state.STATE_METHOD();
+            GD.Print(state.SPRITE);
         }
     }
 }

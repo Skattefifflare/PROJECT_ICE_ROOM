@@ -7,22 +7,31 @@ namespace Project_Ice_Room.Player {
     public partial class Player : Creature {
 
         private State Walk;
+        private State Idle;
 
         public override void _Ready() {
             base._Ready();
 
             Walk = new(
                 () => DIRECTION != Vector2.Zero,
-                true,
+                () => true,
                 () => {
-                    if (DIRECTION.X > 0) SPRITE_PLAYER.FlipH = true;
-                    else SPRITE_PLAYER.FlipH = false;
+                    Velocity = DIRECTION * SPEED;
                 },
-
-
-
+                false,
+                "walk"
+            );
+            Idle = new(
+                () => DIRECTION == Vector2.Zero,
+                () => DIRECTION != Vector2.Zero,
+                () => {
+                    Velocity = Vector2.Zero;
+                },
+                false,
+                "idle"
             );
 
+            SH.SetStates(new List<State> { Walk, Idle });
         }
 
         public override void _PhysicsProcess(double delta) {

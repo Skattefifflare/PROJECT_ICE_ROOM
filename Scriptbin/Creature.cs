@@ -38,6 +38,8 @@ public partial class Creature : CharacterBody2D {
         if (DIRECTION.X > 0) SPRITE_PLAYER.FlipH = true;
         else SPRITE_PLAYER.FlipH = false;
         
+        SH.CallStateHandler();
+
         MoveAndSlide();
     }
 }
