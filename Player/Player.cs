@@ -6,20 +6,23 @@ using System.Collections.Generic;
 namespace Project_Ice_Room.Player {
     public partial class Player : Creature {
 
-        
+        private State Walk;
 
         public override void _Ready() {
             base._Ready();
 
-            State AttackState = new State(
-            () => Input.IsActionPressed("attack"),
-            Attack,
-            true,
-            "attack"
+            Walk = new(
+                () => DIRECTION != Vector2.Zero,
+                true,
+                () => {
+                    if (DIRECTION.X > 0) SPRITE_PLAYER.FlipH = true;
+                    else SPRITE_PLAYER.FlipH = false;
+                },
+
+
+
             );
 
-            SH.SetStates(new List<State>() { DieState, AttackState, WalkState, IdleState });
-            
         }
 
         public override void _PhysicsProcess(double delta) {

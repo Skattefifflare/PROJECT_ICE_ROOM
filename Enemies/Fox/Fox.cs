@@ -13,22 +13,8 @@ public partial class Fox : Creature
     public override void _Ready() {
         base._Ready();
 
-        RunToPlayerState = new State(
-            () => {
-                var player = (Player)GetNode("%player");
-                if (Math.Abs((player.Position - this.Position).Length()) > 40) {
-                    return true;
-                }
-                else {
-                    return false;
-                }
-            },
-            RunToPlayer,
-            true,
-            "walk"
-        );
+       
 
-        SH.SetStates(new List<State>() { DieState, RunToPlayerState, IdleState});
     }
 
     private void RunToPlayer() {  
