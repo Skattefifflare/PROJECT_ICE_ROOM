@@ -34,6 +34,7 @@ public partial class Movement : CharacterBody2D
 		}
 	}
 
+	//Check if sprite should be facing left or right and scale sprite accordingly
 	private void Filip()
 	{
 		if (Velocity.X > 0 && !facing_right)

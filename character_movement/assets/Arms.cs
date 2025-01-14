@@ -3,16 +3,17 @@ using System;
 
 public partial class Arms : Skeleton2D
 {
-    SkeletonModification2DCcdik leftIK;
-    SkeletonModification2DCcdik rightIK;
+    private SkeletonModification2DCcdik leftIK;
+    private SkeletonModification2DCcdik rightIK;
 
-    NodePath leftTarget;
-    NodePath rightTarget;
+    private NodePath leftTarget;
+    private NodePath rightTarget;
 
-    Bone2D spearOffset;
-    SkeletonModificationStack2D modStack;
+    private Bone2D spearOffset;
+    private SkeletonModificationStack2D modStack;
     public override void _Ready()
     {
+        //Get nodes until reached the inverse kinematic targets
         modStack = GetModificationStack();
 
         leftIK = (SkeletonModification2DCcdik)modStack.GetModification(0);
@@ -31,7 +32,8 @@ public partial class Arms : Skeleton2D
     {
         base._PhysicsProcess(delta);
 
-        if ((spearOffset.RotationDegrees < -90 && spearOffset.RotationDegrees > -270) || (spearOffset.RotationDegrees > 90 && spearOffset.RotationDegrees < 270))
+        //If spear is facing left, change hand position by changing targets for inverse kinematics
+        if (Math.Cos(spearOffset.Rotation) < 0)
         {
             leftIK.TargetNodePath = rightTarget;
             rightIK.TargetNodePath = leftTarget;
