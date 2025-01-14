@@ -14,34 +14,21 @@ namespace Project_Ice_Room.Player {
         public override void _Ready() {
             base._Ready();
 
+            Idle = new(
+                () => true,
+                () => DIRECTION != Vector2.Zero,
+                () => Velocity = Vector2.Zero,
+                () => { return; },
+                "idle",
+                false
+            );
             Walk = new(
                 () => DIRECTION != Vector2.Zero,
-                () => true,
-                () => {
-                    Velocity = DIRECTION * SPEED;
-                },
-                true,
-                "walk"
-            );
-            Idle = new(
                 () => DIRECTION == Vector2.Zero,
-                () => DIRECTION != Vector2.Zero,
-                () => {
-                    Velocity = Vector2.Zero;
-                },
-                true,
-                "idle"
-            );
-            Attack = new(
-                () => Input.IsActionPressed("attack"),
-                () => true,
-                () => {
-                    WHAP.Rotate(1f * (float)GetPhysicsProcessDeltaTime());
-                    //SPRITE_PLAYER.Play("attack");
-                    //SPRITE_PLAYER.AnimationFinished += () => Attack.END_CONDITION = () => true;
-                },
-                false,
-                "idle"
+                () => Velocity = DIRECTION * SPEED,
+                () => { return; },
+                "walk",
+                true
             );
 
 

@@ -6,69 +6,74 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Project_Ice_Room.Scriptbin;
+
+
+internal class State {
+    public Func<bool> start_condition;
+    public Func<bool> end_condition;
+
+    public Action start_method;
+    public Action end_method;
+
+    public string sprite;
+
+    public bool state_started = false;
+    public bool is_exclusive;
+
+    public State(Func<bool> start_condition, Func<bool> end_condition, Action start_method, Action end_method, string sprite, bool is_exclusive) {
+        this.start_condition = start_condition;
+        this.end_condition = end_condition;
+        this.start_method = start_method;
+        this.end_method = end_method;
+        this.sprite = sprite;
+        this.is_exclusive = is_exclusive;
+    }
+}
+
 public class StateHandler {
-    private List<State> STATE_LIST;
-    private List<State> ACTIVE_STATES;
-    private AnimatedSprite2D SPRITE_PLAYER;
+    private List<State> state_list;
+    private List<State> active_states;
+    private AnimatedSprite2D sprite_player;
 
     public StateHandler(AnimatedSprite2D SP) {
-        SPRITE_PLAYER = SP;
-        STATE_LIST = new();
-        ACTIVE_STATES = new();
+        sprite_player = SP;
+        state_list = new();
+        active_states = new();
     }
     internal void SetStates(List<State> states) {
-        STATE_LIST = states;
+        state_list = states;
     }
 
     public void CallStateHandler() {
         var active_states_copy = new List<State>();
-        active_states_copy.AddRange(ACTIVE_STATES);
-        foreach (var state in ACTIVE_STATES) {
-            if (state.END_CONDITION()) {
-                STATE_LIST.Find(s => s == state).STARTED_METHOD = false;
+        active_states_copy.AddRange(active_states);
+
+        // remove states that have ended
+        foreach (var state in active_states) {
+            if (state.end_condition()) {
                 active_states_copy.Remove(state);
+                state.end_method();
+                state_list.Find(s => s == state).state_started = false;
             }
         }
-        ACTIVE_STATES = active_states_copy;
-        foreach (var state in STATE_LIST) {
-            if (ACTIVE_STATES.Contains(state)) continue;
-            if (!state.CONDITION()) continue;
-            if (state.IS_EXCLUSIVE) ACTIVE_STATES.Clear();
-            ACTIVE_STATES.Add(state);
-            break;
+        active_states = active_states_copy;
+
+        // add new states
+        foreach (var state in state_list) {
+            if (active_states.Contains(state)) continue;
+            if (!state.start_condition()) continue;
+            if (state.is_exclusive) active_states.Clear();
+            active_states.Add(state);
+            break; // questionable      
         }
-        foreach (var state in STATE_LIST) {
-            if (ACTIVE_STATES.Contains(state)) {
-                SPRITE_PLAYER.Play(state.SPRITE);
-                break;
-            }
-        }
-        foreach (var state in ACTIVE_STATES) {
-            if (state.STARTED_METHOD) continue;
-            state.STARTED_METHOD = true;
-            state.STATE_METHOD();
-            GD.Print(state.SPRITE);
+
+        // start active states
+        foreach (var state in active_states) {
+            if (state.state_started) continue;
+            state.state_started = true;
+            state.start_method();
         }
     }
 }
-
-
-internal class State {
-    public Func<bool> CONDITION;
-    public Func<bool> END_CONDITION;
-    public Action STATE_METHOD;
-    public bool STARTED_METHOD = false;
-    public bool IS_EXCLUSIVE;
-    public string SPRITE;
-
-    public State(Func<bool> CONDITION, Func<bool> END_CONDITION, Action STATE_METHOD, bool IS_EXCLUSIVE, string SPRITE) {
-        this.CONDITION = CONDITION;
-        this.END_CONDITION = END_CONDITION;
-        this.STATE_METHOD = STATE_METHOD;
-        this.IS_EXCLUSIVE = IS_EXCLUSIVE;
-        this.SPRITE = SPRITE;
-    }
-}
-
 
 
