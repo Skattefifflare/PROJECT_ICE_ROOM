@@ -1,5 +1,6 @@
 ﻿using Godot;
 using Project_Ice_Room.Scriptbin;
+using System;
 using System.Collections.Generic;
 
 
@@ -8,6 +9,7 @@ namespace Project_Ice_Room.Player {
 
         private State Walk;
         private State Idle;
+        private State Attack;
 
         public override void _Ready() {
             base._Ready();
@@ -18,7 +20,7 @@ namespace Project_Ice_Room.Player {
                 () => {
                     Velocity = DIRECTION * SPEED;
                 },
-                false,
+                true,
                 "walk"
             );
             Idle = new(
@@ -27,11 +29,23 @@ namespace Project_Ice_Room.Player {
                 () => {
                     Velocity = Vector2.Zero;
                 },
+                true,
+                "idle"
+            );
+            Attack = new(
+                () => Input.IsActionPressed("attack"),
+                () => true,
+                () => {
+                    WHAP.Rotate(1f * (float)GetPhysicsProcessDeltaTime());
+                    //SPRITE_PLAYER.Play("attack");
+                    //SPRITE_PLAYER.AnimationFinished += () => Attack.END_CONDITION = () => true;
+                },
                 false,
                 "idle"
             );
 
-            SH.SetStates(new List<State> { Walk, Idle });
+
+            SH.SetStates(new List<State> { Attack, Walk, Idle });
         }
 
         public override void _PhysicsProcess(double delta) {

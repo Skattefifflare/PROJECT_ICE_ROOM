@@ -25,6 +25,7 @@ public class StateHandler {
         active_states_copy.AddRange(ACTIVE_STATES);
         foreach (var state in ACTIVE_STATES) {
             if (state.END_CONDITION()) {
+                STATE_LIST.Find(s => s == state).STARTED_METHOD = false;
                 active_states_copy.Remove(state);
             }
         }
@@ -43,6 +44,8 @@ public class StateHandler {
             }
         }
         foreach (var state in ACTIVE_STATES) {
+            if (state.STARTED_METHOD) continue;
+            state.STARTED_METHOD = true;
             state.STATE_METHOD();
             GD.Print(state.SPRITE);
         }
@@ -54,6 +57,7 @@ internal class State {
     public Func<bool> CONDITION;
     public Func<bool> END_CONDITION;
     public Action STATE_METHOD;
+    public bool STARTED_METHOD = false;
     public bool IS_EXCLUSIVE;
     public string SPRITE;
 
