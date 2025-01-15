@@ -170,7 +170,7 @@ shape = SubResource("RectangleShape2D_tftvx")
 
 [node name="weapon" parent="." instance=ExtResource("3_tuffx")]
 position = Vector2(8, -4)
-rotation = 0.720821
+rotation = 50.0
 scale = Vector2(1.30788, 1.98858)
 
 [node name="feet" type="Area2D" parent="."]

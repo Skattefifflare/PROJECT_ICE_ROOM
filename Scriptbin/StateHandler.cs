@@ -72,6 +72,7 @@ public class StateHandler {
             if (state.state_started) continue;
             state.state_started = true;
             state.start_method();
+            GD.Print(state.sprite);
         }
     }
 }

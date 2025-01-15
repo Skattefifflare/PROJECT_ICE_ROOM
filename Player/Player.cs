@@ -30,9 +30,17 @@ namespace Project_Ice_Room.Player {
                 "walk",
                 true
             );
+            Attack = new(
+                () => Input.IsActionPressed("attack"),
+                () => WHAP.finished_attack,
+                () => WHAP.is_attacking = true,
+                () => { return; },
+                "idle",
+                true
+            );
 
 
-            SH.SetStates(new List<State> { Attack, Walk, Idle });
+            SH.SetStates(new List<State> { Walk, Idle });
         }
 
         public override void _PhysicsProcess(double delta) {
