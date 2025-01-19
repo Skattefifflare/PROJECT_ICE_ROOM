@@ -40,13 +40,14 @@ namespace Project_Ice_Room.Player {
             );
 
 
-            SH.SetStates(new List<State> { Walk, Idle });
+            SH.SetStates(new List<State> {Attack, Walk, Idle });
         }
 
         public override void _PhysicsProcess(double delta) {
             base._PhysicsProcess(delta);
 
             DIRECTION = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
+            SH.CallStateHandler();
         }
 
 

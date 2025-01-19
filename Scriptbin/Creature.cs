@@ -31,6 +31,10 @@ public partial class Creature : CharacterBody2D {
         SH = new(SPRITE_PLAYER);
 
     }
+    public override void _Process(double delta) {
+        base._Process(delta);
+        
+    }
     public override void _PhysicsProcess(double delta) {
         base._PhysicsProcess(delta);
 
@@ -38,7 +42,7 @@ public partial class Creature : CharacterBody2D {
         if (DIRECTION.X > 0) SPRITE_PLAYER.FlipH = true;
         else SPRITE_PLAYER.FlipH = false;
         
-        SH.CallStateHandler();
+        
 
         MoveAndSlide();
     }

@@ -48,10 +48,11 @@ public class StateHandler {
         var active_states_copy = new List<State>();
         active_states_copy.AddRange(active_states);
 
-        // remove states that have ended
+        // remove states that have ended      
         foreach (var state in active_states) {
             if (state.end_condition()) {
                 active_states_copy.Remove(state);
+                GD.Print("removed " + state.sprite);
                 state.end_method();
                 state_list.Find(s => s == state).state_started = false;
             }
@@ -60,11 +61,12 @@ public class StateHandler {
 
         // add new states
         foreach (var state in state_list) {
-            if (active_states.Contains(state)) continue;
+            if (active_states.Contains(state)) break; // continue?
             if (!state.start_condition()) continue;
             if (state.is_exclusive) active_states.Clear();
             active_states.Add(state);
-            break; // questionable      
+            GD.Print("added " + state.sprite);
+            break; // questionable
         }
 
         // start active states
@@ -74,6 +76,7 @@ public class StateHandler {
             state.start_method();
             GD.Print(state.sprite);
         }
+        sprite_player.Play(active_states.First().sprite);
     }
 }
 
