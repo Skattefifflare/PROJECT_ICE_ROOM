@@ -1,8 +1,17 @@
-[gd_scene load_steps=23 format=3 uid="uid://vwvt1qvu5m5v"]
+[gd_scene load_steps=26 format=3 uid="uid://vwvt1qvu5m5v"]
 
 [ext_resource type="Script" path="res://Player/Player.cs" id="1_twk3x"]
 [ext_resource type="Texture2D" uid="uid://lagas666wog3" path="res://Player/TempCharacterSpriteSheet.png" id="2_qtxel"]
+[ext_resource type="Texture2D" uid="uid://cv2lsrl7np5w" path="res://Player/player.png" id="2_rqxkb"]
 [ext_resource type="PackedScene" uid="uid://dapgexv4no1bw" path="res://Weapons/Sword/Sword.tscn" id="3_tuffx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_upo2t"]
+atlas = ExtResource("2_rqxkb")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qwwne"]
+atlas = ExtResource("2_rqxkb")
+region = Rect2(32, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lb1aa"]
 atlas = ExtResource("2_qtxel")
@@ -70,6 +79,17 @@ region = Rect2(64, 64, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ueiu5"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_upo2t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qwwne")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 1.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_lb1aa")
@@ -152,9 +172,8 @@ SPEED = 80
 
 [node name="sprite_player" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ueiu5")
-animation = &"walk"
+animation = &"attack"
 autoplay = "idle"
-frame_progress = 0.427305
 
 [node name="visibility_box" type="Area2D" parent="."]
 
@@ -170,7 +189,6 @@ shape = SubResource("RectangleShape2D_tftvx")
 
 [node name="weapon" parent="." instance=ExtResource("3_tuffx")]
 position = Vector2(8, -4)
-rotation = 50.0
 scale = Vector2(1.30788, 1.98858)
 
 [node name="feet" type="Area2D" parent="."]

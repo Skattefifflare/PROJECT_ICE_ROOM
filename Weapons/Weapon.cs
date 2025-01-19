@@ -14,9 +14,7 @@ namespace Project_Ice_Room.Scriptbin {
 
         public bool is_attacking = false;
         public bool finished_attack = false;
-        float start_angle = 40f;
-        private float rotation = 5f;
-        bool first_half = false;
+        private float t;
 
 
         public override void _Ready() {
@@ -24,7 +22,6 @@ namespace Project_Ice_Room.Scriptbin {
 
             DMG_BOX = (Area2D)FindChild("dmg_box");
             DMG_BOX.Monitorable = false;
-            Rotation = start_angle;
         }
 
         public void MakeDangerous() {
@@ -35,8 +32,22 @@ namespace Project_Ice_Room.Scriptbin {
         }
 
         public void Attack(float delta) {
+            GD.Print("attacking"); 
+
+            if (t <= 0.5f) Rotation += delta * 10;
+
+            t += delta;
+
+            if (t >= 1) {
+                finished_attack = true;
+                t = 0;
+                is_attacking = false;
+                Rotation = 0;
+            }
+
+            /*
             finished_attack = false;
-            Rotation += rotation * delta * (first_half ? 1 : -1); // should clamp change in rotation
+            Rotation += (rotation - Rotation)  * delta * (first_half ? 1 : -1); // should clamp change in rotation
             if (Rotation >= rotation) {
                 first_half = true;
             }
@@ -46,6 +57,7 @@ namespace Project_Ice_Room.Scriptbin {
                 Rotation = start_angle;
                 is_attacking = false;
             }
+            */
         }
         public override void _PhysicsProcess(double delta) {
             base._PhysicsProcess(delta);

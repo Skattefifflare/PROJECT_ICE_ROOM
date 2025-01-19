@@ -1,6 +1,7 @@
 ﻿using System;
 using Godot;
-
+using Project_Ice_Room.Scriptbin;
+using System.Collections.Generic;
 
 namespace Project_Ice_Room.Scriptbin;
 public partial class Creature : CharacterBody2D {
@@ -18,6 +19,8 @@ public partial class Creature : CharacterBody2D {
     protected Vector2 DIRECTION;
     protected StateHandler SH;
 
+    internal State Walk;
+    internal State Idle;
 
 
     public override void _Ready() {
@@ -30,20 +33,33 @@ public partial class Creature : CharacterBody2D {
         DIRECTION = Vector2.Zero;
         SH = new(SPRITE_PLAYER);
 
+
+        Idle = new(
+                () => true,
+                () => DIRECTION != Vector2.Zero,
+                () => Velocity = Vector2.Zero,
+                () => { return; },
+                "idle",
+                false
+            );
+        Walk = new(
+            () => DIRECTION != Vector2.Zero,
+            () => DIRECTION == Vector2.Zero,
+            () => Velocity = DIRECTION * SPEED,
+            () => { return; },
+            "walk",
+            true
+        );
     }
     public override void _Process(double delta) {
-        base._Process(delta);
-        
+        base._Process(delta);       
     }
     public override void _PhysicsProcess(double delta) {
         base._PhysicsProcess(delta);
 
-        
+        SH.CallStateHandler();
         if (DIRECTION.X > 0) SPRITE_PLAYER.FlipH = true;
         else SPRITE_PLAYER.FlipH = false;
-        
-        
-
         MoveAndSlide();
     }
 }
