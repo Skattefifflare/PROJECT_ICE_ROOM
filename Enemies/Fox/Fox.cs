@@ -33,7 +33,6 @@ public partial class Fox : Creature
     public override void _PhysicsProcess(double delta) {
         base._PhysicsProcess(delta);
     }
-
     public override void _Process(double delta) {
         base._Process(delta);
         Player player = (Player)GetNode("%player");

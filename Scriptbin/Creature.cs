@@ -44,7 +44,7 @@ public partial class Creature : CharacterBody2D {
             );
         Walk = new(
             () => DIRECTION != Vector2.Zero,
-            () => DIRECTION == Vector2.Zero,
+            () => true,
             () => Velocity = DIRECTION * SPEED,
             () => { return; },
             "walk",
