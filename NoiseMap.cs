@@ -1,10 +1,12 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 [Tool]
 public partial class NoiseMap : GenSpline {
     private float height, width;
     private int cHeight, cWidth;
+    private int patchSize = 10;
     private Vector2 center; //center of the polygon
     private Vector2[] uVS;
 
@@ -22,11 +24,13 @@ public partial class NoiseMap : GenSpline {
         //Perlin noise is more smooth while Simplex is more dotted and intense
         noiseGen.NoiseType = FastNoiseLite.NoiseTypeEnum.Perlin;
         noiseGen.Frequency = 1.0f / noiseScale;
-        noiseGen.Seed = 18332/*seed.Next(0, 100000)*/;
+        noiseGen.Seed = /*18332*/seed.Next(0, 100000);
         CreateNoiseMap();
         DrawNoiseMap(ImageTexture.CreateFromImage(noiseMap));
+        NoiseMapDisplayTest(ImageTexture.CreateFromImage(noiseMap));
         GetNoiseData();
-        NoiseHandler test = new(GetNoiseData(), cHeight, cWidth, 10, 0.5f, new float[]{ mapSize[1], mapSize[3] });
+        NoiseHandler test = new(GetNoiseData(), cHeight, cWidth, patchSize, 0.5f, new float[]{ mapSize[1], mapSize[3] });
+        PlaceTexture(test);
     }
     public void CreateNoiseMap() {
         mapSize = GetMaxAndMin();
@@ -112,5 +116,32 @@ public partial class NoiseMap : GenSpline {
         }
         
         return noiseValues;
+    }
+    private void NoiseMapDisplayTest(Texture2D texture) {
+        Polygon2D noiseTest = new() {
+            Polygon = new Vector2[] {
+                new Vector2(0,0),
+                new Vector2(cWidth, 0),
+                new Vector2(cWidth, cHeight),
+                new Vector2(0, cHeight)
+            }
+        };
+        noiseTest.Texture = texture;
+        AddChild(noiseTest);
+    }
+    private void PlaceTexture(NoiseHandler handler1) {
+        List<Vector2> poses = handler1.textureposes;
+        foreach(Vector2 pos in poses) {
+            Polygon2D obj = new Polygon2D() {
+                Polygon = new Vector2[] {
+                pos,
+                new Vector2(pos.X + patchSize, pos.Y),
+                new Vector2(pos.X + patchSize, pos.Y + patchSize),
+                new Vector2(pos.X, pos.Y + patchSize)
+                },
+                Color = new Color(0, 1, 0, 1f)
+            };
+            AddChild(obj); 
+        }
     }
 }

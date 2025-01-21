@@ -1,14 +1,17 @@
 ﻿using Godot;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
-[Tool]
+
 internal partial class NoiseHandler : Node2D {
     float[,] noiseValues;
     int height, width;
     int patchSize;
     float threshold;
     Vector2 minCoords;
+
+    public List<Vector2> textureposes = new List<Vector2>();
 
     public NoiseHandler(float[] noiseValues, int height, int width, int patchSize, float threshold, float[] minCoords) {
         this.height = height;
@@ -43,7 +46,7 @@ internal partial class NoiseHandler : Node2D {
                     if (value > threshold) {
                         Vector2 topLeftPosition = new Vector2(x, y);
                         Vector2 texturePosition = topLeftPosition - minCoords;
-                        PlaceTexture(texturePosition);
+                        textureposes.Add(texturePosition);
                         GD.Print($"Texture at ({texturePosition}): Mean={value}");
                     }
                 }
@@ -65,20 +68,6 @@ internal partial class NoiseHandler : Node2D {
             }
         }
         return total / count;
-    }
-
-    private void PlaceTexture(Vector2 pos) {
-        Polygon2D obj = new Polygon2D() { 
-            Polygon = new Vector2[] {
-            pos, 
-            new Vector2(pos.X + patchSize*10, pos.Y),
-            new Vector2(pos.X + patchSize*10, pos.Y + patchSize*10),
-            new Vector2(pos.X, pos.Y + patchSize*10)
-            },
-            Color = new Color(0, 1, 0, 1f)
-        };
-        AddChild(obj);
-        GD.Print("test");
     }
 }
 

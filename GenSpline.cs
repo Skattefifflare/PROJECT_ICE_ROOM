@@ -33,6 +33,7 @@ public partial class GenSpline : Node2D {
 
             };
         }
+        GD.Print("test");
         SetControlPoints();
         CalculateSpline();
     }
