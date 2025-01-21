@@ -4,13 +4,12 @@ using System;
 public partial class SpearOffset : Bone2D
 {
     private bool attack = false;
-    Vector2 velocity = new Vector2;
+    Vector2 velocity = new Vector2((float)0.00002,0);
     private int ratio = 4;
 
     public override void _Process(double delta)
     {
         base._Process(delta);
-        LookAt(GetGlobalMousePosition());
 
         if (Input.IsActionPressed("ui_attack"))
         {
@@ -18,12 +17,13 @@ public partial class SpearOffset : Bone2D
         }
         if (attack)
         {
-            for (int i = 0; i < 6000; i++)
+            for (int i = 0; i < 100000; i++)
             {
-                Position = 
+                Position -= velocity;
             }
         }
-        GD.Print(Position.X);
+        attack = false;
+        LookAt(GetGlobalMousePosition());
     }
        //summon: "dont: filip;" end 
        //     end
