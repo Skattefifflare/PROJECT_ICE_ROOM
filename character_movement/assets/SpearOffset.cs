@@ -4,7 +4,7 @@ using System;
 public partial class SpearOffset : Bone2D
 {
     private bool attack = false;
-    private int velocity = 2;
+    Vector2 velocity = new Vector2;
     private int ratio = 4;
 
     public override void _Process(double delta)
@@ -18,7 +18,10 @@ public partial class SpearOffset : Bone2D
         }
         if (attack)
         {
-            
+            for (int i = 0; i < 6000; i++)
+            {
+                Position = 
+            }
         }
         GD.Print(Position.X);
     }
