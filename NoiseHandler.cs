@@ -8,7 +8,7 @@ internal partial class NoiseHandler : Node2D {
     int height, width;
     int patchSize;
     float threshold;
-    float[] minCoords;
+    Vector2 minCoords;
 
     public NoiseHandler(float[] noiseValues, int height, int width, int patchSize, float threshold, float[] minCoords) {
         this.height = height;
@@ -16,7 +16,7 @@ internal partial class NoiseHandler : Node2D {
         this.noiseValues = ConvertNoiseData(noiseValues);
         this.patchSize = patchSize;
         this.threshold = threshold;
-        this.minCoords = minCoords;
+        this.minCoords = new Vector2(-minCoords[0], -minCoords[1]);
         NoiseEvaluation();
     }
     private float[,] ConvertNoiseData(float[] noiseData) {
@@ -41,11 +41,10 @@ internal partial class NoiseHandler : Node2D {
                     float value = GetNoisePatchMean(x, y);
 
                     if (value > threshold) {
-                        GD.Print($"Texture at ({x}, {y}): Mean={value}");
-
                         Vector2 topLeftPosition = new Vector2(x, y);
-                        Vector2 centerPosition = new Vector2(x + patchSize / 2f, y + patchSize / 2f);
-                        GD.Print(centerPosition);
+                        Vector2 texturePosition = topLeftPosition - minCoords;
+                        PlaceTexture(texturePosition);
+                        GD.Print($"Texture at ({texturePosition}): Mean={value}");
                     }
                 }
                 catch (Exception ex) {
@@ -68,8 +67,18 @@ internal partial class NoiseHandler : Node2D {
         return total / count;
     }
 
-    private void PlaceTexture(float x, float y) {
-
+    private void PlaceTexture(Vector2 pos) {
+        Polygon2D obj = new Polygon2D() { 
+            Polygon = new Vector2[] {
+            pos, 
+            new Vector2(pos.X + patchSize*10, pos.Y),
+            new Vector2(pos.X + patchSize*10, pos.Y + patchSize*10),
+            new Vector2(pos.X, pos.Y + patchSize*10)
+            },
+            Color = new Color(0, 1, 0, 1f)
+        };
+        AddChild(obj);
+        GD.Print("test");
     }
 }
 

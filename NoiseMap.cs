@@ -22,11 +22,11 @@ public partial class NoiseMap : GenSpline {
         //Perlin noise is more smooth while Simplex is more dotted and intense
         noiseGen.NoiseType = FastNoiseLite.NoiseTypeEnum.Perlin;
         noiseGen.Frequency = 1.0f / noiseScale;
-        noiseGen.Seed = seed.Next(0, 100000);
+        noiseGen.Seed = 18332/*seed.Next(0, 100000)*/;
         CreateNoiseMap();
         DrawNoiseMap(ImageTexture.CreateFromImage(noiseMap));
         GetNoiseData();
-        NoiseHandler test = new(GetNoiseData(), cHeight, cWidth, 10, 0.4f);
+        NoiseHandler test = new(GetNoiseData(), cHeight, cWidth, 10, 0.5f, new float[]{ mapSize[1], mapSize[3] });
     }
     public void CreateNoiseMap() {
         mapSize = GetMaxAndMin();
