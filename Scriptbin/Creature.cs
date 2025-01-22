@@ -33,7 +33,7 @@ public partial class Creature : CharacterBody2D {
         DIRECTION = Vector2.Zero;
         SH = new(SPRITE_PLAYER);
 
-
+        
         Idle = new(
                 () => true,
                 () => DIRECTION != Vector2.Zero,

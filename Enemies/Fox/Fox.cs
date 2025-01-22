@@ -1,17 +1,23 @@
 using Godot;
+using Project_Ice_Room.Player;
 using Project_Ice_Room.Scriptbin;
 using System;
 using System.Collections.Generic;
-using Project_Ice_Room.Player;
 
 
 public partial class Fox : Creature
 {
     State RunToPlayer;
+    State KnockBack;
+
+    private int prev_hp;
+
     private Vector2 player_distance;
 
     public override void _Ready() {
         base._Ready();
+
+        prev_hp = HP;
 
         RunToPlayer = new(
             () => Math.Abs(player_distance.Length()) >= 40,
@@ -21,6 +27,14 @@ public partial class Fox : Creature
             "walk",
             true
         );
+        KnockBack = new(
+            () => prev_hp != HP,
+            () => KnockBackM(),
+            () => true,
+            () => { return; },
+            true,
+            "idle"
+        );
 
         SH.SetStates(new List<State> { RunToPlayer, Idle });
     }
@@ -29,6 +43,9 @@ public partial class Fox : Creature
         DIRECTION = player_distance.Normalized();
 
         Velocity = DIRECTION * SPEED;                  
+    }
+    private void KnockBackM() {
+
     }
     public override void _PhysicsProcess(double delta) {
         base._PhysicsProcess(delta);
