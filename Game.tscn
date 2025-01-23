@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5yl76rkysxvg"]
+
+[ext_resource type="PackedScene" uid="uid://got5wmv06612" path="res://Creatures/Player/player.tscn" id="1_p54tu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vyaw0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t8hbt"]
+size = Vector2(4, 5)
+
+[node name="Game" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_p54tu")]
+position = Vector2(57, -26)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(8, 8)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-9, -13)
+shape = SubResource("CircleShape2D_vyaw0")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(41, -29)
+shape = SubResource("RectangleShape2D_t8hbt")
