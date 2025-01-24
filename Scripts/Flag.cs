@@ -19,10 +19,13 @@ namespace Project_Ice_Room.Scripts {
             is_hoisted = false;
             just_hoisted = false;
         }
-        public void Update(bool hoist_or_lower) {
-            if (just_hoisted) just_hoisted = false;
+        public void Set(bool hoist_or_lower) {
+            Update();
             if (hoist_or_lower) Hoist();
             else Lower();
+        }
+        public void Update() {
+            if (just_hoisted) just_hoisted = false;           
         }
         public Flag() {
             is_hoisted = false;
@@ -30,6 +33,3 @@ namespace Project_Ice_Room.Scripts {
         }
     }
 }
-
-// make a list of flags in creature
-// loop through the flags and update only hoisted check

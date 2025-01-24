@@ -1,28 +1,37 @@
-[gd_scene load_steps=4 format=3 uid="uid://b5yl76rkysxvg"]
+[gd_scene load_steps=5 format=3 uid="uid://b5yl76rkysxvg"]
 
 [ext_resource type="PackedScene" uid="uid://got5wmv06612" path="res://Creatures/Player/player.tscn" id="1_p54tu"]
+[ext_resource type="Texture2D" uid="uid://xbwwkjaxodf7" path="res://Sprite-0001.png" id="2_7oivd"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_vyaw0"]
+[sub_resource type="LabelSettings" id="LabelSettings_ggf8h"]
+font_size = 8
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t8hbt"]
-size = Vector2(4, 5)
+size = Vector2(5, 5)
 
 [node name="Game" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_p54tu")]
 position = Vector2(57, -26)
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(8, 8)
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(-57, 26)
+zoom = Vector2(6, 6)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-9, -13)
-shape = SubResource("CircleShape2D_vyaw0")
+[node name="Label" type="Label" parent="Player/Camera2D"]
+offset_left = -96.0
+offset_top = -53.0
+offset_right = -41.0
+offset_bottom = 7.0
+label_settings = SubResource("LabelSettings_ggf8h")
 
 [node name="Area2D" type="Area2D" parent="."]
+position = Vector2(7, -26)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(41, -29)
 shape = SubResource("RectangleShape2D_t8hbt")
+
+[node name="Sprite-0001" type="Sprite2D" parent="."]
+position = Vector2(7, -26)
+scale = Vector2(0.15625, 0.15625)
+texture = ExtResource("2_7oivd")

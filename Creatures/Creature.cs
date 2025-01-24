@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using Project_Ice_Room.Scripts;
+using System.Collections.Generic;
 
 public partial class Creature : CharacterBody2D
 {
@@ -14,33 +15,37 @@ public partial class Creature : CharacterBody2D
     protected Area2D hitbox;
     protected AnimatedSprite2D sprite_player;
 
-
-    internal Flag idle_flag;
-    internal Flag walk_flag;
-    internal Flag attack_flag;
-    internal Flag damaged_flag;
-    internal Flag dead_flag;
-
-
+    internal Dictionary<string, Flag> flags;
+    
     protected Area2D enemy_hitbox;
 
 
     public override void _Ready() {
         base._Ready();
+
+        flags = new Dictionary<string, Flag>() {
+        { "idle", new Flag() },
+        { "walk", new Flag() },
+        { "attack", new Flag() },
+        { "damaged", new Flag() },
+        { "dead", new Flag() },
+        };
+
         sprite_player = (AnimatedSprite2D)FindChild("sprite_player");
 
-        idle_flag = new Flag();
-        walk_flag = new Flag();
-        attack_flag = new Flag();
-        damaged_flag = new Flag();
-        dead_flag = new Flag();
 
-
+        
         hitbox = (Area2D)FindChild("hitbox");
-        hitbox.AreaEntered += (b) => {
-            damaged_flag.Update(true);
-            enemy_hitbox = b;
-        };
+        hitbox.AreaEntered += (b) => HitboxHit(b);
+        
+    }
+
+    void HitboxHit(Area2D b) {
+        flags["damaged"].Set(true);
+        flags["idle"].Set(false);
+        flags["walk"].Set(false);
+        enemy_hitbox = b;
+        GD.Print("HitboxHit");
     }
 
     public virtual void FlagMan() {
@@ -49,11 +54,17 @@ public partial class Creature : CharacterBody2D
     public virtual void ActionMan() {
         GD.Print("ActionMan not overridden by child class");
     }
+    public virtual void UpdateMan() {
+        foreach (Flag flag in flags.Values) {
+            flag.Update();
+        }
+    }
 
     public override void _Process(double delta) {
         base._Process(delta);
         FlagMan();
         ActionMan();
+        UpdateMan();
     }
 
 }
