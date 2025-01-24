@@ -1,65 +1,74 @@
-﻿using System;
-using Godot;
-using Project_Ice_Room.Scriptbin;
-using System.Collections.Generic;
+﻿using Godot;
+
 
 namespace Project_Ice_Room.Scriptbin;
 public partial class Creature : CharacterBody2D {
 
     [Export]
-    protected int HP = 1;
+    protected int hp = 1;
     [Export]
-    protected int SPEED = 1;
+    protected int speed = 1;
 
-    protected AnimatedSprite2D SPRITE_PLAYER;
-    protected Weapon WHAP;
-    protected Area2D FEET;
-    protected Area2D HITBOX;
-    protected Action CURRENT_ACTION;
-    protected Vector2 DIRECTION;
-    protected StateHandler SH;
+    protected AnimatedSprite2D sprite_player;
+    protected bool sprite_done = false;
+
+    protected Weapon whap;
+    protected Area2D feet;
+    protected Area2D hitbox;
+    protected Vector2 direction;
+    protected StateHandler sh;
 
     internal State Walk;
     internal State Idle;
 
-
     public override void _Ready() {
         base._Ready();
 
-        SPRITE_PLAYER = (AnimatedSprite2D)FindChild("sprite_player");
-        WHAP = (Weapon)FindChild("weapon");
-        FEET = (Area2D)FindChild("feet");
-        HITBOX = (Area2D)FindChild("hitbox");
-        DIRECTION = Vector2.Zero;
-        SH = new(SPRITE_PLAYER);
+        sprite_player = (AnimatedSprite2D)FindChild("sprite_player");
+        sprite_player.AnimationFinished += () => sprite_done = true;
+        sprite_player.AnimationChanged += () => sprite_done = false;
 
-        
-        Idle = new(
-                () => true,
-                () => DIRECTION != Vector2.Zero,
-                () => Velocity = Vector2.Zero,
-                () => { return; },
-                "idle",
-                false
-            );
-        Walk = new(
-            () => DIRECTION != Vector2.Zero,
-            () => true,
-            () => Velocity = DIRECTION * SPEED,
+
+        whap = (Weapon)FindChild("weapon");
+        feet = (Area2D)FindChild("feet");
+        hitbox = (Area2D)FindChild("hitbox");
+        direction = Vector2.Zero;
+        sh = new(sprite_player);
+
+
+        Idle = new State(
+            () => direction == Vector2.Zero,
+            () => direction != Vector2.Zero,
+
             () => { return; },
+            () => { Velocity = new(Mathf.MoveToward(Velocity.X, 0, (float)GetPhysicsProcessDeltaTime() * 1100), Mathf.MoveToward(Velocity.Y, 0, (float)GetPhysicsProcessDeltaTime()* 1100)); },
+            () => { return; },
+
+            "idle",
+            false
+        );
+        Walk = new State(
+            () => direction != Vector2.Zero,
+            () => direction == Vector2.Zero,
+
+            () => { return; },
+            () => { Velocity = direction.Normalized() * speed; },
+            () => { return; },
+
             "walk",
             true
         );
     }
+        
     public override void _Process(double delta) {
         base._Process(delta);       
     }
     public override void _PhysicsProcess(double delta) {
         base._PhysicsProcess(delta);
 
-        SH.CallStateHandler();
-        if (DIRECTION.X > 0) SPRITE_PLAYER.FlipH = true;
-        else SPRITE_PLAYER.FlipH = false;
+        sh.Call();
+        if (direction.X > 0) sprite_player.FlipH = true;
+        else if (direction.X < 0) sprite_player.FlipH = false;
         MoveAndSlide();
     }
 }

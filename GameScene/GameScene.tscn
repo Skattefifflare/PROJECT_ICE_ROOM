@@ -14,8 +14,8 @@ zoom = Vector2(2, 2)
 
 [node name="fox_root2" parent="enemies" instance=ExtResource("2_isbbg")]
 position = Vector2(122, 12)
-SPEED = 75
 
 [node name="player" parent="." instance=ExtResource("2_hjvhr")]
 unique_name_in_owner = true
 position = Vector2(-201, 138)
+motion_mode = 1

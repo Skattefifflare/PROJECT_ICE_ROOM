@@ -3,56 +3,63 @@ using Project_Ice_Room.Player;
 using Project_Ice_Room.Scriptbin;
 using System;
 using System.Collections.Generic;
+using Project_Ice_Room.Enemies;
 
 
-public partial class Fox : Creature
+public partial class Fox : Enemy
 {
     State RunToPlayer;
     State KnockBack;
+    State Bite;
 
-    private int prev_hp;
-
-    private Vector2 player_distance;
-
+    private bool knockbackflag = false;
     public override void _Ready() {
         base._Ready();
+        KnockBack = new(
+            () => knockbackflag,
+            () => knockbackflag == false,
+            () => { return; },
+            () => KnockBackM(),
+            () => { return; },
 
-        prev_hp = HP;
+            "idle",
+            true
+        );
 
         RunToPlayer = new(
             () => Math.Abs(player_distance.Length()) >= 40,
-            () => true,
-            () => RunToPlayerM(),
+            () => Math.Abs(player_distance.Length()) <= 40,
+
             () => { return; },
+            () => RunToPlayerM(),
+            () => { direction = Vector2.Zero; },
+
             "walk",
             true
         );
-        KnockBack = new(
-            () => prev_hp != HP,
-            () => KnockBackM(),
-            () => true,
+
+        Bite = new (
+            () => Math.Abs(player_distance.Length()) <= 20,
+            () => sprite_done,
+            
+            () => whap.MakeDangerous(),
             () => { return; },
-            true,
-            "idle"
+            () => whap.MakeHarmLess(),
+
+            "attack",
+            true
         );
 
-        SH.SetStates(new List<State> { RunToPlayer, Idle });
+        sh.SetStates(new List<State> { Idle });
+        combat_states = new List<State> {Bite, RunToPlayer, Idle };
     }
 
     private void RunToPlayerM() {  
-        DIRECTION = player_distance.Normalized();
+        direction = player_distance.Normalized();
 
-        Velocity = DIRECTION * SPEED;                  
+        Velocity = direction * speed;                  
     }
     private void KnockBackM() {
 
-    }
-    public override void _PhysicsProcess(double delta) {
-        base._PhysicsProcess(delta);
-    }
-    public override void _Process(double delta) {
-        base._Process(delta);
-        Player player = (Player)GetNode("%player");
-        player_distance = player.Position - Position;
     }
 }

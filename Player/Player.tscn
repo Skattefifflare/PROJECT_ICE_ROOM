@@ -168,18 +168,12 @@ b = Vector2(-5, 16)
 
 [node name="player_root" type="CharacterBody2D"]
 script = ExtResource("1_twk3x")
-SPEED = 80
+speed = 100
 
 [node name="sprite_player" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ueiu5")
 animation = &"attack"
 autoplay = "idle"
-
-[node name="visibility_box" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="visibility_box"]
-position = Vector2(1, 0)
-shape = SubResource("RectangleShape2D_tftvx")
 
 [node name="hitbox" type="Area2D" parent="."]
 
