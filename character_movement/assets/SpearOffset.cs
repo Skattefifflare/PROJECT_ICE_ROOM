@@ -6,7 +6,14 @@ public partial class SpearOffset : Bone2D
     private bool attack = false;
     Vector2 velocity = new Vector2((float)0.00002,0);
     private int ratio = 4;
+    private AnimationPlayer animation;
 
+    public override void _Ready()
+    {
+        base._Ready();
+
+        animation = (AnimationPlayer)GetChild(2);
+    }
     public override void _Process(double delta)
     {
         base._Process(delta);
@@ -17,10 +24,7 @@ public partial class SpearOffset : Bone2D
         }
         if (attack)
         {
-            for (int i = 0; i < 100000; i++)
-            {
-                Position -= velocity;
-            }
+            animation.Play("ATTACKKK");
         }
         attack = false;
         LookAt(GetGlobalMousePosition());

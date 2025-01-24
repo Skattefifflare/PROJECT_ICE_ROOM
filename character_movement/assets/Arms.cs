@@ -19,7 +19,7 @@ public partial class Arms : Skeleton2D
         leftIK = (SkeletonModification2DCcdik)modStack.GetModification(0);
         rightIK = (SkeletonModification2DCcdik)modStack.GetModification(1);
 
-        spearOffset = (Bone2D)GetParent().GetChild(2).GetChild(0);
+        spearOffset = (Bone2D)GetParent().GetChild(2).GetChild(0).GetChild(0);
 
         Node IKBuffer = spearOffset.GetChild(1);
         leftTarget = IKBuffer.GetChild(0).GetPath();
