@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://c5lfrw2nny0cd"]
+[gd_scene load_steps=36 format=3 uid="uid://c5lfrw2nny0cd"]
 
 [ext_resource type="Script" path="res://Enemies/Fox/Fox.cs" id="1_d36rd"]
 [ext_resource type="Texture2D" uid="uid://bxkitdfce0bb1" path="res://Enemies/Fox/fox_sprites.png" id="2_oe7mg"]
@@ -223,6 +223,9 @@ b = Vector2(-8, 16)
 radius = 6.0
 height = 16.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gbtt5"]
+radius = 11.0
+
 [node name="fox_root" type="CharacterBody2D"]
 script = ExtResource("1_d36rd")
 speed = 70
@@ -271,3 +274,10 @@ shape = SubResource("SegmentShape2D_rvfyu")
 position = Vector2(0, 6)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_u7dvh")
+
+[node name="backoff" type="Area2D" parent="."]
+
+[node name="capsule" type="CollisionShape2D" parent="backoff"]
+position = Vector2(0, 6)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_gbtt5")

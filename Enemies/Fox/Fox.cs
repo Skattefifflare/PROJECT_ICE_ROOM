@@ -63,3 +63,8 @@ public partial class Fox : Enemy
 
     }
 }
+
+
+
+
+

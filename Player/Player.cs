@@ -9,11 +9,9 @@ namespace Project_Ice_Room.Player {
 
         private State Attack;
 
+
         public override void _Ready() {
             base._Ready();
-
-            
-
 
             sh.SetStates(new List<State> {Walk, Idle });
         }

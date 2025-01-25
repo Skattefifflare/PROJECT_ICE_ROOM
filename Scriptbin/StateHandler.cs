@@ -2,9 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Project_Ice_Room.Scriptbin;
 
 
@@ -54,6 +51,7 @@ public class StateHandler {
         active_states = active_states.Where(s => !s.end_condition()).ToList();
 
         foreach (State state in state_list.Where(s => s.start_condition())) {
+            if (active_states.Contains(state)) continue;
             bool exclusive = false;
             if (state.is_exclusive) { 
                 active_states.Clear();
@@ -72,55 +70,48 @@ public class StateHandler {
     }
 }
 
-//    public class StateHandler {
-//    private List<State> state_list;
-//    private List<State> active_states;
-//    private AnimatedSprite2D sprite_player;
-
-//    public StateHandler(AnimatedSprite2D SP) {
-//        sprite_player = SP;
-//        state_list = new();
-//        active_states = new();
-//    }
-//    internal void SetStates(List<State> states) {
-//        state_list = states;
-//    }
-    
-
-//    public void CallStateHandler() {
-//        var active_states_copy = new List<State>();
-//        active_states_copy.AddRange(active_states);
-
-//        // remove states that have ended      
-//        foreach (var state in active_states) {
-//            if (state.end_condition()) {
-//                active_states_copy.Remove(state);
-//                GD.Print("removed " + state.sprite);
-//                state.end_method();
-//                state_list.Find(s => s == state).state_started = false;
-//            }
-//        }
-//        active_states = active_states_copy;
-
-//        // add new states
-//        foreach (var state in state_list) {
-//            if (active_states.Contains(state)) break; // continue?
-//            if (!state.start_condition()) continue;
-//            if (state.is_exclusive) active_states.Clear();
-//            active_states.Add(state);
-//            GD.Print("added " + state.sprite);
-//            break; // questionable
-//        }
-
-//        // start active states
-//        foreach (var state in active_states) {
-//            if (state.state_started) continue;
-//            state.state_started = true;
-//            state.start_method();
-//            GD.Print(state.sprite);
-//        }
-//        sprite_player.Play(active_states.First().sprite);
-//    }
-//}
 
 
+
+
+public class State2 {
+    private (bool, State2)[] pointers;
+    private bool has_binded = false;
+
+    Action start_method;
+    Action running_method;
+    Action end_method;
+    private bool has_started = false;
+
+    public State2(Action s, Action r, Action e) {
+        start_method = s;
+        running_method = r;
+        end_method = e;
+    }
+
+    public void BindStates((bool, State2)[] _pointers) {
+        if (has_binded) {
+            GD.Print("already bound states");
+            return;
+        }
+        pointers = _pointers;
+        has_binded = true;
+    }
+
+
+    public void Call(State2 current_state) {
+        if (!has_started) {
+            start_method();
+            has_started = true;
+        }
+        foreach ((bool, State2) pointer in pointers) {
+            if (pointer.Item1) {
+                end_method();
+                current_state = pointer.Item2;
+                current_state.start_method();
+                break;
+            }
+        }
+        running_method();
+    }
+}
