@@ -1,70 +1,46 @@
 using Godot;
-using Project_Ice_Room.Player;
 using Project_Ice_Room.Scriptbin;
 using System;
-using System.Collections.Generic;
 using Project_Ice_Room.Enemies;
 
 
 public partial class Fox : Enemy
 {
-    State RunToPlayer;
-    State KnockBack;
-    State Bite;
+    private State Idle;
+    private void IdleStart() {
+        sprite_player.Play("idle");
+        Velocity = Vector2.Zero;
+    }
+    private State WalkToPlayer;
+    private void WalkToPlayerStart() {
+        sprite_player.Play("walk");
+    }
+    private void WalkToPlayerRunning() {
+        direction = player_distance.Normalized();
+        Velocity = direction * speed;
+    }
+    private void WalkToPlayerEnd() {
+        Velocity = Vector2.Zero;
+    }
 
-    private bool knockbackflag = false;
+
+
     public override void _Ready() {
         base._Ready();
-        KnockBack = new(
-            () => knockbackflag,
-            () => knockbackflag == false,
-            () => { return; },
-            () => KnockBackM(),
-            () => { return; },
 
-            "idle",
-            true
-        );
+        Idle = new(IdleStart);
+        WalkToPlayer = new(WalkToPlayerStart, WalkToPlayerRunning, WalkToPlayerEnd);
 
-        RunToPlayer = new(
-            () => Math.Abs(player_distance.Length()) >= 40,
-            () => Math.Abs(player_distance.Length()) <= 40,
+        Idle.BindStates(new (Func<bool>, State)[] {
+            (() => hp <= 0, Die),
+            (() => Math.Abs(player_distance.Length()) > 60, WalkToPlayer)
+        });
 
-            () => { return; },
-            () => RunToPlayerM(),
-            () => { direction = Vector2.Zero; },
+        WalkToPlayer.BindStates(new (Func<bool>, State)[] {
+            (() => hp <= 0, Die),
+            (() => player_distance.Length() < 60, Idle)
+        });
 
-            "walk",
-            true
-        );
-
-        Bite = new (
-            () => Math.Abs(player_distance.Length()) <= 20,
-            () => sprite_done,
-            
-            () => whap.MakeDangerous(),
-            () => { return; },
-            () => whap.MakeHarmLess(),
-
-            "attack",
-            true
-        );
-
-        sh.SetStates(new List<State> { Idle });
-        combat_states = new List<State> {Bite, RunToPlayer, Idle };
-    }
-
-    private void RunToPlayerM() {  
-        direction = player_distance.Normalized();
-
-        Velocity = direction * speed;                  
-    }
-    private void KnockBackM() {
-
+        current_state = Idle;
     }
 }
-
-
-
-
-

@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Godot;
+﻿using Godot;
 using Project_Ice_Room.Scriptbin;
-using Project_Ice_Room.Player;
+
 
 namespace Project_Ice_Room.Enemies;
 public partial class Enemy : Creature {
     Node2D player;
     protected Area2D view_field;
-    internal List<State> combat_states;
     protected Vector2 player_distance;
     protected Area2D backoff;
 
@@ -20,7 +14,6 @@ public partial class Enemy : Creature {
         player = (Node2D)GetNode("%player");
 
         view_field = (Area2D)FindChild("view_field"); 
-        view_field.AreaEntered += (a) => sh.SetStates(combat_states);
 
         
     }
@@ -29,6 +22,3 @@ public partial class Enemy : Creature {
         player_distance = player.Position - Position;
     }
 }
-
-
-// if direction of distance to another fox is same direction as the running, slow down the speed

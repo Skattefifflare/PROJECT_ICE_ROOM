@@ -1,19 +1,46 @@
 ﻿using Godot;
 using Project_Ice_Room.Scriptbin;
 using System;
-using System.Collections.Generic;
 
 
 namespace Project_Ice_Room.Player {
     public partial class Player : Creature {
 
-        private State Attack;
+        State Idle;
+        private void IdleStart() {
+            sprite_player.Play("idle");
+            Velocity = Vector2.Zero;
+        }
+
+        State Walk;
+        private void WalkStart() {
+            sprite_player.Play("walk");
+        }
+        private void WalkRunning() {
+            Velocity = direction * speed;
+        }
+        private void WalkEnd() {
+            Velocity = Vector2.Zero;
+        }   
+
+        State Attack;
 
 
         public override void _Ready() {
             base._Ready();
+            Idle = new(IdleStart);
+            Walk = new(WalkStart, WalkRunning, WalkEnd);
 
-            sh.SetStates(new List<State> {Walk, Idle });
+            Idle.BindStates(new (Func<bool>, State)[] {
+                (() => hp <= 0, Die),
+                (() =>direction != Vector2.Zero, Walk),
+            });
+            Walk.BindStates(new (Func<bool>, State)[] {
+                (() => hp <= 0, Die),
+                (() => direction == Vector2.Zero, Idle)
+            });
+
+            current_state = Idle;
         }
 
         public override void _PhysicsProcess(double delta) {
