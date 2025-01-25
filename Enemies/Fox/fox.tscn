@@ -2,7 +2,8 @@
 
 [ext_resource type="Script" path="res://Enemies/Fox/Fox.cs" id="1_d36rd"]
 [ext_resource type="Texture2D" uid="uid://bxkitdfce0bb1" path="res://Enemies/Fox/fox_sprites.png" id="2_oe7mg"]
-[ext_resource type="Script" path="res://Enemies/Fox/Bite.cs" id="3_pyk2u"]
+[ext_resource type="Script" path="res://Weapons/Weapon.cs" id="3_b058u"]
+[ext_resource type="PackedScene" uid="uid://b8mcmkkivc3ua" path="res://Creatures/healthbar.tscn" id="4_s5hjh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0qcsi"]
 atlas = ExtResource("2_oe7mg")
@@ -133,7 +134,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_7snie")
 }],
 "loop": false,
-"name": &"attack",
+"name": &"bite",
 "speed": 12.0
 }, {
 "frames": [{
@@ -212,8 +213,8 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_7f840"]
 radius = 110.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yxtu5"]
-size = Vector2(3.125, 2)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ptwaj"]
+size = Vector2(4, 3)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_rvfyu"]
 a = Vector2(6, 16)
@@ -223,19 +224,19 @@ b = Vector2(-8, 16)
 radius = 6.0
 height = 16.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gbtt5"]
-radius = 11.0
-
 [node name="fox_root" type="CharacterBody2D"]
 script = ExtResource("1_d36rd")
 speed = 70
 
 [node name="sprite_player" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_jceai")
-animation = &"attack"
+animation = &"bite"
 autoplay = "idle"
+frame = 6
+frame_progress = 1.0
 
 [node name="view_field" type="Area2D" parent="."]
+visible = false
 collision_layer = 2
 
 [node name="cirle" type="CollisionShape2D" parent="view_field"]
@@ -251,16 +252,14 @@ scale = Vector2(1.5375, 0.9)
 polygon = PackedVector2Array(-3.00813, -10, -4.30894, -6.66667, -5.60976, -10, -8.86179, -3.33333, -8.86179, -1.11111, -5.60976, -1.11111, -3.65854, 5.55556, 4.14634, 5.55556, 4.79675, 0, 6.74797, -4.44444, -2.35772, -4.44444)
 
 [node name="weapon" type="Sprite2D" parent="."]
-rotation = 5.0
-script = ExtResource("3_pyk2u")
+script = ExtResource("3_b058u")
+dmg = 50
 
 [node name="dmg_box" type="Area2D" parent="weapon"]
-position = Vector2(6.51303, 10.2752)
-monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="weapon/dmg_box"]
-position = Vector2(-7.99913, -22.3496)
-shape = SubResource("RectangleShape2D_yxtu5")
+position = Vector2(-13, 0)
+shape = SubResource("RectangleShape2D_ptwaj")
 
 [node name="feet" type="Area2D" parent="."]
 collision_layer = 2
@@ -275,9 +274,6 @@ position = Vector2(0, 6)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_u7dvh")
 
-[node name="backoff" type="Area2D" parent="."]
-
-[node name="capsule" type="CollisionShape2D" parent="backoff"]
-position = Vector2(0, 6)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_gbtt5")
+[node name="healthbar" parent="." instance=ExtResource("4_s5hjh")]
+position = Vector2(0, -13)
+scale = Vector2(0.3375, 0.458333)

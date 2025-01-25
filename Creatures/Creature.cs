@@ -5,7 +5,7 @@ namespace Project_Ice_Room.Scriptbin;
 public partial class Creature : CharacterBody2D {
 
     [Export]
-    protected int hp = 1;
+    public int hp = 1;
     [Export]
     protected int speed = 1;
 
@@ -22,6 +22,7 @@ public partial class Creature : CharacterBody2D {
     protected State Die;
     protected void DieStart() {
         sprite_player.Play("die");
+        Velocity = Vector2.Zero;
     }
     
 
@@ -37,7 +38,12 @@ public partial class Creature : CharacterBody2D {
         hitbox = (Area2D)FindChild("hitbox");
         direction = Vector2.Zero;
 
-
+        hitbox.AreaEntered += (area) => {
+            if (area.Name == "dmg_box") {
+                hp -= area.GetParent<Weapon>().dmg;
+                GD.Print(hp);
+            }
+        };
 
         Die = new(DieStart);
     }

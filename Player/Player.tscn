@@ -160,7 +160,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tftvx"]
-size = Vector2(14, 32)
+size = Vector2(9, 27)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_a0fxd"]
 a = Vector2(4, 16)
@@ -172,21 +172,22 @@ speed = 100
 
 [node name="sprite_player" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ueiu5")
-animation = &"attack"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="hitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
-position = Vector2(1, 0)
+position = Vector2(-0.5, 2.5)
 shape = SubResource("RectangleShape2D_tftvx")
-
-[node name="weapon" parent="." instance=ExtResource("3_tuffx")]
-position = Vector2(8, -4)
-scale = Vector2(1.30788, 1.98858)
 
 [node name="feet" type="Area2D" parent="."]
 collision_mask = 4
 
 [node name="segment" type="CollisionShape2D" parent="feet"]
 shape = SubResource("SegmentShape2D_a0fxd")
+
+[node name="sword_root" parent="." instance=ExtResource("3_tuffx")]
+position = Vector2(5, -1)
+rotation = 1.00531
+dmg = 0
