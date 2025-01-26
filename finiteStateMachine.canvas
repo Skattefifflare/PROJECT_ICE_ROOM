@@ -1,0 +1,36 @@
+{
+	"nodes":[
+		{"id":"9af70a7f01fd7edc","x":-260,"y":-620,"width":700,"height":660,"type":"group","label":"PLAYER"},
+		{"id":"2fe8ba5f99e6b805","x":620,"y":-620,"width":760,"height":520,"type":"group","label":"FOX"},
+		{"id":"9cab101761975e08","x":753,"y":-600,"width":107,"height":60,"type":"text","text":"IDLE"},
+		{"id":"ff217fe60ebeec4f","x":1100,"y":-600,"width":178,"height":60,"type":"text","text":"RUN TO PLAYER"},
+		{"id":"430f9dd51c595a9a","x":1138,"y":-377,"width":102,"height":60,"type":"text","text":"BITE"},
+		{"id":"6e333d5cdc7f352c","x":714,"y":-377,"width":186,"height":60,"type":"text","text":"WALK AROUND"},
+		{"id":"0d0268b113ec6de6","x":300,"y":-1100,"width":270,"height":60,"type":"text","text":"EVERYTHING POINTS TO DIE"},
+		{"id":"0cc6c09d3c9aa1aa","x":387,"y":-877,"width":95,"height":60,"type":"text","text":"DIE"},
+		{"id":"198946460f367891","x":-77,"y":-600,"width":122,"height":60,"type":"text","text":"ATTACK"},
+		{"id":"a2aa02f041c0364a","x":-60,"y":-339,"width":105,"height":60,"type":"text","text":"IDLE"},
+		{"id":"26fe0d143e139859","x":300,"y":-339,"width":120,"height":60,"type":"text","text":"WALK"},
+		{"id":"df7050fe877d6375","x":-100,"y":-40,"width":194,"height":60,"type":"text","text":"TAKE DAMAGE"},
+		{"id":"f6ff72eb73315648","x":718,"y":-180,"width":178,"height":60,"type":"text","text":"TAKE DAMAGE"},
+		{"id":"c6736a891445070a","x":-600,"y":-600,"width":250,"height":168,"type":"text","text":"IDLE:\n\n-DIE\n-TAKEDAMAGE\n-ATTACK\n-WALK"}
+	],
+	"edges":[
+		{"id":"3dda5e988aac0b2d","fromNode":"a2aa02f041c0364a","fromSide":"right","toNode":"26fe0d143e139859","toSide":"left","color":"#a3f254","label":"wasd pressed?"},
+		{"id":"f1ac301163221cfc","fromNode":"26fe0d143e139859","fromSide":"top","toNode":"198946460f367891","toSide":"right","color":"6","label":"attack pressed?"},
+		{"id":"a39ff3a79fa1380b","fromNode":"a2aa02f041c0364a","fromSide":"top","toNode":"198946460f367891","toSide":"bottom","color":"4","label":"attack pressed?"},
+		{"id":"a7792a42a4cc34d7","fromNode":"198946460f367891","fromSide":"left","toNode":"a2aa02f041c0364a","toSide":"left","color":"1","label":"finished attack?"},
+		{"id":"de2776b1704c0e98","fromNode":"26fe0d143e139859","fromSide":"bottom","toNode":"a2aa02f041c0364a","toSide":"bottom","color":"#3f50d5","label":"nothing pressed?"},
+		{"id":"fb6fec303f66f3f7","fromNode":"9cab101761975e08","fromSide":"right","toNode":"ff217fe60ebeec4f","toSide":"left","color":"4","label":"see player?"},
+		{"id":"e29ab0e1e67d8421","fromNode":"9cab101761975e08","fromSide":"left","toNode":"6e333d5cdc7f352c","toSide":"left","color":"1"},
+		{"id":"de74091bfa02e4fa","fromNode":"6e333d5cdc7f352c","fromSide":"top","toNode":"9cab101761975e08","toSide":"bottom","color":"3"},
+		{"id":"71b7d4d0397f7e3d","fromNode":"ff217fe60ebeec4f","fromSide":"bottom","toNode":"430f9dd51c595a9a","toSide":"top","color":"5","label":"close enough?"},
+		{"id":"2d45244bbf4c4f47","fromNode":"430f9dd51c595a9a","fromSide":"right","toNode":"ff217fe60ebeec4f","toSide":"right","color":"2","label":"bite finished?"},
+		{"id":"3098f64c1e51b881","fromNode":"0d0268b113ec6de6","fromSide":"bottom","toNode":"0cc6c09d3c9aa1aa","toSide":"top","label":"hp <= 0?"},
+		{"id":"72c3f0046780f0be","fromNode":"a2aa02f041c0364a","fromSide":"bottom","toNode":"df7050fe877d6375","toSide":"top","color":"2","label":"got hit?"},
+		{"id":"a9932d6ef69226d1","fromNode":"26fe0d143e139859","fromSide":"bottom","toNode":"df7050fe877d6375","toSide":"right","color":"3","label":"got hit?"},
+		{"id":"859d85286312232a","fromNode":"6e333d5cdc7f352c","fromSide":"bottom","toNode":"f6ff72eb73315648","toSide":"top","color":"#25f4c0","label":"got hit?"},
+		{"id":"c17c9680be4d0a89","fromNode":"9cab101761975e08","fromSide":"right","toNode":"f6ff72eb73315648","toSide":"right","color":"#d82caa","label":"got hit?"},
+		{"id":"be0b6996cf3997a2","fromNode":"ff217fe60ebeec4f","fromSide":"bottom","toNode":"f6ff72eb73315648","toSide":"right","color":"6","label":"got hit?"}
+	]
+}
