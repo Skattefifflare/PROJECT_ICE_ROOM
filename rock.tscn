@@ -2,17 +2,19 @@
 
 [ext_resource type="Texture2D" uid="uid://b2v6nsk768m6x" path="res://rock.png" id="1_v07uo"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3ju73"]
-size = Vector2(30, 3.75)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nsys0"]
+radius = 4.0
 
 [node name="Sprite2D" type="Sprite2D"]
 texture = ExtResource("1_v07uo")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(0, 8.875)
-shape = SubResource("RectangleShape2D_3ju73")
+position = Vector2(0, 7)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_nsys0")
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
 position = Vector2(0, 7)

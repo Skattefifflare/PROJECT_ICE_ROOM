@@ -14,7 +14,6 @@ public partial class Creature : CharacterBody2D {
     protected bool sprite_done = false;
 
     protected Weapon whap;
-    protected Area2D feet;
     protected Area2D hitbox;
     protected Vector2 direction;
 
@@ -33,9 +32,12 @@ public partial class Creature : CharacterBody2D {
         sprite_player = (AnimatedSprite2D)FindChild("sprite_player");
         sprite_player.AnimationFinished += () => sprite_done = true;
         sprite_player.AnimationChanged += () => sprite_done = false;
-
-        whap = (Weapon)FindChild("weapon");
-        feet = (Area2D)FindChild("feet");
+        try {
+            whap = (Weapon)FindChild("weapon");
+        }
+        catch {
+            GD.Print("No weapon found");
+        }
         hitbox = (Area2D)FindChild("hitbox");
         direction = Vector2.Zero;
 
@@ -44,6 +46,7 @@ public partial class Creature : CharacterBody2D {
 
     public override void _Process(double delta) {
         base._Process(delta);
+        ZIndex = (int)GlobalPosition.Y;
         current_state.Call(ref current_state);
         CheckForHit();
     }
@@ -53,8 +56,8 @@ public partial class Creature : CharacterBody2D {
         MoveAndSlide();
     }
     private void FlipFlop() {
-        if (direction.X > 0) sprite_player.FlipH = true;
-        else if (direction.X < 0) sprite_player.FlipH = false;
+        if (direction.X < 0) sprite_player.FlipH = true;
+        else if (direction.X > 0) sprite_player.FlipH = false;
     }
 
 
@@ -95,7 +98,7 @@ public partial class Creature : CharacterBody2D {
                 if (!((Weapon)area.GetParent()).is_dangerous) continue;
                 enemy_weapon = (Weapon)area.GetParent();
                 hp -= enemy_weapon.dmg;
-                GD.Print(hp);
+                //GD.Print(hp);
             }
         }
     }
