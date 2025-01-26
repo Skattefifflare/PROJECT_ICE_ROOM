@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://bav2vso835uxd"]
+[gd_scene load_steps=5 format=3 uid="uid://bav2vso835uxd"]
 
 [ext_resource type="PackedScene" uid="uid://vwvt1qvu5m5v" path="res://Player/Player.tscn" id="2_hjvhr"]
 [ext_resource type="PackedScene" uid="uid://c5lfrw2nny0cd" path="res://Enemies/Fox/fox.tscn" id="2_isbbg"]
+[ext_resource type="PackedScene" uid="uid://cbicc0vk406d5" path="res://rock.tscn" id="3_fwkir"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_h6c0j"]
+vertices = PackedVector2Array(279.063, -150.031, 280.938, 153, -36, 66.75, -36, 51.6797, -39.0391, 40.3203, -48.3203, 31.0391, -277, -151.961, -61, 27.6484, -73.6797, 31.0391, -277, 153, -82.9609, 40.3203, -86, 51.6797, -86, 66.75, -81.8828, 66.75, -73.6797, 74.9609, -48.3203, 74.9609, -40.1172, 66.75, -61, 78.3516)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(0, 3, 4), PackedInt32Array(0, 4, 5), PackedInt32Array(6, 0, 5, 7), PackedInt32Array(6, 7, 8), PackedInt32Array(9, 6, 8, 10), PackedInt32Array(9, 10, 11), PackedInt32Array(9, 11, 12), PackedInt32Array(12, 13, 14, 9), PackedInt32Array(15, 16, 2, 1), PackedInt32Array(15, 1, 9, 17), PackedInt32Array(9, 14, 17)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(289, -160, -287, -162, -287, 163, 291, 163)])
 
 [node name="gamemaster" type="Node2D"]
 
@@ -19,3 +25,9 @@ position = Vector2(122, 12)
 unique_name_in_owner = true
 position = Vector2(-201, 138)
 motion_mode = 1
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_h6c0j")
+
+[node name="rock" parent="NavigationRegion2D" instance=ExtResource("3_fwkir")]
+position = Vector2(-61, 46)

@@ -5,17 +5,15 @@ using Project_Ice_Room.Scriptbin;
 namespace Project_Ice_Room.Enemies;
 public partial class Enemy : Creature {
     protected Node2D player;
-    protected Area2D view_field;
     protected Vector2 player_distance;
     protected Area2D backoff;
+
+    protected NavigationAgent2D nav_agent;
 
     public override void _Ready() {
         base._Ready();
         player = (Node2D)GetNode("%player");
-
-        view_field = (Area2D)FindChild("view_field"); 
-
-        
+        nav_agent = (NavigationAgent2D)GetNode("nav_agent");      
     }
     public override void _Process(double delta) {
         base._Process(delta);

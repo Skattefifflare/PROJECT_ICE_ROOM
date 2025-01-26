@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://c5lfrw2nny0cd"]
+[gd_scene load_steps=35 format=3 uid="uid://c5lfrw2nny0cd"]
 
 [ext_resource type="Script" path="res://Enemies/Fox/Fox.cs" id="1_d36rd"]
 [ext_resource type="Texture2D" uid="uid://bxkitdfce0bb1" path="res://Enemies/Fox/fox_sprites.png" id="2_oe7mg"]
@@ -210,9 +210,6 @@ animations = [{
 "speed": 12.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_7f840"]
-radius = 110.0
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ptwaj"]
 size = Vector2(4, 3)
 
@@ -224,9 +221,6 @@ b = Vector2(-8, 16)
 radius = 6.0
 height = 16.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_wi23d"]
-radius = 26.1725
-
 [node name="fox_root" type="CharacterBody2D"]
 script = ExtResource("1_d36rd")
 speed = 70
@@ -237,13 +231,6 @@ animation = &"bite"
 autoplay = "idle"
 frame = 6
 frame_progress = 1.0
-
-[node name="view_field" type="Area2D" parent="."]
-visible = false
-collision_layer = 2
-
-[node name="cirle" type="CollisionShape2D" parent="view_field"]
-shape = SubResource("CircleShape2D_7f840")
 
 [node name="hitbox" type="Area2D" parent="."]
 collision_layer = 2
@@ -259,7 +246,7 @@ script = ExtResource("3_b058u")
 dmg = 20
 
 [node name="dmg_box" type="Area2D" parent="weapon"]
-position = Vector2(-13, 0)
+position = Vector2(-15, -1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="weapon/dmg_box"]
 shape = SubResource("RectangleShape2D_ptwaj")
@@ -281,7 +268,6 @@ shape = SubResource("CapsuleShape2D_u7dvh")
 position = Vector2(0, -13)
 scale = Vector2(0.3375, 0.458333)
 
-[node name="dist_box" type="Area2D" parent="."]
-
-[node name="circle" type="CollisionShape2D" parent="dist_box"]
-shape = SubResource("CircleShape2D_wi23d")
+[node name="nav_agent" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
+debug_enabled = true

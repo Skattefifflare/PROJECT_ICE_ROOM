@@ -18,7 +18,8 @@ public partial class Fox : Enemy
         sprite_player.Play("walk");
     }
     private void WalkToPlayerRunning() {
-        direction = player_distance.Normalized();
+        nav_agent.TargetPosition = player.Position;
+        direction = (nav_agent.GetNextPathPosition() - GlobalPosition).Normalized();
         Velocity = direction * speed;
     }
     private void WalkToPlayerEnd() {
@@ -65,11 +66,5 @@ public partial class Fox : Enemy
 
     public override void _PhysicsProcess(double delta) {
         base._PhysicsProcess(delta);
-        AvoidCollision();
-    }
-
-    private void AvoidCollision() {
-        int min_dist = 50;
-        var foxes = GetTree().Root.GetChildren().Where( n => n.GetType() == typeof(Fox));
     }
 }

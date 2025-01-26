@@ -1,4 +1,5 @@
 ﻿using Godot;
+using System.Linq;
 
 
 namespace Project_Ice_Room.Scriptbin;
@@ -24,7 +25,7 @@ public partial class Creature : CharacterBody2D {
         sprite_player.Play("die");
         Velocity = Vector2.Zero;
     }
-    
+
 
     public override void _Ready() {
         base._Ready();
@@ -38,20 +39,13 @@ public partial class Creature : CharacterBody2D {
         hitbox = (Area2D)FindChild("hitbox");
         direction = Vector2.Zero;
 
-        hitbox.AreaEntered += (area) => {
-            if (area.Name == "dmg_box") {
-                if (!area.GetParent<Weapon>().is_dangerous) return;
-                    hp -= area.GetParent<Weapon>().dmg;
-                GD.Print(hp);
-            }
-        };
-        
         Die = new(DieStart);
     }
-    
+
     public override void _Process(double delta) {
-        base._Process(delta);      
+        base._Process(delta);
         current_state.Call(ref current_state);
+        CheckForHit();
     }
     public override void _PhysicsProcess(double delta) {
         base._PhysicsProcess(delta);
@@ -62,5 +56,47 @@ public partial class Creature : CharacterBody2D {
         if (direction.X > 0) sprite_player.FlipH = true;
         else if (direction.X < 0) sprite_player.FlipH = false;
     }
-}
 
+
+    protected Weapon enemy_weapon = null;
+    protected virtual void CheckForHit() {
+        /*
+        if (enemy_weapon != null &&  !enemy_weapon.is_dangerous) {
+            being_attacked = false;
+            enemy_weapon = null;
+            return;
+        }
+        if (being_attacked) return;
+
+        var overlaps = hitbox.GetOverlappingAreas();
+        if (overlaps.Count > 0) {
+            foreach (Area2D area in overlaps) {
+                if (area.Name == "dmg_box") {
+                    if (!enemy_weapon.is_dangerous) continue;
+                    enemy_weapon = (Weapon)area.GetParent();
+                    being_attacked = true;
+                    hp -= enemy_weapon.dmg;
+                    break;
+                }
+            }
+        }
+        */
+
+        if (enemy_weapon != null) {
+            if (!enemy_weapon.is_dangerous) {
+                enemy_weapon = null;
+            }
+        }
+        else {
+            var overlaps = hitbox.GetOverlappingAreas();
+            if (overlaps.Count == 0) return;
+            foreach (Area2D area in overlaps) {
+                if (area.Name != "dmg_box") continue;
+                if (!((Weapon)area.GetParent()).is_dangerous) continue;
+                enemy_weapon = (Weapon)area.GetParent();
+                hp -= enemy_weapon.dmg;
+                GD.Print(hp);
+            }
+        }
+    }
+}

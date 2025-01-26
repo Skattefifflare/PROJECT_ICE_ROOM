@@ -32,6 +32,7 @@ public class State {
             start_method();
             has_started = true;
         }
+        if (pointers == null) return;
         foreach ((Func<bool>, State) pointer in pointers) {
             if (pointer.Item1()) {
                 end_method();
