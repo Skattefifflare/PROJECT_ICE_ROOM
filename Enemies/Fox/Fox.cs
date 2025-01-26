@@ -2,6 +2,7 @@ using Godot;
 using Project_Ice_Room.Scriptbin;
 using System;
 using Project_Ice_Room.Enemies;
+using System.Linq;
 
 
 public partial class Fox : Enemy
@@ -57,8 +58,18 @@ public partial class Fox : Enemy
             (() => hp <= 0, Die),
             (() => sprite_done, Idle)
         });
-
+        
 
         current_state = Idle;
+    }
+
+    public override void _PhysicsProcess(double delta) {
+        base._PhysicsProcess(delta);
+        AvoidCollision();
+    }
+
+    private void AvoidCollision() {
+        int min_dist = 50;
+        var foxes = GetTree().Root.GetChildren().Where( n => n.GetType() == typeof(Fox));
     }
 }

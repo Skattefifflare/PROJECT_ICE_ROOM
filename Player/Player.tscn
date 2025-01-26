@@ -168,6 +168,7 @@ b = Vector2(-5, 16)
 
 [node name="player_root" type="CharacterBody2D"]
 script = ExtResource("1_twk3x")
+hp = 100
 speed = 100
 
 [node name="sprite_player" type="AnimatedSprite2D" parent="."]
@@ -188,6 +189,6 @@ collision_mask = 4
 shape = SubResource("SegmentShape2D_a0fxd")
 
 [node name="sword_root" parent="." instance=ExtResource("3_tuffx")]
-position = Vector2(5, -1)
+position = Vector2(12, -3)
 rotation = 1.00531
 dmg = 0

@@ -40,11 +40,12 @@ public partial class Creature : CharacterBody2D {
 
         hitbox.AreaEntered += (area) => {
             if (area.Name == "dmg_box") {
-                hp -= area.GetParent<Weapon>().dmg;
+                if (!area.GetParent<Weapon>().is_dangerous) return;
+                    hp -= area.GetParent<Weapon>().dmg;
                 GD.Print(hp);
             }
         };
-
+        
         Die = new(DieStart);
     }
     

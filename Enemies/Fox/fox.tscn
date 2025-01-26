@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://c5lfrw2nny0cd"]
+[gd_scene load_steps=37 format=3 uid="uid://c5lfrw2nny0cd"]
 
 [ext_resource type="Script" path="res://Enemies/Fox/Fox.cs" id="1_d36rd"]
 [ext_resource type="Texture2D" uid="uid://bxkitdfce0bb1" path="res://Enemies/Fox/fox_sprites.png" id="2_oe7mg"]
@@ -224,6 +224,9 @@ b = Vector2(-8, 16)
 radius = 6.0
 height = 16.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_wi23d"]
+radius = 26.1725
+
 [node name="fox_root" type="CharacterBody2D"]
 script = ExtResource("1_d36rd")
 speed = 70
@@ -253,12 +256,12 @@ polygon = PackedVector2Array(-3.00813, -10, -4.30894, -6.66667, -5.60976, -10, -
 
 [node name="weapon" type="Sprite2D" parent="."]
 script = ExtResource("3_b058u")
-dmg = 50
+dmg = 20
 
 [node name="dmg_box" type="Area2D" parent="weapon"]
+position = Vector2(-13, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="weapon/dmg_box"]
-position = Vector2(-13, 0)
 shape = SubResource("RectangleShape2D_ptwaj")
 
 [node name="feet" type="Area2D" parent="."]
@@ -269,7 +272,7 @@ collision_mask = 4
 position = Vector2(1, -7)
 shape = SubResource("SegmentShape2D_rvfyu")
 
-[node name="personal_space" type="CollisionShape2D" parent="."]
+[node name="col_box" type="CollisionShape2D" parent="."]
 position = Vector2(0, 6)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_u7dvh")
@@ -277,3 +280,8 @@ shape = SubResource("CapsuleShape2D_u7dvh")
 [node name="healthbar" parent="." instance=ExtResource("4_s5hjh")]
 position = Vector2(0, -13)
 scale = Vector2(0.3375, 0.458333)
+
+[node name="dist_box" type="Area2D" parent="."]
+
+[node name="circle" type="CollisionShape2D" parent="dist_box"]
+shape = SubResource("CircleShape2D_wi23d")

@@ -44,7 +44,7 @@ namespace Project_Ice_Room.Player {
         }
 
         public override void _PhysicsProcess(double delta) {
-            direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
+            direction = Input.GetVector("left", "right", "up", "down");
             base._PhysicsProcess(delta);
         } 
     }
