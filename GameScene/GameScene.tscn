@@ -15,7 +15,6 @@ agent_radius = 8.0
 [node name="gamemaster" type="Node2D"]
 
 [node name="camera" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
 
 [node name="enemies" type="Node" parent="."]
 
@@ -86,7 +85,7 @@ position = Vector2(-165, -23)
 
 [node name="player" parent="." instance=ExtResource("2_hjvhr")]
 unique_name_in_owner = true
-position = Vector2(-201, 138)
+position = Vector2(-157, 55)
 motion_mode = 1
 
 [node name="nav_region" type="NavigationRegion2D" parent="."]
