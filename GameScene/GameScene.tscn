@@ -1,0 +1,99 @@
+[gd_scene load_steps=6 format=3 uid="uid://bav2vso835uxd"]
+
+[ext_resource type="PackedScene" uid="uid://vwvt1qvu5m5v" path="res://Player/Player.tscn" id="2_hjvhr"]
+[ext_resource type="PackedScene" uid="uid://c5lfrw2nny0cd" path="res://Enemies/Fox/fox.tscn" id="2_isbbg"]
+[ext_resource type="PackedScene" uid="uid://cbicc0vk406d5" path="res://rock.tscn" id="3_fwkir"]
+[ext_resource type="PackedScene" uid="uid://dxntdg5sxp0bi" path="res://Enemies/Birdman/birdman.tscn" id="4_yj7i6"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_h6c0j"]
+vertices = PackedVector2Array(281.039, -152.023, 282.953, 155, 110.281, -93, 107.156, -104.641, 107.156, -81.3594, 98.6406, -72.8438, -40.8438, 64.6406, -37.7188, 53, 87, -69.7188, 75.3594, -72.8438, -40.8438, 41.3594, 66.8438, -81.3594, -49.3594, 32.8438, -49.3594, 73.1563, -279, 155, -61, 76.2813, -72.6406, 73.1563, -81.1563, 64.6406, -279, -153.969, -84.2813, 53, -81.1563, 41.3594, -72.6406, 32.8438, 63.7188, -93, -61, 29.7188, 98.6406, -113.156, 66.8438, -104.641, 75.3594, -113.156, 87, -116.281)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 2, 1), PackedInt32Array(5, 4, 1), PackedInt32Array(5, 1, 6, 7, 8), PackedInt32Array(9, 8, 7, 10), PackedInt32Array(11, 9, 10, 12), PackedInt32Array(13, 6, 1), PackedInt32Array(13, 1, 14, 15), PackedInt32Array(16, 15, 14), PackedInt32Array(17, 16, 14), PackedInt32Array(17, 14, 18, 19), PackedInt32Array(20, 19, 18), PackedInt32Array(21, 20, 18), PackedInt32Array(22, 11, 12, 23, 18), PackedInt32Array(0, 3, 24), PackedInt32Array(23, 21, 18), PackedInt32Array(25, 22, 18), PackedInt32Array(26, 25, 18), PackedInt32Array(0, 24, 27), PackedInt32Array(18, 0, 27), PackedInt32Array(18, 27, 26)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(289, -160, -287, -162, -287, 163, 291, 163)])
+parsed_geometry_type = 0
+agent_radius = 8.0
+
+[node name="gamemaster" type="Node2D"]
+
+[node name="camera" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
+[node name="enemies" type="Node" parent="."]
+
+[node name="fox" parent="enemies" instance=ExtResource("2_isbbg")]
+
+[node name="fox2" parent="enemies" instance=ExtResource("2_isbbg")]
+position = Vector2(122, 12)
+
+[node name="birdman" parent="enemies" instance=ExtResource("4_yj7i6")]
+position = Vector2(-99, -15)
+
+[node name="birdman2" parent="enemies" instance=ExtResource("4_yj7i6")]
+position = Vector2(-116, -34)
+
+[node name="birdman3" parent="enemies" instance=ExtResource("4_yj7i6")]
+position = Vector2(-98, -40)
+
+[node name="birdman4" parent="enemies" instance=ExtResource("4_yj7i6")]
+position = Vector2(-129, -11)
+
+[node name="birdman5" parent="enemies" instance=ExtResource("4_yj7i6")]
+position = Vector2(-138, -36)
+
+[node name="birdman6" parent="enemies" instance=ExtResource("4_yj7i6")]
+position = Vector2(-78, -33)
+
+[node name="birdman7" parent="enemies" instance=ExtResource("4_yj7i6")]
+position = Vector2(-125, -57)
+
+[node name="birdman8" parent="enemies" instance=ExtResource("4_yj7i6")]
+position = Vector2(-96, -68)
+
+[node name="birdman9" parent="enemies" instance=ExtResource("4_yj7i6")]
+position = Vector2(-69, -62)
+
+[node name="birdman10" parent="enemies" instance=ExtResource("4_yj7i6")]
+position = Vector2(-36, -49)
+
+[node name="birdman11" parent="enemies" instance=ExtResource("4_yj7i6")]
+position = Vector2(-54, -19)
+
+[node name="birdman12" parent="enemies" instance=ExtResource("4_yj7i6")]
+position = Vector2(-153, -58)
+
+[node name="birdman13" parent="enemies" instance=ExtResource("4_yj7i6")]
+position = Vector2(-131, -84)
+
+[node name="birdman14" parent="enemies" instance=ExtResource("4_yj7i6")]
+position = Vector2(-104, -98)
+
+[node name="birdman15" parent="enemies" instance=ExtResource("4_yj7i6")]
+position = Vector2(-74, -98)
+
+[node name="birdman16" parent="enemies" instance=ExtResource("4_yj7i6")]
+position = Vector2(-44, -84)
+
+[node name="birdman17" parent="enemies" instance=ExtResource("4_yj7i6")]
+position = Vector2(-162, -91)
+
+[node name="birdman18" parent="enemies" instance=ExtResource("4_yj7i6")]
+position = Vector2(-137, -115)
+
+[node name="birdman19" parent="enemies" instance=ExtResource("4_yj7i6")]
+position = Vector2(-181, -43)
+
+[node name="birdman20" parent="enemies" instance=ExtResource("4_yj7i6")]
+position = Vector2(-165, -23)
+
+[node name="player" parent="." instance=ExtResource("2_hjvhr")]
+unique_name_in_owner = true
+position = Vector2(-201, 138)
+motion_mode = 1
+
+[node name="nav_region" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_h6c0j")
+
+[node name="rock" parent="nav_region" instance=ExtResource("3_fwkir")]
+position = Vector2(-61, 46)
+
+[node name="rock2" parent="nav_region" instance=ExtResource("3_fwkir")]
+position = Vector2(87, -100)

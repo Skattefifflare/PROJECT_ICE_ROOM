@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# IDE0053: Use block body for lambda expression
+dotnet_diagnostic.IDE0053.severity = suggestion
