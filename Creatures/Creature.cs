@@ -63,28 +63,6 @@ public partial class Creature : CharacterBody2D {
 
     protected Weapon enemy_weapon = null;
     protected virtual void CheckForHit() {
-        /*
-        if (enemy_weapon != null &&  !enemy_weapon.is_dangerous) {
-            being_attacked = false;
-            enemy_weapon = null;
-            return;
-        }
-        if (being_attacked) return;
-
-        var overlaps = hitbox.GetOverlappingAreas();
-        if (overlaps.Count > 0) {
-            foreach (Area2D area in overlaps) {
-                if (area.Name == "dmg_box") {
-                    if (!enemy_weapon.is_dangerous) continue;
-                    enemy_weapon = (Weapon)area.GetParent();
-                    being_attacked = true;
-                    hp -= enemy_weapon.dmg;
-                    break;
-                }
-            }
-        }
-        */
-
         if (enemy_weapon != null) {
             if (!enemy_weapon.is_dangerous) {
                 enemy_weapon = null;
@@ -98,7 +76,7 @@ public partial class Creature : CharacterBody2D {
                 if (!((Weapon)area.GetParent()).is_dangerous) continue;
                 enemy_weapon = (Weapon)area.GetParent();
                 hp -= enemy_weapon.dmg;
-                //GD.Print(hp);
+                GD.Print(hp);
             }
         }
     }
