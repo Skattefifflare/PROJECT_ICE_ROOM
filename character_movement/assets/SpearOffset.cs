@@ -1,6 +1,7 @@
 using Godot;
 using System;
 
+[Tool]
 public partial class SpearOffset : Bone2D
 {
     private bool attack = false;
@@ -18,7 +19,7 @@ public partial class SpearOffset : Bone2D
     {
         base._Process(delta);
 
-        if (Input.IsActionPressed("ui_attack"))
+        if (Input.IsActionPressed("left_click"))
         {
             attack = true;
         }

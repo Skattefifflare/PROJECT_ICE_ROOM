@@ -1,6 +1,7 @@
 using Godot;
 using System;
 
+[Tool]
 public partial class Arms : Skeleton2D
 {
     private SkeletonModification2DCcdik leftIK;

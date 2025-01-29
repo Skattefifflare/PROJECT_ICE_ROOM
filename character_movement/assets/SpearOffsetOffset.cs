@@ -1,6 +1,7 @@
 using Godot;
 using System;
 
+[Tool]
 public partial class SpearOffsetOffset : Bone2D
 {
     public override void _Process(double delta)

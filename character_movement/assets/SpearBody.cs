@@ -1,6 +1,7 @@
 using Godot;
 using System;
 
+[Tool]
 public partial class SpearBody : Bone2D
 {
     private double offsetmultiplier = 0.5;

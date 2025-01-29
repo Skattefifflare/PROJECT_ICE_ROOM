@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cg4yu5ei70kbl"]
+[gd_scene load_steps=11 format=3 uid="uid://cg4yu5ei70kbl"]
 
 [ext_resource type="Texture2D" uid="uid://cfdon8876150v" path="res://character_movement/assets/Spear.png" id="1_ukfls"]
 [ext_resource type="Script" path="res://Spear.cs" id="2_iwbyh"]
@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://7p3ftuvdhkuf" path="res://character_movement/assets/LowerArm.png" id="3_tbrgo"]
 
 [sub_resource type="SkeletonModification2DCCDIK" id="SkeletonModification2DCCDIK_131aw"]
-target_nodepath = NodePath("../hands/left_pos")
+target_nodepath = NodePath("../Node2D/hands/left_pos")
 tip_nodepath = NodePath("ul/ll/lh")
 ccdik_data_chain_length = 2
 joint_data/0/bone_index = 0
@@ -25,7 +25,7 @@ joint_data/1/constraint_in_localspace = true
 joint_data/1/editor_draw_gizmo = true
 
 [sub_resource type="SkeletonModification2DCCDIK" id="SkeletonModification2DCCDIK_uuxot"]
-target_nodepath = NodePath("../hands/right_pos")
+target_nodepath = NodePath("../Node2D/hands/right_pos")
 tip_nodepath = NodePath("ur/lr/rh")
 ccdik_data_chain_length = 2
 joint_data/0/bone_index = 3
@@ -49,29 +49,79 @@ modification_count = 2
 modifications/0 = SubResource("SkeletonModification2DCCDIK_131aw")
 modifications/1 = SubResource("SkeletonModification2DCCDIK_uuxot")
 
+[sub_resource type="Animation" id="Animation_iq215"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D/hands:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 13)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node2D/hands:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_5fpnp"]
+resource_name = "pierce"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D/hands:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.433333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 13), Vector2(-8, 5), Vector2(6, 9), Vector2(28, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node2D/hands:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.433333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.528835, -0.331613, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6nfom"]
+_data = {
+"RESET": SubResource("Animation_iq215"),
+"pierce": SubResource("Animation_5fpnp")
+}
+
 [node name="Node2D" type="Node2D"]
+metadata/_edit_horizontal_guides_ = [-4.0]
 
 [node name="spear" type="Sprite2D" parent="."]
-position = Vector2(32.3632, -27.3143)
-rotation = 1.62842
+position = Vector2(0.656187, 8.21123)
+rotation = 1.05574
 scale = Vector2(1, 1.85736)
 texture = ExtResource("1_ukfls")
 script = ExtResource("2_iwbyh")
 
-[node name="hands" type="Node2D" parent="."]
-position = Vector2(32, -20)
-rotation = 0.855211
-
-[node name="left_pos" type="Node2D" parent="hands"]
-position = Vector2(7, 1.28057e-07)
-rotation = 1.5708
-scale = Vector2(0.991, 1.6)
-
-[node name="right_pos" type="Node2D" parent="hands"]
-position = Vector2(-2, 2.61702e-07)
-scale = Vector2(0.991, 1.6)
-
 [node name="textures" type="Node2D" parent="."]
+position = Vector2(-31, 38.1595)
 
 [node name="upper_right" type="Polygon2D" parent="textures"]
 position = Vector2(26, -35)
@@ -111,11 +161,13 @@ bones = ["ul", PackedFloat32Array(0, 0, 0, 0), "ul/ll", PackedFloat32Array(1, 1,
 
 [node name="skeleton" type="Skeleton2D" parent="."]
 visible = false
+position = Vector2(-31, 38.1595)
 modification_stack = SubResource("SkeletonModificationStack2D_6jf8d")
 
 [node name="ul" type="Bone2D" parent="skeleton"]
 position = Vector2(35, -38)
-scale = Vector2(0.999997, 0.999997)
+rotation = 2.47488
+scale = Vector2(0.999898, 0.999898)
 rest = Transform2D(0.999997, 0, 0, 0.999997, 35, -38)
 metadata/_local_pose_override_enabled_ = true
 
@@ -156,3 +208,21 @@ rest = Transform2D(1, 0, 0, 1, 5, -2.18557e-07)
 auto_calculate_length_and_angle = false
 length = 1.0
 bone_angle = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_6nfom")
+}
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="hands" type="Node2D" parent="Node2D"]
+position = Vector2(0, 13)
+
+[node name="left_pos" type="Node2D" parent="Node2D/hands"]
+position = Vector2(5.66588, -11.6243)
+scale = Vector2(0.991, 1.6)
+
+[node name="right_pos" type="Node2D" parent="Node2D/hands"]
+position = Vector2(-4, 0)
+scale = Vector2(0.991, 1.6)

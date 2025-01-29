@@ -10,6 +10,8 @@ public partial class Creature : CharacterBody2D {
     [Export]
     protected int speed = 1;
 
+    private bool facing_right = true;
+
     protected AnimatedSprite2D sprite_player;
     protected bool sprite_done = false;
 
@@ -56,8 +58,14 @@ public partial class Creature : CharacterBody2D {
         MoveAndSlide();
     }
     private void FlipFlop() {
-        if (direction.X < 0) sprite_player.FlipH = true;
-        else if (direction.X > 0) sprite_player.FlipH = false;
+        if (direction.X < 0 && facing_right) {
+            this.Scale = new Vector2(-1, 1);
+            facing_right = false;
+        }
+        else if (direction.X > 0 && !facing_right) {
+            this.Scale = new Vector2(1, 1);
+            facing_right = true;
+        }
     }
 
 
