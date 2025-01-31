@@ -19,7 +19,7 @@ public partial class SpearOffset : Bone2D
     {
         base._Process(delta);
 
-        if (Input.IsActionPressed("left_click"))
+        if (Input.IsActionPressed("ui_left"))
         {
             attack = true;
         }
