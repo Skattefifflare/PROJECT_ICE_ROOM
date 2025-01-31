@@ -16,12 +16,13 @@ internal partial class NoiseHandler : Node2D {
     public NoiseHandler(float[] noiseValues, int height, int width, int patchSize, float threshold, float[] minCoords) {
         this.height = height;
         this.width = width;
-        this.noiseValues = ConvertNoiseData(noiseValues);
+        this.noiseValues = ConvertNoiseData(noiseValues); //values range from 0f -> 1f
         this.patchSize = patchSize;
         this.threshold = threshold;
         this.minCoords = new Vector2(-minCoords[0], -minCoords[1]);
         NoiseEvaluation();
     }
+    //Converts our float array to a 2d float array 
     private float[,] ConvertNoiseData(float[] noiseData) {
         float[,] newValues = new float[width, height];
         for (int i = 0; i < noiseData.Length; i++) {
@@ -31,23 +32,26 @@ internal partial class NoiseHandler : Node2D {
 
                 newValues[row, col] = noiseData[i];
             }
-            catch (Exception ex) {
+            catch (Exception ex) { //Debugging
                 GD.Print(ex + "Error at index: " + i);
             }
         }
         return newValues;
     }
+    //Determines if a patch from the noisemap is above the threshold
+    //we have given
     private void NoiseEvaluation() {
         for (int y = 0; y < height; y += patchSize) {
             for (int x = 0; x < width; x += patchSize) {
                 try {
                     float value = GetNoisePatchMean(x, y);
 
-                    if (value > threshold) {
+                    if (value < threshold) {
+                        //offset the position so it matches our map
                         Vector2 topLeftPosition = new Vector2(x, y);
                         Vector2 texturePosition = topLeftPosition - minCoords;
+                        texturePosition += new Vector2(patchSize / 2, patchSize / 2); //center
                         textureposes.Add(texturePosition);
-                        GD.Print($"Texture at ({texturePosition}): Mean={value}");
                     }
                 }
                 catch (Exception ex) {
@@ -56,11 +60,10 @@ internal partial class NoiseHandler : Node2D {
             }
         }
     }
-
+    //Calculates the mean value of a patch based on given coordinates
     private float GetNoisePatchMean(int startX, int startY) {
         float total = 0;
         int count = 0;
-
         for(int y = startY; y < startY + patchSize && y < height; y++) {
             for (int x = startX; x < startX + patchSize && x < width; x++) { 
                 total += noiseValues[x, y];
@@ -68,6 +71,27 @@ internal partial class NoiseHandler : Node2D {
             }
         }
         return total / count;
+    }
+    public List<List<Vector2>> StructureTexturePoses() {
+        List<List<Vector2>> newPoses = new List<List<Vector2>> {
+            new List<Vector2>()
+        };
+        int row = 0;
+        newPoses[row].Add(textureposes[0]);
+        for (int i = 0; i < textureposes.Count -1; i++) {
+            
+
+            if (textureposes[i].Y == textureposes[i + 1].Y) {
+                newPoses[row].Add(textureposes[i + 1]);
+            }
+            else {
+                row++;
+                newPoses.Add(new List<Vector2>());
+                newPoses[row].Add(textureposes[i + 1]);
+            }
+        }
+
+        return newPoses;
     }
 }
 
