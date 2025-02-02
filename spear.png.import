@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0penvrnd4wkp"
-path="res://.godot/imported/SceneTestingOriginalSize.png-84c56f2f2ccadbe72f513f35732f1c39.ctex"
+uid="uid://cnmqg0h0fm3ve"
+path="res://.godot/imported/spear.png-579c7640c642eaea13c8a09c654c17c6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://SceneTestingOriginalSize.png"
-dest_files=["res://.godot/imported/SceneTestingOriginalSize.png-84c56f2f2ccadbe72f513f35732f1c39.ctex"]
+source_file="res://spear.png"
+dest_files=["res://.godot/imported/spear.png-579c7640c642eaea13c8a09c654c17c6.ctex"]
 
 [params]
 

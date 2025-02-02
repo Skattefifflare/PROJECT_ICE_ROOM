@@ -6,11 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://dxntdg5sxp0bi" path="res://Enemies/Birdman/birdman.tscn" id="4_yj7i6"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_h6c0j"]
-vertices = PackedVector2Array(281.039, -152.023, 282.953, 155, 110.281, -93, 107.156, -104.641, 107.156, -81.3594, 98.6406, -72.8438, -40.8438, 64.6406, -37.7188, 53, 87, -69.7188, 75.3594, -72.8438, -40.8438, 41.3594, 66.8438, -81.3594, -49.3594, 32.8438, -49.3594, 73.1563, -279, 155, -61, 76.2813, -72.6406, 73.1563, -81.1563, 64.6406, -279, -153.969, -84.2813, 53, -81.1563, 41.3594, -72.6406, 32.8438, 63.7188, -93, -61, 29.7188, 98.6406, -113.156, 66.8438, -104.641, 75.3594, -113.156, 87, -116.281)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 2, 1), PackedInt32Array(5, 4, 1), PackedInt32Array(5, 1, 6, 7, 8), PackedInt32Array(9, 8, 7, 10), PackedInt32Array(11, 9, 10, 12), PackedInt32Array(13, 6, 1), PackedInt32Array(13, 1, 14, 15), PackedInt32Array(16, 15, 14), PackedInt32Array(17, 16, 14), PackedInt32Array(17, 14, 18, 19), PackedInt32Array(20, 19, 18), PackedInt32Array(21, 20, 18), PackedInt32Array(22, 11, 12, 23, 18), PackedInt32Array(0, 3, 24), PackedInt32Array(23, 21, 18), PackedInt32Array(25, 22, 18), PackedInt32Array(26, 25, 18), PackedInt32Array(0, 24, 27), PackedInt32Array(18, 0, 27), PackedInt32Array(18, 27, 26)])
+vertices = PackedVector2Array(277.07, -148.039, 278.93, 151, 114.422, -93, 110.75, -106.711, 110.75, -79.2891, 100.711, -69.25, -37.25, 66.7109, -33.5781, 53, 87, -65.5781, 73.2891, -69.25, -37.25, 39.2891, 63.25, -79.2891, -47.2891, 29.25, 59.5781, -93, -61, 25.5781, -275, -149.953, -47.2891, 76.75, -275, 151, -61, 80.4219, -74.7109, 76.75, -84.75, 66.7109, -88.4219, 53, -84.75, 39.2891, -74.7109, 29.25, 100.711, -116.75, 63.25, -106.711, 73.2891, -116.75, 87, -120.422)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 2, 1), PackedInt32Array(5, 4, 1), PackedInt32Array(5, 1, 6, 7, 8), PackedInt32Array(9, 8, 7, 10), PackedInt32Array(11, 9, 10, 12), PackedInt32Array(13, 11, 12, 14, 15), PackedInt32Array(16, 6, 1), PackedInt32Array(16, 1, 17, 18), PackedInt32Array(19, 18, 17), PackedInt32Array(20, 19, 17), PackedInt32Array(20, 17, 15, 21), PackedInt32Array(22, 21, 15), PackedInt32Array(23, 22, 15), PackedInt32Array(0, 3, 24), PackedInt32Array(14, 23, 15), PackedInt32Array(25, 13, 15), PackedInt32Array(26, 25, 15), PackedInt32Array(0, 24, 27), PackedInt32Array(15, 0, 27), PackedInt32Array(15, 27, 26)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(289, -160, -287, -162, -287, 163, 291, 163)])
 parsed_geometry_type = 0
-agent_radius = 8.0
+agent_radius = 12.0
 
 [node name="gamemaster" type="Node2D"]
 

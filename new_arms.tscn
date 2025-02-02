@@ -1,0 +1,67 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlt0uk801ih3f"]
+
+[ext_resource type="Texture2D" uid="uid://cpv18jusu663a" path="res://character_movement/assets/UpperArm.png" id="1_vp7mx"]
+[ext_resource type="Texture2D" uid="uid://7p3ftuvdhkuf" path="res://character_movement/assets/LowerArm.png" id="2_xfq04"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="skeleton" type="Skeleton2D" parent="."]
+
+[node name="upper_left_bone" type="Bone2D" parent="skeleton"]
+position = Vector2(3, 0)
+rest = Transform2D(1, 0, 0, 1, 3, 0)
+
+[node name="lower_left_bone" type="Bone2D" parent="skeleton/upper_left_bone"]
+position = Vector2(0, 6)
+rotation = 1.5708
+rest = Transform2D(-4.37114e-08, 1, -1, -4.37114e-08, 0, 5)
+auto_calculate_length_and_angle = false
+length = 4.0
+bone_angle = 0.0
+
+[node name="upper_right_bone" type="Bone2D" parent="skeleton"]
+position = Vector2(-3, 0)
+rest = Transform2D(1, 0, 0, 1, -3, 0)
+
+[node name="lower_right_bone" type="Bone2D" parent="skeleton/upper_right_bone"]
+position = Vector2(0, 6)
+rotation = 1.5708
+rest = Transform2D(-4.37114e-08, 1, -1, -4.37114e-08, 0, 5)
+auto_calculate_length_and_angle = false
+length = 4.0
+bone_angle = 0.0
+
+[node name="Node" type="Node" parent="."]
+
+[node name="upper_left" type="Polygon2D" parent="Node"]
+position = Vector2(-3, 3)
+texture = ExtResource("1_vp7mx")
+skeleton = NodePath("../../skeleton")
+polygon = PackedVector2Array(-0.5, 3.5, -0.5, -3.5, 0.5, -3.5, 0.5, 3.5)
+uv = PackedVector2Array(0, 7, 0, 0, 1, 0, 1, 7)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="lower_left" type="Polygon2D" parent="Node"]
+position = Vector2(-3, 8)
+texture = ExtResource("2_xfq04")
+skeleton = NodePath("../../skeleton")
+polygon = PackedVector2Array(-0.5, 2.5, -0.5, -2.5, 0.5, -2.5, 0.5, 2.5)
+uv = PackedVector2Array(0, 5, 0, 0, 1, 0, 1, 5)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+bones = ["upper_left_bone", PackedFloat32Array(0, 0, 0, 0), "upper_left_bone/lower_left_bone", PackedFloat32Array(0, 0, 0, 0), "upper_right_bone", PackedFloat32Array(0, 0, 0, 0), "upper_right_bone/lower_right_bone", PackedFloat32Array(1, 1, 1, 1)]
+
+[node name="upper_right" type="Polygon2D" parent="Node"]
+position = Vector2(3, 3)
+texture = ExtResource("1_vp7mx")
+skeleton = NodePath("../../skeleton")
+polygon = PackedVector2Array(-0.5, 3.5, -0.5, -3.5, 0.5, -3.5, 0.5, 3.5)
+uv = PackedVector2Array(0, 7, 0, 0, 1, 0, 1, 7)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="lower_right" type="Polygon2D" parent="Node"]
+position = Vector2(3, 8)
+texture = ExtResource("2_xfq04")
+skeleton = NodePath("../../skeleton")
+polygon = PackedVector2Array(-0.5, 2.5, -0.5, -2.5, 0.5, -2.5, 0.5, 2.5)
+uv = PackedVector2Array(0, 5, 0, 0, 1, 0, 1, 5)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
