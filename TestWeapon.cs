@@ -14,6 +14,10 @@ public partial class TestWeapon : Sprite2D
 	Node2D left_hand;
 	Node2D right_hand;
 
+	Node2D parent;
+
+	AnimationPlayer animation;
+
 	float left_dist;
 	float right_dist;
 
@@ -33,10 +37,20 @@ public partial class TestWeapon : Sprite2D
 
 		left_hand = (Node2D)GetNode("%left_hand");
 		right_hand = (Node2D)GetNode("%right_hand");
+
+		parent = (Node2D)GetParent();
+		animation = (AnimationPlayer)FindChild("animation");
     }
 
 	public override void _Process(double delta)
 	{
+		parent.Rotation = Math.Clamp(Mathf.Atan2(GetGlobalMousePosition().Y, GetGlobalMousePosition().X), -Mathf.Pi/2, Mathf.Pi/2);
+		if (Input.IsActionJustPressed("ui_left")) {
+			animation.Play("attack");
+		}
+
+
+
 		left_dist = (left_marker.GlobalPosition - left_bone.GlobalPosition).Length();
 		right_dist = (right_marker.GlobalPosition - right_bone.GlobalPosition).Length();
 
@@ -52,6 +66,12 @@ public partial class TestWeapon : Sprite2D
 			Vector2 left_hand_dist = left_marker.GlobalPosition - left_hand.GlobalPosition;
             Vector2 right_hand_dist = right_marker.GlobalPosition - right_hand.GlobalPosition;
 			this.GlobalPosition -= left_hand_dist.Length() > right_hand_dist.Length() ? left_hand_dist : right_hand_dist;
+		}
+		else if (far_left) {
+
+		}
+		else if (far_right) {
+
 		}
     }
 }
