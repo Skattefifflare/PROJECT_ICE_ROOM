@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://cpv18jusu663a" path="res://character_movement/assets/UpperArm.png" id="1_gge88"]
 [ext_resource type="Texture2D" uid="uid://7p3ftuvdhkuf" path="res://character_movement/assets/LowerArm.png" id="2_h5ctw"]
-[ext_resource type="Texture2D" uid="uid://cnmqg0h0fm3ve" path="res://spear.png" id="3_k7k4o"]
-[ext_resource type="Script" path="res://TestWeapon.cs" id="4_uhhka"]
+[ext_resource type="Texture2D" uid="uid://cnmqg0h0fm3ve" path="res://Weapons/spear.png" id="3_k7k4o"]
+[ext_resource type="Script" path="res://Weapons/Weapon.cs" id="4_7rvnc"]
 
 [sub_resource type="SkeletonModification2DCCDIK" id="SkeletonModification2DCCDIK_kmp30"]
 target_nodepath = NodePath("../weapon_rot/spear/left_marker")
@@ -193,12 +193,13 @@ polygons = [PackedInt32Array(0, 1, 2, 3)]
 bones = ["upper_left", PackedFloat32Array(0, 0, 0, 0), "upper_left/lower_left", PackedFloat32Array(0, 0, 0, 0), "upper_right", PackedFloat32Array(0, 0, 0, 0), "upper_right/lower_right", PackedFloat32Array(1, 1, 1, 1)]
 
 [node name="weapon_rot" type="Node2D" parent="."]
+rotation = 1.5708
 
 [node name="spear" type="Sprite2D" parent="weapon_rot"]
 position = Vector2(6, 11)
 rotation = 1.5708
 texture = ExtResource("3_k7k4o")
-script = ExtResource("4_uhhka")
+script = ExtResource("4_7rvnc")
 
 [node name="left_marker" type="Marker2D" parent="weapon_rot/spear"]
 position = Vector2(-9.97386e-07, 8)
@@ -208,7 +209,8 @@ gizmo_extents = 5.0
 position = Vector2(0, 3)
 gizmo_extents = 5.0
 
-[node name="animation" type="AnimationPlayer" parent="weapon_rot"]
+[node name="animation" type="AnimationPlayer" parent="weapon_rot/spear"]
+root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_i15c0")
 }

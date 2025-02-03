@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2v6nsk768m6x"
-path="res://.godot/imported/rock.png-2fd843802c09e25179696ea826da5ac7.ctex"
+uid="uid://cnmqg0h0fm3ve"
+path="res://.godot/imported/spear.png-3f9f9006bb5b603014a3582ff1f184a6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://rock.png"
-dest_files=["res://.godot/imported/rock.png-2fd843802c09e25179696ea826da5ac7.ctex"]
+source_file="res://Weapons/spear.png"
+dest_files=["res://.godot/imported/spear.png-3f9f9006bb5b603014a3582ff1f184a6.ctex"]
 
 [params]
 

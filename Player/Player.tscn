@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Player/Player.cs" id="1_twk3x"]
 [ext_resource type="Texture2D" uid="uid://lagas666wog3" path="res://Player/TempCharacterSpriteSheet.png" id="2_qtxel"]
 [ext_resource type="Texture2D" uid="uid://cv2lsrl7np5w" path="res://Player/player.png" id="2_rqxkb"]
-[ext_resource type="PackedScene" uid="uid://dapgexv4no1bw" path="res://Weapons/Sword/Sword.tscn" id="3_tuffx"]
+[ext_resource type="PackedScene" uid="uid://drqjfhw7srgij" path="res://Player/arms.tscn" id="4_gn2hq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_upo2t"]
 atlas = ExtResource("2_rqxkb")
@@ -183,10 +183,7 @@ autoplay = "idle"
 position = Vector2(-0.5, 2.5)
 shape = SubResource("RectangleShape2D_tftvx")
 
-[node name="sword_root" parent="." instance=ExtResource("3_tuffx")]
-position = Vector2(12, -3)
-rotation = 1.00531
-dmg = 0
-
 [node name="feet" type="CollisionShape2D" parent="."]
 shape = SubResource("SegmentShape2D_a0fxd")
+
+[node name="arm_root" parent="." instance=ExtResource("4_gn2hq")]

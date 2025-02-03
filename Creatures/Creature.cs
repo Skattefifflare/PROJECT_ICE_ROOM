@@ -14,8 +14,8 @@ public partial class Creature : CharacterBody2D {
 
     protected AnimatedSprite2D sprite_player;
     protected bool sprite_done = false;
-
-    protected Weapon whap;
+    
+    //protected Weapon whap;
     protected Area2D hitbox;
     protected Vector2 direction;
 
@@ -35,7 +35,7 @@ public partial class Creature : CharacterBody2D {
         sprite_player.AnimationFinished += () => sprite_done = true;
         sprite_player.AnimationChanged += () => sprite_done = false;
         try {
-            whap = (Weapon)FindChild("weapon");
+            //whap = (Weapon)FindChild("weapon");
         }
         catch {
             GD.Print("No weapon found");

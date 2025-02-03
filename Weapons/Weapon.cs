@@ -9,73 +9,62 @@ public partial class Weapon : Sprite2D
 
     Area2D dmg_box;
     public bool is_dangerous = false;
-  
-    Node2D left_hand_pos;    
-    Node2D right_hand_pos;
-    Bone2D left_hand;
-    Bone2D right_hand;
 
-    Vector2 mouse_pos;
+    Marker2D left_marker;
+    Marker2D right_marker;
+    Bone2D left_bone;
+    Bone2D right_bone;
+    Node2D left_hand;
+    Node2D right_hand;
+    Node2D parent;
+    AnimationPlayer animation;
 
+    float arm_len = 12f;
 
-    Vector2 prev_pos;
-    float prev_rot;
 
     public override void _Ready() {
-        base._Ready();
-        try {
-            left_hand_pos = (Node2D)FindChild("left_pos");
-            right_hand_pos = (Node2D)FindChild("right_pos");
-            GD.Print(left_hand_pos.GlobalPosition);
-        }
-        catch {
-            GD.Print("left_hand_pos");
-        }
+        left_marker = (Marker2D)FindChild("left_marker");
+        right_marker = (Marker2D)FindChild("right_marker");
 
-        try {
+        left_bone = (Bone2D)GetNode("%upper_left");
+        right_bone = (Bone2D)GetNode("%upper_right");
 
-            left_hand = (Bone2D)GetNode("%lh");
-            right_hand = (Bone2D)GetNode("%rh");
-            GD.Print(left_hand.GlobalPosition);
-        }
-        catch {
-            GD.Print("left_hand");
-        }
-      
+        left_hand = (Node2D)GetNode("%left_hand");
+        right_hand = (Node2D)GetNode("%right_hand");
 
-        prev_pos = this.GlobalPosition;
-        prev_rot = this.Rotation;
-
-        dmg_box = (Area2D)FindChild("dmg_box");
-        is_dangerous = false;
-    } 
-    public void MakeDangerous() {
-        is_dangerous = true;
+        parent = (Node2D)GetParent();
+        animation = (AnimationPlayer)FindChild("animation");
     }
-    public void MakeHarmless() {
-        is_dangerous = false;
-    }
+
     public override void _Process(double delta) {
-        base._Process(delta);
-        Update();
-        prev_pos = this.GlobalPosition;
-        prev_rot = this.Rotation;
-    }
-
-    private void Update() {
-        mouse_pos = GetGlobalMousePosition();
-
-        if (GlobalPosition != prev_pos || Rotation != prev_rot) {
-            if ((left_hand_pos.GlobalPosition-left_hand.GlobalPosition).Length() > 1f) {
-                SetBack();
-            }
-            if ((right_hand_pos.GlobalPosition - right_hand.GlobalPosition).Length() > 1f) {
-                SetBack();
-            }
+        parent.Rotation = Math.Clamp(Mathf.Atan2(GetGlobalMousePosition().Y, GetGlobalMousePosition().X), -Mathf.Pi / 2, Mathf.Pi / 2);
+        if (Input.IsActionJustPressed("left_click")) {
+            animation.Play("attack");
         }
+        CorrectPosition();
     }
-    private void SetBack() {
-        this.GlobalPosition = prev_pos;
-        this.Rotation = prev_rot;
+    private void CorrectPosition() {
+        float left_dist = (left_marker.GlobalPosition - left_bone.GlobalPosition).Length();
+        float right_dist = (right_marker.GlobalPosition - right_bone.GlobalPosition).Length();
+
+        bool far_left = left_dist > 12f ? true : false;
+        bool far_right = right_dist > 12f ? true : false;
+
+        if (far_left && far_right) {
+            Vector2 hand_diff = right_hand.GlobalPosition - left_hand.GlobalPosition;
+
+            float hand_angle = Mathf.Atan2(hand_diff.Y, hand_diff.X);
+            this.Rotation += hand_angle;
+
+            Vector2 left_hand_dist = left_marker.GlobalPosition - left_hand.GlobalPosition;
+            Vector2 right_hand_dist = right_marker.GlobalPosition - right_hand.GlobalPosition;
+            this.GlobalPosition -= left_hand_dist.Length() > right_hand_dist.Length() ? left_hand_dist : right_hand_dist;
+        }
+        else if (far_left) {
+
+        }
+        else if (far_right) {
+
+        }
     }
 }
