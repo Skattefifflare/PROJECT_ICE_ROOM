@@ -7,7 +7,7 @@ using System.Diagnostics;
 public partial class NoiseMap : GenSpline {
     private float height, width;
     private int cHeight, cWidth;
-    private int patchSize = 5;
+    private int patchSize = 20;
     private Vector2 center; //center of the polygon
     private Vector2[] uVS;
 
@@ -20,24 +20,29 @@ public partial class NoiseMap : GenSpline {
     private float[] NoiseData;
 
     private List<List<Vector2>> texturePoses;
+    private List<Vector2> copium;
 
     public override void _Ready() {
         Update();
         
         noiseGen = new FastNoiseLite();
         //Perlin noise is more smooth while Simplex is more dotted and intense
-        noiseGen.NoiseType = FastNoiseLite.NoiseTypeEnum.Perlin;
+        noiseGen.NoiseType = FastNoiseLite.NoiseTypeEnum.Simplex;
         noiseGen.Frequency = 1.0f / noiseScale;
+        //bug seed 85867
         noiseGen.Seed = seed.Next(0, 100000);
+        //GD.Print(noiseGen.Seed);
         CreateNoiseMap();
         DrawNoiseMap(ImageTexture.CreateFromImage(noiseMap));
-        NoiseHandler test = new(NoiseData, cHeight, cWidth, patchSize, 0.5f, new float[]{ mapSize[1], mapSize[3] });
+        NoiseHandler test = new(NoiseData, cHeight, cWidth, patchSize, 0.25f, new float[]{ mapSize[1], mapSize[3] });
         texturePoses = test.StructureTexturePoses();
+        copium = test.textureposes;
         Stopwatch sw = new Stopwatch();
         sw.Start();
-        InsideMap(texturePoses, (0, 0), true);
+        InsideMap(copium);
+        //InsideMap(texturePoses, (0, 0), true);
         sw.Stop();
-        GD.Print("Time: " + sw.ElapsedMilliseconds);
+        //GD.Print("Time: " + sw.ElapsedMilliseconds);
         PlaceTexture(test);
     }
     public void CreateNoiseMap() {
@@ -119,8 +124,6 @@ public partial class NoiseMap : GenSpline {
         splinePoly.Texture = texture;
         AddChild(splinePoly);
     }
-    private void DrawRawNoiseMap() { 
-    }
     //Loops through the noisemap and saves the float values
     private void SetNoiseData(byte[] data) {
         NoiseData = new float[data.Length];
@@ -128,104 +131,44 @@ public partial class NoiseMap : GenSpline {
             NoiseData[i] = (float)data[i] / 255;
         }
     }
-    private void InsideMap(List<List<Vector2>> textposes, (int x, int y) start, bool direction) {
-        if (start.y < 0 || start.y >= textposes.Count || start.x < 0 || start.x >= textposes[start.y].Count) {
-            GD.Print("Out of Bounds: (" + start.x + ", " + start.y + ")");
-            return;
-        }
-
+    private void InsideMap(List<Vector2> textposes) {
         for (int i = 0; i < textposes.Count; i++) {
-            for (int j = 0; j < textposes[i].Count; j++) {
-                if (Geometry2D.IsPointInPolygon(textposes[i][j], splinePoints.ToArray())) {
-                    continue;
+            if (Geometry2D.IsPointInPolygon(textposes[i], splinePoints.ToArray())) {
+                if (textposes[i] == new Vector2(-38.684803f, -421.9668f)) {
+                    GD.Print("bug");
+                    textposes[i] = new Vector2();
                 }
-                else {
-                    textposes[i][j] = new Vector2(-1, -1);
-                }
+                continue;
+            }
+            else {
+                textposes[i] = new Vector2();
             }
         }
-
-        //if (direction) {
-        //    // Forward direction
-        //    for (int i = start.x; i < textposes[start.y].Count; i++) {
-        //        if (start.x == textposes[start.y].Count) {
-        //            //GD.Print("End of Row");
-        //            InsideMap(textposes, (0, start.y + 1), !direction); // Move to the next row
-        //            return;
-        //        }
-        //        if (Geometry2D.IsPointInPolygon(textposes[start.y][i], splinePoints.ToArray())) {
-        //            //GD.Print("I Have Arrived In A Polygon (Forward)");
-        //            InsideMap(textposes, (textposes[start.y].Count - 1, start.y), !direction); //Sends backward
-        //            return;
-        //        }
-        //        else {
-        //            //GD.Print("I Have Not Arrived In A Polygon (Forward)");
-        //            textposes[start.y][i] = new Vector2(-1, -1); // Mark as invalid
-        //        }
-        //    }
-        //}
-        //else {
-        //    // Backward direction
-        //    for (int i = start.x; i >= 0; i--) {
-        //        if(Geometry2D.IsPointInPolygon(textposes[start.y][start.x], splinePoints.ToArray())) {
-        //            //GD.Print("test");
-        //            InsideMap(textposes, (0, start.y + 1), !direction); // Move to the next row
-        //            return;
-        //        }
-        //        else if (Geometry2D.IsPointInPolygon(textposes[start.y][i], splinePoints.ToArray())) {
-        //            //GD.Print("I Have Arrived In A Polygon (Backward)");
-        //            if (start.y == textposes.Count - 1) {
-        //                CutTexturePoses(textposes);
-        //                return;
-        //            }
-        //            InsideMap(textposes, (0, start.y + 1), !direction); //Sends forward
-        //            return;
-        //        }
-        //        else {
-        //            //GD.Print("I Have Not Arrived In A Polygon (Backward)");
-        //            textposes[start.y][i] = new Vector2(-1, -1);
-        //        }
-        //    }
-        //}
+        CutTexturePoses(textposes);
     }
-    private void CutTexturePoses(List<List<Vector2>> textposes) {
-        foreach (List<Vector2> poses in textposes) {
-            for (int i = 0; i < poses.Count; i++) {
-                if (poses[i] == new Vector2(-1, -1)) {
-                    poses.RemoveAt(i);
-                    i--;
-                }
+    private void CutTexturePoses(List<Vector2> textposes) {
+        for (int i = 0; i < textposes.Count; i++) {
+            if (textposes[i] == new Vector2()) {
+                textposes.RemoveAt(i);
+                i--;
             }
         }
     }
     private void PlaceTexture(NoiseHandler handler) {
-        //List<Vector2> positions = handler.textureposes;
-        //foreach (Vector2 pos in positions) {
-        //    Polygon2D obj = new Polygon2D() {
-        //        Polygon = new Vector2[] {
-        //        pos,
-        //        new Vector2(pos.X + patchSize, pos.Y),
-        //        new Vector2(pos.X + patchSize, pos.Y + patchSize),
-        //        new Vector2(pos.X, pos.Y + patchSize)
-        //        },
-        //        Color = new Color(0, 1, 0, 0.3f)
-        //    };
-        //    AddChild(obj);
-        //}
-        //foreach (List<Vector2> poses in texturePoses) {
-        //    foreach (Vector2 pos in poses) {
-        //        Polygon2D obj = new Polygon2D() {
-        //            Polygon = new Vector2[] {
-        //            pos,
-        //            new Vector2(pos.X + patchSize, pos.Y),
-        //            new Vector2(pos.X + patchSize, pos.Y + patchSize),
-        //            new Vector2(pos.X, pos.Y + patchSize)
-        //            },
-        //            Color = new Color(0, 1, 0, 1f)
-        //        };
-        //        AddChild(obj);
-        //    }
-        //}
+        foreach (Vector2 pos in copium) {
+            Vector2 temp = pos - new Vector2(patchSize / 2, patchSize / 2);
+            Polygon2D obj = new Polygon2D() {
+                Polygon = new Vector2[] {
+                temp,
+                new Vector2(temp.X + patchSize, temp.Y),
+                new Vector2(temp.X + patchSize, temp.Y + patchSize),
+                new Vector2(temp.X, temp.Y + patchSize)
+                },
+                Color = new Color(0, 1, 0, 1f)
+            };
+            AddChild(obj);
+        }
+        
     }
 
 }

@@ -72,26 +72,40 @@ internal partial class NoiseHandler : Node2D {
         }
         return total / count;
     }
-    public List<List<Vector2>> StructureTexturePoses() {
-        List<List<Vector2>> newPoses = new List<List<Vector2>> {
-            new List<Vector2>()
+    public void StructureList(bool type) {
+        if(type) {
+            StructureTo2DList();
+        }
+        else
+        {
+            StructureTo1DList();
+        }
+    }
+    private List<List<Vector2>> StructureTo2DList() {
+        List<List<Vector2>> newList = new List<List<Vector2>> {
+        new List<Vector2>()
         };
         int row = 0;
-        newPoses[row].Add(textureposes[0]);
-        for (int i = 0; i < textureposes.Count -1; i++) {
-            
+        newList[row].Add(textureposes[0]);
+        for (int i = 0; i < textureposes.Count - 1; i++) {
+
 
             if (textureposes[i].Y == textureposes[i + 1].Y) {
-                newPoses[row].Add(textureposes[i + 1]);
+                newList[row].Add(textureposes[i + 1]);
             }
             else {
                 row++;
-                newPoses.Add(new List<Vector2>());
-                newPoses[row].Add(textureposes[i + 1]);
+                newList.Add(new List<Vector2>());
+                newList[row].Add(textureposes[i + 1]);
             }
         }
+        return newList;
+    }
+    private List<Vector2> StructureTo1DList() {
+        List<Vector2> newList
+    }
+    public List<Vector2> CheckProximity(List<Vector2> textposes) {
 
-        return newPoses;
     }
 }
 
