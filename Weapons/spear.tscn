@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://rnbeh2t00dvr"]
 
 [ext_resource type="Texture2D" uid="uid://cnmqg0h0fm3ve" path="res://Weapons/spear.png" id="1_sueas"]
-[ext_resource type="Script" path="res://Weapons/Weapon.cs" id="2_asrl1"]
+[ext_resource type="Script" path="res://Weapons/PlayerWeapon.cs" id="2_f0uva"]
 
 [sub_resource type="Animation" id="Animation_g26oj"]
 length = 0.001
@@ -65,11 +65,11 @@ _data = {
 }
 
 [node name="spear" type="Sprite2D"]
-position = Vector2(-4.76837e-07, 0)
-rotation = 1.5708
+position = Vector2(16, 3)
+rotation = 1.43292
 scale = Vector2(1, 1.4)
 texture = ExtResource("1_sueas")
-script = ExtResource("2_asrl1")
+script = ExtResource("2_f0uva")
 
 [node name="animation" type="AnimationPlayer" parent="."]
 root_node = NodePath("../..")
