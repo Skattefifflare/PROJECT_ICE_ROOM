@@ -1,41 +1,46 @@
-using Godot;
+﻿using Godot;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Project_Ice_Room;
+public partial class PlayerWeapon : Weapon {
 
 
-public partial class TestWeapon : Sprite2D
-{
-	Marker2D left_marker;
-	Marker2D right_marker;
-	Bone2D left_bone;
-	Bone2D right_bone;
-	Node2D left_hand;
-	Node2D right_hand;
-	Node2D parent;
-	AnimationPlayer animation;
+    Marker2D left_marker;
+    Marker2D right_marker;
+    Bone2D left_bone;
+    Bone2D right_bone;
+    Node2D left_hand;
+    Node2D right_hand;
+    Node2D parent;
+    AnimationPlayer animation;
 
-	float arm_len = 12f;
+    float arm_len = 12f;
 
-	public override void _Ready()
-	{
-		left_marker = (Marker2D)FindChild("left_marker");
+
+    public override void _Ready() {
+        base._Ready();
+        left_marker = (Marker2D)FindChild("left_marker");
         right_marker = (Marker2D)FindChild("right_marker");
-		left_bone = (Bone2D)GetNode("%upper_left");
+        left_bone = (Bone2D)GetNode("%upper_left");
         right_bone = (Bone2D)GetNode("%upper_right");
-		left_hand = (Node2D)GetNode("%left_hand");
-		right_hand = (Node2D)GetNode("%right_hand"); 
-		parent = (Node2D)GetParent();
-		animation = (AnimationPlayer)FindChild("animation");
+        left_hand = (Node2D)GetNode("%left_hand");
+        right_hand = (Node2D)GetNode("%right_hand");
+        parent = (Node2D)GetParent();
+        animation = (AnimationPlayer)FindChild("animation");
     }
-
-	public override void _Process(double delta)
-	{
-		parent.Rotation = Math.Clamp(Mathf.Atan2(GetGlobalMousePosition().Y, GetGlobalMousePosition().X), -Mathf.Pi/2, Mathf.Pi/2);
-		if (Input.IsActionJustPressed("left_click")) {
+    public override void _Process(double delta) {
+        base._Process(delta);
+        parent.Rotation = Math.Clamp(Mathf.Atan2(GetGlobalMousePosition().Y, GetGlobalMousePosition().X), -Mathf.Pi / 2, Mathf.Pi / 2);
+        if (Input.IsActionJustPressed("left_click")) {
             animation.Play("attack");
-		}
-		CorrectPosition();	
+        }
+        CorrectPosition();
     }
-	private void CorrectPosition() {
+    private void CorrectPosition() {
         float left_dist = (left_marker.GlobalPosition - left_bone.GlobalPosition).Length();
         float right_dist = (right_marker.GlobalPosition - right_bone.GlobalPosition).Length();
 

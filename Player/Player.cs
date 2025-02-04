@@ -6,12 +6,14 @@ using System;
 namespace Project_Ice_Room.Player {
     public partial class Player : Creature {
 
+
+        private PlayerWeapon player_whap;
+
         State Idle;
         private void IdleStart() {
             sprite_player.Play("idle");
             Velocity = Vector2.Zero;
         }
-
         State Walk;
         private void WalkStart() {
             sprite_player.Play("walk");
@@ -28,6 +30,9 @@ namespace Project_Ice_Room.Player {
 
         public override void _Ready() {
             base._Ready();
+
+            player_whap = (PlayerWeapon)FindChild("weapon");
+
             Idle = new(IdleStart);
             Walk = new(WalkStart, WalkRunning, WalkEnd);
 

@@ -1,9 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://drqjfhw7srgij"]
+[gd_scene load_steps=7 format=3 uid="uid://drqjfhw7srgij"]
 
-[ext_resource type="Texture2D" uid="uid://cpv18jusu663a" path="res://character_movement/assets/UpperArm.png" id="1_gge88"]
-[ext_resource type="Texture2D" uid="uid://7p3ftuvdhkuf" path="res://character_movement/assets/LowerArm.png" id="2_h5ctw"]
-[ext_resource type="Texture2D" uid="uid://cnmqg0h0fm3ve" path="res://Weapons/spear.png" id="3_k7k4o"]
-[ext_resource type="Script" path="res://Weapons/Weapon.cs" id="4_7rvnc"]
+[ext_resource type="PackedScene" uid="uid://rnbeh2t00dvr" path="res://Weapons/spear.tscn" id="1_8uwwh"]
 
 [sub_resource type="SkeletonModification2DCCDIK" id="SkeletonModification2DCCDIK_kmp30"]
 target_nodepath = NodePath("../weapon_rot/spear/left_marker")
@@ -49,82 +46,29 @@ modification_count = 2
 modifications/0 = SubResource("SkeletonModification2DCCDIK_kmp30")
 modifications/1 = SubResource("SkeletonModification2DCCDIK_2jl20")
 
-[sub_resource type="Animation" id="Animation_g26oj"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("spear:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(6, 11)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("spear:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.5708]
-}
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wfwce"]
+load_path = "res://.godot/imported/UpperArm.png-d7d52aebbf3648de30f0bfdea3cab03c.ctex"
 
-[sub_resource type="Animation" id="Animation_tbh5o"]
-resource_name = "attack"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("spear:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.166667, 0.366667),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(6, 11), Vector2(-2, 9), Vector2(6, 10), Vector2(16, 3)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("spear:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.166667, 0.366667),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [1.5708, 1.98095, 1.5708, 1.43292]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_i15c0"]
-_data = {
-"RESET": SubResource("Animation_g26oj"),
-"attack": SubResource("Animation_tbh5o")
-}
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_a26bn"]
+load_path = "res://.godot/imported/LowerArm.png-2a92dae36ba8ebac4fc76fe28ab4518c.ctex"
 
 [node name="arm_root" type="Node2D"]
 
 [node name="skeleton" type="Skeleton2D" parent="."]
-visible = false
 modification_stack = SubResource("SkeletonModificationStack2D_o6v72")
 
 [node name="upper_left" type="Bone2D" parent="skeleton"]
 unique_name_in_owner = true
 position = Vector2(-3, 0)
+rotation = 0.20425
+scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, -3, 0)
 metadata/_local_pose_override_enabled_ = true
 
 [node name="lower_left" type="Bone2D" parent="skeleton/upper_left"]
 position = Vector2(0, 7)
-rotation = 1.5708
+rotation = 1.23386
+scale = Vector2(1, 1)
 rest = Transform2D(-4.37114e-08, 1, -1, -4.37114e-08, 0, 7)
 auto_calculate_length_and_angle = false
 length = 4.0
@@ -138,12 +82,15 @@ position = Vector2(4, -1.74846e-07)
 [node name="upper_right" type="Bone2D" parent="skeleton"]
 unique_name_in_owner = true
 position = Vector2(3, 0)
+rotation = 0.0049133
+scale = Vector2(0.999999, 0.999999)
 rest = Transform2D(1, 0, 0, 1, 3, 0)
 metadata/_local_pose_override_enabled_ = true
 
 [node name="lower_right" type="Bone2D" parent="skeleton/upper_right"]
-position = Vector2(0, 7)
-rotation = 1.5708
+position = Vector2(0, 7.00001)
+rotation = 1.23386
+scale = Vector2(1, 1)
 rest = Transform2D(-4.37114e-08, 1, -1, -4.37114e-08, 0, 7)
 auto_calculate_length_and_angle = false
 length = 4.0
@@ -156,62 +103,53 @@ position = Vector2(4, -1.74846e-07)
 
 [node name="textures" type="Node" parent="."]
 
-[node name="upper_left_tex" type="Polygon2D" parent="textures"]
-position = Vector2(-3, 3)
-texture = ExtResource("1_gge88")
+[node name="weapon_rot" type="Node2D" parent="."]
+
+[node name="spear" parent="weapon_rot" instance=ExtResource("1_8uwwh")]
+position = Vector2(6, 11)
+
+[node name="left_marker" type="Marker2D" parent="weapon_rot/spear"]
+position = Vector2(4.3869e-05, 8.57143)
+gizmo_extents = 5.0
+
+[node name="right_marker" type="Marker2D" parent="weapon_rot/spear"]
+position = Vector2(1.48694e-05, 2.85714)
+gizmo_extents = 5.0
+
+[node name="textures2" type="Node2D" parent="."]
+
+[node name="upper_left_tex" type="Polygon2D" parent="textures2"]
+position = Vector2(-3.5, 3.5)
+texture = SubResource("CompressedTexture2D_wfwce")
 skeleton = NodePath("../../skeleton")
 polygon = PackedVector2Array(-0.5, 3.5, -0.5, -3.5, 0.5, -3.5, 0.5, 3.5)
 uv = PackedVector2Array(0, 7, 0, 0, 1, 0, 1, 7)
 polygons = [PackedInt32Array(0, 1, 2, 3)]
 bones = ["upper_left", PackedFloat32Array(1, 1, 1, 1), "upper_left/lower_left", PackedFloat32Array(0, 0, 0, 0), "upper_right", PackedFloat32Array(0, 0, 0, 0), "upper_right/lower_right", PackedFloat32Array(0, 0, 0, 0)]
 
-[node name="lower_left_tex" type="Polygon2D" parent="textures"]
-position = Vector2(-3, 9)
-texture = ExtResource("2_h5ctw")
+[node name="lower_left_tex" type="Polygon2D" parent="textures2"]
+position = Vector2(-3.5, 9.5)
+texture = SubResource("CompressedTexture2D_a26bn")
 skeleton = NodePath("../../skeleton")
 polygon = PackedVector2Array(-0.5, 2.5, -0.5, -2.5, 0.5, -2.5, 0.5, 2.5)
 uv = PackedVector2Array(0, 5, 0, 0, 1, 0, 1, 5)
 polygons = [PackedInt32Array(0, 1, 2, 3)]
 bones = ["upper_left", PackedFloat32Array(0, 0, 0, 0), "upper_left/lower_left", PackedFloat32Array(1, 1, 1, 1), "upper_right", PackedFloat32Array(0, 0, 0, 0), "upper_right/lower_right", PackedFloat32Array(0, 0, 0, 0)]
 
-[node name="upper_right_tex" type="Polygon2D" parent="textures"]
-position = Vector2(3, 3)
-texture = ExtResource("1_gge88")
+[node name="upper_right_tex" type="Polygon2D" parent="textures2"]
+position = Vector2(2.5, 3.5)
+texture = SubResource("CompressedTexture2D_wfwce")
 skeleton = NodePath("../../skeleton")
 polygon = PackedVector2Array(-0.5, 3.5, -0.5, -3.5, 0.5, -3.5, 0.5, 3.5)
 uv = PackedVector2Array(0, 7, 0, 0, 1, 0, 1, 7)
 polygons = [PackedInt32Array(0, 1, 2, 3)]
 bones = ["upper_left", PackedFloat32Array(0, 0, 0, 0), "upper_left/lower_left", PackedFloat32Array(0, 0, 0, 0), "upper_right", PackedFloat32Array(1, 1, 1, 1), "upper_right/lower_right", PackedFloat32Array(0, 0, 0, 0)]
 
-[node name="lower_right_tex" type="Polygon2D" parent="textures"]
-position = Vector2(3, 9)
-texture = ExtResource("2_h5ctw")
+[node name="lower_right_tex" type="Polygon2D" parent="textures2"]
+position = Vector2(2.5, 9.5)
+texture = SubResource("CompressedTexture2D_a26bn")
 skeleton = NodePath("../../skeleton")
 polygon = PackedVector2Array(-0.5, 2.5, -0.5, -2.5, 0.5, -2.5, 0.5, 2.5)
 uv = PackedVector2Array(0, 5, 0, 0, 1, 0, 1, 5)
 polygons = [PackedInt32Array(0, 1, 2, 3)]
 bones = ["upper_left", PackedFloat32Array(0, 0, 0, 0), "upper_left/lower_left", PackedFloat32Array(0, 0, 0, 0), "upper_right", PackedFloat32Array(0, 0, 0, 0), "upper_right/lower_right", PackedFloat32Array(1, 1, 1, 1)]
-
-[node name="weapon_rot" type="Node2D" parent="."]
-rotation = 1.5708
-
-[node name="spear" type="Sprite2D" parent="weapon_rot"]
-position = Vector2(6, 11)
-rotation = 1.5708
-texture = ExtResource("3_k7k4o")
-script = ExtResource("4_7rvnc")
-
-[node name="left_marker" type="Marker2D" parent="weapon_rot/spear"]
-position = Vector2(-9.97386e-07, 8)
-gizmo_extents = 5.0
-
-[node name="right_marker" type="Marker2D" parent="weapon_rot/spear"]
-position = Vector2(0, 3)
-gizmo_extents = 5.0
-
-[node name="animation" type="AnimationPlayer" parent="weapon_rot/spear"]
-root_node = NodePath("../..")
-libraries = {
-"": SubResource("AnimationLibrary_i15c0")
-}
-speed_scale = 1.25

@@ -15,7 +15,6 @@ public partial class Creature : CharacterBody2D {
     protected AnimatedSprite2D sprite_player;
     protected bool sprite_done = false;
     
-    //protected Weapon whap;
     protected Area2D hitbox;
     protected Vector2 direction;
 
@@ -34,12 +33,7 @@ public partial class Creature : CharacterBody2D {
         sprite_player = (AnimatedSprite2D)FindChild("sprite_player");
         sprite_player.AnimationFinished += () => sprite_done = true;
         sprite_player.AnimationChanged += () => sprite_done = false;
-        try {
-            //whap = (Weapon)FindChild("weapon");
-        }
-        catch {
-            GD.Print("No weapon found");
-        }
+
         hitbox = (Area2D)FindChild("hitbox");
         direction = Vector2.Zero;
 
@@ -59,13 +53,32 @@ public partial class Creature : CharacterBody2D {
     }
     private void FlipFlop() {
         if (direction.X < 0 && facing_right) {
-            this.Scale = new Vector2(-1, 1);
+            foreach (Node child in GetChildren()) {
+                if (child == sprite_player) continue;
+                try {
+                    ((Node2D)child).Position = ((Node2D)child).Position * new Vector2(1, 1);
+                }
+                catch {
+
+                }
+            }
+            sprite_player.FlipH = true;
             facing_right = false;
         }
         else if (direction.X > 0 && !facing_right) {
-            this.Scale = new Vector2(1, 1);
+            foreach (Node child in GetChildren()) {
+                if (child == sprite_player) continue;
+                try {
+                    ((Node2D)child).Position = ((Node2D)child).Position * new Vector2(-1, 1);
+                }
+                catch {
+
+                }
+            }
+            sprite_player.FlipH = true;
             facing_right = true;
         }
+        
     }
 
 
@@ -74,6 +87,7 @@ public partial class Creature : CharacterBody2D {
         if (enemy_weapon != null) {
             if (!enemy_weapon.is_dangerous) {
                 enemy_weapon = null;
+                // basically detects if the enemy's attack is finished
             }
         }
         else {

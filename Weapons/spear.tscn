@@ -1,0 +1,79 @@
+[gd_scene load_steps=6 format=3 uid="uid://rnbeh2t00dvr"]
+
+[ext_resource type="Texture2D" uid="uid://cnmqg0h0fm3ve" path="res://Weapons/spear.png" id="1_sueas"]
+[ext_resource type="Script" path="res://Weapons/Weapon.cs" id="2_asrl1"]
+
+[sub_resource type="Animation" id="Animation_g26oj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("spear:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(6, 11)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("spear:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5708]
+}
+
+[sub_resource type="Animation" id="Animation_tbh5o"]
+resource_name = "attack"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("spear:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.166667, 0.366667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(6, 11), Vector2(-2, 9), Vector2(6, 10), Vector2(16, 3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("spear:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.166667, 0.366667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [1.5708, 1.98095, 1.5708, 1.43292]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i15c0"]
+_data = {
+"RESET": SubResource("Animation_g26oj"),
+"attack": SubResource("Animation_tbh5o")
+}
+
+[node name="spear" type="Sprite2D"]
+position = Vector2(-4.76837e-07, 0)
+rotation = 1.5708
+scale = Vector2(1, 1.4)
+texture = ExtResource("1_sueas")
+script = ExtResource("2_asrl1")
+
+[node name="animation" type="AnimationPlayer" parent="."]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_i15c0")
+}
+speed_scale = 1.25
