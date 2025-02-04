@@ -56,26 +56,28 @@ public partial class Creature : CharacterBody2D {
             foreach (Node child in GetChildren()) {
                 if (child == sprite_player) continue;
                 try {
-                    ((Node2D)child).Position = ((Node2D)child).Position * new Vector2(1, 1);
+                    ((Node2D)child).Position = ((Node2D)child).Position * -1;
                 }
                 catch {
 
                 }
             }
             sprite_player.FlipH = true;
+            GD.Print(sprite_player.FlipH);
             facing_right = false;
         }
         else if (direction.X > 0 && !facing_right) {
             foreach (Node child in GetChildren()) {
                 if (child == sprite_player) continue;
                 try {
-                    ((Node2D)child).Position = ((Node2D)child).Position * new Vector2(-1, 1);
+                    ((Node2D)child).Position = ((Node2D)child).Position * -1;
                 }
                 catch {
 
                 }
             }
-            sprite_player.FlipH = true;
+            sprite_player.FlipH = false;
+            GD.Print(sprite_player.FlipH);
             facing_right = true;
         }
         
