@@ -72,40 +72,49 @@ internal partial class NoiseHandler : Node2D {
         }
         return total / count;
     }
-    public void StructureList(bool type) {
-        if(type) {
-            StructureTo2DList();
-        }
-        else
-        {
-            StructureTo1DList();
-        }
-    }
-    private List<List<Vector2>> StructureTo2DList() {
+    // 1D list --> 2D list
+    public List<List<Vector2>> StructureList(List<Vector2> textposes) {
         List<List<Vector2>> newList = new List<List<Vector2>> {
         new List<Vector2>()
         };
         int row = 0;
-        newList[row].Add(textureposes[0]);
-        for (int i = 0; i < textureposes.Count - 1; i++) {
+        newList[row].Add(textposes[0]);
+        for (int i = 0; i < textposes.Count - 1; i++) {
 
 
-            if (textureposes[i].Y == textureposes[i + 1].Y) {
-                newList[row].Add(textureposes[i + 1]);
+            if (textposes[i].Y == textposes[i + 1].Y) {
+                newList[row].Add(textposes[i + 1]);
             }
             else {
                 row++;
                 newList.Add(new List<Vector2>());
-                newList[row].Add(textureposes[i + 1]);
+                newList[row].Add(textposes[i + 1]);
             }
         }
         return newList;
     }
-    private List<Vector2> StructureTo1DList() {
-        List<Vector2> newList
+    // 2D list --> 1D list
+    public List<Vector2> StructureList(List<List<Vector2>> textposes) {
+        List<Vector2> newList = new List<Vector2>();
+        for (int i = 0; i < textposes.Count; i++) {
+            for (int j = 0; j < textposes[i].Count; j++) {
+                newList.Add(textposes[i][j]);
+            }
+        }
+        return newList;
     }
     public List<Vector2> CheckProximity(List<Vector2> textposes) {
+        List<List<Vector2>> textposes2D = StructureList(textposes);
 
+        for(int y = 0; y < textposes2D.Count; y++) {
+            for(int x = 0; x < textposes2D[y].Count; x++) {
+                
+            }
+        }
+
+
+
+        return StructureList(textposes2D);
     }
 }
 
