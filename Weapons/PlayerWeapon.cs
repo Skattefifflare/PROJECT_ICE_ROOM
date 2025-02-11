@@ -31,10 +31,13 @@ public partial class PlayerWeapon : Weapon {
         right_hand = (Node2D)GetNode("%right_hand");
         parent = (Node2D)GetParent();
         animation = (AnimationPlayer)FindChild("animation");
+
+        UpdateOffset();
     }
     public override void _Process(double delta) {
         base._Process(delta);
-        parent.Rotation = Math.Clamp(Mathf.Atan2(GetGlobalMousePosition().Y, GetGlobalMousePosition().X), -Mathf.Pi / 2, Mathf.Pi / 2);
+        //parent.Rotation = Math.Clamp(Mathf.Atan2(GetGlobalMousePosition().Y-parent.GlobalPosition.Y, GetGlobalMousePosition().X - parent.GlobalPosition.X), -Mathf.Pi / 2, Mathf.Pi / 2);
+        parent.Rotation = Mathf.Atan2(GetGlobalMousePosition().Y - parent.GlobalPosition.Y, GetGlobalMousePosition().X - parent.GlobalPosition.X);
         if (Input.IsActionJustPressed("left_click")) {
             animation.Play("attack");
         }
@@ -63,5 +66,9 @@ public partial class PlayerWeapon : Weapon {
         else if (far_right) {
 
         }
+    }
+
+    private void UpdateOffset() {
+        this.Offset = new Vector2((left_marker.Position.X + right_marker.Position.X) / 2, 0);
     }
 }

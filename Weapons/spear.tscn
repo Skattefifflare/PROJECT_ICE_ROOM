@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://rnbeh2t00dvr"]
+[gd_scene load_steps=7 format=3 uid="uid://rnbeh2t00dvr"]
 
 [ext_resource type="Texture2D" uid="uid://cnmqg0h0fm3ve" path="res://Weapons/spear.png" id="1_sueas"]
 [ext_resource type="Script" path="res://Weapons/PlayerWeapon.cs" id="2_f0uva"]
@@ -64,9 +64,11 @@ _data = {
 "attack": SubResource("Animation_tbh5o")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j13th"]
+radius = 0.99051
+height = 5.8564
+
 [node name="spear" type="Sprite2D"]
-position = Vector2(16, 3)
-rotation = 1.43292
 scale = Vector2(1, 1.4)
 texture = ExtResource("1_sueas")
 script = ExtResource("2_f0uva")
@@ -77,3 +79,9 @@ libraries = {
 "": SubResource("AnimationLibrary_i15c0")
 }
 speed_scale = 1.25
+
+[node name="hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(0, -10.7143)
+shape = SubResource("CapsuleShape2D_j13th")
