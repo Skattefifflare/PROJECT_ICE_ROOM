@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Player/Player.cs" id="1_twk3x"]
 [ext_resource type="Texture2D" uid="uid://lagas666wog3" path="res://Player/TempCharacterSpriteSheet.png" id="2_qtxel"]
 [ext_resource type="Texture2D" uid="uid://cv2lsrl7np5w" path="res://Player/player.png" id="2_rqxkb"]
-[ext_resource type="PackedScene" uid="uid://dqo3t52qaiejt" path="res://node_2d.tscn" id="4_fj3k7"]
+[ext_resource type="PackedScene" uid="uid://b16v8d7sjyh8h" path="res://Player/new_arms.tscn" id="4_ghupw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_upo2t"]
 atlas = ExtResource("2_rqxkb")
@@ -187,4 +187,4 @@ shape = SubResource("RectangleShape2D_tftvx")
 [node name="feet" type="CollisionShape2D" parent="."]
 shape = SubResource("SegmentShape2D_a0fxd")
 
-[node name="Node2D" parent="." instance=ExtResource("4_fj3k7")]
+[node name="arms" parent="." instance=ExtResource("4_ghupw")]
