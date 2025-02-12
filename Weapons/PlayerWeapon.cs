@@ -31,7 +31,7 @@ public partial class PlayerWeapon : Weapon {
         right_hand = (Node2D)GetNode("%right_hand");
         parent = (Node2D)GetParent();
         animation = (AnimationPlayer)FindChild("animation");
-
+          
         UpdateOffset();
     }
     public override void _Process(double delta) {
@@ -44,6 +44,7 @@ public partial class PlayerWeapon : Weapon {
         CorrectPosition();
     }
     private void CorrectPosition() {
+        if (animation.IsPlaying()) return;
         float left_dist = (left_marker.GlobalPosition - left_bone.GlobalPosition).Length();
         float right_dist = (right_marker.GlobalPosition - right_bone.GlobalPosition).Length();
 

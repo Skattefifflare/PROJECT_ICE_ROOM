@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://dqo3t52qaiejt"]
+[gd_scene load_steps=2 format=3 uid="uid://by01b6i6qvg51"]
 
-[ext_resource type="PackedScene" uid="uid://drqjfhw7srgij" path="res://Player/arms.tscn" id="1_j6x7o"]
+[ext_resource type="PackedScene" uid="uid://drqjfhw7srgij" path="res://Player/arms.tscn" id="1_q5gvw"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -17,9 +17,11 @@ transparent_bg = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
 size = Vector2i(100, 100)
+size_2d_override = Vector2i(50, 50)
+size_2d_override_stretch = true
 render_target_update_mode = 4
 
-[node name="arm_root" parent="SubViewportContainer/SubViewport2" instance=ExtResource("1_j6x7o")]
+[node name="arm_root" parent="SubViewportContainer/SubViewport2" instance=ExtResource("1_q5gvw")]
 texture_filter = 1
 
 [node name="Camera2D" type="Camera2D" parent="SubViewportContainer/SubViewport2"]

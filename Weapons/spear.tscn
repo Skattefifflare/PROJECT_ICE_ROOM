@@ -3,12 +3,44 @@
 [ext_resource type="Texture2D" uid="uid://cnmqg0h0fm3ve" path="res://Weapons/spear.png" id="1_sueas"]
 [ext_resource type="Script" path="res://Weapons/PlayerWeapon.cs" id="2_f0uva"]
 
-[sub_resource type="Animation" id="Animation_g26oj"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j13th"]
+radius = 0.99051
+height = 5.8564
+
+[sub_resource type="Animation" id="Animation_3x8wx"]
+resource_name = "attack"
+length = 0.45
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.233333, 0.333333, 0.433333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(6, 11), Vector2(-5, 7), Vector2(1, 9), Vector2(20, 4), Vector2(6, 11)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.233333, 0.333333, 0.433333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [1.5708, 1.74882, 1.49051, 1.41197, 1.5708]
+}
+
+[sub_resource type="Animation" id="Animation_vxc8f"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("spear:position")
+tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -20,7 +52,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("spear:rotation")
+tracks/1/path = NodePath(".:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -30,58 +62,26 @@ tracks/1/keys = {
 "values": [1.5708]
 }
 
-[sub_resource type="Animation" id="Animation_tbh5o"]
-resource_name = "attack"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("spear:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.166667, 0.366667),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(6, 11), Vector2(-2, 9), Vector2(6, 10), Vector2(16, 3)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("spear:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.166667, 0.366667),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [1.5708, 1.98095, 1.5708, 1.43292]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_i15c0"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mvevj"]
 _data = {
-"RESET": SubResource("Animation_g26oj"),
-"attack": SubResource("Animation_tbh5o")
+"RESET": SubResource("Animation_vxc8f"),
+"attack": SubResource("Animation_3x8wx")
 }
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j13th"]
-radius = 0.99051
-height = 5.8564
 
 [node name="spear" type="Sprite2D"]
+position = Vector2(6, 11)
+rotation = 1.5708
 scale = Vector2(1, 1.4)
 texture = ExtResource("1_sueas")
 script = ExtResource("2_f0uva")
-
-[node name="animation" type="AnimationPlayer" parent="."]
-root_node = NodePath("../..")
-libraries = {
-"": SubResource("AnimationLibrary_i15c0")
-}
-speed_scale = 1.25
 
 [node name="hitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
 position = Vector2(0, -10.7143)
 shape = SubResource("CapsuleShape2D_j13th")
+
+[node name="animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mvevj")
+}
