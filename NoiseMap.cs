@@ -7,7 +7,7 @@ using System.Diagnostics;
 public partial class NoiseMap : GenSpline {
     private float height, width;
     private int cHeight, cWidth;
-    private int patchSize = 20;
+    private int patchSize = 10;
     private Vector2 center; //center of the polygon
     private Vector2[] uVS;
 
@@ -19,12 +19,10 @@ public partial class NoiseMap : GenSpline {
     private float[] mapSize;//max and min vector values
     private float[] NoiseData;
 
-    private List<List<Vector2>> texturePoses;
-    private List<Vector2> copium;
+    private List<Vector2> texturePoses;
 
     public override void _Ready() {
         Update();
-        
         noiseGen = new FastNoiseLite();
         //Perlin noise is more smooth while Simplex is more dotted and intense
         noiseGen.NoiseType = FastNoiseLite.NoiseTypeEnum.Simplex;
@@ -34,16 +32,14 @@ public partial class NoiseMap : GenSpline {
         //GD.Print(noiseGen.Seed);
         CreateNoiseMap();
         DrawNoiseMap(ImageTexture.CreateFromImage(noiseMap));
-        NoiseHandler test = new(NoiseData, cHeight, cWidth, patchSize, 0.25f, new float[]{ mapSize[1], mapSize[3] });
-        texturePoses = test.StructureTexturePoses();
-        copium = test.textureposes;
-        Stopwatch sw = new Stopwatch();
-        sw.Start();
-        InsideMap(copium);
-        //InsideMap(texturePoses, (0, 0), true);
-        sw.Stop();
-        //GD.Print("Time: " + sw.ElapsedMilliseconds);
-        PlaceTexture(test);
+        NoiseHandler test = new(NoiseData, cHeight, cWidth, patchSize, 0.35f, new float[]{ mapSize[1], mapSize[3] });
+        texturePoses = test.textureposes;
+        InsideMap(ref texturePoses);
+        PlaceTexture(0.5f);
+        texturePoses = test.ListProximity(texturePoses, 2, false);
+        test.textureposes = texturePoses;
+        InsideMap(ref texturePoses);
+        PlaceTexture(1f);
     }
     public void CreateNoiseMap() {
         mapSize = Bounds();
@@ -63,10 +59,10 @@ public partial class NoiseMap : GenSpline {
         //Initialize max and min with the first element
         float[] bounds = new float[4]
         {
-        splinePoints[0].X, //max.X
-        splinePoints[0].X, //min.X
-        splinePoints[0].Y, //max.Y
-        splinePoints[0].Y  //min.Y
+        splinePoints[0].X,
+        splinePoints[0].X, 
+        splinePoints[0].Y, 
+        splinePoints[0].Y  
         };
 
         foreach (Vector2 vec in splinePoints) {
@@ -131,7 +127,7 @@ public partial class NoiseMap : GenSpline {
             NoiseData[i] = (float)data[i] / 255;
         }
     }
-    private void InsideMap(List<Vector2> textposes) {
+    private void InsideMap(ref List<Vector2> textposes) {
         for (int i = 0; i < textposes.Count; i++) {
             if (Geometry2D.IsPointInPolygon(textposes[i], splinePoints.ToArray())) {
                 if (textposes[i] == new Vector2(-38.684803f, -421.9668f)) {
@@ -154,8 +150,8 @@ public partial class NoiseMap : GenSpline {
             }
         }
     }
-    private void PlaceTexture(NoiseHandler handler) {
-        foreach (Vector2 pos in copium) {
+    private void PlaceTexture(float opacity) {
+        foreach (Vector2 pos in texturePoses) {
             Vector2 temp = pos - new Vector2(patchSize / 2, patchSize / 2);
             Polygon2D obj = new Polygon2D() {
                 Polygon = new Vector2[] {
@@ -164,11 +160,9 @@ public partial class NoiseMap : GenSpline {
                 new Vector2(temp.X + patchSize, temp.Y + patchSize),
                 new Vector2(temp.X, temp.Y + patchSize)
                 },
-                Color = new Color(0, 1, 0, 1f)
+                Color = new Color(0, 1, 0, opacity)
             };
             AddChild(obj);
         }
-        
     }
-
 }

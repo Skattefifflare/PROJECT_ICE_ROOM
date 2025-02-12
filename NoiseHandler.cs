@@ -1,6 +1,7 @@
 ﻿using Godot;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 
@@ -72,49 +73,71 @@ internal partial class NoiseHandler : Node2D {
         }
         return total / count;
     }
-    // 1D list --> 2D list
-    public List<List<Vector2>> StructureList(List<Vector2> textposes) {
-        List<List<Vector2>> newList = new List<List<Vector2>> {
-        new List<Vector2>()
-        };
-        int row = 0;
-        newList[row].Add(textposes[0]);
-        for (int i = 0; i < textposes.Count - 1; i++) {
 
+    //Legacy code
+    //// 1D list --> 2D list
+    //public List<List<Vector2>> StructureList(List<Vector2> textposes) {
+    //    List<List<Vector2>> newList = new List<List<Vector2>> {
+    //        new List<Vector2>()
+    //    };
+    //    int row = 0;
+    //    newList[row].Add(textposes[0]);
+    //    for (int i = 0; i < textposes.Count - 1; i++) {
+    //        if (textposes[i].Y == textposes[i + 1].Y) {
+    //            newList[row].Add(textposes[i + 1]);
+    //        }
+    //        else {
+    //            row++;
+    //            newList.Add(new List<Vector2>());
+    //            newList[row].Add(textposes[i + 1]);
+    //        }
+    //    }
+    //    return newList;
+    //}
+    //// 2D list --> 1D list
+    //public List<Vector2> StructureList(List<List<Vector2>> textposes) {
+    //    List<Vector2> newList = new List<Vector2>();
+    //    for (int i = 0; i < textposes.Count; i++) {
+    //        for (int j = 0; j < textposes[i].Count; j++) {
+    //            newList.Add(textposes[i][j]);
+    //        }
+    //    }
+    //    return newList;
+    //}
 
-            if (textposes[i].Y == textposes[i + 1].Y) {
-                newList[row].Add(textposes[i + 1]);
-            }
-            else {
-                row++;
-                newList.Add(new List<Vector2>());
-                newList[row].Add(textposes[i + 1]);
-            }
-        }
-        return newList;
-    }
-    // 2D list --> 1D list
-    public List<Vector2> StructureList(List<List<Vector2>> textposes) {
-        List<Vector2> newList = new List<Vector2>();
+    //Filter outs vectors close to eachother and replaces them with a mean vector
+    public List<Vector2> ListProximity(List<Vector2> textposes, int proximityScale, bool change) {
         for (int i = 0; i < textposes.Count; i++) {
-            for (int j = 0; j < textposes[i].Count; j++) {
-                newList.Add(textposes[i][j]);
-            }
+            TargetVector(textposes[i], textposes, proximityScale, ref change);
         }
-        return newList;
+        //Needs to iterate multiple times idk why
+        if(change) {
+            ListProximity(textposes, proximityScale, false);
+        }
+        return textposes;
     }
-    public List<Vector2> CheckProximity(List<Vector2> textposes) {
-        List<List<Vector2>> textposes2D = StructureList(textposes);
 
-        for(int y = 0; y < textposes2D.Count; y++) {
-            for(int x = 0; x < textposes2D[y].Count; x++) {
-                
+    private void TargetVector(Vector2 target, List<Vector2> textposes, int proximityScale, ref bool change) {
+        int count = 0;
+        Vector2 sum = Vector2.Zero;
+        List<Vector2> toBeRemoved = new List<Vector2>();
+
+        foreach (Vector2 pos in textposes) {
+            if (pos.DistanceTo(target) <= patchSize * proximityScale) {
+                sum += pos;
+                count++;
+                toBeRemoved.Add(pos);
             }
         }
 
-
-
-        return StructureList(textposes2D);
+        if (count > 1) {
+            change = true;
+            Vector2 meanVector = sum / count;
+            textposes.Add(meanVector);
+            foreach (Vector2 pos in toBeRemoved) {
+                textposes.Remove(pos);
+            }
+        }
     }
 }
 
