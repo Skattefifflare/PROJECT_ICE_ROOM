@@ -17,6 +17,7 @@ public partial class PlayerWeapon : Weapon {
     Node2D right_hand;
     Node2D parent;
     AnimationPlayer animation;
+    Node2D root;
 
     float arm_len = 12f;
 
@@ -31,17 +32,18 @@ public partial class PlayerWeapon : Weapon {
         right_hand = (Node2D)GetNode("%right_hand");
         parent = (Node2D)GetParent();
         animation = (AnimationPlayer)FindChild("animation");
-          
+        root = (Node2D)parent.GetParent();
+        
         UpdateOffset();
     }
     public override void _Process(double delta) {
         base._Process(delta);
-        //parent.Rotation = Math.Clamp(Mathf.Atan2(GetGlobalMousePosition().Y-parent.GlobalPosition.Y, GetGlobalMousePosition().X - parent.GlobalPosition.X), -Mathf.Pi / 2, Mathf.Pi / 2);
-        parent.Rotation = Mathf.Atan2(GetGlobalMousePosition().Y - parent.GlobalPosition.Y, GetGlobalMousePosition().X - parent.GlobalPosition.X);
+        Rotate();
         if (Input.IsActionJustPressed("left_click")) {
             animation.Play("attack");
         }
-        CorrectPosition();
+        //CorrectPosition();
+        Flip();
     }
     private void CorrectPosition() {
         if (animation.IsPlaying()) return;
@@ -68,7 +70,19 @@ public partial class PlayerWeapon : Weapon {
 
         }
     }
-
+    private void Flip() {
+        //if (root.Scale.X == 1) {
+        //    if (parent.RotationDegrees > 90 || parent.RotationDegrees < -90) {
+        //        root.Scale = root.Scale * new Vector2(-1, 1);
+        //    }
+        //}
+    }
+    private void Rotate() {
+        if (root.Scale.X == 1)
+            parent.Rotation = Mathf.Atan2(GetGlobalMousePosition().Y - parent.GlobalPosition.Y, GetGlobalMousePosition().X - parent.GlobalPosition.X);
+        else
+            parent.Rotation = Mathf.Atan2(GetGlobalMousePosition().Y - parent.GlobalPosition.Y, GetGlobalMousePosition().X - parent.GlobalPosition.X);
+    }
     private void UpdateOffset() {
         this.Offset = new Vector2((left_marker.Position.X + right_marker.Position.X) / 2, 0);
     }
