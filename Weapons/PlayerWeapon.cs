@@ -34,16 +34,16 @@ public partial class PlayerWeapon : Weapon {
         animation = (AnimationPlayer)FindChild("animation");
         root = (Node2D)parent.GetParent();
         
-        UpdateOffset();
+        //UpdateOffset();
     }
     public override void _Process(double delta) {
         base._Process(delta);
-        Rotate();
-        if (Input.IsActionJustPressed("left_click")) {
-            animation.Play("attack");
-        }
+        //Rotate();
+        //if (Input.IsActionJustPressed("left_click")) {
+        //    animation.Play("attack");
+        //}
         //CorrectPosition();
-        Flip();
+        //Flip();
     }
     private void CorrectPosition() {
         if (animation.IsPlaying()) return;
@@ -71,11 +71,11 @@ public partial class PlayerWeapon : Weapon {
         }
     }
     private void Flip() {
-        //if (root.Scale.X == 1) {
-        //    if (parent.RotationDegrees > 90 || parent.RotationDegrees < -90) {
-        //        root.Scale = root.Scale * new Vector2(-1, 1);
-        //    }
-        //}
+        if (root.Scale.X == 1) {
+            if (parent.RotationDegrees > 90 || parent.RotationDegrees < -90) {
+                root.Scale = root.Scale * new Vector2(-1, 1);
+            }
+        }
     }
     private void Rotate() {
         if (root.Scale.X == 1)
