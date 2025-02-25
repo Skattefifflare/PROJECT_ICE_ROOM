@@ -33,12 +33,12 @@ public partial class PlayerWeapon : Weapon {
         parent = (Node2D)GetParent();
         animation = (AnimationPlayer)FindChild("animation");
         root = (Node2D)parent.GetParent();
-        
+        GD.Print(GetTreeStringPretty());
         //UpdateOffset();
     }
     public override void _Process(double delta) {
         base._Process(delta);
-        //Rotate();
+        Rotate();
         //if (Input.IsActionJustPressed("left_click")) {
         //    animation.Play("attack");
         //}
@@ -84,6 +84,6 @@ public partial class PlayerWeapon : Weapon {
             parent.Rotation = Mathf.Atan2(GetGlobalMousePosition().Y - parent.GlobalPosition.Y, GetGlobalMousePosition().X - parent.GlobalPosition.X);
     }
     private void UpdateOffset() {
-        this.Offset = new Vector2((left_marker.Position.X + right_marker.Position.X) / 2, 0);
+        //this.Offset = new Vector2((left_marker.Position.X + right_marker.Position.X) / 2, 0);
     }
 }

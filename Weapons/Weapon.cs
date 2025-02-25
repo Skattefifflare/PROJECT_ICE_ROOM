@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Weapon : Sprite2D
+public partial class Weapon : Node2D
 {
     [Export]
     public int dmg = 1;

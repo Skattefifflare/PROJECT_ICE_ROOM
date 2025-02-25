@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://ix62ioebhevw"]
 
-[ext_resource type="PackedScene" uid="uid://rnbeh2t00dvr" path="res://Weapons/spear.tscn" id="1_tlmnk"]
+[ext_resource type="PackedScene" uid="uid://rnbeh2t00dvr" path="res://Weapons/Spear/spear.tscn" id="1_tlmnk"]
 [ext_resource type="Texture2D" uid="uid://dicmjk3x6jnh7" path="res://Player/UpperArm.png" id="2_ck0eg"]
 [ext_resource type="Texture2D" uid="uid://biq46jpd35ixh" path="res://Player/LowerArm.png" id="3_j8pi7"]
 
 [sub_resource type="SkeletonModification2DCCDIK" id="SkeletonModification2DCCDIK_1h0r5"]
-target_nodepath = NodePath("../../../weapon_rotation/spear/left_marker")
+target_nodepath = NodePath("../../../weapon_rotation/spear_root/left_marker")
 tip_nodepath = NodePath("upper_left/lower_left/left_hand")
 ccdik_data_chain_length = 2
 joint_data/0/bone_index = 2
@@ -24,7 +24,7 @@ joint_data/1/constraint_in_localspace = true
 joint_data/1/editor_draw_gizmo = true
 
 [sub_resource type="SkeletonModification2DCCDIK" id="SkeletonModification2DCCDIK_suwm1"]
-target_nodepath = NodePath("../../../weapon_rotation/spear/right_marker")
+target_nodepath = NodePath("../../../weapon_rotation/spear_root/right_marker")
 tip_nodepath = NodePath("upper_right/lower_right/right_hand")
 ccdik_data_chain_length = 2
 joint_data/0/bone_index = 0
@@ -52,13 +52,14 @@ modifications/1 = SubResource("SkeletonModification2DCCDIK_suwm1")
 
 [node name="weapon_rotation" type="Node2D" parent="."]
 
-[node name="spear" parent="weapon_rotation" instance=ExtResource("1_tlmnk")]
+[node name="spear_root" parent="weapon_rotation" instance=ExtResource("1_tlmnk")]
+position = Vector2(8, 7)
 
-[node name="left_marker" type="Marker2D" parent="weapon_rotation/spear"]
-position = Vector2(4.80825e-07, 7.85714)
+[node name="left_marker" type="Marker2D" parent="weapon_rotation/spear_root"]
+position = Vector2(-10, 1)
 
-[node name="right_marker" type="Marker2D" parent="weapon_rotation/spear"]
-position = Vector2(1.74846e-07, 2.85714)
+[node name="right_marker" type="Marker2D" parent="weapon_rotation/spear_root"]
+position = Vector2(-2, 1)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 offset_left = -25.0
@@ -73,14 +74,13 @@ size = Vector2i(50, 50)
 render_target_update_mode = 4
 
 [node name="skeleton" type="Skeleton2D" parent="SubViewportContainer/SubViewport"]
-visible = false
 modification_stack = SubResource("SkeletonModificationStack2D_5bxfo")
 
 [node name="upper_right" type="Bone2D" parent="SubViewportContainer/SubViewport/skeleton"]
 unique_name_in_owner = true
 position = Vector2(3, 0)
-rotation = 0.186935
-scale = Vector2(1, 1)
+rotation = -0.180514
+scale = Vector2(0.999999, 0.999999)
 rest = Transform2D(1, 0, 0, 1, 3, 0)
 auto_calculate_length_and_angle = false
 length = 7.0
@@ -88,9 +88,9 @@ bone_angle = 90.0
 metadata/_local_pose_override_enabled_ = true
 
 [node name="lower_right" type="Bone2D" parent="SubViewportContainer/SubViewport/skeleton/upper_right"]
-position = Vector2(2.38419e-07, 5)
-rotation = 1.39626
-scale = Vector2(1, 1)
+position = Vector2(1.66893e-06, 5)
+rotation = 1.35901
+scale = Vector2(0.999998, 0.999998)
 rest = Transform2D(-4.37114e-08, 1, -1, -4.37114e-08, 0, 5)
 auto_calculate_length_and_angle = false
 length = 5.0
@@ -104,8 +104,8 @@ position = Vector2(5, 7.15256e-07)
 [node name="upper_left" type="Bone2D" parent="SubViewportContainer/SubViewport/skeleton"]
 unique_name_in_owner = true
 position = Vector2(-3, 0)
-rotation = 0.284662
-scale = Vector2(1, 1)
+rotation = 0.0259032
+scale = Vector2(0.999999, 0.999999)
 rest = Transform2D(1, 0, 0, 1, -3, 0)
 auto_calculate_length_and_angle = false
 length = 7.0
@@ -113,9 +113,8 @@ bone_angle = 0.0
 metadata/_local_pose_override_enabled_ = true
 
 [node name="lower_left" type="Bone2D" parent="SubViewportContainer/SubViewport/skeleton/upper_left"]
-position = Vector2(4.76837e-07, 5)
-rotation = 1.39626
-scale = Vector2(1, 1)
+position = Vector2(2.14577e-06, 5)
+rotation = 1.32279
 rest = Transform2D(-4.37114e-08, 1, -1, -4.37114e-08, 0, 5)
 auto_calculate_length_and_angle = false
 length = 5.0
