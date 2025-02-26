@@ -31,8 +31,12 @@ public partial class NewPlayerWeapon : Weapon {
     }
     private void CheckInput() {
         if (Input.IsActionJustPressed("left_click")) {
-            animation_player 
+            
         }
+    }
+
+    private void SetAnimationDistance() {
+
     }
 }
 

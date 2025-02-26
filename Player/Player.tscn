@@ -1,16 +1,12 @@
-[gd_scene load_steps=26 format=3 uid="uid://vwvt1qvu5m5v"]
+[gd_scene load_steps=24 format=3 uid="uid://vwvt1qvu5m5v"]
 
 [ext_resource type="Script" path="res://Player/Player.cs" id="1_twk3x"]
 [ext_resource type="Texture2D" uid="uid://lagas666wog3" path="res://Player/TempCharacterSpriteSheet.png" id="2_qtxel"]
-[ext_resource type="Texture2D" uid="uid://cv2lsrl7np5w" path="res://Player/player.png" id="2_rqxkb"]
-[ext_resource type="PackedScene" uid="uid://b16v8d7sjyh8h" path="res://Player/new_arms.tscn" id="4_ghupw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_upo2t"]
-atlas = ExtResource("2_rqxkb")
 region = Rect2(0, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qwwne"]
-atlas = ExtResource("2_rqxkb")
 region = Rect2(32, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lb1aa"]
@@ -186,5 +182,3 @@ shape = SubResource("RectangleShape2D_tftvx")
 
 [node name="feet" type="CollisionShape2D" parent="."]
 shape = SubResource("SegmentShape2D_a0fxd")
-
-[node name="arms" parent="." instance=ExtResource("4_ghupw")]
