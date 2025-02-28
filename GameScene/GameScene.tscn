@@ -19,6 +19,7 @@ agent_radius = 12.0
 [node name="enemies" type="Node" parent="."]
 
 [node name="fox" parent="enemies" instance=ExtResource("2_isbbg")]
+position = Vector2(70, -48)
 
 [node name="fox2" parent="enemies" instance=ExtResource("2_isbbg")]
 position = Vector2(122, 12)
@@ -85,7 +86,6 @@ position = Vector2(-165, -23)
 
 [node name="player" parent="." instance=ExtResource("2_hjvhr")]
 unique_name_in_owner = true
-position = Vector2(-157, 55)
 
 [node name="nav_region" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_h6c0j")

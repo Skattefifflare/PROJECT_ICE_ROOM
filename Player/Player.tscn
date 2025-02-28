@@ -1,7 +1,8 @@
-[gd_scene load_steps=24 format=3 uid="uid://vwvt1qvu5m5v"]
+[gd_scene load_steps=25 format=3 uid="uid://vwvt1qvu5m5v"]
 
 [ext_resource type="Script" path="res://Player/Player.cs" id="1_twk3x"]
 [ext_resource type="Texture2D" uid="uid://lagas666wog3" path="res://Player/TempCharacterSpriteSheet.png" id="2_qtxel"]
+[ext_resource type="PackedScene" uid="uid://ix62ioebhevw" path="res://Player/arms3.tscn" id="3_pqneg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_upo2t"]
 region = Rect2(0, 32, 32, 32)
@@ -182,3 +183,5 @@ shape = SubResource("RectangleShape2D_tftvx")
 
 [node name="feet" type="CollisionShape2D" parent="."]
 shape = SubResource("SegmentShape2D_a0fxd")
+
+[node name="arm_root" parent="." instance=ExtResource("3_pqneg")]

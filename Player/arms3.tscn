@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://ix62ioebhevw"]
+[gd_scene load_steps=8 format=3 uid="uid://ix62ioebhevw"]
 
+[ext_resource type="Script" path="res://Player/Armscript.cs" id="1_kh3c8"]
 [ext_resource type="PackedScene" uid="uid://rnbeh2t00dvr" path="res://Weapons/Spear/spear.tscn" id="1_tlmnk"]
 [ext_resource type="Texture2D" uid="uid://dicmjk3x6jnh7" path="res://Player/UpperArm.png" id="2_ck0eg"]
 [ext_resource type="Texture2D" uid="uid://biq46jpd35ixh" path="res://Player/LowerArm.png" id="3_j8pi7"]
@@ -49,6 +50,7 @@ modifications/0 = SubResource("SkeletonModification2DCCDIK_1h0r5")
 modifications/1 = SubResource("SkeletonModification2DCCDIK_suwm1")
 
 [node name="arm_root" type="Node2D"]
+script = ExtResource("1_kh3c8")
 
 [node name="weapon_rotation" type="Node2D" parent="."]
 
@@ -78,7 +80,7 @@ modification_stack = SubResource("SkeletonModificationStack2D_5bxfo")
 [node name="upper_right" type="Bone2D" parent="SubViewportContainer/SubViewport/skeleton"]
 unique_name_in_owner = true
 position = Vector2(3, 0)
-rotation = -0.181186
+rotation = 0.912301
 scale = Vector2(0.999999, 0.999999)
 rest = Transform2D(1, 0, 0, 1, 3, 0)
 auto_calculate_length_and_angle = false
@@ -88,7 +90,7 @@ metadata/_local_pose_override_enabled_ = true
 
 [node name="lower_right" type="Bone2D" parent="SubViewportContainer/SubViewport/skeleton/upper_right"]
 position = Vector2(1.90735e-06, 5)
-rotation = 1.15406
+rotation = 0.86703
 scale = Vector2(0.999998, 0.999998)
 rest = Transform2D(-4.37114e-08, 1, -1, -4.37114e-08, 0, 5)
 auto_calculate_length_and_angle = false
@@ -103,7 +105,7 @@ position = Vector2(5, 7.15256e-07)
 [node name="upper_left" type="Bone2D" parent="SubViewportContainer/SubViewport/skeleton"]
 unique_name_in_owner = true
 position = Vector2(-3, 0)
-rotation = 0.133951
+rotation = 0.816321
 scale = Vector2(0.999999, 0.999999)
 rest = Transform2D(1, 0, 0, 1, -3, 0)
 auto_calculate_length_and_angle = false
@@ -112,8 +114,8 @@ bone_angle = 0.0
 metadata/_local_pose_override_enabled_ = true
 
 [node name="lower_left" type="Bone2D" parent="SubViewportContainer/SubViewport/skeleton/upper_left"]
-position = Vector2(2.14577e-06, 5)
-rotation = 0.93574
+position = Vector2(2.86102e-06, 5)
+rotation = 1.38744
 scale = Vector2(1, 1)
 rest = Transform2D(-4.37114e-08, 1, -1, -4.37114e-08, 0, 5)
 auto_calculate_length_and_angle = false
@@ -161,7 +163,7 @@ uv = PackedVector2Array(0, 5, 0, 0, 1, 0, 1, 5)
 polygons = [PackedInt32Array(0, 1, 2, 3)]
 bones = ["upper_right", PackedFloat32Array(0, 0, 0, 0), "upper_right/lower_right", PackedFloat32Array(1, 1, 1, 1), "upper_left", PackedFloat32Array(0, 0, 0, 0), "upper_left/lower_left", PackedFloat32Array(0, 0, 0, 0)]
 
-[node name="Camera2D" type="Camera2D" parent="SubViewportContainer/SubViewport"]
+[node name="sub_camera" type="Camera2D" parent="SubViewportContainer/SubViewport"]
 offset = Vector2(-25, -25)
 anchor_mode = 0
 

@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://bdsbu7ish2m7c"]
+
+[ext_resource type="Texture2D" uid="uid://biq46jpd35ixh" path="res://Player/LowerArm.png" id="1_6bo5s"]
+[ext_resource type="Shader" path="res://pixelate.gdshader" id="1_r8icv"]
+[ext_resource type="Texture2D" uid="uid://dicmjk3x6jnh7" path="res://Player/UpperArm.png" id="2_7nhtn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qhw5t"]
+shader = ExtResource("1_r8icv")
+shader_parameter/line_thickness = 0.0
+shader_parameter/line_color = Color(1, 1, 1, 1)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+material = SubResource("ShaderMaterial_qhw5t")
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup"]
+position = Vector2(3, 3)
+rotation = 0.408407
+texture = ExtResource("1_6bo5s")
+
+[node name="Sprite2D2" type="Sprite2D" parent="CanvasGroup"]
+position = Vector2(4, 7)
+rotation = -0.612611
+texture = ExtResource("2_7nhtn")

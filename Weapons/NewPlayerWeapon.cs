@@ -24,19 +24,13 @@ public partial class NewPlayerWeapon : Weapon {
     }
 
     private void Rotate() {
-        if (true)
-            parent.Rotation = Mathf.Atan2(GetGlobalMousePosition().Y - parent.GlobalPosition.Y, GetGlobalMousePosition().X - parent.GlobalPosition.X);
-        else
-            parent.Rotation = Mathf.Atan2(GetGlobalMousePosition().Y - parent.GlobalPosition.Y, GetGlobalMousePosition().X - parent.GlobalPosition.X);
+        parent.Rotation = Mathf.Atan2(GetGlobalMousePosition().Y - parent.GlobalPosition.Y, GetGlobalMousePosition().X - parent.GlobalPosition.X);       
     }
     private void CheckInput() {
         if (Input.IsActionJustPressed("left_click")) {
+            animation_player.Play("attack");
             
         }
-    }
-
-    private void SetAnimationDistance() {
-
     }
 }
 
