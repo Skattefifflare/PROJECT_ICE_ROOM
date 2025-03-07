@@ -1,21 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://bdsbu7ish2m7c"]
+[gd_scene load_steps=5 format=3 uid="uid://bdsbu7ish2m7c"]
 
 [ext_resource type="Texture2D" uid="uid://biq46jpd35ixh" path="res://Player/LowerArm.png" id="1_6bo5s"]
 [ext_resource type="Shader" path="res://pixelate.gdshader" id="1_r8icv"]
 [ext_resource type="Texture2D" uid="uid://dicmjk3x6jnh7" path="res://Player/UpperArm.png" id="2_7nhtn"]
-[ext_resource type="Shader" path="res://pixelate2.gdshader" id="4_lnqra"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_fgjrg"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8s42a"]
 shader = ExtResource("1_r8icv")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_p4rem"]
-shader = ExtResource("4_lnqra")
-shader_parameter/pixel_size = 8.0
+shader_parameter/pixel_size = 8
 
 [node name="Node2D" type="Node2D"]
 
 [node name="CanvasGroup" type="CanvasGroup" parent="."]
-material = SubResource("ShaderMaterial_fgjrg")
+material = SubResource("ShaderMaterial_8s42a")
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasGroup"]
 position = Vector2(3, 3)
@@ -27,16 +23,5 @@ position = Vector2(4, 7)
 rotation = -0.612611
 texture = ExtResource("2_7nhtn")
 
-[node name="CanvasGroup2" type="CanvasGroup" parent="."]
-material = SubResource("ShaderMaterial_p4rem")
-position = Vector2(10, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup2"]
-position = Vector2(3, 3)
-rotation = 0.408407
-texture = ExtResource("1_6bo5s")
-
-[node name="Sprite2D2" type="Sprite2D" parent="CanvasGroup2"]
-position = Vector2(4, 7)
-rotation = -0.612611
-texture = ExtResource("2_7nhtn")
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(7, 11)

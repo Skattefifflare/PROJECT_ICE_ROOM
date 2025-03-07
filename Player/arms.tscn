@@ -1,0 +1,103 @@
+[gd_scene load_steps=6 format=3 uid="uid://cgda4tgokc3j2"]
+
+[ext_resource type="Texture2D" uid="uid://c0v3vpxjl0uau" path="res://Player/CharacterNewArmLower.png" id="1_bcsux"]
+[ext_resource type="Texture2D" uid="uid://dbjfptr137kod" path="res://Player/CharacterNewArmUpper.png" id="2_xdfp0"]
+[ext_resource type="PackedScene" uid="uid://rnbeh2t00dvr" path="res://Weapons/Spear/spear.tscn" id="3_8cuv4"]
+
+[sub_resource type="SkeletonModification2DCCDIK" id="SkeletonModification2DCCDIK_0x0lp"]
+target_nodepath = NodePath("../weapon_rotation/spear_root/left_marker")
+tip_nodepath = NodePath("ul/ll/left_hand")
+ccdik_data_chain_length = 2
+joint_data/0/bone_index = 0
+joint_data/0/bone2d_node = NodePath("ul")
+joint_data/0/rotate_from_joint = false
+joint_data/0/enable_constraint = false
+joint_data/0/editor_draw_gizmo = true
+joint_data/1/bone_index = 1
+joint_data/1/bone2d_node = NodePath("ul/ll")
+joint_data/1/rotate_from_joint = false
+joint_data/1/enable_constraint = false
+joint_data/1/editor_draw_gizmo = true
+
+[sub_resource type="SkeletonModificationStack2D" id="SkeletonModificationStack2D_dynv1"]
+modification_count = 1
+modifications/0 = SubResource("SkeletonModification2DCCDIK_0x0lp")
+
+[node name="arm_root" type="Node2D"]
+
+[node name="skeleton" type="Skeleton2D" parent="."]
+modification_stack = SubResource("SkeletonModificationStack2D_dynv1")
+
+[node name="ul" type="Bone2D" parent="skeleton"]
+position = Vector2(-5, 0)
+rest = Transform2D(1, 0, 0, 1, -5, 0)
+
+[node name="ll" type="Bone2D" parent="skeleton/ul"]
+position = Vector2(-3, 5)
+rotation = 0.610865
+rest = Transform2D(0.819152, 0.573576, -0.573576, 0.819152, -3, 5)
+auto_calculate_length_and_angle = false
+length = 11.0
+bone_angle = 0.0
+
+[node name="left_hand" type="Node2D" parent="skeleton/ul/ll"]
+
+[node name="ur" type="Bone2D" parent="skeleton"]
+position = Vector2(6, 0)
+rest = Transform2D(1, 0, 0, 1, 6, 0)
+
+[node name="lr" type="Bone2D" parent="skeleton/ur"]
+position = Vector2(-3, 5)
+rotation = 0.610865
+rest = Transform2D(0.819152, 0.573576, -0.573576, 0.819152, -3, 5)
+auto_calculate_length_and_angle = false
+length = 11.0
+bone_angle = 0.0
+
+[node name="right_hand" type="Node2D" parent="skeleton/ur/lr"]
+
+[node name="lower_right" type="Polygon2D" parent="."]
+position = Vector2(6.3, 3.3)
+texture = ExtResource("1_bcsux")
+skeleton = NodePath("../skeleton")
+polygon = PackedVector2Array(-6, -5.1, -6, -2.3, -8, -1.2, -8, 4, -4, 7, -4, 8.4, 2, 10.4, 2, 11.3, 4.5, 12.4, 7.8, 9, 9.2, 9, 10.3, 6.8, 7, 2.3, 7, 0.700001)
+uv = PackedVector2Array(10, 15.9, 10, 18.7, 8, 19.8, 8, 25, 12, 28, 12, 29.4, 18, 31.4, 18, 32.3, 20.5, 33.4, 23.8, 30, 25.2, 30, 26.3, 27.8, 23, 23.3, 23, 21.7)
+polygons = [PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)]
+bones = ["ul", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "ul/ll", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "ur", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "ur/lr", PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)]
+
+[node name="upper_right" type="Polygon2D" parent="."]
+position = Vector2(6.3, 3.3)
+texture = ExtResource("2_xdfp0")
+skeleton = NodePath("../skeleton")
+polygon = PackedVector2Array(-2, -9.3, -4, -8.2, -4, -6.7, -7.9, -2, -9.3, -2, -10.3, 0.299999, -6, 5.6, -6, 7.3, -3.5, 8.4, -0.2, 5, 1.1, 5, 5, -1.4, 5, -5.1)
+uv = PackedVector2Array(14, 11.7, 12, 12.8, 12, 14.3, 8.1, 19, 6.7, 19, 5.7, 21.3, 10, 26.6, 10, 28.3, 12.5, 29.4, 15.8, 26, 17.1, 26, 21, 19.6, 21, 15.9)
+polygons = [PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)]
+bones = ["ul", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "ul/ll", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "ur", PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "ur/lr", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
+
+[node name="lower_left" type="Polygon2D" parent="."]
+position = Vector2(-4.7, 3.3)
+texture = ExtResource("1_bcsux")
+skeleton = NodePath("../skeleton")
+polygon = PackedVector2Array(-6, -5.1, -6, -2.3, -8, -1.2, -8, 4, -4, 7, -4, 8.4, 2, 10.4, 2, 11.3, 4.5, 12.4, 7.8, 9, 9.2, 9, 10.3, 6.8, 7, 2.3, 7, 0.700001)
+uv = PackedVector2Array(10, 15.9, 10, 18.7, 8, 19.8, 8, 25, 12, 28, 12, 29.4, 18, 31.4, 18, 32.3, 20.5, 33.4, 23.8, 30, 25.2, 30, 26.3, 27.8, 23, 23.3, 23, 21.7)
+polygons = [PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)]
+bones = ["ul", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "ul/ll", PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "ur", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "ur/lr", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
+
+[node name="upper_left" type="Polygon2D" parent="."]
+position = Vector2(-4.7, 3.3)
+texture = ExtResource("2_xdfp0")
+skeleton = NodePath("../skeleton")
+polygon = PackedVector2Array(-2, -9.3, -4, -8.2, -4, -6.7, -7.9, -2, -9.3, -2, -10.3, 0.299999, -6, 5.6, -6, 7.3, -3.5, 8.4, -0.2, 5, 1.1, 5, 5, -1.4, 5, -5.1)
+uv = PackedVector2Array(14, 11.7, 12, 12.8, 12, 14.3, 8.1, 19, 6.7, 19, 5.7, 21.3, 10, 26.6, 10, 28.3, 12.5, 29.4, 15.8, 26, 17.1, 26, 21, 19.6, 21, 15.9)
+polygons = [PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)]
+bones = ["ul", PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "ul/ll", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "ur", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "ur/lr", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
+
+[node name="weapon_rotation" type="Node2D" parent="."]
+
+[node name="spear_root" parent="weapon_rotation" instance=ExtResource("3_8cuv4")]
+
+[node name="left_marker" type="Marker2D" parent="weapon_rotation/spear_root"]
+position = Vector2(-11, 1)
+
+[node name="right_marker" type="Marker2D" parent="weapon_rotation/spear_root"]
+position = Vector2(-3, 1)
