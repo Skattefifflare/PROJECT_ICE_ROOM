@@ -18,4 +18,3 @@ void fragment() {
     // Sample from the screen texture
     COLOR = texture(screen_texture, pixelated_uv);
 }
-

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cgda4tgokc3j2"]
 
-[ext_resource type="Texture2D" uid="uid://c0v3vpxjl0uau" path="res://Player/CharacterNewArmLower.png" id="1_bcsux"]
-[ext_resource type="Texture2D" uid="uid://dbjfptr137kod" path="res://Player/CharacterNewArmUpper.png" id="2_xdfp0"]
+[ext_resource type="Texture2D" uid="uid://c0v3vpxjl0uau" path="res://Player/LowerArm.png" id="1_bcsux"]
+[ext_resource type="Texture2D" uid="uid://dbjfptr137kod" path="res://Player/UpperArm.png" id="2_xdfp0"]
 [ext_resource type="PackedScene" uid="uid://rnbeh2t00dvr" path="res://Weapons/Spear/spear.tscn" id="3_8cuv4"]
 
 [sub_resource type="SkeletonModification2DCCDIK" id="SkeletonModification2DCCDIK_0x0lp"]

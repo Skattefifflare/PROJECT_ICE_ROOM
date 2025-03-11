@@ -7,6 +7,6 @@ uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_n
 
 void fragment() {
     vec2 uv = SCREEN_UV;
-	
+
     COLOR = texture(screen_texture, uv);
 }
