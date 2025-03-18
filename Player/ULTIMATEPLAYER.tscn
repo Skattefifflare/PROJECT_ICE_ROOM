@@ -1,0 +1,101 @@
+[gd_scene load_steps=8 format=3 uid="uid://b7kgh3wkj0gav"]
+
+[ext_resource type="Texture2D" uid="uid://df8tt3nho5125" path="res://Player/alien_atlas.tres" id="1_0phsu"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_cnx38"]
+viewport_path = NodePath("subviewport")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2qgri"]
+atlas = ExtResource("1_0phsu")
+region = Rect2(25, 12, 5, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c0fhv"]
+atlas = ExtResource("1_0phsu")
+region = Rect2(43, 25, 11, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b4p0v"]
+atlas = ExtResource("1_0phsu")
+region = Rect2(0, 0, 16, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tnrid"]
+atlas = ExtResource("1_0phsu")
+region = Rect2(65, 23, 11, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tqunb"]
+atlas = ExtResource("1_0phsu")
+region = Rect2(84, 12, 5, 31)
+
+[node name="player_root" type="Node2D"]
+
+[node name="subviewport" type="SubViewport" parent="."]
+size = Vector2i(70, 70)
+
+[node name="subviewport_sprite" type="Sprite2D" parent="."]
+texture = SubResource("ViewportTexture_cnx38")
+
+[node name="backarm" type="Sprite2D" parent="."]
+position = Vector2(1, 13.5)
+texture = SubResource("AtlasTexture_2qgri")
+
+[node name="backleg" type="Sprite2D" parent="."]
+position = Vector2(3.5, 24.5)
+texture = SubResource("AtlasTexture_c0fhv")
+
+[node name="torso" type="Sprite2D" parent="."]
+position = Vector2(0, 1)
+texture = SubResource("AtlasTexture_b4p0v")
+
+[node name="frontleg" type="Sprite2D" parent="."]
+position = Vector2(5.5, 23.5)
+texture = SubResource("AtlasTexture_tnrid")
+
+[node name="frontarm" type="Sprite2D" parent="."]
+position = Vector2(2, 13.5)
+texture = SubResource("AtlasTexture_tqunb")
+
+[node name="skeleton" type="Skeleton2D" parent="."]
+position = Vector2(6, 12)
+
+[node name="hip" type="Bone2D" parent="skeleton"]
+
+[node name="navel" type="Bone2D" parent="skeleton/hip"]
+position = Vector2(0, -8)
+auto_calculate_length_and_angle = false
+length = 6.0
+bone_angle = 0.0
+
+[node name="shoulder" type="Bone2D" parent="skeleton/hip/navel"]
+position = Vector2(-5, -5)
+
+[node name="front_elbow" type="Bone2D" parent="skeleton/hip/navel/shoulder"]
+position = Vector2(4.76837e-07, 6)
+
+[node name="front_wrist" type="Bone2D" parent="skeleton/hip/navel/shoulder/front_elbow"]
+position = Vector2(-2, 4)
+rotation = 1.5708
+auto_calculate_length_and_angle = false
+length = 7.0
+bone_angle = 0.0
+
+[node name="back_shoulder" type="Bone2D" parent="skeleton/hip/navel/shoulder"]
+position = Vector2(-2, 0)
+
+[node name="back_elbow" type="Bone2D" parent="skeleton/hip/navel/shoulder/back_shoulder"]
+position = Vector2(4.76837e-07, 6)
+
+[node name="back_wrist" type="Bone2D" parent="skeleton/hip/navel/shoulder/back_shoulder/back_elbow"]
+position = Vector2(-2, 4)
+rotation = 1.5708
+auto_calculate_length_and_angle = false
+length = 7.0
+bone_angle = 0.0
+
+[node name="Bone2D" type="Bone2D" parent="skeleton/hip"]
+position = Vector2(-5, 10)
+
+[node name="Bone2D" type="Bone2D" parent="skeleton/hip/Bone2D"]
+position = Vector2(9, 2)
+rotation = 2.00713
+auto_calculate_length_and_angle = false
+length = 11.0
+bone_angle = 0.0

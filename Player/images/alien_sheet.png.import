@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmnqe6owuvj6b"
-path="res://.godot/imported/CharacterNewIdleSheet.png-f9acf0df17a4d7493b7adeb57c88409f.ctex"
+uid="uid://783mbca70yqk"
+path="res://.godot/imported/alien_sheet.png-97d053436dd7f42ee57b4e5c657f317e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Player/CharacterNewIdleSheet.png"
-dest_files=["res://.godot/imported/CharacterNewIdleSheet.png-f9acf0df17a4d7493b7adeb57c88409f.ctex"]
+source_file="res://Player/images/alien_sheet.png"
+dest_files=["res://.godot/imported/alien_sheet.png-97d053436dd7f42ee57b4e5c657f317e.ctex"]
 
 [params]
 

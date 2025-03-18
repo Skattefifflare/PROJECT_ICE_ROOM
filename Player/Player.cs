@@ -1,6 +1,7 @@
 ﻿using Godot;
 using Project_Ice_Room.Scriptbin;
 using System;
+using Project_Ice_Room.Weapons;
 
 
 namespace Project_Ice_Room.Player {

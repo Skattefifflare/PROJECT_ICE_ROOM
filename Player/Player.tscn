@@ -1,7 +1,6 @@
-[gd_scene load_steps=24 format=3 uid="uid://vwvt1qvu5m5v"]
+[gd_scene load_steps=23 format=3 uid="uid://vwvt1qvu5m5v"]
 
 [ext_resource type="Script" path="res://Player/Player.cs" id="1_twk3x"]
-[ext_resource type="Texture2D" uid="uid://lagas666wog3" path="res://Player/TempCharacterSpriteSheet.png" id="2_qtxel"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_upo2t"]
 region = Rect2(0, 32, 32, 32)
@@ -10,67 +9,51 @@ region = Rect2(0, 32, 32, 32)
 region = Rect2(32, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lb1aa"]
-atlas = ExtResource("2_qtxel")
 region = Rect2(0, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d1pfv"]
-atlas = ExtResource("2_qtxel")
 region = Rect2(32, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yadgj"]
-atlas = ExtResource("2_qtxel")
 region = Rect2(64, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_184xs"]
-atlas = ExtResource("2_qtxel")
 region = Rect2(96, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wx6q8"]
-atlas = ExtResource("2_qtxel")
 region = Rect2(128, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ikqwk"]
-atlas = ExtResource("2_qtxel")
 region = Rect2(160, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5fgr2"]
-atlas = ExtResource("2_qtxel")
 region = Rect2(0, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8dosy"]
-atlas = ExtResource("2_qtxel")
 region = Rect2(32, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6bntd"]
-atlas = ExtResource("2_qtxel")
 region = Rect2(64, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ck65s"]
-atlas = ExtResource("2_qtxel")
 region = Rect2(96, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_61b01"]
-atlas = ExtResource("2_qtxel")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_albin"]
-atlas = ExtResource("2_qtxel")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b401v"]
-atlas = ExtResource("2_qtxel")
 region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dku65"]
-atlas = ExtResource("2_qtxel")
 region = Rect2(0, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w0wye"]
-atlas = ExtResource("2_qtxel")
 region = Rect2(32, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kmr3s"]
-atlas = ExtResource("2_qtxel")
 region = Rect2(64, 64, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ueiu5"]
@@ -171,7 +154,7 @@ speed = 100
 
 [node name="sprite_player" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ueiu5")
-animation = &"idle"
+animation = &"attack"
 autoplay = "idle"
 
 [node name="hitbox" type="Area2D" parent="."]

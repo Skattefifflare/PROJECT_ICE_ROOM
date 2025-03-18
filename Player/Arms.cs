@@ -1,39 +1,39 @@
 using Godot;
 using System;
+using Project_Ice_Room.Weapons;
 
-[Tool]
 public partial class Arms : Node2D
 {
 	Marker2D left_marker;
     Marker2D right_marker;
-	Marker2D left_hold;
-    Marker2D right_hold;
+    PlayerWeapon equipped_weapon;
     
     public override void _Ready()
 	{
-        left_hold = (Marker2D)FindChild("left_hold");
-        right_hold = (Marker2D)FindChild("right_hold");
         left_marker = (Marker2D)FindChild("left_marker");
         right_marker = (Marker2D)FindChild("right_marker");
+        try {
+            equipped_weapon = (PlayerWeapon)FindChild("weapon");
+        }
+        catch {
+            GD.PrintErr("problem finding the equipped weapon");
+        }      
+        if (equipped_weapon != null) {
+            GD.Print("found weapon");
+        }
     }
 	public override void _Process(double delta)
 	{
         try {
-            left_marker.GlobalPosition = left_hold.GlobalPosition + new Vector2(23, 23);
-            right_marker.GlobalPosition = right_hold.GlobalPosition + new Vector2(23, 23);
+            left_marker.GlobalPosition = equipped_weapon.left_hold.GlobalPosition + new Vector2(23, 23);
+            right_marker.GlobalPosition = equipped_weapon.right_hold.GlobalPosition + new Vector2(23, 23);
         }
         catch {
-            if (left_hold == null) {
-                GD.Print("Left hold is null");
+            if (equipped_weapon == null) {
+                GD.PrintErr("equipped_weapon is null");
             }
-            if (right_hold == null) {
-                GD.Print("Right hold is null");
-            }
-            if (left_marker == null) {
-                GD.Print("Left marker is null");
-            }
-            if (right_marker == null) {
-                GD.Print("Right marker is null");
+            else if (equipped_weapon.left_hold == null) {
+                GD.PrintErr("left_hold is null");
             }
         }
     }

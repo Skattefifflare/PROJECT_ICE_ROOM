@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dbjfptr137kod"
-path="res://.godot/imported/UpperArm.png-951896813a4bc85c4e647a6bdd1bde33.ctex"
+path="res://.godot/imported/UpperArm.png-469b7683f7c6ac2f4357d262c08cea06.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Player/UpperArm.png"
-dest_files=["res://.godot/imported/UpperArm.png-951896813a4bc85c4e647a6bdd1bde33.ctex"]
+source_file="res://Player/images/UpperArm.png"
+dest_files=["res://.godot/imported/UpperArm.png-469b7683f7c6ac2f4357d262c08cea06.ctex"]
 
 [params]
 

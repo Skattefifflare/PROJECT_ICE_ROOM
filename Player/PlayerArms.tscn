@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://c01m68jbqinbi"]
 
-[ext_resource type="Script" path="res://Player/Arms.cs" id="1_4suaf"]
-[ext_resource type="Texture2D" uid="uid://dbjfptr137kod" path="res://Player/UpperArm.png" id="1_ipajw"]
-[ext_resource type="Texture2D" uid="uid://c0v3vpxjl0uau" path="res://Player/LowerArm.png" id="2_md5y1"]
-[ext_resource type="Texture2D" uid="uid://cnmqg0h0fm3ve" path="res://Weapons/Spear/spear.png" id="4_eqfvw"]
+[ext_resource type="Script" path="res://Player/Arms.cs" id="1_ypoc8"]
+[ext_resource type="PackedScene" uid="uid://rnbeh2t00dvr" path="res://Weapons/Spear/spear.tscn" id="2_72ru1"]
+[ext_resource type="Texture2D" uid="uid://dbjfptr137kod" path="res://Player/images/UpperArm.png" id="3_lgssq"]
+[ext_resource type="Texture2D" uid="uid://c0v3vpxjl0uau" path="res://Player/images/LowerArm.png" id="4_r7ppg"]
 
 [sub_resource type="SkeletonModification2DCCDIK" id="SkeletonModification2DCCDIK_wwves"]
 target_nodepath = NodePath("../left_marker")
@@ -53,7 +53,13 @@ modifications/1 = SubResource("SkeletonModification2DCCDIK_exuwt")
 viewport_path = NodePath("SubViewport")
 
 [node name="arm_root" type="Node2D"]
-script = ExtResource("1_4suaf")
+script = ExtResource("1_ypoc8")
+
+[node name="rotation" type="Node2D" parent="."]
+position = Vector2(0, 1)
+
+[node name="weapon" parent="rotation" instance=ExtResource("2_72ru1")]
+position = Vector2(0, 10)
 
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true
@@ -64,17 +70,19 @@ size = Vector2i(46, 46)
 position = Vector2(23, 23)
 
 [node name="Skeleton2D" type="Skeleton2D" parent="SubViewport/Node2D"]
-visible = false
 modification_stack = SubResource("SkeletonModificationStack2D_dbxks")
 
 [node name="upper_left" type="Bone2D" parent="SubViewport/Node2D/Skeleton2D"]
 position = Vector2(-5, 0)
+rotation = -0.065806
+scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, -5, 0)
 metadata/_local_pose_override_enabled_ = true
 
 [node name="lower_left" type="Bone2D" parent="SubViewport/Node2D/Skeleton2D/upper_left"]
 position = Vector2(-3, 4)
-rotation = 0.523599
+rotation = 1.44286
+scale = Vector2(1, 1)
 rest = Transform2D(0.866025, 0.5, -0.5, 0.866025, -3, 4)
 auto_calculate_length_and_angle = false
 length = 12.0
@@ -86,12 +94,15 @@ position = Vector2(11.6603, 0.196153)
 
 [node name="upper_right" type="Bone2D" parent="SubViewport/Node2D/Skeleton2D"]
 position = Vector2(4, 0)
+rotation = 0.0746504
+scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, 4, 0)
 metadata/_local_pose_override_enabled_ = true
 
 [node name="lower_right" type="Bone2D" parent="SubViewport/Node2D/Skeleton2D/upper_right"]
 position = Vector2(-3, 4)
-rotation = 0.523599
+rotation = 0.811084
+scale = Vector2(1, 1)
 rest = Transform2D(0.866025, 0.5, -0.5, 0.866025, -3, 4)
 auto_calculate_length_and_angle = false
 length = 12.0
@@ -103,7 +114,7 @@ position = Vector2(11.6603, 0.196152)
 
 [node name="upper_right_tex" type="Polygon2D" parent="SubViewport/Node2D"]
 position = Vector2(5, 3)
-texture = ExtResource("1_ipajw")
+texture = ExtResource("3_lgssq")
 skeleton = NodePath("../Skeleton2D")
 polygon = PackedVector2Array(-2, -9.3, -4, -8.2, -4, -6.7, -7.9, -2, -9.3, -2, -10.3, 0.299999, -6, 5.6, -6, 7.3, -3.5, 8.4, -0.2, 5, 1.1, 5, 5, -1.4, 5, -5.1)
 uv = PackedVector2Array(14, 11.7, 12, 12.8, 12, 14.3, 8.1, 19, 6.7, 19, 5.7, 21.3, 10, 26.6, 10, 28.3, 12.5, 29.4, 15.8, 26, 17.1, 26, 21, 19.6, 21, 15.9)
@@ -112,7 +123,7 @@ bones = ["upper_left", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
 [node name="lower_right_tex" type="Polygon2D" parent="SubViewport/Node2D"]
 position = Vector2(6, 4)
-texture = ExtResource("2_md5y1")
+texture = ExtResource("4_r7ppg")
 skeleton = NodePath("../Skeleton2D")
 polygon = PackedVector2Array(-6, -5.1, -6, -2.3, -8, -1.2, -8, 4, -4, 7, -4, 8.4, 2, 10.4, 2, 11.3, 4.5, 12.4, 7.8, 9, 9.2, 9, 10.3, 6.8, 7, 2.3, 7, 0.700001)
 uv = PackedVector2Array(10, 15.9, 10, 18.7, 8, 19.8, 8, 25, 12, 28, 12, 29.4, 18, 31.4, 18, 32.3, 20.5, 33.4, 23.8, 30, 25.2, 30, 26.3, 27.8, 23, 23.3, 23, 21.7)
@@ -121,7 +132,7 @@ bones = ["upper_left", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 
 [node name="lower_left_tex" type="Polygon2D" parent="SubViewport/Node2D"]
 position = Vector2(-3, 4)
-texture = ExtResource("2_md5y1")
+texture = ExtResource("4_r7ppg")
 skeleton = NodePath("../Skeleton2D")
 polygon = PackedVector2Array(-6, -5.1, -6, -2.3, -8, -1.2, -8, 4, -4, 7, -4, 8.4, 2, 10.4, 2, 11.3, 4.5, 12.4, 7.8, 9, 9.2, 9, 10.3, 6.8, 7, 2.3, 7, 0.700001)
 uv = PackedVector2Array(10, 15.9, 10, 18.7, 8, 19.8, 8, 25, 12, 28, 12, 29.4, 18, 31.4, 18, 32.3, 20.5, 33.4, 23.8, 30, 25.2, 30, 26.3, 27.8, 23, 23.3, 23, 21.7)
@@ -130,7 +141,7 @@ bones = ["upper_left", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 
 [node name="upper_left_tex" type="Polygon2D" parent="SubViewport/Node2D"]
 position = Vector2(-4, 3)
-texture = ExtResource("1_ipajw")
+texture = ExtResource("3_lgssq")
 skeleton = NodePath("../Skeleton2D")
 polygon = PackedVector2Array(-2, -9.3, -4, -8.2, -4, -6.7, -7.9, -2, -9.3, -2, -10.3, 0.299999, -6, 5.6, -6, 7.3, -3.5, 8.4, -0.2, 5, 1.1, 5, 5, -1.4, 5, -5.1)
 uv = PackedVector2Array(14, 11.7, 12, 12.8, 12, 14.3, 8.1, 19, 6.7, 19, 5.7, 21.3, 10, 26.6, 10, 28.3, 12.5, 29.4, 15.8, 26, 17.1, 26, 21, 19.6, 21, 15.9)
@@ -139,29 +150,13 @@ bones = ["upper_left", PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
 
 [node name="left_marker" type="Marker2D" parent="SubViewport/Node2D"]
 unique_name_in_owner = true
-position = Vector2(0.835684, 14.9628)
+visible = false
+position = Vector2(-5.47768, 16.7884)
 
 [node name="right_marker" type="Marker2D" parent="SubViewport/Node2D"]
 unique_name_in_owner = true
-position = Vector2(11.0282, 12.6545)
+visible = false
+position = Vector2(8, 13)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("ViewportTexture_qrpfa")
-
-[node name="rotation" type="Node2D" parent="."]
-rotation = -4.98641
-
-[node name="weapon" type="Sprite2D" parent="rotation"]
-position = Vector2(13.0903, -10.8923)
-scale = Vector2(1.2, 1.8)
-texture = ExtResource("4_eqfvw")
-
-[node name="left_hold" type="Marker2D" parent="rotation/weapon"]
-unique_name_in_owner = true
-position = Vector2(1.2836, 7.85375)
-gizmo_extents = 2.0
-
-[node name="right_hold" type="Marker2D" parent="rotation/weapon"]
-unique_name_in_owner = true
-position = Vector2(1.73023, 2.05549)
-gizmo_extents = 2.0
