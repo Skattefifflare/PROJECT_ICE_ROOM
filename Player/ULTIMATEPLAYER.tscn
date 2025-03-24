@@ -1,29 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://b7kgh3wkj0gav"]
+[gd_scene load_steps=7 format=3 uid="uid://b7kgh3wkj0gav"]
 
-[ext_resource type="Texture2D" uid="uid://df8tt3nho5125" path="res://Player/alien_atlas.tres" id="1_0phsu"]
+[ext_resource type="Texture2D" uid="uid://0wtiff0vuohu" path="res://Player/images/backarm.png" id="1_xfg8n"]
+[ext_resource type="Texture2D" uid="uid://1q5e31t4p0bg" path="res://Player/images/backleg.png" id="2_2s05t"]
+[ext_resource type="Texture2D" uid="uid://b3qbuy6uf2fle" path="res://Player/images/torso.png" id="3_y6rgd"]
+[ext_resource type="Texture2D" uid="uid://bbehhmtkra8d8" path="res://Player/images/frontleg.png" id="4_i04jh"]
+[ext_resource type="Texture2D" uid="uid://bw8q1jbrxxt0n" path="res://Player/images/frontarm.png" id="5_ituhi"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_cnx38"]
 viewport_path = NodePath("subviewport")
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2qgri"]
-atlas = ExtResource("1_0phsu")
-region = Rect2(25, 12, 5, 31)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_c0fhv"]
-atlas = ExtResource("1_0phsu")
-region = Rect2(43, 25, 11, 21)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_b4p0v"]
-atlas = ExtResource("1_0phsu")
-region = Rect2(0, 0, 16, 28)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tnrid"]
-atlas = ExtResource("1_0phsu")
-region = Rect2(65, 23, 11, 23)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tqunb"]
-atlas = ExtResource("1_0phsu")
-region = Rect2(84, 12, 5, 31)
 
 [node name="player_root" type="Node2D"]
 
@@ -33,69 +17,120 @@ size = Vector2i(70, 70)
 [node name="subviewport_sprite" type="Sprite2D" parent="."]
 texture = SubResource("ViewportTexture_cnx38")
 
-[node name="backarm" type="Sprite2D" parent="."]
+[node name="backarm" type="Polygon2D" parent="."]
 position = Vector2(1, 13.5)
-texture = SubResource("AtlasTexture_2qgri")
+texture = ExtResource("1_xfg8n")
+skeleton = NodePath("../skeleton")
+polygon = PackedVector2Array(-2.5, 15.5, -2.5, -15.5, 2.5, -15.5, 2.5, 15.5)
+uv = PackedVector2Array(0, 31, 0, 0, 5, 0, 5, 31)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+bones = ["hip", PackedFloat32Array(0, 0, 0, 0), "hip/navel", PackedFloat32Array(0, 0, 0, 0), "hip/navel/shoulder", PackedFloat32Array(0, 0, 0, 0), "hip/navel/shoulder/front_elbow", PackedFloat32Array(0, 0, 0, 0), "hip/navel/shoulder/front_elbow/front_wrist", PackedFloat32Array(0, 0, 0, 0), "hip/navel/shoulder/back_shoulder", PackedFloat32Array(0, 1, 1, 0), "hip/navel/shoulder/back_shoulder/back_elbow", PackedFloat32Array(0, 0, 0, 0), "hip/navel/shoulder/back_shoulder/back_elbow/back_wrist", PackedFloat32Array(1, 0, 0, 1), "hip/upperfrontleg", PackedFloat32Array(0, 0, 0, 0), "hip/upperfrontleg/lowerfrontleg", PackedFloat32Array(0, 0, 0, 0), "hip/backhip", PackedFloat32Array(0, 0, 0, 0), "hip/backhip/upperbackleg", PackedFloat32Array(0, 0, 0, 0), "hip/backhip/upperbackleg/lowerbackleg", PackedFloat32Array(0, 0, 0, 0)]
 
-[node name="backleg" type="Sprite2D" parent="."]
+[node name="backleg" type="Polygon2D" parent="."]
 position = Vector2(3.5, 24.5)
-texture = SubResource("AtlasTexture_c0fhv")
+texture = ExtResource("2_2s05t")
+skeleton = NodePath("../skeleton")
+polygon = PackedVector2Array(5.5, -10.5, -4.5, -10.5, -5.5, -9.3, -5.5, 2.4, -1.7, 3, -5.5, 7.5, -5.5, 10.5, 5.5, 10.5, 5.5, -5.6, 4.6, -5.8, 5.5, -6.7)
+uv = PackedVector2Array(11, 0, 1, 0, 0, 1.2, 0, 12.9, 3.8, 13.5, 0, 18, 0, 21, 11, 21, 11, 4.9, 10.1, 4.7, 11, 3.8)
+polygons = [PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)]
 
-[node name="torso" type="Sprite2D" parent="."]
+[node name="torso" type="Polygon2D" parent="."]
+visible = false
 position = Vector2(0, 1)
-texture = SubResource("AtlasTexture_b4p0v")
+texture = ExtResource("3_y6rgd")
+skeleton = NodePath("../skeleton")
+polygon = PackedVector2Array(8, -14, -7.2, -14, -8, -13.5, -8, 1, -2.7, 1.9, -0.0999999, 14, 8, 14, 8, -4.6, 6.7, -5.5, 8, -6.5)
+uv = PackedVector2Array(16, 0, 0.8, 0, 0, 0.5, 0, 15, 5.3, 15.9, 7.9, 28, 16, 28, 16, 9.4, 14.7, 8.5, 16, 7.5)
+polygons = [PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)]
+bones = ["hip", PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "hip/navel", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/navel/shoulder", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/navel/shoulder/front_elbow", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/navel/shoulder/front_elbow/front_wrist", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/navel/shoulder/back_shoulder", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/navel/shoulder/back_shoulder/back_elbow", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/navel/shoulder/back_shoulder/back_elbow/back_wrist", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/upperfrontleg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/upperfrontleg/lowerfrontleg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/backhip", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/backhip/upperbackleg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/backhip/upperbackleg/lowerbackleg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
 
-[node name="frontleg" type="Sprite2D" parent="."]
+[node name="frontleg" type="Polygon2D" parent="."]
 position = Vector2(5.5, 23.5)
-texture = SubResource("AtlasTexture_tnrid")
+texture = ExtResource("4_i04jh")
+skeleton = NodePath("../skeleton")
+polygon = PackedVector2Array(5.5, -11.5, -4.5, -11.5, -4.5, -9.3, -5.5, -8.3, -5.5, 3.4, -1.7, 4, -5.5, 8.5, -5.5, 11.5, 5.5, 11.5, 5.5, -4.6, 4.6, -4.8, 5.5, -5.7)
+uv = PackedVector2Array(11, 0, 1, 0, 1, 2.2, 0, 3.2, 0, 14.9, 3.8, 15.5, 0, 20, 0, 23, 11, 23, 11, 6.9, 10.1, 6.7, 11, 5.8)
+polygons = [PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11)]
 
-[node name="frontarm" type="Sprite2D" parent="."]
+[node name="frontarm" type="Polygon2D" parent="."]
 position = Vector2(2, 13.5)
-texture = SubResource("AtlasTexture_tqunb")
+texture = ExtResource("5_ituhi")
+skeleton = NodePath("../skeleton")
+polygon = PackedVector2Array(-2.5, 15.5, -2.5, -15.5, 2.5, -15.5, 2.5, 15.5)
+uv = PackedVector2Array(0, 31, 0, 0, 5, 0, 5, 31)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
 
 [node name="skeleton" type="Skeleton2D" parent="."]
 position = Vector2(6, 12)
 
 [node name="hip" type="Bone2D" parent="skeleton"]
+rest = Transform2D(1, 0, 0, 1, 0, 0)
 
 [node name="navel" type="Bone2D" parent="skeleton/hip"]
 position = Vector2(0, -8)
+rest = Transform2D(1, 0, 0, 1, 0, -8)
 auto_calculate_length_and_angle = false
 length = 6.0
 bone_angle = 0.0
 
 [node name="shoulder" type="Bone2D" parent="skeleton/hip/navel"]
 position = Vector2(-5, -5)
+rest = Transform2D(1, 0, 0, 1, -5, -5)
 
 [node name="front_elbow" type="Bone2D" parent="skeleton/hip/navel/shoulder"]
-position = Vector2(4.76837e-07, 6)
+position = Vector2(-1.7053e-13, 12)
+rest = Transform2D(1, 0, 0, 1, -1.7053e-13, 12)
 
 [node name="front_wrist" type="Bone2D" parent="skeleton/hip/navel/shoulder/front_elbow"]
-position = Vector2(-2, 4)
+position = Vector2(0, 7)
 rotation = 1.5708
+rest = Transform2D(-3.61999e-06, 1, -1, -3.61999e-06, 0, 7)
 auto_calculate_length_and_angle = false
 length = 7.0
 bone_angle = 0.0
 
 [node name="back_shoulder" type="Bone2D" parent="skeleton/hip/navel/shoulder"]
-position = Vector2(-2, 0)
+position = Vector2(-1, 0)
+rotation = 1.49575
+scale = Vector2(1, 1)
+rest = Transform2D(1, 0, 0, 1, -1, 0)
 
 [node name="back_elbow" type="Bone2D" parent="skeleton/hip/navel/shoulder/back_shoulder"]
-position = Vector2(4.76837e-07, 6)
+position = Vector2(-1.7053e-13, 12)
+rest = Transform2D(1, 0, 0, 1, -1.7053e-13, 12)
 
 [node name="back_wrist" type="Bone2D" parent="skeleton/hip/navel/shoulder/back_shoulder/back_elbow"]
-position = Vector2(-2, 4)
+position = Vector2(0, 7)
 rotation = 1.5708
+rest = Transform2D(-3.61999e-06, 1, -1, -3.61999e-06, 0, 7)
 auto_calculate_length_and_angle = false
 length = 7.0
 bone_angle = 0.0
 
-[node name="Bone2D" type="Bone2D" parent="skeleton/hip"]
+[node name="upperfrontleg" type="Bone2D" parent="skeleton/hip"]
 position = Vector2(-5, 10)
+rest = Transform2D(1, 0, 0, 1, -5, 10)
 
-[node name="Bone2D" type="Bone2D" parent="skeleton/hip/Bone2D"]
+[node name="lowerfrontleg" type="Bone2D" parent="skeleton/hip/upperfrontleg"]
 position = Vector2(9, 2)
 rotation = 2.00713
+rest = Transform2D(-0.422619, 0.906307, -0.906307, -0.422619, 9, 2)
+auto_calculate_length_and_angle = false
+length = 11.0
+bone_angle = 0.0
+
+[node name="backhip" type="Bone2D" parent="skeleton/hip"]
+position = Vector2(-1, 0)
+rest = Transform2D(1, 0, 0, 1, -1, 0)
+
+[node name="upperbackleg" type="Bone2D" parent="skeleton/hip/backhip"]
+position = Vector2(-5, 10)
+rest = Transform2D(1, 0, 0, 1, -5, 10)
+
+[node name="lowerbackleg" type="Bone2D" parent="skeleton/hip/backhip/upperbackleg"]
+position = Vector2(9, 2)
+rotation = 2.00713
+rest = Transform2D(-0.422618, 0.906308, -0.906308, -0.422618, 9, 2)
 auto_calculate_length_and_angle = false
 length = 11.0
 bone_angle = 0.0
