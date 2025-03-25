@@ -63,6 +63,7 @@ position = Vector2(0, 10)
 
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true
+screen_space_aa = 1
 canvas_item_default_texture_filter = 0
 size = Vector2i(46, 46)
 
@@ -74,14 +75,14 @@ modification_stack = SubResource("SkeletonModificationStack2D_dbxks")
 
 [node name="upper_left" type="Bone2D" parent="SubViewport/Node2D/Skeleton2D"]
 position = Vector2(-5, 0)
-rotation = -0.065806
+rotation = -0.0944095
 scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, -5, 0)
 metadata/_local_pose_override_enabled_ = true
 
 [node name="lower_left" type="Bone2D" parent="SubViewport/Node2D/Skeleton2D/upper_left"]
 position = Vector2(-3, 4)
-rotation = 1.44286
+rotation = 1.47977
 scale = Vector2(1, 1)
 rest = Transform2D(0.866025, 0.5, -0.5, 0.866025, -3, 4)
 auto_calculate_length_and_angle = false
@@ -94,15 +95,14 @@ position = Vector2(11.6603, 0.196153)
 
 [node name="upper_right" type="Bone2D" parent="SubViewport/Node2D/Skeleton2D"]
 position = Vector2(4, 0)
-rotation = 0.0746504
+rotation = 0.069477
 scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, 4, 0)
 metadata/_local_pose_override_enabled_ = true
 
 [node name="lower_right" type="Bone2D" parent="SubViewport/Node2D/Skeleton2D/upper_right"]
-position = Vector2(-3, 4)
-rotation = 0.811084
-scale = Vector2(1, 1)
+position = Vector2(-3.00001, 4)
+rotation = 0.816667
 rest = Transform2D(0.866025, 0.5, -0.5, 0.866025, -3, 4)
 auto_calculate_length_and_angle = false
 length = 12.0
