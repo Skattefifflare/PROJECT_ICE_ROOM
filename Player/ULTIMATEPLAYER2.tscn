@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://di02vbt3h0b1a"]
+[gd_scene load_steps=17 format=3 uid="uid://di02vbt3h0b1a"]
 
 [ext_resource type="Texture2D" uid="uid://0wtiff0vuohu" path="res://Player/images/backarm.png" id="1_2hneh"]
 [ext_resource type="Script" path="res://Player/TargetRepositioning.cs" id="1_w7qyq"]
@@ -90,7 +90,10 @@ height = 14.1335
 radius = 2.0
 height = 8.0
 
-[node name="player_root" type="Node2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p1t6d"]
+radius = 1.0
+
+[node name="player_root" type="CharacterBody2D"]
 script = ExtResource("1_w7qyq")
 
 [node name="subviewport" type="SubViewport" parent="."]
@@ -104,24 +107,21 @@ position = Vector2(65, 45)
 modification_stack = SubResource("SkeletonModificationStack2D_sn4ua")
 
 [node name="main" type="Bone2D" parent="subviewport/skeleton"]
-rotation = -0.274017
 rest = Transform2D(1, 0, 0, 1, 0, 0)
 
 [node name="frontupperleg" type="Bone2D" parent="subviewport/skeleton/main"]
 position = Vector2(0, 1)
-rotation = 0.614356
 rest = Transform2D(1, 0, 0, 1, 0, 1)
 metadata/_local_pose_override_enabled_ = true
 
 [node name="frontknee" type="Bone2D" parent="subviewport/skeleton/main/frontupperleg"]
 position = Vector2(-5, 7)
-rotation = 1.09258
 rest = Transform2D(1, 0, 0, 1, -5, 7)
 metadata/_local_pose_override_enabled_ = true
 
 [node name="frontlowerleg" type="Bone2D" parent="subviewport/skeleton/main/frontupperleg/frontknee"]
 position = Vector2(10, 2)
-rotation = 0.797615
+rotation = 2.0944
 rest = Transform2D(-0.5, 0.866025, -0.866025, -0.5, 10, 2)
 auto_calculate_length_and_angle = false
 length = 12.0
@@ -129,19 +129,17 @@ bone_angle = 0.0
 
 [node name="backupperleg" type="Bone2D" parent="subviewport/skeleton/main"]
 position = Vector2(-1, 1)
-rotation = -0.794125
 rest = Transform2D(1, 0, 0, 1, -1, 1)
 metadata/_local_pose_override_enabled_ = true
 
 [node name="backknee" type="Bone2D" parent="subviewport/skeleton/main/backupperleg"]
 position = Vector2(-5, 7)
-rotation = 0.682424
 rest = Transform2D(1, 0, 0, 1, -5, 7)
 metadata/_local_pose_override_enabled_ = true
 
 [node name="backlowerleg" type="Bone2D" parent="subviewport/skeleton/main/backupperleg/backknee"]
 position = Vector2(9, 2)
-rotation = 1.54811
+rotation = 2.0944
 rest = Transform2D(-0.5, 0.866025, -0.866025, -0.5, 9, 2)
 auto_calculate_length_and_angle = false
 length = 12.0
@@ -157,19 +155,17 @@ rest = Transform2D(1, 0, 0, 1, -5, -6)
 
 [node name="frontupperarm" type="Bone2D" parent="subviewport/skeleton/main/spine/shoulder"]
 position = Vector2(0, 1)
-rotation = 0.820305
 rest = Transform2D(1, 0, 0, 1, 0, 1)
 metadata/_local_pose_override_enabled_ = true
 
 [node name="frontelbow" type="Bone2D" parent="subviewport/skeleton/main/spine/shoulder/frontupperarm"]
 position = Vector2(1, 12)
-rotation = 0.750492
 rest = Transform2D(1, 0, 0, 1, 1, 12)
 metadata/_local_pose_override_enabled_ = true
 
 [node name="frontlowerarm" type="Bone2D" parent="subviewport/skeleton/main/spine/shoulder/frontupperarm/frontelbow"]
 position = Vector2(0, 9)
-rotation = 0.820305
+rotation = 1.5708
 rest = Transform2D(-4.37114e-08, 1, -1, -4.37114e-08, 0, 9)
 auto_calculate_length_and_angle = false
 length = 8.0
@@ -177,20 +173,17 @@ bone_angle = 0.0
 
 [node name="backupperarm" type="Bone2D" parent="subviewport/skeleton/main/spine/shoulder"]
 position = Vector2(-1, 1)
-rotation = 1.22871
 rest = Transform2D(1, 0, 0, 1, -1, 1)
 metadata/_local_pose_override_enabled_ = true
 
 [node name="backelbow" type="Bone2D" parent="subviewport/skeleton/main/spine/shoulder/backupperarm"]
 position = Vector2(1, 12)
-rotation = 0.47822
-scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, 1, 12)
 metadata/_local_pose_override_enabled_ = true
 
 [node name="backlowerarm" type="Bone2D" parent="subviewport/skeleton/main/spine/shoulder/backupperarm/backelbow"]
 position = Vector2(0, 9)
-rotation = 2.04902
+rotation = 1.5708
 rest = Transform2D(-4.37114e-08, 1, -1, -4.37114e-08, 0, 9)
 auto_calculate_length_and_angle = false
 length = 8.0
@@ -242,13 +235,13 @@ polygons = [PackedInt32Array(0, 1, 2, 7), PackedInt32Array(2, 3, 6, 7), PackedIn
 bones = ["main", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/frontupperleg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/frontupperleg/frontknee", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/frontupperleg/frontknee/frontlowerleg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/backupperleg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/backupperleg/backknee", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/backupperleg/backknee/backlowerleg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/spine", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/spine/shoulder", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/spine/shoulder/frontupperarm", PackedFloat32Array(1, 1, 1, 0, 0, 0, 0, 1), "main/spine/shoulder/frontupperarm/frontelbow", PackedFloat32Array(0, 0, 1, 1, 0, 0, 1, 1), "main/spine/shoulder/frontupperarm/frontelbow/frontlowerarm", PackedFloat32Array(0, 0, 0, 1, 1, 1, 1, 0), "main/spine/shoulder/backupperarm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/spine/shoulder/backupperarm/backelbow", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/spine/shoulder/backupperarm/backelbow/backlowerarm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0)]
 
 [node name="local_frontarmtarget" type="Node2D" parent="subviewport"]
-position = Vector2(46, 45)
+position = Vector2(45, 44)
 
 [node name="local_backarmtarget" type="Node2D" parent="subviewport"]
-position = Vector2(30, 45)
+position = Vector2(41, 38)
 
 [node name="local_frontlegtarget" type="Node2D" parent="subviewport"]
-position = Vector2(55, 60)
+position = Vector2(71, 58)
 
 [node name="local_backlegtarget" type="Node2D" parent="subviewport"]
 position = Vector2(72, 56)
@@ -257,18 +250,19 @@ position = Vector2(72, 56)
 texture = SubResource("ViewportTexture_cnx38")
 
 [node name="frontarmtarget" type="Node2D" parent="."]
-position = Vector2(-4, -5)
+position = Vector2(-5, -6)
 
 [node name="backarmtarget" type="Node2D" parent="."]
-position = Vector2(-20, -5)
+position = Vector2(-9, -12)
 
 [node name="frontlegtarget" type="Node2D" parent="."]
-position = Vector2(5, 10)
+position = Vector2(21, 8)
 
 [node name="backlegtarget" type="Node2D" parent="."]
 position = Vector2(22, 6)
 
 [node name="hitbox" type="Area2D" parent="."]
+visible = false
 position = Vector2(10, -14)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
@@ -287,5 +281,12 @@ rotation = -1.16064
 shape = SubResource("CapsuleShape2D_puokr")
 
 [node name="animation_player" type="AnimationPlayer" parent="."]
+root_node = NodePath("")
 
 [node name="weapon_slot" type="Node" parent="."]
+
+[node name="feet" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(9, 18)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_p1t6d")

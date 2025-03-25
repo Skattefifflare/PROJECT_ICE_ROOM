@@ -43,19 +43,19 @@ public partial class Fox : Enemy
         WalkToPlayer = new(WalkToPlayerStart, WalkToPlayerRunning, WalkToPlayerEnd);
         Bite = new(BiteStart, null, BiteEnd);
 
-        Idle.BindStates(new (Func<bool>, State)[] {
+        Idle.BindConditions(new (Func<bool>, State)[] {
             (() => hp <= 0, Die),
             (() => (whap.GlobalPosition-player.GlobalPosition).Length() <= 20, Bite),
             (() => Math.Abs(player_distance.Length()) > 60, WalkToPlayer)
         });
 
-        WalkToPlayer.BindStates(new (Func<bool>, State)[] {
+        WalkToPlayer.BindConditions(new (Func<bool>, State)[] {
             (() => hp <= 0, Die),
             (() => (whap.GlobalPosition-player.GlobalPosition).Length() <= 20, Bite),
             (() => player_distance.Length() < 10, Idle)
         });
 
-        Bite.BindStates(new (Func<bool>, State)[] {
+        Bite.BindConditions(new (Func<bool>, State)[] {
             (() => hp <= 0, Die),
             (() => sprite_done, Idle)
         });

@@ -50,11 +50,11 @@ public partial class Birdman : Enemy
         Idle = new(IdleStart, IdleRunning, IdleEnd);
         RunAround = new(RunAroundStart, RunAroundRunning, RunAroundEnd);
 
-        Idle.BindStates(new (Func<bool>, State)[] {
+        Idle.BindConditions(new (Func<bool>, State)[] {
              (() => hp <= 0, Die),
              (() => idletime >= idletime_max, RunAround)
         });
-        RunAround.BindStates(new (Func<bool>, State)[] {
+        RunAround.BindConditions(new (Func<bool>, State)[] {
             (() => hp <= 0, Die),
             (() => runtime >= runtime_max, Idle) 
         });

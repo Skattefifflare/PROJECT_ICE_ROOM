@@ -18,7 +18,7 @@ public class State {
         end_method = e ?? (() => { });
     }
 
-    public void BindStates((Func<bool>, State)[] _pointers) {
+    public void BindConditions((Func<bool>, State)[] _pointers) {
         if (has_binded) {
             GD.Print("already bound states");
             return;

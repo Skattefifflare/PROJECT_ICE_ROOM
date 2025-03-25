@@ -37,11 +37,11 @@ namespace Project_Ice_Room.Player {
             Idle = new(IdleStart);
             Walk = new(WalkStart, WalkRunning, WalkEnd);
 
-            Idle.BindStates(new (Func<bool>, State)[] {
+            Idle.BindConditions(new (Func<bool>, State)[] {
                 (() => hp <= 0, Die),
                 (() =>direction != Vector2.Zero, Walk),
             });
-            Walk.BindStates(new (Func<bool>, State)[] {
+            Walk.BindConditions(new (Func<bool>, State)[] {
                 (() => hp <= 0, Die),
                 (() => direction == Vector2.Zero, Idle)
             });
