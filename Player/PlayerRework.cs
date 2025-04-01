@@ -4,20 +4,9 @@ using Project_Ice_Room.Scriptbin;
 using System;
 
 
-[Tool]
 public partial class PlayerRework : CreatureRework
 {
-	Node2D frontarmtarget;
-	Node2D backarmtarget;
-	Node2D frontlegtarget;
-	Node2D backlegtarget;
-
-    Node2D local_frontarmtarget;
-    Node2D local_backarmtarget;
-    Node2D local_frontlegtarget;
-    Node2D local_backlegtarget;
-
-
+     
 
     private AnimationPlayer animation_player;
     private Weapon weapon;
@@ -50,18 +39,8 @@ public partial class PlayerRework : CreatureRework
 
     public override void _Ready()
 	{
-		frontarmtarget = (Node2D)FindChild("frontarmtarget");
-        backarmtarget = (Node2D)FindChild("backarmtarget");
-        frontlegtarget = (Node2D)FindChild("frontlegtarget");
-        backlegtarget = (Node2D)FindChild("backlegtarget");
-
-		local_frontarmtarget = (Node2D)FindChild("local_frontarmtarget");
-        local_backarmtarget = (Node2D)FindChild("local_backarmtarget");
-        local_frontlegtarget = (Node2D)FindChild("local_frontlegtarget");
-        local_backlegtarget = (Node2D)FindChild("local_backlegtarget");
-
-
         animation_player = (AnimationPlayer)FindChild("animation_player");
+        weapon_slot = (Node)FindChild("weapon_slot");
         if (weapon_slot.GetChildCount() != 0) weapon = (Weapon)weapon_slot.GetChild(0);
 
 
@@ -79,18 +58,13 @@ public partial class PlayerRework : CreatureRework
             });
 
 
+        current_state = IdleState;
     }
 
 
 	public override void _Process(double delta)
 	{
-        local_frontarmtarget.GlobalPosition = frontarmtarget.Position + new Vector2(50, 50);
-        local_backarmtarget.Position = backarmtarget.Position + new Vector2(50, 50);
-        local_frontlegtarget.Position = frontlegtarget.Position + new Vector2(50, 50);
-        local_backlegtarget.Position = backlegtarget.Position + new Vector2(50, 50);
-
-
-
+        base._Process(delta);
     }
 
     public override void _PhysicsProcess(double delta) {

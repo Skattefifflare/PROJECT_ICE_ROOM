@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bav2vso835uxd"]
 
-[ext_resource type="PackedScene" uid="uid://vwvt1qvu5m5v" path="res://Player/Player.tscn" id="2_hjvhr"]
+[ext_resource type="PackedScene" uid="uid://dxm6xlxhw5sck" path="res://Player/Player.tscn" id="2_hjvhr"]
 [ext_resource type="PackedScene" uid="uid://c5lfrw2nny0cd" path="res://Enemies/Fox/fox.tscn" id="2_isbbg"]
 [ext_resource type="PackedScene" uid="uid://cbicc0vk406d5" path="res://Environ/rock.tscn" id="3_fwkir"]
 [ext_resource type="PackedScene" uid="uid://dxntdg5sxp0bi" path="res://Enemies/Birdman/birdman.tscn" id="4_yj7i6"]

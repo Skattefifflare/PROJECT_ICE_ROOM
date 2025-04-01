@@ -15,6 +15,7 @@ public partial class CreatureRework : CharacterBody2D {
     protected int speed = 1;
 
     private bool facing_right = true;
+    
 
     protected Area2D hitbox;
     protected Vector2 direction;
@@ -26,6 +27,14 @@ public partial class CreatureRework : CharacterBody2D {
         hitbox = (Area2D)FindChild("hitbox");
         direction = Vector2.Zero;
 
+    }
+    public override void _Process(double delta) {
+        base._Process(delta);
+        current_state.Call(ref current_state);
+    }
+    public override void _PhysicsProcess(double delta) {
+        base._PhysicsProcess(delta);
+        MoveAndSlide();
     }
 }
 
