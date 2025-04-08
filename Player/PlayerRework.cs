@@ -6,8 +6,6 @@ using System;
 
 public partial class PlayerRework : CreatureRework
 {
-     
-
     private AnimationPlayer animation_player;
     private Weapon weapon;
     private Node weapon_slot;
@@ -46,12 +44,14 @@ public partial class PlayerRework : CreatureRework
 
         DieState = new(DieStart, null, null);
         IdleState = new(IdleStart, null, IdleEnd);
+        RunState = new(RunStart, RunRunning, RunEnd);
+
         IdleState.BindConditions(new (Func<bool>, State)[] {
                 (() => hp <= 0, DieState),
                 (() =>direction != Vector2.Zero, RunState),
             });
         
-        RunState = new(RunStart, RunRunning, RunEnd);
+        
         RunState.BindConditions(new (Func<bool>, State)[] {
                 (() => hp <= 0, DieState),
                 (() => direction == Vector2.Zero, IdleState)
@@ -70,6 +70,7 @@ public partial class PlayerRework : CreatureRework
     public override void _PhysicsProcess(double delta) {
         base._PhysicsProcess(delta);
         direction = Input.GetVector("left", "right", "up", "down");
-        base._PhysicsProcess(delta);
+        GD.Print(this.GlobalPosition);
+        GD.Print("v: " + this.Velocity);
     }
 }

@@ -487,6 +487,7 @@ _data = {
 }
 
 [node name="player_root" type="CharacterBody2D"]
+motion_mode = 1
 script = ExtResource("1_q4crj")
 speed = 100
 
@@ -686,10 +687,10 @@ position = Vector2(48, 55)
 position = Vector2(37, 54)
 
 [node name="local_frontlegtarget" type="Node2D" parent="limb_handler/subviewport"]
-position = Vector2(40.0959, 78.0128)
+position = Vector2(67, 67)
 
 [node name="local_backlegtarget" type="Node2D" parent="limb_handler/subviewport"]
-position = Vector2(105.866, 69.032)
+position = Vector2(59, 67)
 
 [node name="frontarmtarget" type="Node2D" parent="limb_handler"]
 position = Vector2(-2, 5)
@@ -707,6 +708,3 @@ position = Vector2(9, 17)
 libraries = {
 "": SubResource("AnimationLibrary_01v1g")
 }
-
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)

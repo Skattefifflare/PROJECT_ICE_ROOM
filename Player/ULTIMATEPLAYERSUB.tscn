@@ -160,16 +160,16 @@ position = Vector2(-27, 66)
 zoom = Vector2(10, 10)
 
 [node name="local_frontarmtarget" type="Node2D" parent="limb_handler"]
-position = Vector2(9, -57)
+position = Vector2(-4, 104)
 
 [node name="local_backarmtarget" type="Node2D" parent="limb_handler"]
-position = Vector2(-69, -49)
+position = Vector2(-8, 98)
 
 [node name="local_frontlegtarget" type="Node2D" parent="limb_handler"]
-position = Vector2(-61, 3)
+position = Vector2(22, 118)
 
 [node name="local_backlegtarget" type="Node2D" parent="limb_handler"]
-position = Vector2(6, 29)
+position = Vector2(23, 116)
 
 [node name="skeleton" type="Skeleton2D" parent="limb_handler"]
 position = Vector2(6, 12)

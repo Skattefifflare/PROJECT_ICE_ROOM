@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://b3ww5esftxe72"]
+
+[ext_resource type="PackedScene" uid="uid://di02vbt3h0b1a" path="res://Player/ULTIMATEPLAYER2.tscn" id="1_pjbwk"]
+[ext_resource type="PackedScene" uid="uid://cbicc0vk406d5" path="res://Environ/rock.tscn" id="2_werju"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_4wtun"]
+vertices = PackedVector2Array(-18.6484, -24, 136.32, -31.0391, 149, -27.6484, -22.0391, -11.3203, 127.039, -40.3203, 263.289, -134.07, 271.68, 138.008, 174.352, -53, 170.961, -65.6797, 170.961, -40.3203, 161.68, -31.0391, -260.93, 138.977, 123.648, -53, -22.0391, -36.6797, 161.68, -74.9609, 127.039, -65.6797, -31.3203, -45.9609, 149, -78.3516, -259.063, -137.922, 136.32, -74.9609, -44, -49.3516, -56.6797, -45.9609, -65.9609, -36.6797, -69.3516, -24, -65.9609, -11.3203, -56.6797, -2.03906, -44, 1.35156, -31.3203, -2.03906)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 1, 0), PackedInt32Array(5, 6, 7, 8), PackedInt32Array(9, 7, 6), PackedInt32Array(10, 9, 6), PackedInt32Array(10, 6, 11, 2), PackedInt32Array(12, 4, 0, 13), PackedInt32Array(5, 8, 14), PackedInt32Array(15, 12, 13, 16), PackedInt32Array(5, 14, 17), PackedInt32Array(18, 5, 17, 19), PackedInt32Array(18, 19, 15, 16, 20), PackedInt32Array(18, 20, 21), PackedInt32Array(11, 18, 21, 22), PackedInt32Array(11, 22, 23), PackedInt32Array(11, 23, 24), PackedInt32Array(11, 24, 25), PackedInt32Array(11, 25, 26), PackedInt32Array(2, 11, 26, 27), PackedInt32Array(2, 27, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(273, -144, 282, 148, -271, 149, -269, -148)])
+parsed_geometry_type = 0
+
+[node name="Node2D" type="Node2D"]
+
+[node name="player_root" parent="." instance=ExtResource("1_pjbwk")]
+collision_layer = 4
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_4wtun")
+
+[node name="rock1" parent="NavigationRegion2D" instance=ExtResource("2_werju")]
+position = Vector2(149, -60)
+
+[node name="rock2" parent="NavigationRegion2D" instance=ExtResource("2_werju")]
+position = Vector2(-44, -31)
+
+[node name="Camera2D" type="Camera2D" parent="."]
