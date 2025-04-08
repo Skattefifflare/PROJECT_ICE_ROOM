@@ -68,8 +68,9 @@ public partial class PlayerRework : CreatureRework
     }
 
     public override void _PhysicsProcess(double delta) {
-        base._PhysicsProcess(delta);
+        
         direction = Input.GetVector("left", "right", "up", "down");
+        base._PhysicsProcess(delta);
         GD.Print(this.GlobalPosition);
         GD.Print("v: " + this.Velocity);
     }

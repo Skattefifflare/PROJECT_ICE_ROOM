@@ -12,7 +12,7 @@ public partial class Fox : Enemy
         sprite_player.Play("idle");
         Velocity = Vector2.Zero;
     }
-
+     
     private State WalkToPlayer;
     private void WalkToPlayerStart() {
         sprite_player.Play("walk");

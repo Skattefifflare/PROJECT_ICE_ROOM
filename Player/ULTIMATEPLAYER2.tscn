@@ -267,7 +267,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath(".:position")
+tracks/9/path = NodePath("subviewport_sprite:position")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -279,7 +279,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath(".:rotation")
+tracks/10/path = NodePath("subviewport_sprite:rotation")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -457,26 +457,26 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath(".:position")
+tracks/4/path = NodePath("subviewport_sprite:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, 2), Vector2(0, 0), Vector2(0, -2), Vector2(0, -1), Vector2(0, 0)]
+"values": [Vector2(0, 0), Vector2(0, 2), Vector2(0, 0), Vector2(0, -2), Vector2(0, -1), Vector2(0, 1), Vector2(0, 0)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath(".:rotation")
+tracks/5/path = NodePath("subviewport_sprite:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+"values": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_01v1g"]
@@ -492,23 +492,22 @@ script = ExtResource("1_q4crj")
 speed = 100
 
 [node name="subviewport_sprite" type="Sprite2D" parent="."]
-position = Vector2(3, 0.620566)
 texture = SubResource("ViewportTexture_cnx38")
 
-[node name="hitbox" type="Area2D" parent="."]
-position = Vector2(17, -15.3794)
+[node name="hitbox" type="Area2D" parent="subviewport_sprite"]
+position = Vector2(14, -16.7947)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="subviewport_sprite/hitbox"]
 position = Vector2(0, 5)
 rotation = -0.29147
 shape = SubResource("CapsuleShape2D_kduvd")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="hitbox"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="subviewport_sprite/hitbox"]
 position = Vector2(-9, -10)
 rotation = 0.820305
 shape = SubResource("CapsuleShape2D_tao34")
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="hitbox"]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="subviewport_sprite/hitbox"]
 position = Vector2(-6, -4)
 rotation = -1.16064
 shape = SubResource("CapsuleShape2D_puokr")
@@ -536,7 +535,7 @@ position = Vector2(65, 45)
 modification_stack = SubResource("SkeletonModificationStack2D_sn4ua")
 
 [node name="main" type="Bone2D" parent="limb_handler/subviewport/skeleton"]
-scale = Vector2(0.999977, 0.999977)
+scale = Vector2(0.999976, 0.999976)
 rest = Transform2D(1, 0, 0, 1, 0, 0)
 
 [node name="frontupperleg" type="Bone2D" parent="limb_handler/subviewport/skeleton/main"]
@@ -687,10 +686,10 @@ position = Vector2(48, 55)
 position = Vector2(37, 54)
 
 [node name="local_frontlegtarget" type="Node2D" parent="limb_handler/subviewport"]
-position = Vector2(67, 67)
+position = Vector2(65.4927, 62.6232)
 
 [node name="local_backlegtarget" type="Node2D" parent="limb_handler/subviewport"]
-position = Vector2(59, 67)
+position = Vector2(56.7681, 75.1594)
 
 [node name="frontarmtarget" type="Node2D" parent="limb_handler"]
 position = Vector2(-2, 5)

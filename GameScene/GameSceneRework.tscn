@@ -12,6 +12,7 @@ parsed_geometry_type = 0
 [node name="Node2D" type="Node2D"]
 
 [node name="player_root" parent="." instance=ExtResource("1_pjbwk")]
+position = Vector2(52, 31)
 collision_layer = 4
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]

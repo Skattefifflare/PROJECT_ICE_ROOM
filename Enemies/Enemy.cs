@@ -7,7 +7,7 @@ public partial class Enemy : Creature {
     protected Node2D player;
     protected Vector2 player_distance;
     protected Area2D backoff;
-    protected Weapon whap;
+    protected Weapon whap; 
     protected NavigationAgent2D nav_agent;
 
     public override void _Ready() {
