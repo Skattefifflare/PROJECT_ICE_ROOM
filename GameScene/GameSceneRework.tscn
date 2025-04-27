@@ -15,9 +15,13 @@ parsed_geometry_type = 0
 navigation_polygon = SubResource("NavigationPolygon_4wtun")
 
 [node name="rock1" parent="NavigationRegion2D" instance=ExtResource("2_werju")]
+z_index = -60
+z_as_relative = false
 position = Vector2(149, -60)
 
 [node name="rock2" parent="NavigationRegion2D" instance=ExtResource("2_werju")]
+z_index = -31
+z_as_relative = false
 position = Vector2(-44, -31)
 
 [node name="Camera2D" type="Camera2D" parent="."]

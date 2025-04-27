@@ -22,6 +22,7 @@ public partial class CreatureRework : CharacterBody2D {
 
     protected State current_state;
 
+
     public override void _Ready() {
         base._Ready();
         hitbox = (Area2D)FindChild("hitbox");

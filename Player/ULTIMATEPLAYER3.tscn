@@ -10,6 +10,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p1t6d"]
 radius = 1.0
+height = 22.0
 
 [sub_resource type="SkeletonModification2DCCDIK" id="SkeletonModification2DCCDIK_csagm"]
 target_nodepath = NodePath("../local_frontarmtarget")
@@ -139,6 +140,21 @@ modifications/1 = SubResource("SkeletonModification2DCCDIK_00yc3")
 modifications/2 = SubResource("SkeletonModification2DCCDIK_g7rlp")
 modifications/3 = SubResource("SkeletonModification2DCCDIK_jurvs")
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_cnx38"]
+viewport_path = NodePath("limb_handler/subviewport")
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kduvd"]
+radius = 2.8267
+height = 16.9602
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tao34"]
+radius = 4.24006
+height = 14.1335
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_puokr"]
+radius = 2.0
+height = 8.0
+
 [sub_resource type="Animation" id="Animation_5mnqg"]
 length = 0.001
 tracks/0/type = "value"
@@ -244,30 +260,6 @@ tracks/8/path = NodePath("limb_handler/subviewport/skeleton/main:rotation")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("flip_node/subviewport_sprite:position")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-tracks/10/type = "value"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("flip_node/subviewport_sprite:rotation")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -439,30 +431,6 @@ tracks/3/keys = {
 "update": 0,
 "values": [0.0, 0.0, 0.0, 0.0, 0.0]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("flip_node/subviewport_sprite:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, 2), Vector2(0, 0), Vector2(0, -2), Vector2(0, -1), Vector2(0, 1), Vector2(0, 0)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("flip_node/subviewport_sprite:rotation")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_01v1g"]
 _data = {
@@ -471,22 +439,8 @@ _data = {
 "run": SubResource("Animation_q6fju")
 }
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_cnx38"]
-viewport_path = NodePath("limb_handler/subviewport")
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kduvd"]
-radius = 2.8267
-height = 16.9602
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tao34"]
-radius = 4.24006
-height = 14.1335
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_puokr"]
-radius = 2.0
-height = 8.0
-
 [node name="player_root" type="CharacterBody2D"]
+z_as_relative = false
 motion_mode = 1
 script = ExtResource("1_c6d0c")
 speed = 100
@@ -494,8 +448,7 @@ speed = 100
 [node name="weapon_slot" type="Node" parent="."]
 
 [node name="feet" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(9, 18)
+position = Vector2(0, 18)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_p1t6d")
 
@@ -682,14 +635,10 @@ position = Vector2(17, 17)
 [node name="backlegtarget" type="Node2D" parent="limb_handler"]
 position = Vector2(9, 17)
 
-[node name="animation_player" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_01v1g")
-}
-
 [node name="flip_node" type="Node2D" parent="."]
 
 [node name="subviewport_sprite" type="Sprite2D" parent="flip_node"]
+position = Vector2(-13, 0)
 texture = SubResource("ViewportTexture_cnx38")
 
 [node name="hitbox" type="Area2D" parent="flip_node/subviewport_sprite"]
@@ -709,3 +658,9 @@ shape = SubResource("CapsuleShape2D_tao34")
 position = Vector2(-6, -4)
 rotation = -1.16064
 shape = SubResource("CapsuleShape2D_puokr")
+
+[node name="animation_player" type="AnimationPlayer" parent="flip_node"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_01v1g")
+}
