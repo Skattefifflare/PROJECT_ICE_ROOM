@@ -1,27 +1,12 @@
-[gd_scene load_steps=22 format=3 uid="uid://di02vbt3h0b1a"]
+[gd_scene load_steps=22 format=3 uid="uid://bdkrt6juvuf1j"]
 
-[ext_resource type="Texture2D" uid="uid://0wtiff0vuohu" path="res://Player/images/backarm.png" id="1_2hneh"]
-[ext_resource type="Script" path="res://Player/PlayerRework.cs" id="1_q4crj"]
-[ext_resource type="Texture2D" uid="uid://1q5e31t4p0bg" path="res://Player/images/backleg.png" id="2_rcexh"]
-[ext_resource type="Texture2D" uid="uid://b3qbuy6uf2fle" path="res://Player/images/torso.png" id="3_vpp0c"]
-[ext_resource type="Texture2D" uid="uid://bbehhmtkra8d8" path="res://Player/images/frontleg.png" id="4_bed8y"]
-[ext_resource type="Texture2D" uid="uid://bw8q1jbrxxt0n" path="res://Player/images/frontarm.png" id="5_b0ec5"]
-[ext_resource type="Script" path="res://Player/LimbHandler.cs" id="7_8xovg"]
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_cnx38"]
-viewport_path = NodePath("limb_handler/subviewport")
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kduvd"]
-radius = 2.8267
-height = 16.9602
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tao34"]
-radius = 4.24006
-height = 14.1335
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_puokr"]
-radius = 2.0
-height = 8.0
+[ext_resource type="Script" path="res://Player/PlayerRework.cs" id="1_c6d0c"]
+[ext_resource type="Script" path="res://Player/LimbHandler.cs" id="2_xtw75"]
+[ext_resource type="Texture2D" uid="uid://0wtiff0vuohu" path="res://Player/images/backarm.png" id="3_h2p8r"]
+[ext_resource type="Texture2D" uid="uid://1q5e31t4p0bg" path="res://Player/images/backleg.png" id="4_v27ln"]
+[ext_resource type="Texture2D" uid="uid://b3qbuy6uf2fle" path="res://Player/images/torso.png" id="5_4m101"]
+[ext_resource type="Texture2D" uid="uid://bbehhmtkra8d8" path="res://Player/images/frontleg.png" id="6_jgq4f"]
+[ext_resource type="Texture2D" uid="uid://bw8q1jbrxxt0n" path="res://Player/images/frontarm.png" id="7_dhhna"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p1t6d"]
 radius = 1.0
@@ -267,7 +252,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("subviewport_sprite:position")
+tracks/9/path = NodePath("flip_node/subviewport_sprite:position")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -279,7 +264,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("subviewport_sprite:rotation")
+tracks/10/path = NodePath("flip_node/subviewport_sprite:rotation")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -457,7 +442,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("subviewport_sprite:position")
+tracks/4/path = NodePath("flip_node/subviewport_sprite:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -469,7 +454,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("subviewport_sprite:rotation")
+tracks/5/path = NodePath("flip_node/subviewport_sprite:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -486,31 +471,25 @@ _data = {
 "run": SubResource("Animation_q6fju")
 }
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_cnx38"]
+viewport_path = NodePath("limb_handler/subviewport")
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kduvd"]
+radius = 2.8267
+height = 16.9602
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tao34"]
+radius = 4.24006
+height = 14.1335
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_puokr"]
+radius = 2.0
+height = 8.0
+
 [node name="player_root" type="CharacterBody2D"]
 motion_mode = 1
-script = ExtResource("1_q4crj")
+script = ExtResource("1_c6d0c")
 speed = 100
-
-[node name="subviewport_sprite" type="Sprite2D" parent="."]
-texture = SubResource("ViewportTexture_cnx38")
-
-[node name="hitbox" type="Area2D" parent="subviewport_sprite"]
-position = Vector2(14, -16.7947)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="subviewport_sprite/hitbox"]
-position = Vector2(0, 5)
-rotation = -0.29147
-shape = SubResource("CapsuleShape2D_kduvd")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="subviewport_sprite/hitbox"]
-position = Vector2(-9, -10)
-rotation = 0.820305
-shape = SubResource("CapsuleShape2D_tao34")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="subviewport_sprite/hitbox"]
-position = Vector2(-6, -4)
-rotation = -1.16064
-shape = SubResource("CapsuleShape2D_puokr")
 
 [node name="weapon_slot" type="Node" parent="."]
 
@@ -522,7 +501,7 @@ shape = SubResource("CapsuleShape2D_p1t6d")
 
 [node name="limb_handler" type="Node2D" parent="."]
 position = Vector2(3, -1)
-script = ExtResource("7_8xovg")
+script = ExtResource("2_xtw75")
 
 [node name="subviewport" type="SubViewport" parent="limb_handler"]
 transparent_bg = true
@@ -636,7 +615,7 @@ metadata/_local_pose_override_enabled_ = true
 
 [node name="backarm" type="Polygon2D" parent="limb_handler/subviewport"]
 position = Vector2(57.3417, 30.4089)
-texture = ExtResource("1_2hneh")
+texture = ExtResource("3_h2p8r")
 skeleton = NodePath("../skeleton")
 polygon = PackedVector2Array(3.20538, -0.0859342, 3.52903, 12.9949, 3.44812, 21.9223, 5.95641, 31.0924, -0.46266, 31.2812, 0.481321, 22.0032, -0.327806, 13.1837, -0.219923, -0.112905)
 uv = PackedVector2Array(3.20538, -0.0859342, 3.52903, 12.9949, 3.44812, 21.9223, 5.95641, 31.0924, -0.46266, 31.2812, 0.481321, 22.0032, -0.327806, 13.1837, -0.219923, -0.112905)
@@ -645,7 +624,7 @@ bones = ["main", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/frontupperleg
 
 [node name="backleg" type="Polygon2D" parent="limb_handler/subviewport"]
 position = Vector2(57.3417, 45.4089)
-texture = ExtResource("2_rcexh")
+texture = ExtResource("4_v27ln")
 skeleton = NodePath("../skeleton")
 polygon = PackedVector2Array(4.12385, -0.831486, -0.889296, 6.41774, -0.745032, 9.82596, 7.96486, 11.1063, 1.47421, 21.0772, 7.89392, 21.4018, 11.9153, 13.4313, 11.6808, 8.40008, 4.25127, 7.08367, 9.42672, -0.399982)
 uv = PackedVector2Array(4.12385, -0.831486, -0.889296, 6.41774, -0.745032, 9.82596, 7.96486, 11.1063, 1.47421, 21.0772, 7.89392, 21.4018, 11.9153, 13.4313, 11.6808, 8.40008, 4.25127, 7.08367, 9.42672, -0.399982)
@@ -654,7 +633,7 @@ bones = ["main", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "main/frontup
 
 [node name="torso" type="Polygon2D" parent="limb_handler/subviewport"]
 position = Vector2(50.3417, 18.4089)
-texture = ExtResource("3_vpp0c")
+texture = ExtResource("5_4m101")
 skeleton = NodePath("../skeleton")
 polygon = PackedVector2Array(16.3956, 28.2653, 16.0115, 11.9761, 15.5635, -0.408878, -0.213688, -0.312871, -0.341698, 12.7761, 8.42696, 15.4643, 11.1472, 28.3293)
 uv = PackedVector2Array(16.3956, 28.2653, 16.0115, 11.9761, 15.5635, -0.408878, -0.213688, -0.312871, -0.341698, 12.7761, 8.42696, 15.4643, 11.1472, 28.3293)
@@ -663,7 +642,7 @@ bones = ["main", PackedFloat32Array(1, 1, 1, 1, 1, 1, 1), "main/frontupperleg", 
 
 [node name="frontleg" type="Polygon2D" parent="limb_handler/subviewport"]
 position = Vector2(58.3417, 43.4089)
-texture = ExtResource("4_bed8y")
+texture = ExtResource("6_jgq4f")
 skeleton = NodePath("../skeleton")
 polygon = PackedVector2Array(-0.909873, 7.52277, -0.820841, 11.6183, 7.77077, 13.7105, 1.31713, 23.2815, 7.861, 23.2369, 11.9862, 15.2834, 11.8526, 10.1937, 4.11893, 8.91597, 9.26796, 4.10823, 9.0899, -0.432419, 4.20796, -0.343387)
 uv = PackedVector2Array(-0.909873, 7.52277, -0.820841, 11.6183, 7.77077, 13.7105, 1.31713, 23.2815, 7.861, 23.2369, 11.9862, 15.2834, 11.8526, 10.1937, 4.11893, 8.91597, 9.26796, 4.10823, 9.0899, -0.432419, 4.20796, -0.343387)
@@ -672,7 +651,7 @@ bones = ["main", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "main/fron
 
 [node name="frontarm" type="Polygon2D" parent="limb_handler/subviewport"]
 position = Vector2(58.3417, 30.4089)
-texture = ExtResource("5_b0ec5")
+texture = ExtResource("7_dhhna")
 skeleton = NodePath("../skeleton")
 polygon = PackedVector2Array(-0.0599995, -0.0599999, 3.58, -0.0799999, 3.72, 13.32, 3.52, 22.44, 5.88, 31.04, 0.219997, 31, 0.399996, 22.44, -0.300003, 13.36)
 uv = PackedVector2Array(-0.0599995, -0.0599999, 3.58, -0.0799999, 3.72, 13.32, 3.52, 22.44, 5.88, 31.04, 0.219997, 31, 0.399996, 22.44, -0.300003, 13.36)
@@ -707,3 +686,26 @@ position = Vector2(9, 17)
 libraries = {
 "": SubResource("AnimationLibrary_01v1g")
 }
+
+[node name="flip_node" type="Node2D" parent="."]
+
+[node name="subviewport_sprite" type="Sprite2D" parent="flip_node"]
+texture = SubResource("ViewportTexture_cnx38")
+
+[node name="hitbox" type="Area2D" parent="flip_node/subviewport_sprite"]
+position = Vector2(14, -16.7947)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="flip_node/subviewport_sprite/hitbox"]
+position = Vector2(0, 5)
+rotation = -0.29147
+shape = SubResource("CapsuleShape2D_kduvd")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="flip_node/subviewport_sprite/hitbox"]
+position = Vector2(-9, -10)
+rotation = 0.820305
+shape = SubResource("CapsuleShape2D_tao34")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="flip_node/subviewport_sprite/hitbox"]
+position = Vector2(-6, -4)
+rotation = -1.16064
+shape = SubResource("CapsuleShape2D_puokr")

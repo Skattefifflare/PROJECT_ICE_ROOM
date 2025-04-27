@@ -4,8 +4,7 @@ using Project_Ice_Room.Scriptbin;
 using System;
 
 
-public partial class PlayerRework : CreatureRework
-{
+public partial class PlayerRework : CreatureRework {
     private AnimationPlayer animation_player;
     private Weapon weapon;
     private Node weapon_slot;
@@ -35,11 +34,12 @@ public partial class PlayerRework : CreatureRework
         Velocity = Vector2.Zero;
     }
 
-    public override void _Ready()
-	{
+    public override void _Ready() {
         animation_player = (AnimationPlayer)FindChild("animation_player");
         weapon_slot = (Node)FindChild("weapon_slot");
         if (weapon_slot.GetChildCount() != 0) weapon = (Weapon)weapon_slot.GetChild(0);
+        flip_node = (Node2D)FindChild("flip_node");
+
 
 
         DieState = new(DieStart, null, null);
@@ -50,8 +50,8 @@ public partial class PlayerRework : CreatureRework
                 (() => hp <= 0, DieState),
                 (() =>direction != Vector2.Zero, RunState),
             });
-        
-        
+
+
         RunState.BindConditions(new (Func<bool>, State)[] {
                 (() => hp <= 0, DieState),
                 (() => direction == Vector2.Zero, IdleState)
@@ -62,16 +62,30 @@ public partial class PlayerRework : CreatureRework
     }
 
 
-	public override void _Process(double delta)
-	{
+    public override void _Process(double delta) {
         base._Process(delta);
     }
 
     public override void _PhysicsProcess(double delta) {
-        
+
         direction = Input.GetVector("left", "right", "up", "down");
         base._PhysicsProcess(delta);
         GD.Print(this.GlobalPosition);
         GD.Print("v: " + this.Velocity);
+        FlipFlop();
+    }
+
+
+    private Node2D flip_node;
+
+    private void FlipFlop() {
+        if (direction.X < 0) {
+            flip_node.Scale = new Vector2(1, 1);
+
+        }
+        else if (direction.X > 0) {
+            flip_node.Scale = new Vector2(-1, 1);
+
+        }
     }
 }

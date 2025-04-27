@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b3ww5esftxe72"]
 
-[ext_resource type="PackedScene" uid="uid://di02vbt3h0b1a" path="res://Player/ULTIMATEPLAYER2.tscn" id="1_pjbwk"]
+[ext_resource type="PackedScene" uid="uid://bdkrt6juvuf1j" path="res://Player/ULTIMATEPLAYER3.tscn" id="2_a44n2"]
 [ext_resource type="PackedScene" uid="uid://cbicc0vk406d5" path="res://Environ/rock.tscn" id="2_werju"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_4wtun"]
@@ -10,10 +10,6 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(273, -144, 282, 148, -2
 parsed_geometry_type = 0
 
 [node name="Node2D" type="Node2D"]
-
-[node name="player_root" parent="." instance=ExtResource("1_pjbwk")]
-position = Vector2(52, 31)
-collision_layer = 4
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_4wtun")
@@ -25,3 +21,6 @@ position = Vector2(149, -60)
 position = Vector2(-44, -31)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="player_root" parent="." instance=ExtResource("2_a44n2")]
+position = Vector2(42, 36)
