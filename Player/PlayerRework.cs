@@ -8,7 +8,7 @@ public partial class PlayerRework : CreatureRework {
     private AnimationPlayer animation_player;
     private Weapon weapon;
     private Node weapon_slot;
-    protected Area2D feet;
+    protected CollisionShape2D feet;
 
     private State IdleState;
     private void IdleStart() {
@@ -40,7 +40,7 @@ public partial class PlayerRework : CreatureRework {
         weapon_slot = (Node)FindChild("weapon_slot");
         if (weapon_slot.GetChildCount() != 0) weapon = (Weapon)weapon_slot.GetChild(0);
         flip_node = (Node2D)FindChild("flip_node");
-        feet = (Area2D)FindChild("feet");
+        feet = (CollisionShape2D)FindChild("feet");
 
 
         DieState = new(DieStart, null, null);
@@ -65,15 +65,16 @@ public partial class PlayerRework : CreatureRework {
 
     public override void _Process(double delta) {
         base._Process(delta);
-        ZIndex = (int)(feet.GlobalPosition.Y);
+        ZIndex = (int)feet.GlobalPosition.Y;
+        GD.Print(ZIndex);
     }
 
     public override void _PhysicsProcess(double delta) {
 
         direction = Input.GetVector("left", "right", "up", "down");
         base._PhysicsProcess(delta);
-        GD.Print(this.GlobalPosition);
-        GD.Print("v: " + this.Velocity);
+        //GD.Print(this.GlobalPosition);
+        //GD.Print("v: " + this.Velocity);
         FlipFlop();
     }
 

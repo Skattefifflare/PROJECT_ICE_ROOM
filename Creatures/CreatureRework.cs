@@ -6,8 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Project_Ice_Room.Scriptbin;
 
-namespace Project_Ice_Room.Creatures;
 
+namespace Project_Ice_Room.Creatures;
 public partial class CreatureRework : CharacterBody2D {
     [Export]
     public int hp = 1;
@@ -19,7 +19,6 @@ public partial class CreatureRework : CharacterBody2D {
 
     protected Area2D hitbox;
     protected Vector2 direction;
-
     protected State current_state;
 
 

@@ -37,4 +37,6 @@ public partial class FoxRework : EnemyRework {
     private void BiteEnd() {
         weapon.MakeHarmless();
     }
+
+
 }
