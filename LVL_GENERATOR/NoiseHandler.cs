@@ -14,7 +14,7 @@ internal partial class NoiseHandler : Node2D {
 
     public List<Vector2> textureposes = new List<Vector2>();
 
-    public NoiseHandler(float[] noiseValues, int height, int width, int patchSize, float threshold, float[] minCoords) {
+    public void Constructer(float[] noiseValues, int height, int width, int patchSize, float threshold, float[] minCoords) {
         this.height = height;
         this.width = width;
         this.noiseValues = ConvertNoiseData(noiseValues); //values range from 0f -> 1f

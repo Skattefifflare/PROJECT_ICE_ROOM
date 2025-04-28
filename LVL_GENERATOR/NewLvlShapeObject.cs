@@ -14,6 +14,7 @@ internal class NewLvlShapeObject { // contains all the bounding points of the le
     float width;
     float height;
 
+    List<int> unusable_index = new List<int>();
 
     internal NewLvlShapeObject(int width, int height, int rect_num) {
         this.width = width;
@@ -45,9 +46,9 @@ internal class NewLvlShapeObject { // contains all the bounding points of the le
     }
 
     void CreateExpansions() {
-        int insert_index;
+        int insert_index = 0;
         List<int> unusable_indexes = new List<int>();
-
+        
         int rects_created;
 
 
@@ -59,13 +60,13 @@ internal class NewLvlShapeObject { // contains all the bounding points of the le
             height *= 0.65f + (float)rand.NextDouble() / 3;
             while (true) {
                 insert_index = ChooseIndex();
-                GD.Print("index is " + insert_index);
+                //GD.Print("index is " + insert_index);
                 CreatePoints();
                 new_sub_shape = CreateSubShape();
 
                 if (ShapeOverlaps()) {
                     unusable_indexes.Add(insert_index);
-                    GD.Print("overlapping, trying again");
+                    //GD.Print("overlapping, trying again");
                 }
                 else {
                     ShiftArray();
@@ -118,11 +119,11 @@ internal class NewLvlShapeObject { // contains all the bounding points of the le
             }
             
 
-            GD.Print("new_points:");
+            //GD.Print("new_points:");
             foreach(var point in new_points) {
-                GD.Print(point);
+                //GD.Print(point);
             }
-            GD.Print("___");
+            //GD.Print("___");
 
             Vector2 GetDirection() {
                 var prev_next = GetPrevAndNextIndex();
@@ -157,10 +158,10 @@ internal class NewLvlShapeObject { // contains all the bounding points of the le
         bool ShapeOverlaps() { // returns true if it overlaps
             foreach (var polygon in sub_shapes) {
                 if (Geometry2D.IntersectPolygons(polygon.Polygon, new_sub_shape.Polygon).Any(a => a.Any(p => !new_sub_shape.Polygon.Contains(p)))) {
-                    GD.Print("intersecting points: ");
+                    //GD.Print("intersecting points: ");
                     foreach( var a in Geometry2D.IntersectPolygons(polygon.Polygon, new_sub_shape.Polygon).ToArray()) {
                         foreach (var p in a) {
-                            GD.Print(p);
+                            //GD.Print(p);
                         }
                     }
                     return true;
@@ -192,6 +193,9 @@ internal class NewLvlShapeObject { // contains all the bounding points of the le
     }
     internal List<Polygon2D> GetSubShapes() {
         return sub_shapes;
+    }
+    public List<int> GetUnusableIndex() {
+        return unusable_index;
     }
 }
 
