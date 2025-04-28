@@ -1,6 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://bdkrt6juvuf1j"]
+[gd_scene load_steps=23 format=3 uid="uid://bdkrt6juvuf1j"]
 
 [ext_resource type="Script" path="res://Player/PlayerRework.cs" id="1_c6d0c"]
+[ext_resource type="PackedScene" uid="uid://rnbeh2t00dvr" path="res://Weapons/Spear/spear.tscn" id="2_s7jxc"]
 [ext_resource type="Script" path="res://Player/LimbHandler.cs" id="2_xtw75"]
 [ext_resource type="Texture2D" uid="uid://0wtiff0vuohu" path="res://Player/images/backarm.png" id="3_h2p8r"]
 [ext_resource type="Texture2D" uid="uid://1q5e31t4p0bg" path="res://Player/images/backleg.png" id="4_v27ln"]
@@ -268,7 +269,7 @@ tracks/8/keys = {
 
 [sub_resource type="Animation" id="Animation_uh86n"]
 resource_name = "idle"
-length = 0.3
+length = 0.5
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -277,7 +278,7 @@ tracks/0/path = NodePath("limb_handler/frontarmtarget:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(-2, 5), Vector2(-2, 5)]
@@ -289,7 +290,7 @@ tracks/1/path = NodePath("limb_handler/frontarmtarget:rotation")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, 0.0]
@@ -301,7 +302,7 @@ tracks/2/path = NodePath("limb_handler/backarmtarget:position")
 tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(-13, 4), Vector2(-13, 4)]
@@ -313,7 +314,7 @@ tracks/3/path = NodePath("limb_handler/backarmtarget:rotation")
 tracks/3/interp = 2
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, 0.0]
@@ -325,7 +326,7 @@ tracks/4/path = NodePath("limb_handler/frontlegtarget:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(17, 15), Vector2(17, 15)]
@@ -337,7 +338,7 @@ tracks/5/path = NodePath("limb_handler/frontlegtarget:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, 0.0]
@@ -349,7 +350,7 @@ tracks/6/path = NodePath("limb_handler/backlegtarget:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(9, 15), Vector2(9, 15)]
@@ -361,7 +362,7 @@ tracks/7/path = NodePath("limb_handler/backlegtarget:rotation")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, 0.0]
@@ -373,10 +374,10 @@ tracks/8/path = NodePath("limb_handler/subviewport/skeleton/main:rotation")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0, 0.166667, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0.0, 0.0, -0.0872665, 0.0]
+"values": [0.0, -0.0872665, 0.0]
 }
 
 [sub_resource type="Animation" id="Animation_q6fju"]
@@ -445,8 +446,6 @@ motion_mode = 1
 script = ExtResource("1_c6d0c")
 speed = 100
 
-[node name="weapon_slot" type="Node" parent="."]
-
 [node name="feet" type="CollisionShape2D" parent="."]
 position = Vector2(0, 18)
 rotation = 1.5708
@@ -471,18 +470,23 @@ scale = Vector2(0.999976, 0.999976)
 rest = Transform2D(1, 0, 0, 1, 0, 0)
 
 [node name="frontupperleg" type="Bone2D" parent="limb_handler/subviewport/skeleton/main"]
-position = Vector2(0, 1)
+position = Vector2(0, 1.00001)
+rotation = -0.147221
+scale = Vector2(0.999999, 0.999999)
 rest = Transform2D(1, 0, 0, 1, 0, 1)
 metadata/_local_pose_override_enabled_ = true
 
 [node name="frontknee" type="Bone2D" parent="limb_handler/subviewport/skeleton/main/frontupperleg"]
 position = Vector2(-5, 7)
+rotation = -0.0176085
+scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, -5, 7)
 metadata/_local_pose_override_enabled_ = true
 
 [node name="frontlowerleg" type="Bone2D" parent="limb_handler/subviewport/skeleton/main/frontupperleg/frontknee"]
-position = Vector2(10, 2)
-rotation = 2.0944
+position = Vector2(9.99999, 2)
+rotation = 2.1301
+scale = Vector2(1, 1)
 rest = Transform2D(-0.5, 0.866025, -0.866025, -0.5, 10, 2)
 auto_calculate_length_and_angle = false
 length = 12.0
@@ -493,18 +497,23 @@ metadata/_local_pose_override_enabled_ = true
 position = Vector2(12.5263, -0.303851)
 
 [node name="backupperleg" type="Bone2D" parent="limb_handler/subviewport/skeleton/main"]
-position = Vector2(-1, 1)
+position = Vector2(-1, 1.00001)
+rotation = 0.186937
+scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, -1, 1)
 metadata/_local_pose_override_enabled_ = true
 
 [node name="backknee" type="Bone2D" parent="limb_handler/subviewport/skeleton/main/backupperleg"]
-position = Vector2(-5, 7)
+position = Vector2(-5.00002, 7.00002)
+rotation = 0.0212894
+scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, -5, 7)
 metadata/_local_pose_override_enabled_ = true
 
 [node name="backlowerleg" type="Bone2D" parent="limb_handler/subviewport/skeleton/main/backupperleg/backknee"]
-position = Vector2(9, 2)
-rotation = 2.0944
+position = Vector2(9, 1.99999)
+rotation = 2.04761
+scale = Vector2(1, 1)
 rest = Transform2D(-0.5, 0.866025, -0.866025, -0.5, 9, 2)
 auto_calculate_length_and_angle = false
 length = 12.0
@@ -526,17 +535,22 @@ rest = Transform2D(1, 0, 0, 1, -5, -6)
 
 [node name="frontupperarm" type="Bone2D" parent="limb_handler/subviewport/skeleton/main/spine/shoulder"]
 position = Vector2(0, 1)
+rotation = -0.333891
+scale = Vector2(0.999999, 0.999999)
 rest = Transform2D(1, 0, 0, 1, 0, 1)
 metadata/_local_pose_override_enabled_ = true
 
 [node name="frontelbow" type="Bone2D" parent="limb_handler/subviewport/skeleton/main/spine/shoulder/frontupperarm"]
 position = Vector2(1, 12)
+rotation = 0.959931
+scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, 1, 12)
 metadata/_local_pose_override_enabled_ = true
 
 [node name="frontlowerarm" type="Bone2D" parent="limb_handler/subviewport/skeleton/main/spine/shoulder/frontupperarm/frontelbow"]
-position = Vector2(0, 9)
-rotation = 1.5708
+position = Vector2(-1.52588e-05, 9.00001)
+rotation = 0.523599
+scale = Vector2(1, 1)
 rest = Transform2D(-4.37114e-08, 1, -1, -4.37114e-08, 0, 9)
 auto_calculate_length_and_angle = false
 length = 8.0
@@ -547,17 +561,22 @@ metadata/_local_pose_override_enabled_ = true
 
 [node name="backupperarm" type="Bone2D" parent="limb_handler/subviewport/skeleton/main/spine/shoulder"]
 position = Vector2(-1, 1)
+rotation = 0.0905314
+scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, -1, 1)
 metadata/_local_pose_override_enabled_ = true
 
 [node name="backelbow" type="Bone2D" parent="limb_handler/subviewport/skeleton/main/spine/shoulder/backupperarm"]
-position = Vector2(1, 12)
+position = Vector2(0.999996, 12)
+rotation = 0.959931
+scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, 1, 12)
 metadata/_local_pose_override_enabled_ = true
 
 [node name="backlowerarm" type="Bone2D" parent="limb_handler/subviewport/skeleton/main/spine/shoulder/backupperarm/backelbow"]
 position = Vector2(0, 9)
-rotation = 1.5708
+rotation = 0.523599
+scale = Vector2(0.999999, 0.999999)
 rest = Transform2D(-4.37114e-08, 1, -1, -4.37114e-08, 0, 9)
 auto_calculate_length_and_angle = false
 length = 8.0
@@ -612,16 +631,16 @@ polygons = [PackedInt32Array(0, 1, 2, 7), PackedInt32Array(2, 3, 6, 7), PackedIn
 bones = ["main", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/frontupperleg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/frontupperleg/frontknee", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/frontupperleg/frontknee/frontlowerleg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/backupperleg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/backupperleg/backknee", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/backupperleg/backknee/backlowerleg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/spine", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/spine/shoulder", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/spine/shoulder/frontupperarm", PackedFloat32Array(1, 1, 1, 0, 0, 0, 0, 1), "main/spine/shoulder/frontupperarm/frontelbow", PackedFloat32Array(0, 0, 1, 1, 0, 0, 1, 1), "main/spine/shoulder/frontupperarm/frontelbow/frontlowerarm", PackedFloat32Array(0, 0, 0, 1, 1, 1, 1, 0), "main/spine/shoulder/backupperarm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/spine/shoulder/backupperarm/backelbow", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/spine/shoulder/backupperarm/backelbow/backlowerarm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0)]
 
 [node name="local_frontarmtarget" type="Node2D" parent="limb_handler/subviewport"]
-position = Vector2(48, 55)
+position = Vector2(61, 55)
 
 [node name="local_backarmtarget" type="Node2D" parent="limb_handler/subviewport"]
-position = Vector2(37, 54)
+position = Vector2(50, 54)
 
 [node name="local_frontlegtarget" type="Node2D" parent="limb_handler/subviewport"]
-position = Vector2(67, 67)
+position = Vector2(67, 65)
 
 [node name="local_backlegtarget" type="Node2D" parent="limb_handler/subviewport"]
-position = Vector2(59, 67)
+position = Vector2(59, 65)
 
 [node name="frontarmtarget" type="Node2D" parent="limb_handler"]
 position = Vector2(-2, 5)
@@ -659,8 +678,18 @@ position = Vector2(-6, -4)
 rotation = -1.16064
 shape = SubResource("CapsuleShape2D_puokr")
 
-[node name="animation_player" type="AnimationPlayer" parent="flip_node"]
+[node name="player_animation_player" type="AnimationPlayer" parent="flip_node"]
 root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_01v1g")
 }
+
+[node name="weapon_slot" type="Node2D" parent="flip_node"]
+position = Vector2(-9, -3)
+
+[node name="spear_root" parent="flip_node/weapon_slot" instance=ExtResource("2_s7jxc")]
+position = Vector2(-6, 3)
+rotation = 3.34056
+scale = Vector2(1.4, -1.4)
+
+[node name="Camera2D" type="Camera2D" parent="."]

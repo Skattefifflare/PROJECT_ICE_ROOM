@@ -38,5 +38,7 @@ public partial class FoxRework : EnemyRework {
         weapon.MakeHarmless();
     }
 
-
+    public override void _Ready() {
+        base._Ready();
+    }
 }

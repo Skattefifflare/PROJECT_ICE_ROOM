@@ -19,8 +19,6 @@ public partial class PlayerWeapon : Weapon {
         animation_player = (AnimationPlayer)FindChild("animation_player");
         left_hold = (Marker2D)FindChild("left_hold");
         right_hold = (Marker2D)FindChild("right_hold");
-
-        
     }
 
     public override void _Process(double delta) {
@@ -30,7 +28,7 @@ public partial class PlayerWeapon : Weapon {
     }
 
     private void Rotate() {
-        parent.Rotation = Mathf.Atan2(GetGlobalMousePosition().Y - parent.GlobalPosition.Y, GetGlobalMousePosition().X - parent.GlobalPosition.X);       
+        parent.Rotation = Mathf.Atan2(-GetGlobalMousePosition().Y - parent.GlobalPosition.Y, -GetGlobalMousePosition().X - parent.GlobalPosition.X);
     }
     private void CheckInput() {
         if (Input.IsActionJustPressed("left_click")) {

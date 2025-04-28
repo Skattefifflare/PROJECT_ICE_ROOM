@@ -7,7 +7,7 @@ using System;
 public partial class PlayerRework : CreatureRework {
     private AnimationPlayer animation_player;
     private Weapon weapon;
-    private Node weapon_slot;
+    private Node2D weapon_slot;
     protected CollisionShape2D feet;
 
     private State IdleState;
@@ -36,9 +36,8 @@ public partial class PlayerRework : CreatureRework {
     }
 
     public override void _Ready() {
-        animation_player = (AnimationPlayer)FindChild("animation_player");
-        weapon_slot = (Node)FindChild("weapon_slot");
-        if (weapon_slot.GetChildCount() != 0) weapon = (Weapon)weapon_slot.GetChild(0);
+        animation_player = (AnimationPlayer)FindChild("player_animation_player");
+        weapon_slot = (Node2D)FindChild("weapon_slot");
         flip_node = (Node2D)FindChild("flip_node");
         feet = (CollisionShape2D)FindChild("feet");
 
@@ -48,15 +47,14 @@ public partial class PlayerRework : CreatureRework {
         RunState = new(RunStart, RunRunning, RunEnd);
 
         IdleState.BindConditions(new (Func<bool>, State)[] {
-                (() => hp <= 0, DieState),
-                (() =>direction != Vector2.Zero, RunState),
-            });
-
+            (() => hp <= 0, DieState),
+            (() =>direction != Vector2.Zero, RunState),
+        });
 
         RunState.BindConditions(new (Func<bool>, State)[] {
-                (() => hp <= 0, DieState),
-                (() => direction == Vector2.Zero, IdleState)
-            });
+            (() => hp <= 0, DieState),
+            (() => direction == Vector2.Zero, IdleState)
+        });
 
 
         current_state = IdleState;
@@ -67,6 +65,7 @@ public partial class PlayerRework : CreatureRework {
         base._Process(delta);
         ZIndex = (int)feet.GlobalPosition.Y;
         GD.Print(ZIndex);
+        GetHandles();
     }
 
     public override void _PhysicsProcess(double delta) {
@@ -89,6 +88,15 @@ public partial class PlayerRework : CreatureRework {
         else if (direction.X > 0) {
             flip_node.Scale = new Vector2(-1, 1);
 
+        }
+    }
+    private void GetHandles() {
+        if (weapon_slot.GetChildCount() != 0) {
+            weapon = (Weapon)weapon_slot.GetChild(0);
+            LimbHandler lh = (LimbHandler)FindChild("limb_handler");
+            Marker2D left_hold = (Marker2D)weapon_slot.FindChild("left_hold");
+            Marker2D right_hold = (Marker2D)weapon_slot.FindChild("right_hold");
+            lh.SetHolds(left_hold, right_hold);
         }
     }
 }

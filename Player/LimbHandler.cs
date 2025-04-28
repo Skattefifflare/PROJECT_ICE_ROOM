@@ -13,6 +13,10 @@ public partial class LimbHandler : Node2D
     Node2D local_backarmtarget;
     Node2D local_frontlegtarget;
     Node2D local_backlegtarget;
+
+    Marker2D left_hold;
+    Marker2D right_hold;
+
     public override void _Ready()
 	{
         frontarmtarget = (Node2D)FindChild("frontarmtarget");
@@ -27,9 +31,21 @@ public partial class LimbHandler : Node2D
     }
 
     public override void _Process(double delta) {
-        local_frontarmtarget.GlobalPosition = frontarmtarget.Position + new Vector2(50, 50);
-        local_backarmtarget.Position = backarmtarget.Position + new Vector2(50, 50);
+        if (left_hold != null && right_hold != null) {
+            frontarmtarget.GlobalPosition = left_hold.GlobalPosition;
+            backarmtarget.GlobalPosition = right_hold.GlobalPosition;
+        }
+
+
+        local_frontarmtarget.GlobalPosition = frontarmtarget.Position + new Vector2(50 + 13, 50);
+        local_backarmtarget.Position = backarmtarget.Position + new Vector2(50 + 13, 50);
+
         local_frontlegtarget.Position = frontlegtarget.Position + new Vector2(50, 50);
         local_backlegtarget.Position = backlegtarget.Position + new Vector2(50, 50);
+    }
+
+    public void SetHolds(Marker2D l, Marker2D r) {
+        left_hold = l;
+        right_hold = r;
     }
 }

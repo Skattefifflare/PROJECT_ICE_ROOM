@@ -15,5 +15,6 @@ public partial class EnemyRework : CreatureRework {
     }
     public override void _Process(double delta) {
         base._Process(delta);
+        sprite_player = (AnimatedSprite2D)player.FindChild("sprite_player");
     }
 }
