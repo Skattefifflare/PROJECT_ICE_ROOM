@@ -1,6 +1,34 @@
 # PROJECT_ICE_ROOM
 The most ambitious game made since Skyrim.
 
+## ROADMAP:
+
+- fungerande armar och attack [A]
+- merga med behaviour [CT]
+- merga med level generation [CL]
+- generera flera levlar [?]
+- bygga dörrar mellan levlar [?]
+- koda fiendespawn [?]
+- koda fiender 2.0 (health, attacker, avancerat beteende) [?]
+- fler vapen [H]
+- inventory och pickupable vapen [?]
+- - crafting [?]
+- snyggare environs [H]
+- bossar [?]
+- avancerad combat [?]
+- story [?]
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ## FORMATERINGSGUIDE
@@ -8,15 +36,15 @@ The most ambitious game made since Skyrim.
 Mappar och filer sorteras i detta mönster:<br/>
 res://
   - Creatures
-    - Cow
-      - CowObj.tscn
-      - CowScript.cs
-      - CowSprite.png
+	- Cow
+	  - CowObj.tscn
+	  - CowScript.cs
+	  - CowSprite.png
   - Weapons
-    - Spear
-      - SpearObj.tscn
-      - SpearSprite.png
-    
+	- Spear
+	  - SpearObj.tscn
+	  - SpearSprite.png
+	
 osv.
 
 ### Namngivning

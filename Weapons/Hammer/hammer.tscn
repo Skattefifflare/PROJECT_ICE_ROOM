@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dt0hskmty6up1"]
+
+[ext_resource type="Texture2D" uid="uid://cnqpo1omx5ex1" path="res://Weapons/Hammer/hammertime.png" id="1_j361m"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ac60u"]
+radius = 2.0
+height = 10.0
+
+[node name="hammer_root" type="Node2D"]
+position = Vector2(21, 1)
+rotation = -0.715585
+
+[node name="hammer_tex" type="Sprite2D" parent="."]
+texture = ExtResource("1_j361m")
+
+[node name="Area2D" type="Area2D" parent="hammer_tex"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hammer_tex/Area2D"]
+position = Vector2(6, 6)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ac60u")
