@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cy6net7bytm70"]
+
+[ext_resource type="Script" path="res://addons/LEVEL_GEN/LvlGenNode.cs" id="1_63mqi"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="LvlGenNode" type="Node2D" parent="."]
+script = ExtResource("1_63mqi")
