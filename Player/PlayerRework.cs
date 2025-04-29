@@ -63,7 +63,7 @@ public partial class PlayerRework : CreatureRework {
 
     public override void _Process(double delta) {
         base._Process(delta);
-        ZIndex = (int)feet.GlobalPosition.Y;
+        ZIndex = (int)2345678;
         GD.Print(ZIndex);
         GetHandles();
     }

@@ -1,8 +1,99 @@
-[gd_scene load_steps=2 format=3 uid="uid://cy6net7bytm70"]
+[gd_scene load_steps=6 format=3 uid="uid://cy6net7bytm70"]
 
 [ext_resource type="Script" path="res://addons/LEVEL_GEN/LvlGenNode.cs" id="1_63mqi"]
+[ext_resource type="PackedScene" uid="uid://dxntdg5sxp0bi" path="res://Enemies/Birdman/birdman.tscn" id="2_h4spa"]
+[ext_resource type="PackedScene" uid="uid://c5lfrw2nny0cd" path="res://Enemies/Fox/fox.tscn" id="3_pcg2f"]
+[ext_resource type="PackedScene" uid="uid://cbicc0vk406d5" path="res://Environ/rock.tscn" id="4_wmijf"]
+[ext_resource type="PackedScene" uid="uid://bdkrt6juvuf1j" path="res://Player/ULTIMATEPLAYER3.tscn" id="5_5se0a"]
 
 [node name="Node2D" type="Node2D"]
+
+[node name="player_root" parent="." instance=ExtResource("5_5se0a")]
+position = Vector2(50, -54)
+
+[node name="birdman" parent="." instance=ExtResource("2_h4spa")]
+position = Vector2(-43, 267)
+
+[node name="birdman2" parent="." instance=ExtResource("2_h4spa")]
+position = Vector2(-359, 191)
+
+[node name="birdman3" parent="." instance=ExtResource("2_h4spa")]
+position = Vector2(-166, 65)
+
+[node name="birdman4" parent="." instance=ExtResource("2_h4spa")]
+position = Vector2(57, 120)
+
+[node name="birdman5" parent="." instance=ExtResource("2_h4spa")]
+position = Vector2(-71, -11)
+
+[node name="birdman6" parent="." instance=ExtResource("2_h4spa")]
+position = Vector2(172, 22)
+
+[node name="birdman7" parent="." instance=ExtResource("2_h4spa")]
+position = Vector2(157, 106)
+
+[node name="birdman8" parent="." instance=ExtResource("2_h4spa")]
+position = Vector2(-188, -44)
+
+[node name="birdman9" parent="." instance=ExtResource("2_h4spa")]
+position = Vector2(62, -97)
+
+[node name="birdman10" parent="." instance=ExtResource("2_h4spa")]
+position = Vector2(-114, -175)
+
+[node name="birdman11" parent="." instance=ExtResource("2_h4spa")]
+position = Vector2(-76, 170)
+
+[node name="birdman12" parent="." instance=ExtResource("2_h4spa")]
+position = Vector2(-26, 77)
+
+[node name="birdman13" parent="." instance=ExtResource("2_h4spa")]
+position = Vector2(174, -73)
+
+[node name="birdman14" parent="." instance=ExtResource("2_h4spa")]
+position = Vector2(-54, -173)
+
+[node name="birdman15" parent="." instance=ExtResource("2_h4spa")]
+position = Vector2(34, -196)
+
+[node name="birdman16" parent="." instance=ExtResource("2_h4spa")]
+position = Vector2(81, 27)
+
+[node name="birdman17" parent="." instance=ExtResource("2_h4spa")]
+position = Vector2(150, -196)
+
+[node name="birdman18" parent="." instance=ExtResource("2_h4spa")]
+position = Vector2(-83, -130)
+
+[node name="fox_root" parent="." instance=ExtResource("3_pcg2f")]
+position = Vector2(-147, -32)
+
+[node name="fox_root2" parent="." instance=ExtResource("3_pcg2f")]
+position = Vector2(200, -154)
+
+[node name="fox_root3" parent="." instance=ExtResource("3_pcg2f")]
+position = Vector2(262, -13)
+
+[node name="fox_root4" parent="." instance=ExtResource("3_pcg2f")]
+position = Vector2(-47, -256)
+
+[node name="fox_root5" parent="." instance=ExtResource("3_pcg2f")]
+position = Vector2(103, 72)
+
+[node name="fox_root6" parent="." instance=ExtResource("3_pcg2f")]
+position = Vector2(10, 175)
+
+[node name="fox_root7" parent="." instance=ExtResource("3_pcg2f")]
+position = Vector2(100, -318)
+
+[node name="Sprite2D" parent="." instance=ExtResource("4_wmijf")]
+position = Vector2(-228, 68)
+
+[node name="Sprite2D2" parent="." instance=ExtResource("4_wmijf")]
+position = Vector2(248, -244)
+
+[node name="Sprite2D3" parent="." instance=ExtResource("4_wmijf")]
+position = Vector2(124, 148)
 
 [node name="LvlGenNode" type="Node2D" parent="."]
 script = ExtResource("1_63mqi")
