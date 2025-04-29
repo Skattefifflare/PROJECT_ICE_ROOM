@@ -1,6 +1,34 @@
 # PROJECT_ICE_ROOM
 The most ambitious game made since Skyrim.
 
+## ROADMAP:
+
+- fungerande armar och attack [A]
+- merga med behaviour [CT]
+- merga med level generation [CL]
+- generera flera levlar [?]
+- bygga dörrar mellan levlar [?]
+- koda fiendespawn [?]
+- koda fiender 2.0 (health, attacker, avancerat beteende) [?]
+- fler vapen [H]
+- inventory och pickupable vapen [?]
+- - crafting [?]
+- snyggare environs [H]
+- bossar [?]
+- avancerad combat [?]
+- story [?]
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ## FORMATERINGSGUIDE
