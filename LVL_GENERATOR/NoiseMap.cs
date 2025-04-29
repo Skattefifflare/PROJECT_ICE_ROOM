@@ -92,7 +92,7 @@ public partial class NoiseMap : Node2D {
         noiseLayers.Add(new NoiseLayer(noiseScale, FastNoiseLite.NoiseTypeEnum.Simplex, seed.Next(0, 100000), 44, 0.3f, textures[0]));
         noiseLayers.Add(new NoiseLayer(noiseScale, FastNoiseLite.NoiseTypeEnum.Value, seed.Next(0, 100000), 16, 0.3f, textures[1]));
         noiseLayers.Add(new NoiseLayer(noiseScale, FastNoiseLite.NoiseTypeEnum.SimplexSmooth, seed.Next(0, 100000), 20, 0.4f, textures[2]));
-        noiseLayers.Add(new NoiseLayer(noiseScale, FastNoiseLite.NoiseTypeEnum.Perlin, seed.Next(0, 100000), 18, 0.3f, textures[3]));
+        noiseLayers.Add(new NoiseLayer(noiseScale, FastNoiseLite.NoiseTypeEnum.Perlin, seed.Next(0, 100000), 18, 0.35f, textures[3]));
 
         for(int i = 0; i < noiseLayers.Count; i++) {
             noiseLayers[i] = CreateNoiseMap(noiseLayers[i]);
