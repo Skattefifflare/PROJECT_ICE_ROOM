@@ -29,6 +29,7 @@ position = Vector2(-44, -31)
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="player_root" parent="." instance=ExtResource("2_a44n2")]
+unique_name_in_owner = true
 position = Vector2(42, 36)
 
 [node name="birdman" parent="." instance=ExtResource("3_bg4v2")]

@@ -47,6 +47,12 @@ public partial class FoxRework : EnemyRework {
 
     public override void _Ready() {
         base._Ready();
+        if (player == null) {
+            GD.Print("player null");
+        }
+        if (weapon == null) {
+            GD.Print("weapon null");
+        }
 
         sprite_player.AnimationFinished += () => {
             sprite_done = true;
@@ -56,7 +62,7 @@ public partial class FoxRework : EnemyRework {
         };
 
 
-        IdleState = new(IdleStart);
+        IdleState = new(IdleStart, null, null);
         WalkToPlayerState = new(WalkToPlayerStart, WalkToPlayerRunning, WalkToPlayerEnd);
         BiteState = new(BiteStart, null, BiteEnd);
         Die = new(null, null, null);

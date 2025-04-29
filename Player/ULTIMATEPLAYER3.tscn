@@ -486,7 +486,6 @@ metadata/_local_pose_override_enabled_ = true
 [node name="frontlowerleg" type="Bone2D" parent="limb_handler/subviewport/skeleton/main/frontupperleg/frontknee"]
 position = Vector2(10, 1.99999)
 rotation = 1.95018
-scale = Vector2(1, 1)
 rest = Transform2D(-0.5, 0.866025, -0.866025, -0.5, 10, 2)
 auto_calculate_length_and_angle = false
 length = 12.0
@@ -506,13 +505,13 @@ metadata/_local_pose_override_enabled_ = true
 [node name="backknee" type="Bone2D" parent="limb_handler/subviewport/skeleton/main/backupperleg"]
 position = Vector2(-5.00004, 7.00002)
 rotation = 0.100603
-scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, -5, 7)
 metadata/_local_pose_override_enabled_ = true
 
 [node name="backlowerleg" type="Bone2D" parent="limb_handler/subviewport/skeleton/main/backupperleg/backknee"]
 position = Vector2(9.00001, 2)
 rotation = 1.8735
+scale = Vector2(1, 1)
 rest = Transform2D(-0.5, 0.866025, -0.866025, -0.5, 9, 2)
 auto_calculate_length_and_angle = false
 length = 12.0
@@ -542,7 +541,6 @@ metadata/_local_pose_override_enabled_ = true
 [node name="frontelbow" type="Bone2D" parent="limb_handler/subviewport/skeleton/main/spine/shoulder/frontupperarm"]
 position = Vector2(1, 12)
 rotation = 0.959931
-scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, 1, 12)
 metadata/_local_pose_override_enabled_ = true
 
@@ -560,14 +558,12 @@ metadata/_local_pose_override_enabled_ = true
 [node name="backupperarm" type="Bone2D" parent="limb_handler/subviewport/skeleton/main/spine/shoulder"]
 position = Vector2(-1, 1)
 rotation = 0.0905311
-scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, -1, 1)
 metadata/_local_pose_override_enabled_ = true
 
 [node name="backelbow" type="Bone2D" parent="limb_handler/subviewport/skeleton/main/spine/shoulder/backupperarm"]
 position = Vector2(0.999985, 12)
 rotation = 0.959931
-scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, 1, 12)
 metadata/_local_pose_override_enabled_ = true
 
