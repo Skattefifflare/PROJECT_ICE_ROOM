@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://px8y8p413wsh"
-path="res://.godot/imported/TreeNew.png-73f8cc2bb6f20dfccf7682237a80fd98.ctex"
+uid="uid://1vlctlqj7p5r"
+path="res://.godot/imported/cloud1.png-567efaaeaf190d2af1904a1505993054.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://LVL_GENERATOR/Assets/TreeNew.png"
-dest_files=["res://.godot/imported/TreeNew.png-73f8cc2bb6f20dfccf7682237a80fd98.ctex"]
+source_file="res://LVL_GENERATOR/assets/cloud1.png"
+dest_files=["res://.godot/imported/cloud1.png-567efaaeaf190d2af1904a1505993054.ctex"]
 
 [params]
 

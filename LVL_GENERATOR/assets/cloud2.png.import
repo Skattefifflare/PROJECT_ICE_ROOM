@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bdxe1w4orojei"
-path="res://.godot/imported/FlowerNew.png-7cd2d20b70aaaf05b2e27779e78f41d1.ctex"
+uid="uid://fdh14r5oh48d"
+path="res://.godot/imported/cloud2.png-52417c0b699a3cd08132603f0023e003.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://LVL_GENERATOR/Assets/FlowerNew.png"
-dest_files=["res://.godot/imported/FlowerNew.png-7cd2d20b70aaaf05b2e27779e78f41d1.ctex"]
+source_file="res://LVL_GENERATOR/assets/cloud2.png"
+dest_files=["res://.godot/imported/cloud2.png-52417c0b699a3cd08132603f0023e003.ctex"]
 
 [params]
 

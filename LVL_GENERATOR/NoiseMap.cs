@@ -5,7 +5,9 @@ using System.Diagnostics;
 using System.Linq;
 
 /*TODO:
- * Create multiple noisemaps
+ * Scale down polygon when checking if textures are inside
+ * Add clouds around the map
+ * Merging
  * 
  * Notes: Order
  * trees
@@ -19,12 +21,9 @@ public partial class NoiseMap : Node2D {
     private float height, width;
     private int cHeight, cWidth;
     private int patchSize = 10;
-    private Vector2[] uVS;
 
     private float noiseScale = 100.0f; //Large number equals bigger noise
     private Random seed = new Random();
-    private Image noiseMap;
-    private FastNoiseLite noiseGen;
 
     public GenSpline map;
     private List<Vector2> splinePoints;
@@ -46,6 +45,7 @@ public partial class NoiseMap : Node2D {
         public float threshold;
         public List<Vector2> poses;
         public Texture2D texture;
+        public List<Texture2D> textures;
         public NoiseLayer(float scale, FastNoiseLite.NoiseTypeEnum noiseType, int seed, int patchSize, float threshold, Texture2D texture) {
             noise = new FastNoiseLite();
             noise.NoiseType = noiseType;
@@ -56,6 +56,19 @@ public partial class NoiseMap : Node2D {
             noiseData = new();
             poses = new();
             this.texture = texture;
+            textures = new List<Texture2D>();
+        }
+        public NoiseLayer(float scale, FastNoiseLite.NoiseTypeEnum noiseType, int seed, int patchSize, float threshold, List<Texture2D> textures) {
+            noise = new FastNoiseLite();
+            noise.NoiseType = noiseType;
+            noise.Frequency = 1.0f / scale;
+            noise.Seed = seed;
+            this.patchSize = patchSize;
+            this.threshold = threshold;
+            noiseData = new();
+            poses = new();
+            texture = new();
+            this.textures = textures;
         }
     }
 
@@ -65,6 +78,7 @@ public partial class NoiseMap : Node2D {
         for (int i = 0; i < noiseLayers.Count; i++) {
             noiseLayers[i] = TextureHandling(noiseLayers[i], i);
         }
+        Finish();
     }
     private void Spline(Vector2[] shape) {
         map = new GenSpline();
@@ -89,20 +103,30 @@ public partial class NoiseMap : Node2D {
         textures.Add(GD.Load<Texture2D>("res://LVL_GENERATOR/assets/flower.png"));
         textures.Add(GD.Load<Texture2D>("res://LVL_GENERATOR/assets/grass.png"));
         textures.Add(GD.Load<Texture2D>("res://LVL_GENERATOR/assets/rocks.png"));
+        textures.Add(GD.Load<Texture2D>("res://LVL_GENERATOR/assets/cloud1.png"));
+        textures.Add(GD.Load<Texture2D>("res://LVL_GENERATOR/assets/cloud2.png"));
+        textures.Add(GD.Load<Texture2D>("res://LVL_GENERATOR/assets/cloud3.png"));
+        textures.Add(GD.Load<Texture2D>("res://LVL_GENERATOR/assets/cloud4.png"));
     }
     private NoiseLayer TextureHandling(NoiseLayer noise, int layer) {
         NoiseHandler handler = new();
         texturePolys = new List<Polygon2D>();
         handler.Constructer(noise.noiseData.ToArray(), cHeight, cWidth, noise.patchSize, noise.threshold, new float[] { mapSize[1], mapSize[3] });
         noise.poses = handler.textureposes;
-        InsideMap(ref noise.poses);
         if(layer < 2) {
+            InsideMap(ref noise.poses, 0.9f, true);
             noise.poses = handler.ListProximity(noise.poses, 3, false);
-            InsideMap(ref noise.poses);
+            InsideMap(ref noise.poses, 0.9f, true);
+        }
+        else if (layer == 4) {
+            InsideMap(ref noise.poses, 1f, false);
+            noise.poses = NaturalEnvironment(noise.poses);
+            InsideMap(ref noise.poses, 1f, false);
         }
         else {
-            noise.poses = NaturalGrassAndRocks(noise.poses);
-            InsideMap(ref noise.poses);
+            InsideMap(ref noise.poses, 0.9f, true);
+            noise.poses = NaturalEnvironment(noise.poses);
+            InsideMap(ref noise.poses, 0.9f, true);
         }
         return noise;
     }
@@ -183,18 +207,50 @@ public partial class NoiseMap : Node2D {
         }
         return NoiseData;
     }
-    private void InsideMap(ref List<Vector2> textposes) {
-        for (int i = 0; i < textposes.Count; i++) {
-            if (Geometry2D.IsPointInPolygon(textposes[i], splinePoints.ToArray())) {
-                continue;
+    private void InsideMap(ref List<Vector2> textposes, float scale, bool inside) {
+        textposes = ScalePolygon(textposes, scale);
+        if (inside) {
+            for (int i = 0; i < textposes.Count; i++) {
+                if (Geometry2D.IsPointInPolygon(textposes[i], splinePoints.ToArray())) {
+                    continue;
+                }
+                else {
+                    textposes[i] = new Vector2();
+                }
             }
-            else {
-                textposes[i] = new Vector2();
+        }
+        else {
+            for (int i = 0; i < textposes.Count; i++) {
+                if (Geometry2D.IsPointInPolygon(textposes[i], splinePoints.ToArray())) {
+                    textposes[i] = new Vector2();
+                }
+                else {
+                    continue;
+                }
             }
         }
         CutTexturePoses(ref textposes);
     }
-     
+    private List<Vector2> ScalePolygon(List<Vector2> polygon, float scale) {
+        if (polygon == null || polygon.Count == 0) return new List<Vector2>();
+
+        //Get center
+        Vector2 centroid = Vector2.Zero;
+        foreach (var point in polygon)
+            centroid += point;
+        centroid /= polygon.Count;
+
+        //Scale polygon from center
+        var scaledPolygon = new List<Vector2>();
+        foreach (var point in polygon) {
+            Vector2 direction = point - centroid;
+            Vector2 scaledPoint = centroid + direction * scale;
+            scaledPolygon.Add(scaledPoint);
+        }
+
+        return scaledPolygon;
+    }
+
     private void CutTexturePoses(ref List<Vector2> textposes) {
         for (int i = 0; i < textposes.Count; i++) {
             if (textposes[i] == new Vector2()) {
@@ -203,11 +259,23 @@ public partial class NoiseMap : Node2D {
             }
         }
     }
-    private List<Vector2> NaturalGrassAndRocks(List<Vector2> poses) {
+    private List<Vector2> NaturalEnvironment(List<Vector2> poses) {
         for (int i = 0; i < poses.Count; i++) {
             poses[i] = new Vector2(poses[i].X + (GD.Randf() - 1) * 10, poses[i].Y + (GD.Randf() - 1) * 10);
         }
 
         return poses;
+    }
+
+    private void Finish() {
+        List<Texture2D> cloudTextures = new List<Texture2D>() { 
+            textures[4],
+            textures[5],
+            textures[6],
+            textures[7]
+        };
+        noiseLayers.Add(new NoiseLayer(noiseScale, FastNoiseLite.NoiseTypeEnum.Cellular, seed.Next(0, 100000), 60, 0.2f, cloudTextures));
+        noiseLayers[4] = CreateNoiseMap(noiseLayers[4]);
+        noiseLayers[4] = TextureHandling(noiseLayers[4], 4);
     }
 }

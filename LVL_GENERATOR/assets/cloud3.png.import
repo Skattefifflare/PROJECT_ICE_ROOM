@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://krfpbrhasoxj"
-path="res://.godot/imported/GrassNew.png-86e2a1bc1813215a21ab691d3aae5651.ctex"
+uid="uid://d0svfyv2mevf8"
+path="res://.godot/imported/cloud3.png-118dee8b78393b5fb75b7edcd910b577.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://LVL_GENERATOR/Assets/GrassNew.png"
-dest_files=["res://.godot/imported/GrassNew.png-86e2a1bc1813215a21ab691d3aae5651.ctex"]
+source_file="res://LVL_GENERATOR/assets/cloud3.png"
+dest_files=["res://.godot/imported/cloud3.png-118dee8b78393b5fb75b7edcd910b577.ctex"]
 
 [params]
 

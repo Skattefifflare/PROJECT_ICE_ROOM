@@ -116,25 +116,6 @@ public partial class GenSpline : Node2D {
                 splinePoints.Add(CalculateCatmullRomPoint(t, p0, p1, p2, p3));
             }
             CheckDuplicate();
-            //if (uniquepoints.Count != splinePoints.Count) {
-            //    GD.Print(uniquepoints.Count);
-            //    GD.Print(splinePoints.Count);
-            //    GD.Print("----------");
-            //    for (int k = 0; k < splinePoints.Count; k++) {
-            //        for(int l = k + 1; l < splinePoints.Count; l++) {
-            //            if (splinePoints[k] == splinePoints[l]) {
-            //                GD.Print("Found duplicate");
-            //                GD.Print(splinePoints[k], k);
-            //                GD.Print(splinePoints[l], l);
-            //            }
-            //        }
-            //    }
-            //    index = 0;
-            //    splinePoints.Clear();
-            //    NewLvlShapeObject nso = new NewLvlShapeObject(1000, 1000, 6);
-            //    Update(nso.GetShape());
-            //    return;
-            //}
         }
         if (index < shape.Count) {
             Update(shape.ToArray());

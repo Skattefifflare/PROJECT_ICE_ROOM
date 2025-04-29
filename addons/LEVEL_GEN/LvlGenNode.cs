@@ -41,7 +41,8 @@ public partial class LvlGenNode : Node2D
 
 	}
     public override void _Draw() {
-		for (int i = 3; i >= 0; i--) {
+        Random rand = new Random();
+        for (int i = 3; i >= 0; i--) {
             
             foreach (var p in spline.noiseLayers[i].poses) {
 				bool flipX = GD.Randf() > 0.5f;
@@ -51,6 +52,13 @@ public partial class LvlGenNode : Node2D
 				DrawTextureRect(spline.noiseLayers[i].texture, new Rect2(p, spline.noiseLayers[i].texture.GetSize() * scale), false);
             }
 		}
+		foreach (var p in spline.noiseLayers[4].poses) {
+            bool flipX = GD.Randf() > 0.5f;
+			int ranTexture = rand.Next(0, 4);
+            Vector2 scale = flipX ? new Vector2(-1, 1) : new Vector2(1, 1);
+			//DrawTexture(spline.noiseLayers[i].texture, p);
+			DrawTextureRect(spline.noiseLayers[4].textures[ranTexture], new Rect2(p, spline.noiseLayers[4].textures[ranTexture].GetSize() * scale), false);
+        }
         base._Draw();
     }
 
