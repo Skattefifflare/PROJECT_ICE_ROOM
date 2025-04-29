@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8mcmkkivc3ua"]
+
+[ext_resource type="Texture2D" uid="uid://ci0q7atnu10hs" path="res://Creatures/healthbar.png" id="1_2ojml"]
+[ext_resource type="Script" path="res://Creatures/Healthbar.cs" id="2_0ae4d"]
+
+[node name="healthbar" type="Sprite2D"]
+texture = ExtResource("1_2ojml")
+script = ExtResource("2_0ae4d")

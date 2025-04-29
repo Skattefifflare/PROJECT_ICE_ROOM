@@ -1,0 +1,312 @@
+[gd_scene load_steps=12 format=3 uid="uid://b7kgh3wkj0gav"]
+
+[ext_resource type="Texture2D" uid="uid://0wtiff0vuohu" path="res://Player/images/backarm.png" id="1_xfg8n"]
+[ext_resource type="Texture2D" uid="uid://1q5e31t4p0bg" path="res://Player/images/backleg.png" id="2_2s05t"]
+[ext_resource type="Texture2D" uid="uid://b3qbuy6uf2fle" path="res://Player/images/torso.png" id="3_y6rgd"]
+[ext_resource type="Texture2D" uid="uid://bbehhmtkra8d8" path="res://Player/images/frontleg.png" id="4_i04jh"]
+[ext_resource type="Texture2D" uid="uid://bw8q1jbrxxt0n" path="res://Player/images/frontarm.png" id="5_ituhi"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_cnx38"]
+viewport_path = NodePath("subviewport")
+
+[sub_resource type="SkeletonModification2DCCDIK" id="SkeletonModification2DCCDIK_ldv6n"]
+target_nodepath = NodePath("../local_frontarmtarget")
+tip_nodepath = NodePath("main/spine/shoulder/frontupperarm/frontelbow/frontlowerarm/fronthand")
+ccdik_data_chain_length = 3
+joint_data/0/bone_index = 9
+joint_data/0/bone2d_node = NodePath("main/spine/shoulder/frontupperarm")
+joint_data/0/rotate_from_joint = false
+joint_data/0/enable_constraint = false
+joint_data/0/editor_draw_gizmo = true
+joint_data/1/bone_index = 10
+joint_data/1/bone2d_node = NodePath("main/spine/shoulder/frontupperarm/frontelbow")
+joint_data/1/rotate_from_joint = false
+joint_data/1/enable_constraint = true
+joint_data/1/constraint_angle_min = 55.0
+joint_data/1/constraint_angle_max = 175.0
+joint_data/1/constraint_angle_invert = false
+joint_data/1/constraint_in_localspace = true
+joint_data/1/editor_draw_gizmo = true
+joint_data/2/bone_index = 11
+joint_data/2/bone2d_node = NodePath("main/spine/shoulder/frontupperarm/frontelbow/frontlowerarm")
+joint_data/2/rotate_from_joint = false
+joint_data/2/enable_constraint = true
+joint_data/2/constraint_angle_min = 30.0
+joint_data/2/constraint_angle_max = 85.0
+joint_data/2/constraint_angle_invert = false
+joint_data/2/constraint_in_localspace = true
+joint_data/2/editor_draw_gizmo = true
+
+[sub_resource type="SkeletonModification2DCCDIK" id="SkeletonModification2DCCDIK_x2f8s"]
+target_nodepath = NodePath("../local_backarmtarget")
+tip_nodepath = NodePath("main/spine/shoulder/backupperarm/backelbow/backlowerarm/backhand")
+ccdik_data_chain_length = 3
+joint_data/0/bone_index = 12
+joint_data/0/bone2d_node = NodePath("main/spine/shoulder/backupperarm")
+joint_data/0/rotate_from_joint = false
+joint_data/0/enable_constraint = false
+joint_data/0/editor_draw_gizmo = true
+joint_data/1/bone_index = 13
+joint_data/1/bone2d_node = NodePath("main/spine/shoulder/backupperarm/backelbow")
+joint_data/1/rotate_from_joint = false
+joint_data/1/enable_constraint = true
+joint_data/1/constraint_angle_min = 55.0
+joint_data/1/constraint_angle_max = 175.0
+joint_data/1/constraint_angle_invert = false
+joint_data/1/constraint_in_localspace = true
+joint_data/1/editor_draw_gizmo = true
+joint_data/2/bone_index = 14
+joint_data/2/bone2d_node = NodePath("main/spine/shoulder/backupperarm/backelbow/backlowerarm")
+joint_data/2/rotate_from_joint = false
+joint_data/2/enable_constraint = true
+joint_data/2/constraint_angle_min = 30.0
+joint_data/2/constraint_angle_max = 85.0
+joint_data/2/constraint_angle_invert = false
+joint_data/2/constraint_in_localspace = true
+joint_data/2/editor_draw_gizmo = true
+
+[sub_resource type="SkeletonModification2DCCDIK" id="SkeletonModification2DCCDIK_j77b3"]
+target_nodepath = NodePath("../local_frontlegtarget")
+tip_nodepath = NodePath("main/frontupperleg/frontknee/frontlowerleg/frontfoot")
+ccdik_data_chain_length = 3
+joint_data/0/bone_index = 1
+joint_data/0/bone2d_node = NodePath("main/frontupperleg")
+joint_data/0/rotate_from_joint = false
+joint_data/0/enable_constraint = true
+joint_data/0/constraint_angle_min = 250.0
+joint_data/0/constraint_angle_max = 85.0
+joint_data/0/constraint_angle_invert = true
+joint_data/0/constraint_in_localspace = true
+joint_data/0/editor_draw_gizmo = true
+joint_data/1/bone_index = 2
+joint_data/1/bone2d_node = NodePath("main/frontupperleg/frontknee")
+joint_data/1/rotate_from_joint = false
+joint_data/1/enable_constraint = true
+joint_data/1/constraint_angle_min = 15.0
+joint_data/1/constraint_angle_max = 290.0
+joint_data/1/constraint_angle_invert = true
+joint_data/1/constraint_in_localspace = true
+joint_data/1/editor_draw_gizmo = true
+joint_data/2/bone_index = 3
+joint_data/2/bone2d_node = NodePath("main/frontupperleg/frontknee/frontlowerleg")
+joint_data/2/rotate_from_joint = false
+joint_data/2/enable_constraint = false
+joint_data/2/editor_draw_gizmo = true
+
+[sub_resource type="SkeletonModification2DCCDIK" id="SkeletonModification2DCCDIK_wkaxv"]
+target_nodepath = NodePath("../local_backlegtarget")
+tip_nodepath = NodePath("main/backupperleg/backknee/backlowerleg/backfoot")
+ccdik_data_chain_length = 3
+joint_data/0/bone_index = 4
+joint_data/0/bone2d_node = NodePath("main/backupperleg")
+joint_data/0/rotate_from_joint = false
+joint_data/0/enable_constraint = true
+joint_data/0/constraint_angle_min = 250.0
+joint_data/0/constraint_angle_max = 85.0
+joint_data/0/constraint_angle_invert = true
+joint_data/0/constraint_in_localspace = true
+joint_data/0/editor_draw_gizmo = true
+joint_data/1/bone_index = 5
+joint_data/1/bone2d_node = NodePath("main/backupperleg/backknee")
+joint_data/1/rotate_from_joint = false
+joint_data/1/enable_constraint = true
+joint_data/1/constraint_angle_min = 15.0
+joint_data/1/constraint_angle_max = 290.0
+joint_data/1/constraint_angle_invert = true
+joint_data/1/constraint_in_localspace = true
+joint_data/1/editor_draw_gizmo = true
+joint_data/2/bone_index = 6
+joint_data/2/bone2d_node = NodePath("main/backupperleg/backknee/backlowerleg")
+joint_data/2/rotate_from_joint = false
+joint_data/2/enable_constraint = false
+joint_data/2/editor_draw_gizmo = true
+
+[sub_resource type="SkeletonModificationStack2D" id="SkeletonModificationStack2D_vmvpb"]
+enabled = true
+modification_count = 4
+modifications/0 = SubResource("SkeletonModification2DCCDIK_ldv6n")
+modifications/1 = SubResource("SkeletonModification2DCCDIK_x2f8s")
+modifications/2 = SubResource("SkeletonModification2DCCDIK_j77b3")
+modifications/3 = SubResource("SkeletonModification2DCCDIK_wkaxv")
+
+[node name="player_root" type="Node2D"]
+
+[node name="subviewport" type="SubViewport" parent="."]
+size = Vector2i(70, 70)
+
+[node name="Camera2D" type="Camera2D" parent="subviewport"]
+
+[node name="subviewport_sprite" type="Sprite2D" parent="."]
+texture = SubResource("ViewportTexture_cnx38")
+
+[node name="skeleton" type="Skeleton2D" parent="."]
+position = Vector2(6, 12)
+modification_stack = SubResource("SkeletonModificationStack2D_vmvpb")
+
+[node name="main" type="Bone2D" parent="skeleton"]
+rest = Transform2D(1, 0, 0, 1, 0, 0)
+
+[node name="frontupperleg" type="Bone2D" parent="skeleton/main"]
+position = Vector2(0, 1)
+rest = Transform2D(1, 0, 0, 1, 0, 1)
+metadata/_local_pose_override_enabled_ = true
+
+[node name="frontknee" type="Bone2D" parent="skeleton/main/frontupperleg"]
+position = Vector2(-5, 7)
+rest = Transform2D(1, 0, 0, 1, -5, 7)
+metadata/_local_pose_override_enabled_ = true
+
+[node name="frontlowerleg" type="Bone2D" parent="skeleton/main/frontupperleg/frontknee"]
+position = Vector2(10, 2)
+rotation = 2.0944
+rest = Transform2D(-0.5, 0.866025, -0.866025, -0.5, 10, 2)
+auto_calculate_length_and_angle = false
+length = 12.0
+bone_angle = 0.0
+metadata/_local_pose_override_enabled_ = true
+
+[node name="frontfoot" type="Node2D" parent="skeleton/main/frontupperleg/frontknee/frontlowerleg"]
+position = Vector2(11.6603, 0.196152)
+
+[node name="backupperleg" type="Bone2D" parent="skeleton/main"]
+position = Vector2(-1, 1)
+rest = Transform2D(1, 0, 0, 1, -1, 1)
+metadata/_local_pose_override_enabled_ = true
+
+[node name="backknee" type="Bone2D" parent="skeleton/main/backupperleg"]
+position = Vector2(-5, 7)
+rest = Transform2D(1, 0, 0, 1, -5, 7)
+metadata/_local_pose_override_enabled_ = true
+
+[node name="backlowerleg" type="Bone2D" parent="skeleton/main/backupperleg/backknee"]
+position = Vector2(9, 2)
+rotation = 2.0944
+rest = Transform2D(-0.5, 0.866025, -0.866025, -0.5, 9, 2)
+auto_calculate_length_and_angle = false
+length = 12.0
+bone_angle = 0.0
+metadata/_local_pose_override_enabled_ = true
+
+[node name="backfoot" type="Node2D" parent="skeleton/main/backupperleg/backknee/backlowerleg"]
+position = Vector2(11.6603, 0.196152)
+
+[node name="spine" type="Bone2D" parent="skeleton/main"]
+position = Vector2(0, -9)
+rest = Transform2D(1, 0, 0, 1, 0, -9)
+
+[node name="shoulder" type="Bone2D" parent="skeleton/main/spine"]
+position = Vector2(-5, -6)
+rest = Transform2D(1, 0, 0, 1, -5, -6)
+
+[node name="frontupperarm" type="Bone2D" parent="skeleton/main/spine/shoulder"]
+position = Vector2(0, 1)
+rest = Transform2D(1, 0, 0, 1, 0, 1)
+metadata/_local_pose_override_enabled_ = true
+
+[node name="frontelbow" type="Bone2D" parent="skeleton/main/spine/shoulder/frontupperarm"]
+position = Vector2(1, 12)
+rest = Transform2D(1, 0, 0, 1, 1, 12)
+metadata/_local_pose_override_enabled_ = true
+
+[node name="frontlowerarm" type="Bone2D" parent="skeleton/main/spine/shoulder/frontupperarm/frontelbow"]
+position = Vector2(0, 9)
+rotation = 1.5708
+rest = Transform2D(-4.37114e-08, 1, -1, -4.37114e-08, 0, 9)
+auto_calculate_length_and_angle = false
+length = 8.0
+bone_angle = 0.0
+metadata/_local_pose_override_enabled_ = true
+
+[node name="fronthand" type="Node2D" parent="skeleton/main/spine/shoulder/frontupperarm/frontelbow/frontlowerarm"]
+position = Vector2(8, -3.49691e-07)
+
+[node name="backupperarm" type="Bone2D" parent="skeleton/main/spine/shoulder"]
+position = Vector2(-1, 1)
+rest = Transform2D(1, 0, 0, 1, -1, 1)
+metadata/_local_pose_override_enabled_ = true
+
+[node name="backelbow" type="Bone2D" parent="skeleton/main/spine/shoulder/backupperarm"]
+position = Vector2(1, 12)
+rest = Transform2D(1, 0, 0, 1, 1, 12)
+metadata/_local_pose_override_enabled_ = true
+
+[node name="backlowerarm" type="Bone2D" parent="skeleton/main/spine/shoulder/backupperarm/backelbow"]
+position = Vector2(0, 9)
+rotation = 1.5708
+rest = Transform2D(-4.37114e-08, 1, -1, -4.37114e-08, 0, 9)
+auto_calculate_length_and_angle = false
+length = 8.0
+bone_angle = 0.0
+metadata/_local_pose_override_enabled_ = true
+
+[node name="backhand" type="Node2D" parent="skeleton/main/spine/shoulder/backupperarm/backelbow/backlowerarm"]
+position = Vector2(8, -3.49691e-07)
+
+[node name="backarm" type="Polygon2D" parent="."]
+position = Vector2(-1, -3)
+texture = ExtResource("1_xfg8n")
+skeleton = NodePath("../skeleton")
+polygon = PackedVector2Array(3.20538, -0.0859342, 3.52903, 12.9949, 3.44812, 21.9223, 5.95641, 31.0924, -0.46266, 31.2812, 0.481321, 22.0032, -0.327806, 13.1837, -0.219923, -0.112905)
+uv = PackedVector2Array(3.20538, -0.0859342, 3.52903, 12.9949, 3.44812, 21.9223, 5.95641, 31.0924, -0.46266, 31.2812, 0.481321, 22.0032, -0.327806, 13.1837, -0.219923, -0.112905)
+polygons = [PackedInt32Array(6, 1, 0, 7), PackedInt32Array(6, 5, 2, 1), PackedInt32Array(2, 5, 4, 3)]
+bones = ["main", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/frontupperleg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/frontupperleg/frontknee", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/frontupperleg/frontknee/frontlowerleg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/backupperleg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/backupperleg/backknee", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/backupperleg/backknee/backlowerleg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/spine", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/spine/shoulder", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/spine/shoulder/frontupperarm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/spine/shoulder/frontupperarm/frontelbow", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/spine/shoulder/frontupperarm/frontelbow/frontlowerarm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/spine/shoulder/backupperarm", PackedFloat32Array(1, 1, 0, 0, 0, 0, 1, 1), "main/spine/shoulder/backupperarm/backelbow", PackedFloat32Array(0, 1, 1, 0, 0, 1, 1, 0), "main/spine/shoulder/backupperarm/backelbow/backlowerarm", PackedFloat32Array(0, 0, 1, 1, 1, 1, 0, 0)]
+
+[node name="backleg" type="Polygon2D" parent="."]
+position = Vector2(-1, 12)
+texture = ExtResource("2_2s05t")
+skeleton = NodePath("../skeleton")
+polygon = PackedVector2Array(4.12385, -0.831486, -0.889296, 6.41774, -0.745032, 9.82596, 7.96486, 11.1063, 1.47421, 21.0772, 7.89392, 21.4018, 11.9153, 13.4313, 11.6808, 8.40008, 4.25127, 7.08367, 9.42672, -0.399982)
+uv = PackedVector2Array(4.12385, -0.831486, -0.889296, 6.41774, -0.745032, 9.82596, 7.96486, 11.1063, 1.47421, 21.0772, 7.89392, 21.4018, 11.9153, 13.4313, 11.6808, 8.40008, 4.25127, 7.08367, 9.42672, -0.399982)
+polygons = [PackedInt32Array(8, 2, 1, 0, 9), PackedInt32Array(8, 7, 6, 3, 2), PackedInt32Array(3, 4, 5, 6)]
+bones = ["main", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "main/frontupperleg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "main/frontupperleg/frontknee", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "main/frontupperleg/frontknee/frontlowerleg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "main/backupperleg", PackedFloat32Array(1, 1, 1, 0, 0, 0, 0, 0, 1, 1), "main/backupperleg/backknee", PackedFloat32Array(0, 0, 1, 1, 0, 0, 0, 1, 1, 0), "main/backupperleg/backknee/backlowerleg", PackedFloat32Array(0, 0, 0, 1, 1, 1, 1, 1, 0, 0), "main/spine", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "main/spine/shoulder", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "main/spine/shoulder/frontupperarm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "main/spine/shoulder/frontupperarm/frontelbow", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "main/spine/shoulder/frontupperarm/frontelbow/frontlowerarm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "main/spine/shoulder/backupperarm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "main/spine/shoulder/backupperarm/backelbow", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "main/spine/shoulder/backupperarm/backelbow/backlowerarm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
+
+[node name="torso" type="Polygon2D" parent="."]
+position = Vector2(-8, -15)
+texture = ExtResource("3_y6rgd")
+skeleton = NodePath("../skeleton")
+polygon = PackedVector2Array(16.3956, 28.2653, 16.0115, 11.9761, 15.5635, -0.408878, -0.213688, -0.312871, -0.341698, 12.7761, 8.42696, 15.4643, 11.1472, 28.3293)
+uv = PackedVector2Array(16.3956, 28.2653, 16.0115, 11.9761, 15.5635, -0.408878, -0.213688, -0.312871, -0.341698, 12.7761, 8.42696, 15.4643, 11.1472, 28.3293)
+polygons = [PackedInt32Array(3, 4, 5, 1, 2), PackedInt32Array(1, 0, 6, 5)]
+bones = ["main", PackedFloat32Array(1, 1, 1, 1, 1, 1, 1), "main/frontupperleg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "main/frontupperleg/frontknee", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "main/frontupperleg/frontknee/frontlowerleg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "main/backupperleg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "main/backupperleg/backknee", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "main/backupperleg/backknee/backlowerleg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "main/spine", PackedFloat32Array(0, 0, 1, 1, 0, 0, 0), "main/spine/shoulder", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "main/spine/shoulder/frontupperarm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "main/spine/shoulder/frontupperarm/frontelbow", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "main/spine/shoulder/frontupperarm/frontelbow/frontlowerarm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "main/spine/shoulder/backupperarm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "main/spine/shoulder/backupperarm/backelbow", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "main/spine/shoulder/backupperarm/backelbow/backlowerarm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0)]
+
+[node name="frontleg" type="Polygon2D" parent="."]
+position = Vector2(0, 10)
+texture = ExtResource("4_i04jh")
+skeleton = NodePath("../skeleton")
+polygon = PackedVector2Array(-0.909873, 7.52277, -0.820841, 11.6183, 7.77077, 13.7105, 1.31713, 23.2815, 7.861, 23.2369, 11.9862, 15.2834, 11.8526, 10.1937, 4.11893, 8.91597, 9.26796, 4.10823, 9.0899, -0.432419, 4.20796, -0.343387)
+uv = PackedVector2Array(-0.909873, 7.52277, -0.820841, 11.6183, 7.77077, 13.7105, 1.31713, 23.2815, 7.861, 23.2369, 11.9862, 15.2834, 11.8526, 10.1937, 4.11893, 8.91597, 9.26796, 4.10823, 9.0899, -0.432419, 4.20796, -0.343387)
+polygons = [PackedInt32Array(10, 9, 8, 7, 1, 0), PackedInt32Array(7, 6, 5, 2, 1), PackedInt32Array(2, 3, 4, 5)]
+bones = ["main", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "main/frontupperleg", PackedFloat32Array(1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1), "main/frontupperleg/frontknee", PackedFloat32Array(0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0), "main/frontupperleg/frontknee/frontlowerleg", PackedFloat32Array(0, 0, 1, 1, 1, 1, 0.5, 0, 0, 0, 0), "main/backupperleg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "main/backupperleg/backknee", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "main/backupperleg/backknee/backlowerleg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "main/spine", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "main/spine/shoulder", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "main/spine/shoulder/frontupperarm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "main/spine/shoulder/frontupperarm/frontelbow", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "main/spine/shoulder/frontupperarm/frontelbow/frontlowerarm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "main/spine/shoulder/backupperarm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "main/spine/shoulder/backupperarm/backelbow", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "main/spine/shoulder/backupperarm/backelbow/backlowerarm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
+
+[node name="frontarm" type="Polygon2D" parent="."]
+position = Vector2(0, -3)
+texture = ExtResource("5_ituhi")
+skeleton = NodePath("../skeleton")
+polygon = PackedVector2Array(-0.0599995, -0.0599999, 3.58, -0.0799999, 3.72, 13.32, 3.52, 22.44, 5.88, 31.04, 0.219997, 31, 0.399996, 22.44, -0.300003, 13.36)
+uv = PackedVector2Array(-0.0599995, -0.0599999, 3.58, -0.0799999, 3.72, 13.32, 3.52, 22.44, 5.88, 31.04, 0.219997, 31, 0.399996, 22.44, -0.300003, 13.36)
+polygons = [PackedInt32Array(0, 1, 2, 7), PackedInt32Array(2, 3, 6, 7), PackedInt32Array(6, 5, 4, 3)]
+bones = ["main", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/frontupperleg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/frontupperleg/frontknee", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/frontupperleg/frontknee/frontlowerleg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/backupperleg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/backupperleg/backknee", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/backupperleg/backknee/backlowerleg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/spine", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/spine/shoulder", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/spine/shoulder/frontupperarm", PackedFloat32Array(1, 1, 1, 0, 0, 0, 0, 1), "main/spine/shoulder/frontupperarm/frontelbow", PackedFloat32Array(0, 0, 1, 1, 0, 0, 1, 1), "main/spine/shoulder/frontupperarm/frontelbow/frontlowerarm", PackedFloat32Array(0, 0, 0, 1, 1, 1, 1, 0), "main/spine/shoulder/backupperarm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/spine/shoulder/backupperarm/backelbow", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "main/spine/shoulder/backupperarm/backelbow/backlowerarm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0)]
+
+[node name="frontarmtarget" type="Node2D" parent="."]
+position = Vector2(-54, 54)
+
+[node name="backarmtarget" type="Node2D" parent="."]
+position = Vector2(-58, 48)
+
+[node name="frontlegtarget" type="Node2D" parent="."]
+position = Vector2(-28, 68)
+
+[node name="backlegtarget" type="Node2D" parent="."]
+position = Vector2(-27, 66)
+
+[node name="local_frontarmtarget" type="Node2D" parent="."]
+position = Vector2(-23, 13)
+
+[node name="local_backarmtarget" type="Node2D" parent="."]
+position = Vector2(-37, -2)
+
+[node name="local_frontlegtarget" type="Node2D" parent="."]
+position = Vector2(-9, 33)
+
+[node name="local_backlegtarget" type="Node2D" parent="."]
+position = Vector2(12, 33)
