@@ -178,6 +178,8 @@ speed = 10
 scale = Vector2(0.703125, 0.703125)
 sprite_frames = SubResource("SpriteFrames_nmiei")
 animation = &"idle"
+frame = 4
+frame_progress = 0.560734
 
 [node name="hitbox" type="Area2D" parent="."]
 

@@ -44,7 +44,8 @@ public partial class LimbHandler : Node2D
         local_backlegtarget.Position = backlegtarget.Position + new Vector2(50, 50);
     }
 
-    public void SetHolds(Marker2D l, Marker2D r) {
+    public void SetHolds(Marker2D l, Marker2D r, bool flipped) {
+        
         left_hold = l;
         right_hold = r;
     }

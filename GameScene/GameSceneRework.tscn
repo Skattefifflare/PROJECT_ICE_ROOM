@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://b3ww5esftxe72"]
+[gd_scene load_steps=6 format=3 uid="uid://b3ww5esftxe72"]
 
 [ext_resource type="PackedScene" uid="uid://bdkrt6juvuf1j" path="res://Player/ULTIMATEPLAYER3.tscn" id="2_a44n2"]
 [ext_resource type="PackedScene" uid="uid://cbicc0vk406d5" path="res://Environ/rock.tscn" id="2_werju"]
+[ext_resource type="PackedScene" uid="uid://dxntdg5sxp0bi" path="res://Enemies/Birdman/birdman.tscn" id="3_bg4v2"]
+[ext_resource type="PackedScene" uid="uid://c5lfrw2nny0cd" path="res://Enemies/Fox/fox.tscn" id="4_pfaq3"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_4wtun"]
 vertices = PackedVector2Array(-18.6484, -24, 136.32, -31.0391, 149, -27.6484, -22.0391, -11.3203, 127.039, -40.3203, 263.289, -134.07, 271.68, 138.008, 174.352, -53, 170.961, -65.6797, 170.961, -40.3203, 161.68, -31.0391, -260.93, 138.977, 123.648, -53, -22.0391, -36.6797, 161.68, -74.9609, 127.039, -65.6797, -31.3203, -45.9609, 149, -78.3516, -259.063, -137.922, 136.32, -74.9609, -44, -49.3516, -56.6797, -45.9609, -65.9609, -36.6797, -69.3516, -24, -65.9609, -11.3203, -56.6797, -2.03906, -44, 1.35156, -31.3203, -2.03906)
@@ -28,3 +30,9 @@ position = Vector2(-44, -31)
 
 [node name="player_root" parent="." instance=ExtResource("2_a44n2")]
 position = Vector2(42, 36)
+
+[node name="birdman" parent="." instance=ExtResource("3_bg4v2")]
+position = Vector2(-129, -17)
+
+[node name="fox_root" parent="." instance=ExtResource("4_pfaq3")]
+position = Vector2(-174, -42)

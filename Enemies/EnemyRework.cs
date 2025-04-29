@@ -12,9 +12,11 @@ public partial class EnemyRework : CreatureRework {
     protected Weapon weapon;
     public override void _Ready() {
         base._Ready();
+        sprite_player = (AnimatedSprite2D)FindChild("sprite_player");
+        nav_agent = (NavigationAgent2D)FindChild("nav_agent");
     }
     public override void _Process(double delta) {
         base._Process(delta);
-        sprite_player = (AnimatedSprite2D)player.FindChild("sprite_player");
+        
     }
 }

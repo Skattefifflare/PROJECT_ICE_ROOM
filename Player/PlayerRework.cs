@@ -96,7 +96,8 @@ public partial class PlayerRework : CreatureRework {
             LimbHandler lh = (LimbHandler)FindChild("limb_handler");
             Marker2D left_hold = (Marker2D)weapon_slot.FindChild("left_hold");
             Marker2D right_hold = (Marker2D)weapon_slot.FindChild("right_hold");
-            lh.SetHolds(left_hold, right_hold);
+            if (flip_node.Scale.X< 0) lh.SetHolds(left_hold, right_hold, true);
+            else lh.SetHolds(left_hold, right_hold, false);
         }
     }
 }

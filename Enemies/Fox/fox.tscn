@@ -1,6 +1,6 @@
 [gd_scene load_steps=35 format=3 uid="uid://c5lfrw2nny0cd"]
 
-[ext_resource type="Script" path="res://Enemies/Fox/Fox.cs" id="1_d36rd"]
+[ext_resource type="Script" path="res://Enemies/Fox/FoxRework.cs" id="1_amovj"]
 [ext_resource type="Texture2D" uid="uid://c1f4hfuslcild" path="res://Enemies/Fox/fox_sprites2.png" id="2_ljs3p"]
 [ext_resource type="Script" path="res://Weapons/Weapon.cs" id="3_b058u"]
 [ext_resource type="PackedScene" uid="uid://b8mcmkkivc3ua" path="res://Creatures/healthbar.tscn" id="4_s5hjh"]
@@ -225,8 +225,7 @@ b = Vector2(-8, 16)
 collision_layer = 2
 collision_mask = 3
 motion_mode = 1
-script = ExtResource("1_d36rd")
-speed = 70
+script = ExtResource("1_amovj")
 
 [node name="sprite_player" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_s3k4y")

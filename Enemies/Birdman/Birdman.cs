@@ -3,7 +3,7 @@ using Project_Ice_Room.Scriptbin;
 using System;
 using Project_Ice_Room.Enemies;
 using System.Linq;
-public partial class Birdman : Enemy
+public partial class Birdman : EnemyRework
 {
     float idletime = 0;
     float idletime_max = 0;
@@ -44,11 +44,14 @@ public partial class Birdman : Enemy
 
     State Fly;
 
+
+    State Die;
     public override void _Ready() {
         base._Ready();
 
         Idle = new(IdleStart, IdleRunning, IdleEnd);
         RunAround = new(RunAroundStart, RunAroundRunning, RunAroundEnd);
+        Die = new(null, null, null);
 
         Idle.BindConditions(new (Func<bool>, State)[] {
              (() => hp <= 0, Die),

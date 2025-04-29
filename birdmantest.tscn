@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://ijwl5hhyobuj"]
+
+[ext_resource type="PackedScene" uid="uid://dxntdg5sxp0bi" path="res://Enemies/Birdman/birdman.tscn" id="1_as2fd"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="birdman" parent="." instance=ExtResource("1_as2fd")]
+position = Vector2(66, -32)
