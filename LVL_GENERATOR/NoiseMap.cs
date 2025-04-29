@@ -114,19 +114,19 @@ public partial class NoiseMap : Node2D {
         handler.Constructer(noise.noiseData.ToArray(), cHeight, cWidth, noise.patchSize, noise.threshold, new float[] { mapSize[1], mapSize[3] });
         noise.poses = handler.textureposes;
         if(layer < 2) {
-            InsideMap(ref noise.poses, 0.9f, true);
+            InsideMap(ref noise.poses, 0.95f, true);
             noise.poses = handler.ListProximity(noise.poses, 3, false);
-            InsideMap(ref noise.poses, 0.9f, true);
+            InsideMap(ref noise.poses, 0.95f, true);
         }
         else if (layer == 4) {
             InsideMap(ref noise.poses, 1f, false);
-            noise.poses = NaturalEnvironment(noise.poses);
+            noise.poses = NaturalEnvironment(noise.poses, 2f);
             InsideMap(ref noise.poses, 1f, false);
         }
         else {
-            InsideMap(ref noise.poses, 0.9f, true);
-            noise.poses = NaturalEnvironment(noise.poses);
-            InsideMap(ref noise.poses, 0.9f, true);
+            InsideMap(ref noise.poses, 0.95f, true);
+            noise.poses = NaturalEnvironment(noise.poses, 1f);
+            InsideMap(ref noise.poses, 0.95f, true);
         }
         return noise;
     }
@@ -259,9 +259,9 @@ public partial class NoiseMap : Node2D {
             }
         }
     }
-    private List<Vector2> NaturalEnvironment(List<Vector2> poses) {
+    private List<Vector2> NaturalEnvironment(List<Vector2> poses, float scale) {
         for (int i = 0; i < poses.Count; i++) {
-            poses[i] = new Vector2(poses[i].X + (GD.Randf() - 1) * 10, poses[i].Y + (GD.Randf() - 1) * 10);
+            poses[i] = new Vector2(poses[i].X + (GD.Randf() - 1) * 10 * scale, poses[i].Y + (GD.Randf() - 1) * 10* scale);
         }
 
         return poses;

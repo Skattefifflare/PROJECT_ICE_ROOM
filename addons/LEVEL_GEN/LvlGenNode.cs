@@ -28,8 +28,15 @@ public partial class LvlGenNode : Node2D
         spline = new NoiseMap();
 		spline.Begin(generated_shape);
 		
-		OS.DelayMsec(1000);
+		OS.DelayMsec(5000);
         AddChild(spline.splinePoly);
+
+        NavigationRegion2D navRegion = new NavigationRegion2D();
+		NavigationPolygon navpoly = new NavigationPolygon();
+		navpoly.AddOutline(spline.splinePoly.Polygon);
+        navRegion.NavigationPolygon = navpoly;
+		navRegion.BakeNavigationPolygon();
+		AddChild(navRegion);
 
         foreach (var p in lso.GetSubShapes()) {
 			//AddChild(p);
