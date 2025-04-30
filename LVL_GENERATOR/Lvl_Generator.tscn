@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cy6net7bytm70"]
+[gd_scene load_steps=7 format=3 uid="uid://cy6net7bytm70"]
 
 [ext_resource type="Script" path="res://addons/LEVEL_GEN/LvlGenNode.cs" id="1_63mqi"]
+[ext_resource type="PackedScene" uid="uid://c1hpcwsry0862" path="res://Inventory/userinterface.tscn" id="2_foodo"]
 [ext_resource type="PackedScene" uid="uid://dxntdg5sxp0bi" path="res://Enemies/Birdman/birdman.tscn" id="2_h4spa"]
 [ext_resource type="PackedScene" uid="uid://c5lfrw2nny0cd" path="res://Enemies/Fox/fox.tscn" id="3_pcg2f"]
 [ext_resource type="PackedScene" uid="uid://cbicc0vk406d5" path="res://Environ/rock.tscn" id="4_wmijf"]
@@ -10,6 +11,9 @@
 
 [node name="player_root" parent="." instance=ExtResource("5_5se0a")]
 position = Vector2(50, -54)
+
+[node name="Inventory" parent="player_root" instance=ExtResource("2_foodo")]
+z_index = 999
 
 [node name="birdman" parent="." instance=ExtResource("2_h4spa")]
 position = Vector2(-43, 267)

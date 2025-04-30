@@ -1,6 +1,5 @@
-[gd_scene load_steps=6 format=3 uid="uid://bav2vso835uxd"]
+[gd_scene load_steps=5 format=3 uid="uid://bav2vso835uxd"]
 
-[ext_resource type="PackedScene" uid="uid://dxm6xlxhw5sck" path="res://Player/Player.tscn" id="2_hjvhr"]
 [ext_resource type="PackedScene" uid="uid://c5lfrw2nny0cd" path="res://Enemies/Fox/fox.tscn" id="2_isbbg"]
 [ext_resource type="PackedScene" uid="uid://cbicc0vk406d5" path="res://Environ/rock.tscn" id="3_fwkir"]
 [ext_resource type="PackedScene" uid="uid://dxntdg5sxp0bi" path="res://Enemies/Birdman/birdman.tscn" id="4_yj7i6"]
@@ -84,8 +83,17 @@ position = Vector2(-181, -43)
 [node name="birdman20" parent="enemies" instance=ExtResource("4_yj7i6")]
 position = Vector2(-165, -23)
 
-[node name="player" parent="." instance=ExtResource("2_hjvhr")]
+[node name="player" parent="."]
+_import_path = NodePath("")
 unique_name_in_owner = true
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+script = null
 
 [node name="nav_region" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_h6c0j")
