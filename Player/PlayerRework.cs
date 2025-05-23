@@ -39,7 +39,10 @@ public partial class PlayerRework : CreatureRework {
         animation_player = (AnimationPlayer)FindChild("player_animation_player");
         weapon_slot = (Node2D)FindChild("weapon_slot");
         flip_node = (Node2D)FindChild("flip_node");
+        skelton = (Skeleton2D)FindChild("skeleton");
         feet = (CollisionShape2D)FindChild("feet");
+        papyrus = (Node2D)FindChild("papyrus");
+        gaster = (Node2D)FindChild("gaster");
 
 
         DieState = new(DieStart, null, null);
@@ -64,7 +67,7 @@ public partial class PlayerRework : CreatureRework {
     public override void _Process(double delta) {
         base._Process(delta);
         ZIndex = (int)2345678;
-        GD.Print(ZIndex);
+        //GD.Print(ZIndex);
         GetHandles();
     }
 
@@ -79,15 +82,29 @@ public partial class PlayerRework : CreatureRework {
 
 
     private Node2D flip_node;
-
+    private Skeleton2D skelton;
+    private Node2D papyrus;
+    private Node2D gaster;
+    private bool flipped = false;
     private void FlipFlop() {
         if (direction.X < 0) {
             flip_node.Scale = new Vector2(1, 1);
-
+            //skelton.Scale = new Vector2(1, 1);
+            //skelton.Scale = new Vector2(1, 1);
+            //papyrus.Scale = new Vector2(1, 1);
+            //gaster.Scale = new Vector2(1, 1);
+            //flipped = false;
+            //GD.Print(Scale);
         }
-        else if (direction.X > 0) {
+        else if (direction.X > 0)
+        {
             flip_node.Scale = new Vector2(-1, 1);
-
+            //skelton.Scale = new Vector2(-1, 1);
+            //skelton.Scale = new Vector2(-1, 1);
+            //papyrus.Scale = new Vector2(-1, 1);
+            //gaster.Scale = new Vector2(-1, 1);
+            //flipped = true;
+            //GD.Print(Scale);
         }
     }
     private void GetHandles() {

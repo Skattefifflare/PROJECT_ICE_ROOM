@@ -34,8 +34,8 @@ public partial class PlayerWeapon : Weapon {
         parent.Rotation = Mathf.Atan2(GetGlobalMousePosition().Y - grandparent.GlobalPosition.Y, GetGlobalMousePosition().X - grandparent.GlobalPosition.X);
         if (grandparent.Scale.X < 0) parent.Rotation *= -1;
         else parent.Rotation += Mathf.Pi;
-        GD.Print("p---" + parent.Scale.X);
-        GD.Print("gp--" + grandparent.Scale.X);
+        //GD.Print("p---" + parent.Scale.X);
+        //GD.Print("gp--" + grandparent.Scale.X);
     }
 
     private void CheckInput() {
